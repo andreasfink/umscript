@@ -14,6 +14,4 @@
 #import "UMFunction.h"
 #import "UMFunctionMacros.h"
 #import "UMTerm.h"
-
-
-@end
+#import "UMScriptDocument.h"
