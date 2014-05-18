@@ -1,0 +1,465 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A6A3AA0719297741007FFC7B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA0619297741007FFC7B /* Cocoa.framework */; };
+		A6A3AA1119297741007FFC7B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6A3AA0F19297741007FFC7B /* InfoPlist.strings */; };
+		A6A3AA1519297741007FFC7B /* umscript.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A3AA1419297741007FFC7B /* umscript.m */; };
+		A6A3AA1C19297741007FFC7B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA1B19297741007FFC7B /* XCTest.framework */; };
+		A6A3AA1D19297741007FFC7B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA0619297741007FFC7B /* Cocoa.framework */; };
+		A6A3AA2019297741007FFC7B /* umscript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA0319297741007FFC7B /* umscript.framework */; };
+		A6A3AA2619297741007FFC7B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6A3AA2419297741007FFC7B /* InfoPlist.strings */; };
+		A6A3AA2819297741007FFC7B /* umscriptTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A3AA2719297741007FFC7B /* umscriptTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A6A3AA1E19297741007FFC7B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A6A3A9FA19297741007FFC7B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A6A3AA0219297741007FFC7B;
+			remoteInfo = umscript;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A6A3AA0319297741007FFC7B /* umscript.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = umscript.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6A3AA0619297741007FFC7B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		A6A3AA0919297741007FFC7B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A6A3AA0A19297741007FFC7B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A6A3AA0B19297741007FFC7B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		A6A3AA0E19297741007FFC7B /* umscript-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "umscript-Info.plist"; sourceTree = "<group>"; };
+		A6A3AA1019297741007FFC7B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A6A3AA1219297741007FFC7B /* umscript-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "umscript-Prefix.pch"; sourceTree = "<group>"; };
+		A6A3AA1319297741007FFC7B /* umscript.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = umscript.h; sourceTree = "<group>"; };
+		A6A3AA1419297741007FFC7B /* umscript.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = umscript.m; sourceTree = "<group>"; };
+		A6A3AA1A19297741007FFC7B /* umscriptTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = umscriptTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6A3AA1B19297741007FFC7B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		A6A3AA2319297741007FFC7B /* umscriptTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "umscriptTests-Info.plist"; sourceTree = "<group>"; };
+		A6A3AA2519297741007FFC7B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A6A3AA2719297741007FFC7B /* umscriptTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = umscriptTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A6A3A9FF19297741007FFC7B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6A3AA0719297741007FFC7B /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A3AA1719297741007FFC7B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6A3AA2019297741007FFC7B /* umscript.framework in Frameworks */,
+				A6A3AA1D19297741007FFC7B /* Cocoa.framework in Frameworks */,
+				A6A3AA1C19297741007FFC7B /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A6A3A9F919297741007FFC7B = {
+			isa = PBXGroup;
+			children = (
+				A6A3AA0C19297741007FFC7B /* umscript */,
+				A6A3AA2119297741007FFC7B /* umscriptTests */,
+				A6A3AA0519297741007FFC7B /* Frameworks */,
+				A6A3AA0419297741007FFC7B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A6A3AA0419297741007FFC7B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A6A3AA0319297741007FFC7B /* umscript.framework */,
+				A6A3AA1A19297741007FFC7B /* umscriptTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A6A3AA0519297741007FFC7B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A6A3AA0619297741007FFC7B /* Cocoa.framework */,
+				A6A3AA1B19297741007FFC7B /* XCTest.framework */,
+				A6A3AA0819297741007FFC7B /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A6A3AA0819297741007FFC7B /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A6A3AA0919297741007FFC7B /* Foundation.framework */,
+				A6A3AA0A19297741007FFC7B /* CoreData.framework */,
+				A6A3AA0B19297741007FFC7B /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		A6A3AA0C19297741007FFC7B /* umscript */ = {
+			isa = PBXGroup;
+			children = (
+				A6A3AA1319297741007FFC7B /* umscript.h */,
+				A6A3AA1419297741007FFC7B /* umscript.m */,
+				A6A3AA0D19297741007FFC7B /* Supporting Files */,
+			);
+			path = umscript;
+			sourceTree = "<group>";
+		};
+		A6A3AA0D19297741007FFC7B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A6A3AA0E19297741007FFC7B /* umscript-Info.plist */,
+				A6A3AA0F19297741007FFC7B /* InfoPlist.strings */,
+				A6A3AA1219297741007FFC7B /* umscript-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A6A3AA2119297741007FFC7B /* umscriptTests */ = {
+			isa = PBXGroup;
+			children = (
+				A6A3AA2719297741007FFC7B /* umscriptTests.m */,
+				A6A3AA2219297741007FFC7B /* Supporting Files */,
+			);
+			path = umscriptTests;
+			sourceTree = "<group>";
+		};
+		A6A3AA2219297741007FFC7B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A6A3AA2319297741007FFC7B /* umscriptTests-Info.plist */,
+				A6A3AA2419297741007FFC7B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A6A3AA0019297741007FFC7B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		A6A3AA0219297741007FFC7B /* umscript */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A6A3AA2B19297741007FFC7B /* Build configuration list for PBXNativeTarget "umscript" */;
+			buildPhases = (
+				A6A3A9FE19297741007FFC7B /* Sources */,
+				A6A3A9FF19297741007FFC7B /* Frameworks */,
+				A6A3AA0019297741007FFC7B /* Headers */,
+				A6A3AA0119297741007FFC7B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = umscript;
+			productName = umscript;
+			productReference = A6A3AA0319297741007FFC7B /* umscript.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A6A3AA1919297741007FFC7B /* umscriptTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A6A3AA2E19297741007FFC7B /* Build configuration list for PBXNativeTarget "umscriptTests" */;
+			buildPhases = (
+				A6A3AA1619297741007FFC7B /* Sources */,
+				A6A3AA1719297741007FFC7B /* Frameworks */,
+				A6A3AA1819297741007FFC7B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A6A3AA1F19297741007FFC7B /* PBXTargetDependency */,
+			);
+			name = umscriptTests;
+			productName = umscriptTests;
+			productReference = A6A3AA1A19297741007FFC7B /* umscriptTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A6A3A9FA19297741007FFC7B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "SMSRelay AG";
+				TargetAttributes = {
+					A6A3AA1919297741007FFC7B = {
+						TestTargetID = A6A3AA0219297741007FFC7B;
+					};
+				};
+			};
+			buildConfigurationList = A6A3A9FD19297741007FFC7B /* Build configuration list for PBXProject "umscript" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A6A3A9F919297741007FFC7B;
+			productRefGroup = A6A3AA0419297741007FFC7B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A6A3AA0219297741007FFC7B /* umscript */,
+				A6A3AA1919297741007FFC7B /* umscriptTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A6A3AA0119297741007FFC7B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6A3AA1119297741007FFC7B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A3AA1819297741007FFC7B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6A3AA2619297741007FFC7B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A6A3A9FE19297741007FFC7B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6A3AA1519297741007FFC7B /* umscript.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A3AA1619297741007FFC7B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6A3AA2819297741007FFC7B /* umscriptTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A6A3AA1F19297741007FFC7B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A6A3AA0219297741007FFC7B /* umscript */;
+			targetProxy = A6A3AA1E19297741007FFC7B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A6A3AA0F19297741007FFC7B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A6A3AA1019297741007FFC7B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A6A3AA2419297741007FFC7B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A6A3AA2519297741007FFC7B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A6A3AA2919297741007FFC7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A6A3AA2A19297741007FFC7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A6A3AA2C19297741007FFC7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
+				INFOPLIST_FILE = "umscript/umscript-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		A6A3AA2D19297741007FFC7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
+				INFOPLIST_FILE = "umscript/umscript-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		A6A3AA2F19297741007FFC7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/umscript.framework/Versions/A/umscript";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "umscriptTests/umscriptTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		A6A3AA3019297741007FFC7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/umscript.framework/Versions/A/umscript";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
+				INFOPLIST_FILE = "umscriptTests/umscriptTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A6A3A9FD19297741007FFC7B /* Build configuration list for PBXProject "umscript" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6A3AA2919297741007FFC7B /* Debug */,
+				A6A3AA2A19297741007FFC7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A6A3AA2B19297741007FFC7B /* Build configuration list for PBXNativeTarget "umscript" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6A3AA2C19297741007FFC7B /* Debug */,
+				A6A3AA2D19297741007FFC7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A6A3AA2E19297741007FFC7B /* Build configuration list for PBXNativeTarget "umscriptTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6A3AA2F19297741007FFC7B /* Debug */,
+				A6A3AA3019297741007FFC7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A6A3A9FA19297741007FFC7B /* Project object */;
+}
