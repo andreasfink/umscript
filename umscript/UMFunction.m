@@ -8,7 +8,7 @@
 
 #import <ulib/ulib.h>
 #import "UMFunction.h"
-#import "UMEnvironmentProtocol.h"
+#import "UMEnvironment.h"
 #import "UMTerm.h"
 #import "NSNumber+UMRule.h"
 
