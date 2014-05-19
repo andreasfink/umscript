@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <ulib/ulib.h>
 
-@interface umscript : NSObject
-
-@end
+#import "UMDiscreteValue.h"
+#import "UMEnvironment.h"
+#import "UMFunction.h"
+#import "UMFunctionMacros.h"
+#import "UMTerm.h"
+#import "UMScriptDocument.h"
