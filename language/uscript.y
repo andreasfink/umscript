@@ -251,10 +251,11 @@ function_definition
 extern char yytext[];
 extern int column;
 int yyerror(char *s);
-void yylex(void);
+int yylex();
 
 int yyerror(char *s)
 {
 	fflush(stdout);
 	printf("\n%*s\n%*s\n", column, "^", column, s);
+    return 0;
 }

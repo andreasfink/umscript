@@ -88,6 +88,10 @@
 		A6835C8F19297F990090FC94 /* UMScriptDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = A6835C8D19297F990090FC94 /* UMScriptDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6835C9019297F990090FC94 /* UMScriptDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = A6835C8E19297F990090FC94 /* UMScriptDocument.m */; };
 		A6835C9119297F990090FC94 /* UMScriptDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = A6835C8E19297F990090FC94 /* UMScriptDocument.m */; };
+		A6835C97192989190090FC94 /* uscript.l in Sources */ = {isa = PBXBuildFile; fileRef = A6835C96192989190090FC94 /* uscript.l */; };
+		A6835C98192989190090FC94 /* uscript.l in Sources */ = {isa = PBXBuildFile; fileRef = A6835C96192989190090FC94 /* uscript.l */; };
+		A6835C9A192989200090FC94 /* uscript.y in Sources */ = {isa = PBXBuildFile; fileRef = A6835C99192989200090FC94 /* uscript.y */; };
+		A6835C9B192989200090FC94 /* uscript.y in Sources */ = {isa = PBXBuildFile; fileRef = A6835C99192989200090FC94 /* uscript.y */; };
 		A6A3AA0719297741007FFC7B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA0619297741007FFC7B /* Cocoa.framework */; };
 		A6A3AA1119297741007FFC7B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6A3AA0F19297741007FFC7B /* InfoPlist.strings */; };
 		A6A3AA1C19297741007FFC7B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA1B19297741007FFC7B /* XCTest.framework */; };
@@ -187,6 +191,8 @@
 		A6835C3519297B2F0090FC94 /* libulib.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libulib.1.1.dylib; path = /usr/local/lib/libulib.1.1.dylib; sourceTree = "<absolute>"; };
 		A6835C8D19297F990090FC94 /* UMScriptDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMScriptDocument.h; sourceTree = "<group>"; };
 		A6835C8E19297F990090FC94 /* UMScriptDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMScriptDocument.m; sourceTree = "<group>"; };
+		A6835C96192989190090FC94 /* uscript.l */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.lex; name = uscript.l; path = language/uscript.l; sourceTree = "<group>"; };
+		A6835C99192989200090FC94 /* uscript.y */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.yacc; name = uscript.y; path = language/uscript.y; sourceTree = "<group>"; };
 		A6A3AA0319297741007FFC7B /* umscript.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = umscript.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6A3AA0619297741007FFC7B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		A6A3AA0919297741007FFC7B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -226,9 +232,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A6835C951929890B0090FC94 /* language */ = {
+			isa = PBXGroup;
+			children = (
+				A6835C96192989190090FC94 /* uscript.l */,
+				A6835C99192989200090FC94 /* uscript.y */,
+			);
+			name = language;
+			sourceTree = "<group>";
+		};
 		A6A3A9F919297741007FFC7B = {
 			isa = PBXGroup;
 			children = (
+				A6835C951929890B0090FC94 /* language */,
 				A6A3AA0C19297741007FFC7B /* umscript */,
 				A6A3AA2119297741007FFC7B /* umscriptTests */,
 				A6A3AA0519297741007FFC7B /* Frameworks */,
@@ -535,6 +551,7 @@
 				A6835BF119297AE30090FC94 /* UMFunction_bit_or.m in Sources */,
 				A6835C0319297AE30090FC94 /* UMFunction_greaterthan.m in Sources */,
 				A6835C1D19297AE30090FC94 /* UMFunction_notequal.m in Sources */,
+				A6835C9A192989200090FC94 /* uscript.y in Sources */,
 				A6835C1B19297AE30090FC94 /* UMFunction_math_substract.m in Sources */,
 				A6835BF919297AE30090FC94 /* UMFunction_block.m in Sources */,
 				A6835C2C19297AE30090FC94 /* UMRule.m in Sources */,
@@ -549,6 +566,7 @@
 				A6835BE619297AE30090FC94 /* NSNumber+UMRule.m in Sources */,
 				A6835C3419297AE30090FC94 /* UMTerm.m in Sources */,
 				A6835BF719297AE30090FC94 /* UMFunction_bit_xor.m in Sources */,
+				A6835C97192989190090FC94 /* uscript.l in Sources */,
 				A6835C0919297AE30090FC94 /* UMFunction_logic_and.m in Sources */,
 				A6835C9019297F990090FC94 /* UMScriptDocument.m in Sources */,
 				A6835BED19297AE30090FC94 /* UMFunction_bit_and.m in Sources */,
@@ -570,7 +588,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6835C98192989190090FC94 /* uscript.l in Sources */,
 				A6A3AA2819297741007FFC7B /* umscriptTests.m in Sources */,
+				A6835C9B192989200090FC94 /* uscript.y in Sources */,
 				A6835C9119297F990090FC94 /* UMScriptDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
