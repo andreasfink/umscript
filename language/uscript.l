@@ -9,13 +9,18 @@ FS			(f|F|l|L)
 IS			(u|U|l|L)*
 
 %{
-#include <stdio.h>
-#include "y.tab.h"
+
+#import "uscript.yl.h"
+#import "uscript.y.h" 
 
 void count(void);
 void comment(void);
 int check_type(void);
 int yywrap(void);
+
+
+#define SAVE_TOKEN  yylval.discreteString = [[NSString alloc]initWithBytes:yytext length:yyleng encoding:NSUTF8StringEncoding];
+#define TOKEN(t)    yylval.token = t
 
 %}
 
@@ -34,7 +39,7 @@ int yywrap(void);
 "switch"		{ count(); return(SWITCH); }
 "while"			{ count(); return(WHILE); }
 
-{LETTER}({LETTER}|{DECIMAL})*			{ count(); return(IDENTIFIER); }
+{LETTER}({LETTER}|{DECIMAL})*			{ count(); SAVE_TOKEN; return(IDENTIFIER); }
 
 0[xX]{HEXDIGIT}+{IS}?					{ count(); return(CONSTANT); }
 0{DECIMAL}+{IS}?						{ count(); return(CONSTANT); }
@@ -164,3 +169,5 @@ int check_type(void)
 */
 	return(IDENTIFIER);
 }
+
+

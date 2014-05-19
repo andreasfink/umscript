@@ -249,4 +249,33 @@
     return @"/*unknown UMTerm */";
 }
 
++ (id)termWithVariable:(UMTerm *)varNameTerm
+{
+    UMDiscreteValue *d = varNameTerm.discrete;
+    UMTerm *term = [[UMTerm alloc]initWithVariableName:d.stringValue];
+    return term;
+}
+
++ (id)termWithField:(UMTerm *)fieldNameTerm
+{
+    UMDiscreteValue *d = fieldNameTerm.discrete;
+    UMTerm *term = [[UMTerm alloc]initWithFieldName:d.stringValue];
+    return term;
+}
+
++ (id)termWithConstant:(UMTerm *)constantTerm
+{
+    return constantTerm;
+}
+
++ (id)termWithString:(UMTerm *)stringTerm
+{
+    return stringTerm;
+}
+
+- (void) setDiscreteString:(NSString *)s
+{
+    UMDiscreteValue *d = [UMDiscreteValue discreteString:s];
+    self.discrete = d;
+}
 @end

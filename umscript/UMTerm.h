@@ -59,5 +59,12 @@ typedef enum UMTermType
 - (id)initFunction:(UMFunction *)name params:(NSArray *)parm;
 - (NSString *)codeWithEnvironment:(UMEnvironment *)env;
 
++ (id)termWithVariable:(UMTerm *)varNameTerm;
++ (id)termWithField:(UMTerm *)fieldNameTerm;
++ (id)termWithConstant:(UMTerm *)constantTerm;
++ (id)termWithString:(UMTerm *)stringTerm;
+
+- (void) setDiscreteString:(NSString *)s;
+
 
 @end

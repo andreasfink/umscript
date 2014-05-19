@@ -1,3 +1,7 @@
+%{
+#import "uscript.yl.h"
+%}
+
 %token IDENTIFIER
 %token VARIABLE_IDENTIFIER 
 %token FIELD_IDENTIFIER 
@@ -192,10 +196,10 @@ variable_identifier : '$' IDENTIFIER;
 
 primary_expression
 	: IDENTIFIER
-	| variable_identifier
-	| field_identifier
-	| CONSTANT
-	| STRING_LITERAL
+    | variable_identifier   { $$ = [UMTerm termWithVariable:$1]; };
+    | field_identifier      { $$ = [UMTerm termWithField:$1]; };
+    | CONSTANT              { $$ = [UMTerm termWithConstant:$1]; };
+    | STRING_LITERAL        { $$ = [UMTerm termWithString:$1]; };
 	| '(' expression ')'
 	;
 
@@ -255,7 +259,18 @@ int yylex();
 
 int yyerror(char *s)
 {
-	fflush(stdout);
-	printf("\n%*s\n%*s\n", column, "^", column, s);
+    fflush(stdout);
+    printf("\n%*s\n%*s\n", column, "^", column, s);
     return 0;
 }
+
+int push_field(void *p)
+{
+    return 0;
+}
+
+int push_variable(void *p)
+{
+    return 0;
+}
+
