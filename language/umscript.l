@@ -9,8 +9,8 @@ IS			(u|U|l|L)*
 
 %{
 
-#import "uscript.yl.h"
-#import "uscript.y.h"
+#import "umscript.yl.h"
+#import "umscript.y.h"
 
 static void comment(void);
 static void count(void);

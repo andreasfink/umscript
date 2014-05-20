@@ -1,14 +1,14 @@
 //
-//  NSNumber+UMRule.m
-//  umruleengine
+//  NSNumber+UMScript.m
+//  umscript
 //
 //  Created by Andreas Fink on 17.05.14.
 //  Copyright (c) 2014 SMSRelay AG. All rights reserved.
 //
 
-#import "NSNumber+UMRule.h"
+#import "NSNumber+UMScript.h"
 
-@implementation NSNumber(UMRule)
+@implementation NSNumber(UMScript)
 
 
 +(NSNumber *)numberWithString:(NSString *)s

@@ -1,6 +1,6 @@
 //
-//  UMRuleFieldOrValue.m
-//  umruleengine
+//  UMTerm.m
+//  umscript
 //
 //  Created by Andreas Fink on 17.05.14.
 //  Copyright (c) 2014 SMSRelay AG. All rights reserved.
@@ -9,7 +9,7 @@
 #import "UMTerm.h"
 #import "UMFunction.h"
 #import "UMFunctionMacros.h"
-#import "NSNumber+UMRule.h"
+#import "NSNumber+UMScript.h"
 #import "UMEnvironment.h"
 
 @implementation UMTerm
@@ -417,7 +417,7 @@ NSMutableString *s = [[NSMutableString alloc]init];
     return result;
 }
 
-- (UMTerm *)greatorequal:(UMTerm *)b;
+- (UMTerm *)greaterorequal:(UMTerm *)b;
 {
     UMFunction *func = [[UMFunction_greaterorequal alloc]init];
     UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];

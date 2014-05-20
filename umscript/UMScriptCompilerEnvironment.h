@@ -7,7 +7,7 @@
 //
 
 #import "UMEnvironment.h"
-#import "uscript.yl.h"
+#import "umscript.yl.h"
 
 @class UMScriptCompilerEnvironment;
 @class UMTerm;

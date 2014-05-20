@@ -154,9 +154,9 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 1 "language/uscript.y"
+#line 1 "language/umscript.y"
 
-#import "uscript.yl.h"
+#import "umscript.yl.h"
 #import "UMFunctionMacros.h"
 
 
@@ -192,7 +192,7 @@ typedef int YYSTYPE;
 
 
 /* Line 216 of yacc.c.  */
-#line 196 "language/uscript.y.m"
+#line 196 "language/umscript.y.m"
 
 #ifdef short
 # undef short
@@ -520,17 +520,17 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    55,    55,    56,    60,    61,    65,    66,    67,    68,
-      69,    70,    74,    75,    79,    80,    81,    85,    86,    87,
-      91,    92,    93,    94,    95,   100,   101,   102,   103,   108,
-     109,   113,   114,   115,   116,   117,   118,   119,   120,   121,
-     122,   123,   124,   128,   129,   133,   134,   138,   139,   143,
-     144,   148,   149,   153,   154,   158,   159,   160,   164,   165,
-     166,   167,   168,   172,   173,   174,   178,   179,   180,   184,
-     185,   186,   187,   192,   193,   194,   195,   199,   200,   201,
-     202,   203,   204,   211,   212,   213,   214,   215,   216,   221,
-     222,   227,   228,   229,   230,   231,   232,   235,   239,   240,
-     244,   248
+       0,    54,    54,    55,    59,    60,    64,    65,    66,    67,
+      68,    69,    73,    74,    78,    79,    80,    84,    85,    86,
+      90,    91,    92,    93,    94,    99,   100,   101,   102,   107,
+     108,   112,   113,   114,   115,   116,   117,   118,   119,   120,
+     121,   122,   123,   127,   128,   132,   133,   137,   138,   142,
+     143,   147,   148,   152,   153,   157,   158,   159,   163,   164,
+     165,   166,   167,   171,   172,   173,   177,   178,   179,   183,
+     184,   185,   186,   191,   192,   193,   194,   198,   199,   200,
+     201,   202,   203,   210,   211,   212,   213,   214,   215,   220,
+     221,   226,   227,   228,   229,   230,   231,   234,   238,   239,
+     243,   247
 };
 #endif
 
@@ -1620,108 +1620,138 @@ yyreduce:
   switch (yyn)
     {
         case 33:
-#line 115 "language/uscript.y"
+#line 114 "language/umscript.y"
     { (yyval) = ROOT = [(yyvsp[(1) - (3)]) assign:[(yyvsp[(1) - (3)]) mul: (yyvsp[(3) - (3)])]];  ;}
     break;
 
   case 34:
-#line 116 "language/uscript.y"
+#line 115 "language/umscript.y"
     { (yyval) = ROOT = [(yyvsp[(1) - (3)]) assign:[(yyvsp[(1) - (3)]) div: (yyvsp[(3) - (3)])]];  ;}
     break;
 
   case 35:
-#line 117 "language/uscript.y"
+#line 116 "language/umscript.y"
     { (yyval) = ROOT = [(yyvsp[(1) - (3)]) assign:[(yyvsp[(1) - (3)]) mul: (yyvsp[(3) - (3)])]];  ;}
     break;
 
   case 36:
-#line 118 "language/uscript.y"
+#line 117 "language/umscript.y"
     { (yyval) = ROOT = [(yyvsp[(1) - (3)]) assign:[(yyvsp[(1) - (3)]) add: (yyvsp[(2) - (3)])]];  ;}
     break;
 
   case 37:
-#line 119 "language/uscript.y"
+#line 118 "language/umscript.y"
     { (yyval) = ROOT = [(yyvsp[(1) - (3)]) assign:[(yyvsp[(1) - (3)]) sub: (yyvsp[(2) - (3)])]];  ;}
     break;
 
   case 38:
-#line 120 "language/uscript.y"
+#line 119 "language/umscript.y"
     { (yyval) = ROOT = [(yyvsp[(1) - (3)]) assign:[(yyvsp[(1) - (3)]) leftshift: (yyvsp[(3) - (3)])]];  ;}
     break;
 
   case 39:
-#line 121 "language/uscript.y"
+#line 120 "language/umscript.y"
     { (yyval) = ROOT = [(yyvsp[(1) - (3)]) assign:[(yyvsp[(1) - (3)]) rightshift: (yyvsp[(3) - (3)])]];  ;}
     break;
 
   case 40:
-#line 122 "language/uscript.y"
+#line 121 "language/umscript.y"
     { (yyval) = ROOT = [(yyvsp[(1) - (3)]) assign:[(yyvsp[(1) - (3)]) and: (yyvsp[(3) - (3)])]];  ;}
     break;
 
   case 41:
-#line 123 "language/uscript.y"
+#line 122 "language/umscript.y"
     { (yyval) = ROOT = [(yyvsp[(1) - (3)]) assign:[(yyvsp[(1) - (3)]) xor: (yyvsp[(3) - (3)])]];  ;}
     break;
 
   case 42:
-#line 124 "language/uscript.y"
+#line 123 "language/umscript.y"
     { (yyval) = ROOT = [(yyvsp[(1) - (3)]) assign:[(yyvsp[(1) - (3)]) or: (yyvsp[(3) - (3)])]];  ;}
     break;
 
+  case 59:
+#line 164 "language/umscript.y"
+    { (yyval) = ROOT = [(yyvsp[(1) - (3)]) lessthan:       (yyvsp[(3) - (3)])];  ;}
+    break;
+
+  case 60:
+#line 165 "language/umscript.y"
+    { (yyval) = ROOT = [(yyvsp[(1) - (3)]) greaterthan:    (yyvsp[(3) - (3)])];  ;}
+    break;
+
+  case 61:
+#line 166 "language/umscript.y"
+    { (yyval) = ROOT = [(yyvsp[(1) - (3)]) lessorequal:    (yyvsp[(3) - (3)])];  ;}
+    break;
+
+  case 62:
+#line 167 "language/umscript.y"
+    { (yyval) = ROOT = [(yyvsp[(1) - (3)]) greaterorequal: (yyvsp[(3) - (3)])];  ;}
+    break;
+
+  case 64:
+#line 172 "language/umscript.y"
+    { (yyval) = ROOT = [(yyvsp[(1) - (3)]) leftshift:  (yyvsp[(3) - (3)])];  ;}
+    break;
+
+  case 65:
+#line 173 "language/umscript.y"
+    { (yyval) = ROOT = [(yyvsp[(1) - (3)]) rightshift: (yyvsp[(3) - (3)])];  ;}
+    break;
+
   case 67:
-#line 179 "language/uscript.y"
-    { (yyval) = ROOT = [(yyvsp[(1) - (3)]) add: (yyvsp[(2) - (3)])];  ;}
+#line 178 "language/umscript.y"
+    { (yyval) = ROOT = [(yyvsp[(1) - (3)]) add: (yyvsp[(3) - (3)])];  ;}
     break;
 
   case 68:
-#line 180 "language/uscript.y"
-    { (yyval) = ROOT = [(yyvsp[(1) - (3)]) sub: (yyvsp[(2) - (3)])];  ;}
+#line 179 "language/umscript.y"
+    { (yyval) = ROOT = [(yyvsp[(1) - (3)]) sub: (yyvsp[(3) - (3)])];  ;}
     break;
 
   case 70:
-#line 185 "language/uscript.y"
-    { (yyval) = ROOT = [(yyvsp[(1) - (3)]) mul: (yyvsp[(2) - (3)])];    ;}
+#line 184 "language/umscript.y"
+    { (yyval) = ROOT = [(yyvsp[(1) - (3)]) mul:    (yyvsp[(3) - (3)])]; ;}
     break;
 
   case 71:
-#line 186 "language/uscript.y"
-    { (yyval) = ROOT = [(yyvsp[(1) - (3)]) div: (yyvsp[(2) - (3)])];    ;}
+#line 185 "language/umscript.y"
+    { (yyval) = ROOT = [(yyvsp[(1) - (3)]) div:    (yyvsp[(3) - (3)])]; ;}
     break;
 
   case 72:
-#line 187 "language/uscript.y"
-    { (yyval) = ROOT = [(yyvsp[(1) - (3)]) modulo: (yyvsp[(2) - (3)])]; ;}
+#line 186 "language/umscript.y"
+    { (yyval) = ROOT = [(yyvsp[(1) - (3)]) modulo: (yyvsp[(3) - (3)])]; ;}
     break;
 
   case 83:
-#line 211 "language/uscript.y"
+#line 210 "language/umscript.y"
     { (yyval) = ROOT = [UMTerm termWithIdentifier:(yyvsp[(1) - (1)])];  ;}
     break;
 
   case 84:
-#line 212 "language/uscript.y"
-    { (yyval) = [UMTerm termWithVariable:(yyvsp[(1) - (1)])];    ;}
+#line 211 "language/umscript.y"
+    { (yyval) = ROOT = [UMTerm termWithVariable:(yyvsp[(1) - (1)])];    ;}
     break;
 
   case 85:
-#line 213 "language/uscript.y"
-    { (yyval) = [UMTerm termWithField:(yyvsp[(1) - (1)])];       ;}
+#line 212 "language/umscript.y"
+    { (yyval) = ROOT = [UMTerm termWithField:(yyvsp[(1) - (1)])];       ;}
     break;
 
   case 86:
-#line 214 "language/uscript.y"
-    { (yyval) = [UMTerm termWithConstant:(yyvsp[(1) - (1)])];    ;}
+#line 213 "language/umscript.y"
+    { (yyval) = ROOT = [UMTerm termWithConstant:(yyvsp[(1) - (1)])];    ;}
     break;
 
   case 87:
-#line 215 "language/uscript.y"
-    { (yyval) = [UMTerm termWithString:(yyvsp[(1) - (1)])];      ;}
+#line 214 "language/umscript.y"
+    { (yyval) = ROOT = [UMTerm termWithString:(yyvsp[(1) - (1)])];      ;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1725 "language/uscript.y.m"
+#line 1755 "language/umscript.y.m"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1935,7 +1965,7 @@ yyreturn:
 }
 
 
-#line 251 "language/uscript.y"
+#line 250 "language/umscript.y"
 
 #include <stdio.h>
 

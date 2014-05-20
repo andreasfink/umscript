@@ -1,6 +1,6 @@
 //
 //  UMFunction_lessthan.m
-//  umruleengine
+//  umscript
 //
 //  Created by Andreas Fink on 17.05.14.
 //  Copyright (c) 2014 SMSRelay AG. All rights reserved.

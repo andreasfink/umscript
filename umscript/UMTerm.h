@@ -1,6 +1,6 @@
 //
 //  UMRuleFieldOrValue.h
-//  umruleengine
+//  umscript
 //
 //  Created by Andreas Fink on 17.05.14.
 //  Copyright (c) 2014 SMSRelay AG. All rights reserved.
@@ -85,7 +85,7 @@ typedef enum UMTermType
 - (UMTerm *)notequal:(UMTerm *)b;
 - (UMTerm *)greaterthan:(UMTerm *)b;
 - (UMTerm *)lessthan:(UMTerm *)b;
-- (UMTerm *)greatorequal:(UMTerm *)b;
+- (UMTerm *)greaterorequal:(UMTerm *)b;
 - (UMTerm *)lessorequal:(UMTerm *)b;
 - (UMTerm *)assign:(UMTerm *)b;
 - (UMTerm *)and:(UMTerm *)b;

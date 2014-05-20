@@ -13,5 +13,8 @@
 #import "UMEnvironment.h"
 #import "UMFunction.h"
 #import "UMFunctionMacros.h"
+
 #import "UMTerm.h"
 #import "UMScriptDocument.h"
+#import "UMScriptCompilerEnvironment.h"
+#import "NSNumber+UMScript.h"

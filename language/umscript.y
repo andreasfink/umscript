@@ -1,5 +1,5 @@
 %{
-#import "uscript.yl.h"
+#import "umscript.yl.h"
 #import "UMFunctionMacros.h"
 
 %}
@@ -33,7 +33,6 @@
 %token OPERATOR_AND_ASSIGN
 %token OPERATOR_XOR_ASSIGN
 %token OPERATOR_OR_ASSIGN
-
 
 %token CASE
 %token DEFAULT 
@@ -162,29 +161,29 @@ equality_expression
 
 relational_expression
 	: shift_expression
-	| relational_expression OPERATOR_LESS shift_expression
-	| relational_expression OPERATOR_GREATER shift_expression
-	| relational_expression OPERATOR_LESS_OR_EQUAL shift_expression
-	| relational_expression OPERATOR_GREATER_OR_EQUAL shift_expression
+	| relational_expression OPERATOR_LESS shift_expression              { $$ = ROOT = [$1 lessthan:       $3];  };
+	| relational_expression OPERATOR_GREATER shift_expression           { $$ = ROOT = [$1 greaterthan:    $3];  };
+	| relational_expression OPERATOR_LESS_OR_EQUAL shift_expression     { $$ = ROOT = [$1 lessorequal:    $3];  };
+	| relational_expression OPERATOR_GREATER_OR_EQUAL shift_expression  { $$ = ROOT = [$1 greaterorequal: $3];  };
 	;
 
 shift_expression
 	: additive_expression
-	| shift_expression OPERATOR_LEFT additive_expression
-	| shift_expression OPERATOR_RIGHT additive_expression
+	| shift_expression OPERATOR_LEFT additive_expression   { $$ = ROOT = [$1 leftshift:  $3];  };
+	| shift_expression OPERATOR_RIGHT additive_expression  { $$ = ROOT = [$1 rightshift: $3];  };
 	;
 
 additive_expression
 	: multiplicative_expression
-    | additive_expression '+' multiplicative_expression { $$ = ROOT = [$1 add: $2];  };
-	| additive_expression '-' multiplicative_expression { $$ = ROOT = [$1 sub: $2];  };
+    | additive_expression '+' multiplicative_expression { $$ = ROOT = [$1 add: $3];  };
+	| additive_expression '-' multiplicative_expression { $$ = ROOT = [$1 sub: $3];  };
 	;
 
 multiplicative_expression
 	: unary_expression
-	| multiplicative_expression '*' unary_expression { $$ = ROOT = [$1 mul: $2];    };
-	| multiplicative_expression '/' unary_expression { $$ = ROOT = [$1 div: $2];    };
-    | multiplicative_expression '%' unary_expression { $$ = ROOT = [$1 modulo: $2]; };
+	| multiplicative_expression '*' unary_expression { $$ = ROOT = [$1 mul:    $3]; };
+	| multiplicative_expression '/' unary_expression { $$ = ROOT = [$1 div:    $3]; };
+    | multiplicative_expression '%' unary_expression { $$ = ROOT = [$1 modulo: $3]; };
 
 	;
 	
@@ -209,10 +208,10 @@ variable_identifier : '$' IDENTIFIER;
 
 primary_expression
     : IDENTIFIER            { $$ = ROOT = [UMTerm termWithIdentifier:$1];  };
-    | VARIABLE              { $$ = [UMTerm termWithVariable:$1];    };
-    | FIELD                 { $$ = [UMTerm termWithField:$1];       };
-    | CONSTANT              { $$ = [UMTerm termWithConstant:$1];    };
-    | STRING_LITERAL        { $$ = [UMTerm termWithString:$1];      };
+    | VARIABLE              { $$ = ROOT = [UMTerm termWithVariable:$1];    };
+    | FIELD                 { $$ = ROOT = [UMTerm termWithField:$1];       };
+    | CONSTANT              { $$ = ROOT = [UMTerm termWithConstant:$1];    };
+    | STRING_LITERAL        { $$ = ROOT = [UMTerm termWithString:$1];      };
 	| '(' expression ')'
 	;
 

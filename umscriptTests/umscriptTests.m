@@ -8,8 +8,6 @@
 
 #import <XCTest/XCTest.h>
 
-#import "UMRule.h"
-#import "UMRuleSet.h"
 #import "UMFunction.h"
 #import "UMTerm.h"
 #import "UMEnvironment.h"

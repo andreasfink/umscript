@@ -1,6 +1,6 @@
 //
-//  UMRuleCondition.m
-//  umruleengine
+//  UMFunction
+//  umscript
 //
 //  Created by Andreas Fink on 17.05.14.
 //  Copyright (c) 2014 SMSRelay AG. All rights reserved.
@@ -10,7 +10,7 @@
 #import "UMFunction.h"
 #import "UMEnvironment.h"
 #import "UMTerm.h"
-#import "NSNumber+UMRule.h"
+#import "NSNumber+UMScript.h"
 
 @implementation UMFunction
 

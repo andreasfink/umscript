@@ -8,7 +8,7 @@
 
 /* functions which are used by the lexer and the parser jointly */
 
-#include "uscript.yl.h"
+#include "umscript.yl.h"
 
 
 #import "UMScriptCompilerEnvironment.h"
