@@ -1,5 +1,7 @@
 %{
 #import "uscript.yl.h"
+
+void yyerror(char *);
 %}
 
 %token IDENTIFIER
@@ -254,15 +256,7 @@ function_definition
 
 extern char yytext[];
 extern int column;
-int yyerror(char *s);
 int yylex();
-
-int yyerror(char *s)
-{
-    fflush(stdout);
-    printf("\n%*s\n%*s\n", column, "^", column, s);
-    return 0;
-}
 
 int push_field(void *p)
 {
@@ -274,3 +268,27 @@ int push_variable(void *p)
     return 0;
 }
 
+int redirected_fprintf_for_parser(FILE *f,char *format,...)
+{
+    char buffer[1024];
+    memset(buffer,0x00,sizeof(buffer));
+    va_list args;
+    
+    
+    va_start(args, format);
+    vsnprintf(buffer,sizeof(buffer)-1, format,args);
+    va_end(args);
+    
+    return fprintf(f,"*PARSER*: %s",buffer);
+}
+
+void yyerror(char *s)
+{
+    fflush(stdout);
+    char buffer [1024];
+    
+    snprintf(buffer,sizeof(buffer),"\n%*s\n%*s\n", column, "^", column, s);
+    NSString *err = [NSString stringWithUTF8String:buffer];
+    
+    [global_UMScriptCompilerEnvironment addStdErr:err];
+}

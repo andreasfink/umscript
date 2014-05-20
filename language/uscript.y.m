@@ -158,6 +158,8 @@
 
 #import "uscript.yl.h"
 
+void yyerror(char *);
+
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -190,7 +192,7 @@ typedef int YYSTYPE;
 
 
 /* Line 216 of yacc.c.  */
-#line 194 "language/uscript.y.m"
+#line 196 "language/uscript.y.m"
 
 #ifdef short
 # undef short
@@ -517,17 +519,17 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    53,    53,    54,    58,    59,    63,    64,    65,    66,
-      67,    68,    72,    73,    77,    78,    79,    83,    84,    85,
-      89,    90,    91,    92,    93,    98,    99,   100,   101,   106,
-     107,   111,   112,   116,   117,   121,   122,   126,   127,   131,
-     132,   136,   137,   141,   142,   146,   147,   148,   152,   153,
-     154,   155,   156,   160,   161,   162,   166,   167,   168,   172,
-     173,   174,   175,   179,   180,   181,   182,   186,   187,   188,
-     189,   190,   191,   194,   195,   198,   199,   200,   201,   202,
-     203,   207,   208,   209,   210,   211,   212,   213,   214,   215,
-     216,   217,   221,   222,   227,   228,   229,   230,   231,   232,
-     236,   240,   241,   245,   249
+       0,    55,    55,    56,    60,    61,    65,    66,    67,    68,
+      69,    70,    74,    75,    79,    80,    81,    85,    86,    87,
+      91,    92,    93,    94,    95,   100,   101,   102,   103,   108,
+     109,   113,   114,   118,   119,   123,   124,   128,   129,   133,
+     134,   138,   139,   143,   144,   148,   149,   150,   154,   155,
+     156,   157,   158,   162,   163,   164,   168,   169,   170,   174,
+     175,   176,   177,   181,   182,   183,   184,   188,   189,   190,
+     191,   192,   193,   196,   197,   200,   201,   202,   203,   204,
+     205,   209,   210,   211,   212,   213,   214,   215,   216,   217,
+     218,   219,   223,   224,   229,   230,   231,   232,   233,   234,
+     238,   242,   243,   247,   251
 };
 #endif
 
@@ -1617,28 +1619,28 @@ yyreduce:
   switch (yyn)
     {
         case 76:
-#line 199 "language/uscript.y"
+#line 201 "language/uscript.y"
     { (yyval) = [UMTerm termWithVariable:(yyvsp[(1) - (1)])]; ;}
     break;
 
   case 77:
-#line 200 "language/uscript.y"
+#line 202 "language/uscript.y"
     { (yyval) = [UMTerm termWithField:(yyvsp[(1) - (1)])]; ;}
     break;
 
   case 78:
-#line 201 "language/uscript.y"
+#line 203 "language/uscript.y"
     { (yyval) = [UMTerm termWithConstant:(yyvsp[(1) - (1)])]; ;}
     break;
 
   case 79:
-#line 202 "language/uscript.y"
+#line 204 "language/uscript.y"
     { (yyval) = [UMTerm termWithString:(yyvsp[(1) - (1)])]; ;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1642 "language/uscript.y.m"
+#line 1644 "language/uscript.y.m"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1852,21 +1854,13 @@ yyreturn:
 }
 
 
-#line 252 "language/uscript.y"
+#line 254 "language/uscript.y"
 
 #include <stdio.h>
 
 extern char yytext[];
 extern int column;
-int yyerror(char *s);
 int yylex();
-
-int yyerror(char *s)
-{
-    fflush(stdout);
-    printf("\n%*s\n%*s\n", column, "^", column, s);
-    return 0;
-}
 
 int push_field(void *p)
 {
@@ -1878,4 +1872,28 @@ int push_variable(void *p)
     return 0;
 }
 
+int redirected_fprintf_for_parser(FILE *f,char *format,...)
+{
+    char buffer[1024];
+    memset(buffer,0x00,sizeof(buffer));
+    va_list args;
+    
+    
+    va_start(args, format);
+    vsnprintf(buffer,sizeof(buffer)-1, format,args);
+    va_end(args);
+    
+    return fprintf(f,"*PARSER*: %s",buffer);
+}
+
+void yyerror(char *s)
+{
+    fflush(stdout);
+    char buffer [1024];
+    
+    snprintf(buffer,sizeof(buffer),"\n%*s\n%*s\n", column, "^", column, s);
+    NSString *err = [NSString stringWithUTF8String:buffer];
+    
+    [global_UMScriptCompilerEnvironment addStdErr:err];
+}
 

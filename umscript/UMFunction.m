@@ -32,6 +32,11 @@
     return [UMDiscreteValue discreteNull];
 }
 
+- (NSString *)debugDescription
+{
+    return self.name;
+}
+
 - (NSString *)description
 {
     UMJsonWriter *writer = [[UMJsonWriter alloc]init];
@@ -47,7 +52,6 @@
         dict[@"function"] = name;
     }
     return dict;
-
 }
 
 - (NSString *)codeWithEnvironmentStart:(UMEnvironment *)env

@@ -1,5 +1,5 @@
 //
-//  UMScript.h
+//  UMScriptDocument.h
 //  umruleengine
 //
 //  Created by Andreas Fink on 18.05.14.
@@ -14,17 +14,15 @@
 
 @interface UMScriptDocument : UMObject
 {
-    NSString *scriptName;
     NSString *sourceCode;
-    UMTerm   *execCode;
+    UMTerm *compiledCode;
     BOOL isCompiled;
 }
 
 @property (readwrite,strong)    NSString *sourceCode;
-@property (readonly, strong)    UMTerm   *execCode;
+@property (readwrite, strong)    UMTerm   *compiledCode;
 
 - (UMDiscreteValue *)runScriptWithEnvironment:(UMEnvironment *)env;
 - (NSString *)compileSource;
-- (NSString *)sourceWithoutComment;
-
+- (id)initWithFilename:(NSString *)filename;
 @end

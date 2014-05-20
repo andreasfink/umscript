@@ -10,9 +10,23 @@
 
 #import <Foundation/Foundation.h>
 #import "UMTerm.h"
+#import "UMScriptCompilerEnvironment.h"
+
+#define CENV    global_UMScriptCompilerEnvironment;
 
 #define YYSTYPE_IS_DECLARED 1
 typedef UMTerm *YYSTYPE;
+
+//#define YYPARSE_PARAM   parm
+
+
+//extern char yytext[];
+extern int column;
+int yylex();
+
+extern void *parm;
+
+
 
 /*
 typedef struct MyGlueStruct {  CFTypeRef *object; } MyGlueStruct;

@@ -9,15 +9,37 @@
 #import "UMScriptDocument.h"
 #import "UMTerm.h"
 #import "UMEnvironment.h"
+#import "UMScriptCompilerEnvironment.h"
+#include <stdio.h>
+#include <unistd.h>
 
 @implementation UMScriptDocument
 
 @synthesize sourceCode;
-@synthesize execCode;
+@synthesize compiledCode;
+
+- (id)initWithFilename:(NSString *)filename
+{
+    self = [super init];
+    if(self)
+    {
+        NSError *err = NULL;
+        sourceCode = [[NSString alloc] initWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:&err];
+        if(err)
+        {
+            @throw err;
+        }
+    }
+    return self;
+}
 
 - (UMDiscreteValue *)runScriptWithEnvironment:(UMEnvironment *)env
 {
-    UMDiscreteValue *result = [execCode evaluateWithEnvironment:env];
+    if(isCompiled==NO)
+    {
+        [self compileSource];
+    }
+    UMDiscreteValue *result = [compiledCode evaluateWithEnvironment:env];
     return result;
 }
 
@@ -34,29 +56,15 @@
 
 - (NSString *)compileSource
 {
-    return @"";
-}
 
-- (NSString *)sourceWithoutComment
-{
-    /* step1: split source into lines */
+    UMScriptCompilerEnvironment *compilerEnvironment = [UMScriptCompilerEnvironment sharedInstance];
+
+    NSString *out = @"";
+    NSString *err = @"";
     
-    NSArray *lines = [sourceCode componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-    NSMutableArray *linesWithoutComments = [[NSMutableArray alloc]init];
-    for(NSString *line in lines)
-    {
-        NSRange r = [line rangeOfString:@"//"];
-        if(r.location != NSNotFound)
-        {
-            [linesWithoutComments addObject:[line substringToIndex:r.location]];
-        }
-        else
-        {
-            [linesWithoutComments addObject:line];
-        }
-    }
-    NSString *sourceNoComment = [linesWithoutComments componentsJoinedByString:@"\r"];
-    return sourceNoComment;
+    self.compiledCode = [compilerEnvironment compile:sourceCode stdOut:&out stdErr:&err];
+
+    return err;
 }
 
 

@@ -19,6 +19,7 @@
 @synthesize varname;
 @synthesize discrete;
 @synthesize function;
+@synthesize token;
 
 - (UMDiscreteValue *)evaluateWithEnvironment:(UMEnvironment *)env;
 {
@@ -278,4 +279,38 @@
     UMDiscreteValue *d = [UMDiscreteValue discreteString:s];
     self.discrete = d;
 }
+
+
+- (NSString * )debugDescription
+{
+    
+NSMutableString *s = [[NSMutableString alloc]init];
+    [s appendString: [super description]];
+    switch(type)
+    {
+        case UMTermType_discrete:
+            [s appendString:@"\r type=discrete\r"];
+            break;
+        case UMTermType_field:
+            [s appendString:@"\r type=field\r"];
+            break;
+        case UMTermType_variable:
+            [s appendString:@"\r type=variable\r"];
+            break;
+        case UMTermType_function:
+            [s appendString:@"\r type=function\r"];
+            break;
+        default:
+            [s appendString:@"\r type=unknown\r"];
+            break;
+    }
+    [s appendFormat:@" discrete=%@\r", discrete ? [discrete debugDescription] : @"nil"];
+    [s appendFormat:@" function=%@\r", function ? [function debugDescription] : @"nil"];
+    [s appendFormat:@" fieldname=%@\r", fieldname ? fieldname : @"nil"];
+    [s appendFormat:@" varname=%@\r", varname ? varname : @"nil"];
+    [s appendFormat:@" paramcount=%d\r", (int)param.count ];
+    [s appendFormat:@" token=%d\r", token];
+    return s;
+}
+
 @end
