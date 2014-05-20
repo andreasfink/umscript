@@ -1,6 +1,4 @@
-include/
-install_root/
-version.h
+build/
 
 #########################
 # .gitignore file for Xcode4 and Xcode5 Source projects
