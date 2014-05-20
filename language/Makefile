@@ -6,14 +6,13 @@
 #
 #
 
-all:	y.tab.c
+all:	y.tab.m lex.yy.m
 
-lex.yy.c:	uscript.l
-	lex uscript.l
+uscript.l.m:	uscript.l
+	flex uscript.l
+	mv lex.yy.c uscript.l.m
 	
-y.tab.c:	uscript.y
-	yacc -d uscript.y
-		
-y.tab.h:		uscript.y
-	yacc -d uscript.y
+uscript.y.m:	uscript.y
+	yacc uscript.y --output-file uscript.y.m
+
 

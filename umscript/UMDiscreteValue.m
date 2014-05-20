@@ -692,6 +692,7 @@
     }
 }
 
+
 - (UMDiscreteValue *)dotValue:(UMDiscreteValue *)bval
 {
     if((self.type==UMVALUE_STRING) && (bval.type==UMVALUE_STRING))

@@ -1,21 +1,21 @@
 //
-//  UMFunction_xor.m
+//  UMFunction_and.m
 //  umruleengine
 //
 //  Created by Andreas Fink on 17.05.14.
 //  Copyright (c) 2014 SMSRelay AG. All rights reserved.
 //
 
-#import "UMFunction_logic_xor.h"
+#import "UMFunction_and.h"
 
-@implementation UMFunction_logic_xor
+@implementation UMFunction_and
 
 - (id)init
 {
     self = [super init];
     if(self)
     {
-        self.name = @"LOGICXOR";
+        self.name=@"LOGICAND";
     }
     return self;
 }
@@ -26,20 +26,20 @@
     {
         return [UMDiscreteValue discreteNull];
     }
-    UMDiscreteValue *result;
+    UMDiscreteValue *result = nil;
     for(UMTerm *entry in params)
     {
         UMDiscreteValue *d = [entry evaluateWithEnvironment:env];
+
         if(result == nil)
         {
             result = d;
         }
         else
         {
-            result = [result logicXor:d];
+            result = [result logicAnd:d];
         }
     }
     return result;
 }
-
 @end

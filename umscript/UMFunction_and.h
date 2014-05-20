@@ -1,5 +1,5 @@
 //
-//  UMFunction_or.h
+//  UMFunction_logic_and.h
 //  umruleengine
 //
 //  Created by Andreas Fink on 17.05.14.
@@ -8,7 +8,7 @@
 
 #import "UMFunction.h"
 
-@interface UMFunction_logic_or : UMFunction
+@interface UMFunction_and : UMFunction
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(id)env;
 

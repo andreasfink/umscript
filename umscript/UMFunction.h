@@ -30,4 +30,6 @@
 - (NSString *)codeWithEnvironmentLastParam:(UMTerm *)param env:(UMEnvironment *)env;
 - (NSString *)codeWithEnvironmentStop:(UMEnvironment *)env;
 
+- (NSString *)debugDescription;
+
 @end

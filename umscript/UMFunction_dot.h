@@ -8,7 +8,7 @@
 
 #import "UMFunction.h"
 
-@interface UMFunction_math_dot : UMFunction
+@interface UMFunction_dot : UMFunction
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(id)env;
 

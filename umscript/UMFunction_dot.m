@@ -1,39 +1,45 @@
 //
-//  UMFunction_logic_not.m
+//  UMFunction_math_dot.m
 //  umruleengine
 //
 //  Created by Andreas Fink on 18.05.14.
 //  Copyright (c) 2014 SMSRelay AG. All rights reserved.
 //
 
-#import "UMFunction_logic_not.h"
+#import "UMFunction_dot.h"
 
-@implementation UMFunction_logic_not
+@implementation UMFunction_dot
+
 
 - (id)init
 {
     self = [super init];
     if(self)
     {
-        self.name=@"LOGICNOT";
+        self.name = @"MATHDOT";
     }
     return self;
 }
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(id)env
 {
-    if(params.count < 1)
+    UMDiscreteValue *result = NULL;
+    for(UMTerm *entry in params)
     {
-        return [UMDiscreteValue discreteNull];
+        if(result == NULL)
+        {
+            result = [entry evaluateWithEnvironment:env];
+        }
+        else
+        {
+            result = [result dotValue:[entry evaluateWithEnvironment:env]];
+        }
     }
-    UMTerm *entry = params[0];
-    UMDiscreteValue *d = [entry evaluateWithEnvironment:env];
-    return [d notValue];
+    return result;
 }
-
 - (NSString *)codeWithEnvironmentStart:(UMEnvironment *)env
 {
-    NSString *s=[NSString stringWithFormat:@"!"];
+    NSString *s=[NSString stringWithFormat:@"("];
     return s;
 }
 
@@ -44,17 +50,18 @@
 
 - (NSString *)codeWithEnvironmentNextParam:(UMTerm *)param env:(UMEnvironment *)env
 {
-    return [NSString stringWithFormat:@"/* unused %@*/",[param codeWithEnvironment:env]];
+    return [NSString stringWithFormat:@".%@",[param codeWithEnvironment:env]];
 }
 
 - (NSString *)codeWithEnvironmentLastParam:(UMTerm *)param env:(UMEnvironment *)env
 {
-    return [NSString stringWithFormat:@"/* unused %@*/",[param codeWithEnvironment:env]];
+    return [NSString stringWithFormat:@".%@",[param codeWithEnvironment:env]];
 }
 
 - (NSString *)codeWithEnvironmentStop:(UMEnvironment *)env
 {
     return @")";
 }
+
 
 @end

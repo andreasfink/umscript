@@ -1,5 +1,5 @@
 //
-//  UMFunction_math_multiply.h
+//  UMFunction_math_division.h
 //  umruleengine
 //
 //  Created by Andreas Fink on 18.05.14.
@@ -8,7 +8,7 @@
 
 #import "UMFunction.h"
 
-@interface UMFunction_math_multiply : UMFunction
+@interface UMFunction_div : UMFunction
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(id)env;
 

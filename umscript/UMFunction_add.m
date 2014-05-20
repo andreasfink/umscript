@@ -1,22 +1,21 @@
 //
-//  UMFunction_math_division.m
+//  UMFunction_math_add.m
 //  umruleengine
 //
 //  Created by Andreas Fink on 18.05.14.
 //  Copyright (c) 2014 SMSRelay AG. All rights reserved.
 //
 
-#import "UMFunction_math_division.h"
+#import "UMFunction_add.h"
 
-@implementation UMFunction_math_division
-
+@implementation UMFunction_add
 
 - (id)init
 {
     self = [super init];
     if(self)
     {
-        self.name = @"MATHDIVISION";
+        self.name = @"MATHADD";
     }
     return self;
 }
@@ -32,11 +31,12 @@
         }
         else
         {
-            result = [result divideValue:[entry evaluateWithEnvironment:env]];
+            result = [result addValue:[entry evaluateWithEnvironment:env]];
         }
     }
     return result;
 }
+
 
 - (NSString *)codeWithEnvironmentStart:(UMEnvironment *)env
 {
@@ -51,12 +51,12 @@
 
 - (NSString *)codeWithEnvironmentNextParam:(UMTerm *)param env:(UMEnvironment *)env
 {
-    return [NSString stringWithFormat:@"/%@",[param codeWithEnvironment:env]];
+    return [NSString stringWithFormat:@"+%@",[param codeWithEnvironment:env]];
 }
 
 - (NSString *)codeWithEnvironmentLastParam:(UMTerm *)param env:(UMEnvironment *)env
 {
-    return [NSString stringWithFormat:@"/%@",[param codeWithEnvironment:env]];
+    return [NSString stringWithFormat:@"+%@",[param codeWithEnvironment:env]];
 }
 
 - (NSString *)codeWithEnvironmentStop:(UMEnvironment *)env

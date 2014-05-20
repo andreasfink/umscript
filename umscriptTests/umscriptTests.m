@@ -13,6 +13,7 @@
 #import "UMFunction.h"
 #import "UMTerm.h"
 #import "UMEnvironment.h"
+#import "UMScriptDocument.h"
 
 @interface umscriptTests : XCTestCase
 {
@@ -190,4 +191,9 @@
 }
 
 
+- (void)testCompileScript1
+{
+    UMScriptDocument *s = [[UMScriptDocument alloc]initWithFilename:@"umscriptTests/test1.ums"];
+    [s compileSource];
+}
 @end

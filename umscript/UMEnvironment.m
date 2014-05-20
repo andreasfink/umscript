@@ -115,17 +115,17 @@
         variables = [[NSMutableDictionary alloc]init];
         fields = [[NSMutableDictionary alloc]init];
 
-        [self addFunction:[[UMFunction_math_add alloc]init]];
-        [self addFunction:[[UMFunction_math_substract alloc]init]];
-        [self addFunction:[[UMFunction_math_multiply alloc]init]];
-        [self addFunction:[[UMFunction_math_division alloc]init]];
-        [self addFunction:[[UMFunction_math_dot alloc]init]];
-        [self addFunction:[[UMFunction_math_percent alloc]init]];
+        [self addFunction:[[UMFunction_add alloc]init]];
+        [self addFunction:[[UMFunction_sub alloc]init]];
+        [self addFunction:[[UMFunction_mul alloc]init]];
+        [self addFunction:[[UMFunction_div alloc]init]];
+        [self addFunction:[[UMFunction_dot alloc]init]];
+        [self addFunction:[[UMFunction_modulo alloc]init]];
         [self addFunction:[[UMFunction_if alloc]init]];
-        [self addFunction:[[UMFunction_logic_not alloc]init]];
-        [self addFunction:[[UMFunction_logic_and alloc]init]];
-        [self addFunction:[[UMFunction_logic_or alloc]init]];
-        [self addFunction:[[UMFunction_logic_xor alloc]init]];
+        [self addFunction:[[UMFunction_not alloc]init]];
+        [self addFunction:[[UMFunction_and alloc]init]];
+        [self addFunction:[[UMFunction_or alloc]init]];
+        [self addFunction:[[UMFunction_xor alloc]init]];
         [self addFunction:[[UMFunction_bit_not alloc]init]];
         [self addFunction:[[UMFunction_bit_and alloc]init]];
         [self addFunction:[[UMFunction_bit_or alloc]init]];

@@ -1,6 +1,12 @@
+%{
+#import "uscript.yl.h"
+#import "UMFunctionMacros.h"
+
+%}
+
 %token IDENTIFIER
-%token VARIABLE_IDENTIFIER 
-%token FIELD_IDENTIFIER 
+%token VARIABLE
+%token FIELD
 %token CONSTANT 
 %token STRING_LITERAL
 
@@ -105,7 +111,17 @@ expression
 
 assignment_expression
 	: conditional_expression
-	| unary_expression assignment_operator assignment_expression
+	| unary_expression '=' assignment_expression
+    | unary_expression OPERATOR_MUL_ASSIGN assignment_expression    { $$ = ROOT = [$1 assign:[$1 mul: $3]];  };
+    | unary_expression OPERATOR_DIV_ASSIGN assignment_expression    { $$ = ROOT = [$1 assign:[$1 div: $3]];  };
+    | unary_expression OPERATOR_MOD_ASSIGN assignment_expression    { $$ = ROOT = [$1 assign:[$1 mul: $3]];  };
+    | unary_expression OPERATOR_ADD_ASSIGN assignment_expression    { $$ = ROOT = [$1 assign:[$1 add: $2]];  };
+    | unary_expression OPERATOR_SUB_ASSIGN assignment_expression    { $$ = ROOT = [$1 assign:[$1 sub: $2]];  };
+    | unary_expression OPERATOR_LEFT_ASSIGN assignment_expression   { $$ = ROOT = [$1 assign:[$1 leftshift: $3]];  };
+    | unary_expression OPERATOR_RIGHT_ASSIGN assignment_expression  { $$ = ROOT = [$1 assign:[$1 rightshift: $3]];  };
+    | unary_expression OPERATOR_AND_ASSIGN assignment_expression    { $$ = ROOT = [$1 assign:[$1 and: $3]];  };
+    | unary_expression OPERATOR_XOR_ASSIGN assignment_expression    { $$ = ROOT = [$1 assign:[$1 xor: $3]];  };
+    | unary_expression OPERATOR_OR_ASSIGN assignment_expression     { $$ = ROOT = [$1 assign:[$1 or: $3]];  };
 	;
 
 conditional_expression
@@ -160,15 +176,16 @@ shift_expression
 
 additive_expression
 	: multiplicative_expression
-	| additive_expression '+' multiplicative_expression
-	| additive_expression '-' multiplicative_expression
+    | additive_expression '+' multiplicative_expression { $$ = ROOT = [$1 add: $2];  };
+	| additive_expression '-' multiplicative_expression { $$ = ROOT = [$1 sub: $2];  };
 	;
 
 multiplicative_expression
 	: unary_expression
-	| multiplicative_expression '*' unary_expression
-	| multiplicative_expression '/' unary_expression
-	| multiplicative_expression '%' unary_expression
+	| multiplicative_expression '*' unary_expression { $$ = ROOT = [$1 mul: $2];    };
+	| multiplicative_expression '/' unary_expression { $$ = ROOT = [$1 div: $2];    };
+    | multiplicative_expression '%' unary_expression { $$ = ROOT = [$1 modulo: $2]; };
+
 	;
 	
 unary_expression
@@ -191,27 +208,14 @@ field_identifier	: '%' IDENTIFIER;
 variable_identifier : '$' IDENTIFIER;
 
 primary_expression
-	: IDENTIFIER
-	| variable_identifier
-	| field_identifier
-	| CONSTANT
-	| STRING_LITERAL
+    : IDENTIFIER            { $$ = ROOT = [UMTerm termWithIdentifier:$1];  };
+    | VARIABLE              { $$ = [UMTerm termWithVariable:$1];    };
+    | FIELD                 { $$ = [UMTerm termWithField:$1];       };
+    | CONSTANT              { $$ = [UMTerm termWithConstant:$1];    };
+    | STRING_LITERAL        { $$ = [UMTerm termWithString:$1];      };
 	| '(' expression ')'
 	;
 
-assignment_operator
-	: '='
-	| OPERATOR_MUL_ASSIGN
-	| OPERATOR_DIV_ASSIGN
-	| OPERATOR_MOD_ASSIGN
-	| OPERATOR_ADD_ASSIGN
-	| OPERATOR_SUB_ASSIGN
-	| OPERATOR_LEFT_ASSIGN
-	| OPERATOR_RIGHT_ASSIGN
-	| OPERATOR_AND_ASSIGN
-	| OPERATOR_XOR_ASSIGN
-	| OPERATOR_OR_ASSIGN
-	;
 
 argument_expression_list
 	: assignment_expression
@@ -220,13 +224,12 @@ argument_expression_list
 
 
 unary_operator
-	: '&'
-	| '*'
-	| '+'
-	| '-'
+    : '*'
+    | '+'
+    | '-'
 	| '~'
-	| '!'
-	;
+    | '!'
+    | '%'
 
 constant_expression
 	: conditional_expression
@@ -250,11 +253,15 @@ function_definition
 
 extern char yytext[];
 extern int column;
-int yyerror(char *s);
-void yylex(void);
+int yylex();
 
-int yyerror(char *s)
+int push_field(void *p)
 {
-	fflush(stdout);
-	printf("\n%*s\n%*s\n", column, "^", column, s);
+    return 0;
 }
+
+int push_variable(void *p)
+{
+    return 0;
+}
+

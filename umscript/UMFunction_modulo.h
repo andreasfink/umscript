@@ -1,5 +1,5 @@
 //
-//  UMFunction_logic_not.h
+//  UMFunction_math_percent.h
 //  umruleengine
 //
 //  Created by Andreas Fink on 18.05.14.
@@ -8,7 +8,7 @@
 
 #import "UMFunction.h"
 
-@interface UMFunction_logic_not : UMFunction
+@interface UMFunction_modulo : UMFunction
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(id)env;
 

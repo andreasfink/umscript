@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 SMSRelay AG. All rights reserved.
 //
 
-#import "UMFunction_math_substract.h"
+#import "UMFunction_sub.h"
 
-@implementation UMFunction_math_substract
+@implementation UMFunction_sub
 
 - (id)init
 {
