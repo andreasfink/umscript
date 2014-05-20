@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 SMSRelay AG. All rights reserved.
 //
 
-#import "UMFunction_logic_or.h"
+#import "UMFunction_or.h"
 
-@implementation UMFunction_logic_or
+@implementation UMFunction_or
 
 - (id)init
 {

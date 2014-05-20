@@ -8,6 +8,7 @@
 
 #import "UMTerm.h"
 #import "UMFunction.h"
+#import "UMFunctionMacros.h"
 #import "NSNumber+UMRule.h"
 #import "UMEnvironment.h"
 
@@ -20,11 +21,16 @@
 @synthesize discrete;
 @synthesize function;
 @synthesize token;
+@synthesize identifier;
 
 - (UMDiscreteValue *)evaluateWithEnvironment:(UMEnvironment *)env;
 {
     switch(type)
     {
+        case UMTermType_identifier:
+        {
+            return discrete;
+        }
         case UMTermType_discrete:
         {
             return discrete;
@@ -53,6 +59,17 @@
     {
         self.type = UMTermType_discrete;
         self.discrete = d;
+    }
+    return self;
+}
+
+- (id)initWithIdentifier:(NSString *)ident
+{
+    self = [super init];
+    if(self)
+    {
+        self.type = UMTermType_identifier;
+        self.identifier = ident;
     }
     return self;
 }
@@ -138,6 +155,8 @@
 {
     switch(type)
     {
+        case UMTermType_identifier:
+            return @{@"IDENTIFIER" : identifier };
         case UMTermType_discrete:
             return [discrete descriptionDictVal];
         case UMTermType_variable:
@@ -250,6 +269,14 @@
     return @"/*unknown UMTerm */";
 }
 
++ (id)termWithIdentifier:(UMTerm *)identifier
+{
+    UMDiscreteValue *d = identifier.discrete;
+    UMTerm *term = [[UMTerm alloc]initWithIdentifier:d.stringValue];
+    return term;
+}
+
+
 + (id)termWithVariable:(UMTerm *)varNameTerm
 {
     UMDiscreteValue *d = varNameTerm.discrete;
@@ -311,6 +338,140 @@ NSMutableString *s = [[NSMutableString alloc]init];
     [s appendFormat:@" paramcount=%d\r", (int)param.count ];
     [s appendFormat:@" token=%d\r", token];
     return s;
+}
+
+- (UMTerm *)add:(UMTerm *)b
+{
+    UMFunction *func = [[UMFunction_add alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+}
+
+- (UMTerm *)sub:(UMTerm *)b
+{
+    UMFunction *func = [[UMFunction_sub alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+}
+
+- (UMTerm *)mul:(UMTerm *)b
+{
+    UMFunction *func = [[UMFunction_mul alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+}
+
+- (UMTerm *)div:(UMTerm *)b
+{
+    UMFunction *func = [[UMFunction_div alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+}
+
+- (UMTerm *)modulo:(UMTerm *)b
+{
+    UMFunction *func = [[UMFunction_div alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+}
+
+- (UMTerm *)dot:(UMTerm *)b
+{
+    UMFunction *func = [[UMFunction_dot alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+}
+
+- (UMTerm *)not
+{
+    UMFunction *func = [[UMFunction_not alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self]];
+    return result;
+}
+
+- (UMTerm *)equal:(UMTerm *)b;
+{
+    UMFunction *func = [[UMFunction_equal alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+}
+
+- (UMTerm *)notequal:(UMTerm *)b;
+{
+    UMFunction *func = [[UMFunction_notequal alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+}
+
+- (UMTerm *)greaterthan:(UMTerm *)b;
+{
+    UMFunction *func = [[UMFunction_greaterthan alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+}
+
+- (UMTerm *)lessthan:(UMTerm *)b;
+{
+    UMFunction *func = [[UMFunction_lessthan alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+}
+
+- (UMTerm *)greatorequal:(UMTerm *)b;
+{
+    UMFunction *func = [[UMFunction_greaterorequal alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+}
+
+- (UMTerm *)lessorequal:(UMTerm *)b;
+{
+    UMFunction *func = [[UMFunction_lessorequal alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+}
+
+- (UMTerm *)assign:(UMTerm *)b
+{
+    UMFunction *func = [[UMFunction_assign alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+}
+
+- (UMTerm *)and:(UMTerm *)b
+{
+    UMFunction *func = [[UMFunction_and alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+
+}
+
+- (UMTerm *)or:(UMTerm *)b
+{
+    UMFunction *func = [[UMFunction_or alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+}
+
+- (UMTerm *)xor:(UMTerm *)b
+{
+    UMFunction *func = [[UMFunction_xor alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+}
+
+- (UMTerm *)leftshift:(UMTerm *)b
+{
+    UMFunction *func = [[UMFunction_bit_shiftleft alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+}
+
+- (UMTerm *)rightshift:(UMTerm *)b
+{
+    UMFunction *func = [[UMFunction_bit_shiftright alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
 }
 
 @end

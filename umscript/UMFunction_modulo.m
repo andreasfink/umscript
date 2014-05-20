@@ -1,22 +1,21 @@
 //
-//  UMFunction_math_multiply.m
+//  UMFunction_math_percent.m
 //  umruleengine
 //
 //  Created by Andreas Fink on 18.05.14.
 //  Copyright (c) 2014 SMSRelay AG. All rights reserved.
 //
 
-#import "UMFunction_math_multiply.h"
+#import "UMFunction_modulo.h"
 
-@implementation UMFunction_math_multiply
-
+@implementation UMFunction_modulo
 
 - (id)init
 {
     self = [super init];
     if(self)
     {
-        self.name = @"MATHMULTIPLY";
+        self.name = @"MATHPERCENT";
     }
     return self;
 }
@@ -32,12 +31,11 @@
         }
         else
         {
-            result = [result multiplyValue:[entry evaluateWithEnvironment:env]];
+            result = [result percentValue:[entry evaluateWithEnvironment:env]];
         }
     }
     return result;
 }
-
 - (NSString *)codeWithEnvironmentStart:(UMEnvironment *)env
 {
     NSString *s=[NSString stringWithFormat:@"("];
@@ -51,12 +49,12 @@
 
 - (NSString *)codeWithEnvironmentNextParam:(UMTerm *)param env:(UMEnvironment *)env
 {
-    return [NSString stringWithFormat:@"*%@",[param codeWithEnvironment:env]];
+    return [NSString stringWithFormat:@"%%%@",[param codeWithEnvironment:env]];
 }
 
 - (NSString *)codeWithEnvironmentLastParam:(UMTerm *)param env:(UMEnvironment *)env
 {
-    return [NSString stringWithFormat:@"*%@",[param codeWithEnvironment:env]];
+    return [NSString stringWithFormat:@"%%%@",[param codeWithEnvironment:env]];
 }
 
 - (NSString *)codeWithEnvironmentStop:(UMEnvironment *)env

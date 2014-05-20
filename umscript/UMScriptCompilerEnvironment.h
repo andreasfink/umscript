@@ -7,6 +7,7 @@
 //
 
 #import "UMEnvironment.h"
+#import "uscript.yl.h"
 
 @class UMScriptCompilerEnvironment;
 @class UMTerm;
@@ -29,8 +30,11 @@ extern UMScriptCompilerEnvironment *global_UMScriptCompilerEnvironment;
     int errors;
     int last_syntax_error_line;
     UMTerm *root;
+    int column;
 }
 
+@property (readwrite,assign) int column;
+@property (readwrite,strong)    UMTerm *root;
 
 + (UMScriptCompilerEnvironment *)sharedInstance;
 
@@ -42,8 +46,7 @@ extern UMScriptCompilerEnvironment *global_UMScriptCompilerEnvironment;
 - (NSString *)stdErr;
 - (NSString *)stdOut;
 
-- (int)readInputForLexer:(char *)buffer numBytesRead:(int *)numBytesRead maxBytesToRead:(int)maxBytesToRead;
+- (size_t)readInputForLexer:(char *)buffer numBytesRead:(size_t *)numBytesRead maxBytesToRead:(size_t)maxBytesToRead;
 
 @end
 
-extern int readInputForLexer(char *buffer, int *numBytesRead, int maxBytesToRead);

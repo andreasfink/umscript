@@ -19,6 +19,7 @@ typedef enum UMTermType
     UMTermType_field,
     UMTermType_variable,
     UMTermType_function,
+    UMTermType_identifier,
 } UMTermType;
 
 @interface UMTerm : UMObject
@@ -28,6 +29,7 @@ typedef enum UMTermType
     UMFunction      *function;
     NSString        *fieldname;
     NSString        *varname;
+    NSString        *identifier;
     NSArray         *param;
     int             token;
 }
@@ -36,6 +38,7 @@ typedef enum UMTermType
 @property (readwrite,strong) UMDiscreteValue *discrete;
 @property (readwrite,strong) NSString        *fieldname;
 @property (readwrite,strong) NSString        *varname;
+@property (readwrite,strong) NSString        *identifier;
 @property (readwrite,strong) UMFunction      *function;
 @property (readwrite,strong) NSArray         *param;
 @property (readwrite,assign) int             token;
@@ -44,6 +47,7 @@ typedef enum UMTermType
 - (id)initWithDiscreteValue:(UMDiscreteValue *)d;
 - (id)initWithFieldName:(NSString *)fieldName;
 - (id)initWithVariableName:(NSString *)variableName;
+- (id)initWithIdentifier:(NSString *)identifierName;
 - (id)initWithFunction:(UMFunction *)func andParams:(NSArray *)params;
 
 - (UMDiscreteValue *)evaluateWithEnvironment:(UMEnvironment *)env;
@@ -61,6 +65,7 @@ typedef enum UMTermType
 - (id)initFunction:(UMFunction *)name params:(NSArray *)parm;
 - (NSString *)codeWithEnvironment:(UMEnvironment *)env;
 
++ (id)termWithIdentifier:(UMTerm *)identifierName;
 + (id)termWithVariable:(UMTerm *)varNameTerm;
 + (id)termWithField:(UMTerm *)fieldNameTerm;
 + (id)termWithConstant:(UMTerm *)constantTerm;
@@ -68,5 +73,25 @@ typedef enum UMTermType
 
 - (void) setDiscreteString:(NSString *)s;
 - (NSString * )debugDescription;
+
+- (UMTerm *)add:(UMTerm *)b;
+- (UMTerm *)sub:(UMTerm *)b;
+- (UMTerm *)mul:(UMTerm *)b;
+- (UMTerm *)div:(UMTerm *)b;
+- (UMTerm *)modulo:(UMTerm *)b;
+- (UMTerm *)dot:(UMTerm *)b;
+- (UMTerm *)not;
+- (UMTerm *)equal:(UMTerm *)b;
+- (UMTerm *)notequal:(UMTerm *)b;
+- (UMTerm *)greaterthan:(UMTerm *)b;
+- (UMTerm *)lessthan:(UMTerm *)b;
+- (UMTerm *)greatorequal:(UMTerm *)b;
+- (UMTerm *)lessorequal:(UMTerm *)b;
+- (UMTerm *)assign:(UMTerm *)b;
+- (UMTerm *)and:(UMTerm *)b;
+- (UMTerm *)or:(UMTerm *)b;
+- (UMTerm *)xor:(UMTerm *)b;
+- (UMTerm *)leftshift:(UMTerm *)b;
+- (UMTerm *)rightshift:(UMTerm *)b;
 
 @end

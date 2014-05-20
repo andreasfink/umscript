@@ -10,12 +10,16 @@
 #import "UMTerm.h"
 #include <string.h>
 
+
 UMScriptCompilerEnvironment *global_UMScriptCompilerEnvironment = NULL;
 
 extern int yyparse(void *);
 extern FILE *yyin;
 
 @implementation UMScriptCompilerEnvironment
+
+@synthesize column;
+@synthesize root;
 
 - (id)init
 {
@@ -39,8 +43,8 @@ extern FILE *yyin;
 
 - (void)zapOutput
 {
-    stdErr = @"";
-    stdOut = @"";
+    stdErr = [[NSString alloc]init];
+    stdOut = [[NSString alloc]init];
 }
 
 #define RXPIPE 0
@@ -56,10 +60,13 @@ extern FILE *yyin;
         currentSourceCString = currentSource.UTF8String;
         currentSourcePosition = 0;
 
-        int result = yyparse(NULL);
+        yyparse(NULL);
         
         UMTerm *resultingCode = root;
         root = NULL;
+        printf("\r***STDOUT:\r");
+        NSLog(@"**STDOUT: \r%@",stdOut);
+        NSLog(@"**STDERR: \r%@",stdErr);
         return resultingCode;
     }
 }
@@ -77,13 +84,11 @@ extern FILE *yyin;
 
 - (void)addStdOut:(NSString *)s
 {
-    NSLog(@"OUT: %@",s);
     stdOut = [stdOut stringByAppendingString:s];
 }
 
 - (void)addStdErr:(NSString *)s
 {
-    NSLog(@"ERR: %@",s);
     stdErr = [stdErr stringByAppendingString:s];
     
 }
@@ -98,12 +103,12 @@ extern FILE *yyin;
     return stdOut;
 }
 
-- (int)readInputForLexer:(char *)buffer numBytesRead:(int *)numBytesRead maxBytesToRead:(int)maxBytesToRead
+- (size_t)readInputForLexer:(char *)buffer numBytesRead:(size_t *)numBytesRead maxBytesToRead:(size_t)maxBytesToRead
 {
     
-    int numBytesToRead = maxBytesToRead;
-    int bytesRemaining = strlen(currentSourceCString)-currentSourcePosition;
-    int i;
+    size_t numBytesToRead = maxBytesToRead;
+    size_t bytesRemaining = strlen(currentSourceCString)-currentSourcePosition;
+    size_t i;
     
     if (numBytesToRead > bytesRemaining)
     {
@@ -121,9 +126,4 @@ extern FILE *yyin;
 @end
 
 
-int readInputForLexer(char *buffer, int *numBytesRead, int maxBytesToRead)
-{
-    UMScriptCompilerEnvironment *g = [UMScriptCompilerEnvironment sharedInstance];
-    return [g readInputForLexer:buffer numBytesRead:numBytesRead maxBytesToRead:maxBytesToRead];
-}
 

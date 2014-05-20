@@ -12,20 +12,13 @@ IS			(u|U|l|L)*
 #import "uscript.yl.h"
 #import "uscript.y.h"
 
-
-void count(void);
-void comment(void);
-int check_type(void);
+static void comment(void);
+static void count(void);
+static int column=0;
 int yywrap(void);
-
-extern int readInputForLexer(char *buffer, int *numBytesRead, int maxBytesToRead);
-
-#undef YY_INPUT
-#define YY_INPUT(b,r,s) readInputForLexer(b,&r,s)
 
 //#define  YYPARSEPARAM  yyparseparam
 
-//int readInputForLexer( char *buffer, int *numBytesRead, int maxBytesToRead );
 
 #define SAVE_TOKEN  yylval.discreteString = [[NSString alloc]initWithBytes:yytext length:yyleng encoding:NSUTF8StringEncoding];
 #define TOKEN(t)    yylval.token = t
@@ -48,6 +41,8 @@ extern int readInputForLexer(char *buffer, int *numBytesRead, int maxBytesToRead
 "while"			{ count(); SAVE_TOKEN; return TOKEN(WHILE); }
 
 {LETTER}({LETTER}|{DECIMAL})*			{ count(); SAVE_TOKEN; return(IDENTIFIER); }
+\${LETTER}({LETTER}|{DECIMAL})*			{ count(); SAVE_TOKEN; return(VARIABLE); }
+\%{LETTER}({LETTER}|{DECIMAL})*			{ count(); SAVE_TOKEN; return(FIELD); }
 
 0[xX]{HEXDIGIT}+{IS}?					{ count(); SAVE_TOKEN; return TOKEN(CONSTANT); }
 0{DECIMAL}+{IS}?						{ count(); SAVE_TOKEN; return TOKEN(CONSTANT); }
@@ -110,16 +105,11 @@ L?\"(\\.|[^\\"])*\"						{ count(); SAVE_TOKEN; return TOKEN(STRING_LITERAL); }
 
 %%
 
-int yywrap(void)
-{
-	return(1);
-}
 
-
-void comment(void)
+static void comment(void)
 {
 	char c, c1;
-loop:
+    loop:
 	while ((c = input()) != '*' && c != 0)
 	{
 		putchar(c);
@@ -135,13 +125,10 @@ loop:
 	}
 }
 
-
-int column = 0;
-
-void count(void)
+static void count(void)
 {
 	int i;
-
+    
 	for (i = 0; yytext[i] != '\0'; i++)
 	{
 		if (yytext[i] == '\n')
@@ -157,40 +144,15 @@ void count(void)
 			column++;
 		}
 	}
+    [global_UMScriptCompilerEnvironment setColumn:column];
 	ECHO;
 }
 
 
-int check_type(void)
+int yywrap(void)
 {
-/*
-* pseudo code --- this is what it should check
-*
-*	if (yytext == type_name)
-*		return(TYPE_NAME);
-*
-*	return(IDENTIFIER);
-*/
-
-/*
-*	it actually will only return IDENTIFIER
-*/
-	return(IDENTIFIER);
+	return(1);
 }
 
 
-extern UMScriptCompilerEnvironment *global_UMScriptCompilerEnvironment;
-
-int redirected_fprintf_for_lexer(FILE *f,char *format,...)
-{
-    char buffer[1024];
-    memset(buffer,0x00,sizeof(buffer));
-    va_list args;
-
-    va_start(args, format);
-    vsnprintf(buffer,sizeof(buffer)-1, format,args);
-    va_end(args);
-    
-    return fprintf(f,"*LEXER*: %s",buffer);
-}
 

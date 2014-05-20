@@ -12,32 +12,24 @@
 #import "UMTerm.h"
 #import "UMScriptCompilerEnvironment.h"
 
-#define CENV    global_UMScriptCompilerEnvironment;
+
+#undef YYFPRINTF
+#define YYFPRINTF redirected_fprintf
+
+#undef YY_INPUT
+#define YY_INPUT(b,r,s) readInputForLexer(b,&r,s)
 
 #define YYSTYPE_IS_DECLARED 1
 typedef UMTerm *YYSTYPE;
 
-//#define YYPARSE_PARAM   parm
+#define     ROOT    (global_UMScriptCompilerEnvironment.root)
+
+extern void yyerror(char *s);
+extern void lex_count(void);
+extern void lex_comment(void);
+extern int  lex_check_type(void);
+extern int yywrap(void);
+extern int yylex();
+extern size_t readInputForLexer(char *buffer, size_t * numBytesRead, size_t maxBytesToRead);
 
 
-//extern char yytext[];
-extern int column;
-int yylex();
-
-extern void *parm;
-
-
-
-/*
-typedef struct MyGlueStruct {  CFTypeRef *object; } MyGlueStruct;
-//#define YYSTYPE ((__bridge void *)id)
-
-typedef struct YYSTYPE_Struct
-{
-    id object;
-    int integer;
-    NSString *string;
-} YYSTYPE_Struct;
-
-typedef YYSTYPE_Struct YYSTYPE;
-*/
