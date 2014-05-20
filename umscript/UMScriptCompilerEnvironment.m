@@ -10,35 +10,43 @@
 #import "UMTerm.h"
 #include <string.h>
 
-
-UMScriptCompilerEnvironment *global_UMScriptCompilerEnvironment = NULL;
-
 extern int yyparse(void *);
 extern FILE *yyin;
 
 @implementation UMScriptCompilerEnvironment
 
+@synthesize currentSource;
+
+
+-(id)init
+{
+    self = [super init];
+    if(self)
+    {        
+        currentSource = @"DUMMY";
+        currentSourceCString = currentSource.UTF8String;
+        currentSourcePosition = 0;
+    }
+    return self;
+}
+
+
+UMScriptCompilerEnvironment *global_UMScriptCompilerEnvironment = NULL;
+
 @synthesize column;
 @synthesize root;
 
-- (id)init
-{
-    if(global_UMScriptCompilerEnvironment!=NULL)
-    {
-        return global_UMScriptCompilerEnvironment;
-    }
-    global_UMScriptCompilerEnvironment = [super init];
-    return global_UMScriptCompilerEnvironment;
-}
 
 + (UMScriptCompilerEnvironment *)sharedInstance
 {
-    if(global_UMScriptCompilerEnvironment)
+    @synchronized(self)
     {
+        if(global_UMScriptCompilerEnvironment == NULL)
+        {
+            global_UMScriptCompilerEnvironment = [[UMScriptCompilerEnvironment alloc]init];
+        }
         return global_UMScriptCompilerEnvironment;
     }
-    global_UMScriptCompilerEnvironment = [[UMScriptCompilerEnvironment alloc]init];
-    return global_UMScriptCompilerEnvironment;
 }
 
 - (void)zapOutput
@@ -56,7 +64,7 @@ extern FILE *yyin;
     {
         [self zapOutput];
         
-        currentSource = code;
+        self.currentSource = code;
         currentSourceCString = currentSource.UTF8String;
         currentSourcePosition = 0;
 

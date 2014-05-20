@@ -47,10 +47,23 @@
         {
             return [function evaluateWithParams:param environment:env];
         }
+        case UMTermType_nullterm:
+        {
+            return [UMDiscreteValue discreteNull];
+        }
     }
     return [UMDiscreteValue discreteNull];
 }
-    
+
+- (id)initWithNull
+{
+    self = [super init];
+    if(self)
+    {
+        self.type = UMTermType_nullterm;
+    }
+    return self;
+}
 
 - (id)initWithDiscreteValue:(UMDiscreteValue *)d
 {
@@ -155,6 +168,8 @@
 {
     switch(type)
     {
+        case UMTermType_nullterm:
+            return @{@"NULLTERM" :@"NULL"};
         case UMTermType_identifier:
             return @{@"IDENTIFIER" : identifier };
         case UMTermType_discrete:
@@ -269,6 +284,12 @@
     return @"/*unknown UMTerm */";
 }
 
++ (id)termWithNull
+{
+    UMTerm *term = [[UMTerm alloc]initWithNull];
+    return term;
+}
+
 + (id)termWithIdentifier:(UMTerm *)identifier
 {
     UMDiscreteValue *d = identifier.discrete;
@@ -291,6 +312,23 @@
     return term;
 }
 
++ (id)termWithDirectInteger:(int)i
+{
+    UMDiscreteValue *d = [UMDiscreteValue discreteInt:i];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    return term;
+   
+}
+
++ (id)termWithDirectString:(NSString *)s
+{
+    UMDiscreteValue *d = [UMDiscreteValue discreteString:s];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    return term;
+    
+}
+
+
 + (id)termWithConstant:(UMTerm *)constantTerm
 {
     return constantTerm;
@@ -306,7 +344,6 @@
     UMDiscreteValue *d = [UMDiscreteValue discreteString:s];
     self.discrete = d;
 }
-
 
 - (NSString * )debugDescription
 {
@@ -382,7 +419,7 @@ NSMutableString *s = [[NSMutableString alloc]init];
     return result;
 }
 
-- (UMTerm *)not
+- (UMTerm *)logical_not
 {
     UMFunction *func = [[UMFunction_not alloc]init];
     UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self]];
@@ -438,7 +475,7 @@ NSMutableString *s = [[NSMutableString alloc]init];
     return result;
 }
 
-- (UMTerm *)and:(UMTerm *)b
+- (UMTerm *)logical_and:(UMTerm *)b
 {
     UMFunction *func = [[UMFunction_and alloc]init];
     UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
@@ -446,18 +483,50 @@ NSMutableString *s = [[NSMutableString alloc]init];
 
 }
 
-- (UMTerm *)or:(UMTerm *)b
+- (UMTerm *)logical_or:(UMTerm *)b
 {
     UMFunction *func = [[UMFunction_or alloc]init];
     UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
     return result;
 }
 
-- (UMTerm *)xor:(UMTerm *)b
+- (UMTerm *)logical_xor:(UMTerm *)b
 {
     UMFunction *func = [[UMFunction_xor alloc]init];
     UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
     return result;
+}
+
+- (UMTerm *)bit_and:(UMTerm *)b
+{
+    UMFunction *func = [[UMFunction_bit_and alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+
+}
+
+- (UMTerm *)bit_or:(UMTerm *)b
+{
+    UMFunction *func = [[UMFunction_bit_or alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+
+}
+
+- (UMTerm *)bit_xor:(UMTerm *)b
+{
+    UMFunction *func = [[UMFunction_bit_xor alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+
+}
+
+- (UMTerm *)bit_not
+{
+    UMFunction *func = [[UMFunction_bit_not alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self]];
+    return result;
+
 }
 
 - (UMTerm *)leftshift:(UMTerm *)b
@@ -471,6 +540,73 @@ NSMutableString *s = [[NSMutableString alloc]init];
 {
     UMFunction *func = [[UMFunction_bit_shiftright alloc]init];
     UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    return result;
+}
+
++ (UMTerm *)whileCondition:(UMTerm *)condition thenDo:(UMTerm *)thendo
+{
+    UMFunction *func = [[UMFunction_while alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[condition,thendo]];
+    return result;
+}
+
++ (UMTerm *)ifCondition:(UMTerm *)condition thenDo:(UMTerm *)thendo elseDo:(UMTerm *)elsedo
+{
+    UMFunction *func = [[UMFunction_if alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[condition,thendo,(elsedo ? elsedo : [NSNull null])]];
+    return result;
+}
+
++ (UMTerm *)thenDo:(UMTerm *)thendo whileCondition:(UMTerm *)condition
+{
+    UMFunction *func = [[UMFunction_dowhile alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[thendo,condition]];
+    return result;
+
+}
+
++ (UMTerm *)forInitializer:(UMTerm *)initializer endCondition:(UMTerm *)condition every:(UMTerm *)every thenDo:(UMTerm *)thenDo
+{
+    UMFunction *func = [[UMFunction_for alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams:
+                       @[ (initializer ? initializer: [NSNull null]),
+                          (condition ? condition : [NSNull null]),
+                           (every ? every : [NSNull null]),
+                          thenDo]];
+    return result;
+}
+
+- (UMTerm *)preincrease
+{
+    UMFunction *func = [[UMFunction_preincrease alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self]];
+    return result;
+}
+
+- (UMTerm *)postincrease
+{
+    UMFunction *func = [[UMFunction_postincrease alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self]];
+    return result;
+}
+- (UMTerm *)predecrease
+{
+    UMFunction *func = [[UMFunction_predecrease alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self]];
+    return result;
+
+}
+- (UMTerm *)postdecrease
+{
+    UMFunction *func = [[UMFunction_postdecrease alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self]];
+    return result;
+}
+
++ (UMTerm *)switchCondition:(UMTerm *)condition thenDo:(UMTerm *)thenDo
+{
+    UMFunction *func = [[UMFunction_switch alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[condition,thenDo]];
     return result;
 }
 

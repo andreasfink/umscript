@@ -20,6 +20,7 @@ typedef enum UMTermType
     UMTermType_variable,
     UMTermType_function,
     UMTermType_identifier,
+    UMTermType_nullterm,
 } UMTermType;
 
 @interface UMTerm : UMObject
@@ -43,7 +44,7 @@ typedef enum UMTermType
 @property (readwrite,strong) NSArray         *param;
 @property (readwrite,assign) int             token;
 
-
+- (id)initWithNull;
 - (id)initWithDiscreteValue:(UMDiscreteValue *)d;
 - (id)initWithFieldName:(NSString *)fieldName;
 - (id)initWithVariableName:(NSString *)variableName;
@@ -70,6 +71,10 @@ typedef enum UMTermType
 + (id)termWithField:(UMTerm *)fieldNameTerm;
 + (id)termWithConstant:(UMTerm *)constantTerm;
 + (id)termWithString:(UMTerm *)stringTerm;
++ (id)termWithNull;
+
++ (id)termWithDirectInteger:(int)i;
++ (id)termWithDirectString:(NSString *)s;
 
 - (void) setDiscreteString:(NSString *)s;
 - (NSString * )debugDescription;
@@ -80,7 +85,6 @@ typedef enum UMTermType
 - (UMTerm *)div:(UMTerm *)b;
 - (UMTerm *)modulo:(UMTerm *)b;
 - (UMTerm *)dot:(UMTerm *)b;
-- (UMTerm *)not;
 - (UMTerm *)equal:(UMTerm *)b;
 - (UMTerm *)notequal:(UMTerm *)b;
 - (UMTerm *)greaterthan:(UMTerm *)b;
@@ -88,10 +92,28 @@ typedef enum UMTermType
 - (UMTerm *)greaterorequal:(UMTerm *)b;
 - (UMTerm *)lessorequal:(UMTerm *)b;
 - (UMTerm *)assign:(UMTerm *)b;
-- (UMTerm *)and:(UMTerm *)b;
-- (UMTerm *)or:(UMTerm *)b;
-- (UMTerm *)xor:(UMTerm *)b;
+- (UMTerm *)logical_not;
+- (UMTerm *)logical_and:(UMTerm *)b;
+- (UMTerm *)logical_or:(UMTerm *)b;
+- (UMTerm *)logical_xor:(UMTerm *)b;
+
+- (UMTerm *)bit_and:(UMTerm *)b;
+- (UMTerm *)bit_or:(UMTerm *)b;
+- (UMTerm *)bit_xor:(UMTerm *)b;
+- (UMTerm *)bit_not;
+
 - (UMTerm *)leftshift:(UMTerm *)b;
 - (UMTerm *)rightshift:(UMTerm *)b;
++ (UMTerm *)whileCondition:(UMTerm *)condition thenDo:(UMTerm *)thendo;
++ (UMTerm *)ifCondition:(UMTerm *)condition thenDo:(UMTerm *)thendo elseDo:(UMTerm *)elsedo;
++ (UMTerm *)thenDo:(UMTerm *)thendo whileCondition:(UMTerm *)condition;
++ (UMTerm *)forInitializer:(UMTerm *)initializer endCondition:(UMTerm *)condition every:(UMTerm *)every thenDo:(UMTerm *)thenDo;
++ (UMTerm *)switchCondition:(UMTerm *)condition thenDo:(UMTerm *)thenDo;
+
+- (UMTerm *)preincrease;
+- (UMTerm *)postincrease;
+- (UMTerm *)predecrease;
+- (UMTerm *)postdecrease;
+
 
 @end

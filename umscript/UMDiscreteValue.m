@@ -584,6 +584,7 @@
     }
 }
 
+
 - (UMDiscreteValue *)subtractValue:(UMDiscreteValue *)bval
 {
     if((self.isNumberType) && (bval.isNumberType))
@@ -1026,4 +1027,71 @@
     }
     return @"/* unknown discreete type */";
 }
+
+- (UMDiscreteValue *)increase
+{
+    if(self.isNumberType)
+    {
+        NSNumber *a = self.value;
+        if(type==UMVALUE_BOOL)
+        {
+            BOOL c = a.boolValue + TRUE;
+            return [UMDiscreteValue discreteBool:c];
+        }
+        if(type==UMVALUE_INT)
+        {
+            int c = a.intValue + 1;
+            return [UMDiscreteValue discreteInt:c];
+        }
+        if(type==UMVALUE_LONGLONG)
+        {
+            long long c = a.longLongValue + 1;
+            return [UMDiscreteValue discreteLongLong:c];
+        }
+        else
+        {
+            double c = a.doubleValue + 1.0;
+            return [UMDiscreteValue discreteDouble:c];
+        }
+    }
+    else
+    {
+        return [UMDiscreteValue discreteNull];
+    }
+}
+
+
+
+- (UMDiscreteValue *)decrease
+{
+    if(self.isNumberType)
+    {
+        NSNumber *a = self.value;
+        if(type==UMVALUE_BOOL)
+        {
+            BOOL c = a.boolValue - TRUE;
+            return [UMDiscreteValue discreteBool:c];
+        }
+        if(type==UMVALUE_INT)
+        {
+            int c = a.intValue - 1;
+            return [UMDiscreteValue discreteInt:c];
+        }
+        if(type==UMVALUE_LONGLONG)
+        {
+            long long c = a.longLongValue - 1;
+            return [UMDiscreteValue discreteLongLong:c];
+        }
+        else
+        {
+            double c = a.doubleValue - 1.0;
+            return [UMDiscreteValue discreteDouble:c];
+        }
+    }
+    else
+    {
+        return [UMDiscreteValue discreteNull];
+    }
+}
+
 @end

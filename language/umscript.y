@@ -7,7 +7,7 @@
 %token IDENTIFIER
 %token VARIABLE
 %token FIELD
-%token CONSTANT 
+%token CONSTANT
 %token STRING_LITERAL
 
 %token OPERATOR_ASSIGNMENT
@@ -71,7 +71,7 @@ statement
 
 expression_statement
 	: ';'
-	| expression ';'
+    | expression ';'                                    { $$ = ROOT = $1;  }
 	;
 
 labeled_statement
@@ -81,9 +81,9 @@ labeled_statement
 	;
 
 selection_statement
-	: IF '(' expression ')' block
-	| IF '(' expression ')' block ELSE block
-	| SWITCH '(' expression ')' statement
+    : IF '(' expression ')' block                        { $$ = ROOT = [UMTerm ifCondition: $2 thenDo: $5 elseDo: [UMTerm termWithNull]];  };
+    | IF '(' expression ')' block ELSE block             { $$ = ROOT = [UMTerm ifCondition: $2 thenDo: $5 elseDo: $7];  };
+	| SWITCH '(' expression ')' block                    { $$ = ROOT = [UMTerm switchCondition: $2 thenDo: $5 ];  };
 	;
 
 jump_statement
@@ -96,10 +96,12 @@ jump_statement
 
 
 iteration_statement
-	: WHILE '(' expression ')' statement
-	| DO statement WHILE '(' expression ')' ';'
+    : WHILE '(' expression ')' statement                { $$ = ROOT = [UMTerm whileCondition: $2 thenDo: $3];  };
+    | DO statement WHILE '(' expression ')' ';'         { $$ = ROOT = [UMTerm thenDo: $2 whileCondition: $3];  };
 	| FOR '(' expression_statement expression_statement ')' statement
-	| FOR '(' expression_statement expression_statement expression ')' statement
+        { $$ = ROOT = [UMTerm forInitializer:$3 endCondition:$4 every:NULL thenDo: $6] };
+    | FOR '(' expression_statement expression_statement expression ')' statement
+        { $$ = ROOT = [UMTerm forInitializer:$3 endCondition:$4 every:$5 thenDo: $7] };
 	;
 
 
@@ -110,57 +112,60 @@ expression
 
 assignment_expression
 	: conditional_expression
-	| unary_expression '=' assignment_expression
-    | unary_expression OPERATOR_MUL_ASSIGN assignment_expression    { $$ = ROOT = [$1 assign:[$1 mul: $3]];  };
-    | unary_expression OPERATOR_DIV_ASSIGN assignment_expression    { $$ = ROOT = [$1 assign:[$1 div: $3]];  };
-    | unary_expression OPERATOR_MOD_ASSIGN assignment_expression    { $$ = ROOT = [$1 assign:[$1 mul: $3]];  };
-    | unary_expression OPERATOR_ADD_ASSIGN assignment_expression    { $$ = ROOT = [$1 assign:[$1 add: $2]];  };
-    | unary_expression OPERATOR_SUB_ASSIGN assignment_expression    { $$ = ROOT = [$1 assign:[$1 sub: $2]];  };
-    | unary_expression OPERATOR_LEFT_ASSIGN assignment_expression   { $$ = ROOT = [$1 assign:[$1 leftshift: $3]];  };
-    | unary_expression OPERATOR_RIGHT_ASSIGN assignment_expression  { $$ = ROOT = [$1 assign:[$1 rightshift: $3]];  };
-    | unary_expression OPERATOR_AND_ASSIGN assignment_expression    { $$ = ROOT = [$1 assign:[$1 and: $3]];  };
-    | unary_expression OPERATOR_XOR_ASSIGN assignment_expression    { $$ = ROOT = [$1 assign:[$1 xor: $3]];  };
-    | unary_expression OPERATOR_OR_ASSIGN assignment_expression     { $$ = ROOT = [$1 assign:[$1 or: $3]];  };
+	| unary_expression '=' assignment_expression                        { $$ = ROOT = [$1 assign:$3];  };
+    | unary_expression OPERATOR_MUL_ASSIGN assignment_expression        { $$ = ROOT = [$1 assign:[$1 mul: $3]];  };
+    | unary_expression OPERATOR_DIV_ASSIGN assignment_expression        { $$ = ROOT = [$1 assign:[$1 div: $3]];  };
+    | unary_expression OPERATOR_MOD_ASSIGN assignment_expression        { $$ = ROOT = [$1 assign:[$1 mul: $3]];  };
+    | unary_expression OPERATOR_ADD_ASSIGN assignment_expression        { $$ = ROOT = [$1 assign:[$1 add: $2]];  };
+    | unary_expression OPERATOR_SUB_ASSIGN assignment_expression        { $$ = ROOT = [$1 assign:[$1 sub: $2]];  };
+    | unary_expression OPERATOR_LEFT_ASSIGN assignment_expression       { $$ = ROOT = [$1 assign:[$1 leftshift: $3]];  };
+    | unary_expression OPERATOR_RIGHT_ASSIGN assignment_expression      { $$ = ROOT = [$1 assign:[$1 rightshift: $3]];  };
+    | unary_expression OPERATOR_AND_ASSIGN assignment_expression        { $$ = ROOT = [$1 assign:[$1 logical_and: $3]];  };
+    | unary_expression OPERATOR_XOR_ASSIGN assignment_expression        { $$ = ROOT = [$1 assign:[$1 logical_xor: $3]];  };
+    | unary_expression OPERATOR_OR_ASSIGN assignment_expression         { $$ = ROOT = [$1 assign:[$1 logical_or: $3]];  };
 	;
 
 conditional_expression
 	: logical_or_expression
-	| logical_or_expression '?' expression ':' conditional_expression
+    | logical_or_expression '?' expression ':' conditional_expression
+        { $$ = ROOT = [UMTerm ifCondition: $1 thenDo: $3 elseDo: $5];  };
 	;
 
 logical_or_expression
 	: logical_and_expression
-	| logical_or_expression OPERATOR_OR logical_and_expression
+    | logical_or_expression OPERATOR_OR logical_and_expression          { $$ = ROOT = [$1 logical_or: $3];  };
+
 	;
 
 logical_and_expression
 	: inclusive_or_expression
-	| logical_and_expression OPERATOR_AND inclusive_or_expression
+    | logical_and_expression OPERATOR_AND inclusive_or_expression       { $$ = ROOT = [$1 logical_and: $3];  };
+
 	;
 
 inclusive_or_expression
-	: exclusive_or_expression
-	| inclusive_or_expression '|' exclusive_or_expression
+    : exclusive_or_expression                                           { $$ = ROOT = $1};
+	| inclusive_or_expression '|' exclusive_or_expression               { $$ = ROOT = [$1 bit_or: $3];  };
 	;
 
 exclusive_or_expression
-	: and_expression
-	| exclusive_or_expression '^' and_expression
+	: and_expression                                                    { $$ = ROOT = $1};
+	| exclusive_or_expression '^' and_expression                        { $$ = ROOT = [$1 bit_xor: $3];  };
 	;
 
 and_expression
-	: equality_expression
-	| and_expression '&' equality_expression
+	: equality_expression                                               { $$ = ROOT = $1};
+	| and_expression '&' equality_expression                            { $$ = ROOT = [$1 bit_and: $3];  };
 	;
 
 equality_expression
-	: relational_expression
-	| equality_expression OPERATOR_EQUAL relational_expression
-	| equality_expression OPERATOR_NOT_EQUAL relational_expression
+	: relational_expression                                             { $$ = ROOT = $1};
+	| equality_expression OPERATOR_EQUAL relational_expression          { $$ = ROOT = [$1 equal: $3];     };
+	| equality_expression OPERATOR_NOT_EQUAL relational_expression      { $$ = ROOT = [$1 notequal: $3];  };
 	;
 
 relational_expression
-	: shift_expression
+	: shift_expression                                                  { $$ = ROOT = $1};
 	| relational_expression OPERATOR_LESS shift_expression              { $$ = ROOT = [$1 lessthan:       $3];  };
 	| relational_expression OPERATOR_GREATER shift_expression           { $$ = ROOT = [$1 greaterthan:    $3];  };
 	| relational_expression OPERATOR_LESS_OR_EQUAL shift_expression     { $$ = ROOT = [$1 lessorequal:    $3];  };
@@ -168,30 +173,31 @@ relational_expression
 	;
 
 shift_expression
-	: additive_expression
-	| shift_expression OPERATOR_LEFT additive_expression   { $$ = ROOT = [$1 leftshift:  $3];  };
-	| shift_expression OPERATOR_RIGHT additive_expression  { $$ = ROOT = [$1 rightshift: $3];  };
+	: additive_expression                                               { $$ = ROOT = $1};
+	| shift_expression OPERATOR_LEFT additive_expression                { $$ = ROOT = [$1 leftshift:  $3];  };
+	| shift_expression OPERATOR_RIGHT additive_expression               { $$ = ROOT = [$1 rightshift: $3];  };
 	;
 
 additive_expression
-	: multiplicative_expression
-    | additive_expression '+' multiplicative_expression { $$ = ROOT = [$1 add: $3];  };
-	| additive_expression '-' multiplicative_expression { $$ = ROOT = [$1 sub: $3];  };
+	: multiplicative_expression                                         { $$ = ROOT = $1};
+    | additive_expression '+' multiplicative_expression                 { $$ = ROOT = [$1 add: $3];  };
+	| additive_expression '-' multiplicative_expression                 { $$ = ROOT = [$1 sub: $3];  };
 	;
 
 multiplicative_expression
-	: unary_expression
-	| multiplicative_expression '*' unary_expression { $$ = ROOT = [$1 mul:    $3]; };
-	| multiplicative_expression '/' unary_expression { $$ = ROOT = [$1 div:    $3]; };
-    | multiplicative_expression '%' unary_expression { $$ = ROOT = [$1 modulo: $3]; };
+	: unary_expression                                                  { $$ = ROOT = $1};
+	| multiplicative_expression '*' unary_expression                    { $$ = ROOT = [$1 mul:    $3]; };
+	| multiplicative_expression '/' unary_expression                    { $$ = ROOT = [$1 div:    $3]; };
+    | multiplicative_expression '%' unary_expression                    { $$ = ROOT = [$1 modulo: $3]; };
 
 	;
 	
 unary_expression
-	: postfix_expression
-	| OPERATOR_INCREASE unary_expression
-	| OPERATOR_DECREASE unary_expression
-	| unary_operator unary_expression
+	: postfix_expression                                                { $$ = ROOT = $1};
+    | OPERATOR_INCREASE unary_expression                                { $$ = ROOT = [$2 preincrease]; };
+	| OPERATOR_DECREASE unary_expression                                { $$ = ROOT = [$2 predecrease]; };
+    | '!' unary_expression                                              { $$ = ROOT = [$1 logical_not]};
+    | '~' unary_expression                                              { $$ = ROOT = [$1 bit_not]};
 	;
 
 postfix_expression
@@ -199,12 +205,9 @@ postfix_expression
 	| postfix_expression '(' ')'
 	| postfix_expression '(' argument_expression_list ')'
 	| postfix_expression '.' IDENTIFIER
-	| postfix_expression OPERATOR_INCREASE
-	| postfix_expression OPERATOR_DECREASE
+	| postfix_expression OPERATOR_INCREASE                              { $$ = ROOT = [$1 postincrease]; };
+	| postfix_expression OPERATOR_DECREASE                              { $$ = ROOT = [$1 postdecrease]; };
 	;
-
-field_identifier	: '%' IDENTIFIER;
-variable_identifier : '$' IDENTIFIER;
 
 primary_expression
     : IDENTIFIER            { $$ = ROOT = [UMTerm termWithIdentifier:$1];  };
@@ -220,15 +223,6 @@ argument_expression_list
 	: assignment_expression
 	| argument_expression_list ',' assignment_expression
 	;
-
-
-unary_operator
-    : '*'
-    | '+'
-    | '-'
-	| '~'
-    | '!'
-    | '%'
 
 constant_expression
 	: conditional_expression

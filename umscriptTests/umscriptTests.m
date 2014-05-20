@@ -193,5 +193,6 @@
 {
     UMScriptDocument *s = [[UMScriptDocument alloc]initWithFilename:@"umscriptTests/test1.ums"];
     [s compileSource];
+    UMDiscreteValue *result = [s runScriptWithEnvironment:env];
 }
 @end

@@ -9,9 +9,9 @@
 #import "UMEnvironment.h"
 #import "umscript.yl.h"
 
+
 @class UMScriptCompilerEnvironment;
 @class UMTerm;
-extern UMScriptCompilerEnvironment *global_UMScriptCompilerEnvironment;
 
 @interface UMScriptCompilerEnvironment : UMEnvironment
 {
@@ -35,6 +35,7 @@ extern UMScriptCompilerEnvironment *global_UMScriptCompilerEnvironment;
 
 @property (readwrite,assign) int column;
 @property (readwrite,strong)    UMTerm *root;
+@property (readwrite,strong)    NSString *currentSource;
 
 + (UMScriptCompilerEnvironment *)sharedInstance;
 
@@ -49,4 +50,6 @@ extern UMScriptCompilerEnvironment *global_UMScriptCompilerEnvironment;
 - (size_t)readInputForLexer:(char *)buffer numBytesRead:(size_t *)numBytesRead maxBytesToRead:(size_t)maxBytesToRead;
 
 @end
+
+extern UMScriptCompilerEnvironment *global_UMScriptCompilerEnvironment;
 

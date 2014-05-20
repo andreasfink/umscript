@@ -40,6 +40,14 @@
 #import "UMFunction_block.h"
 #import "UMFunction_return.h"
 #import "UMFunction_assign.h"
+#import "UMFunction_while.h"
+#import "UMFunction_dowhile.h"
+#import "UMFunction_for.h"
+#import "UMFunction_preincrease.h"
+#import "UMFunction_predecrease.h"
+#import "UMFunction_postincrease.h"
+#import "UMFunction_postdecrease.h"
+#import "UMFunction_switch.h"
 
 #define TermLogicNOT(a)           [[UMTerm alloc]initWithFunction:[[UMFunction_logic_not alloc]init], @[a]]
 #define TermLogicAND(a,b)         [[UMTerm alloc]initWithFunction:[[UMFunction_logic_and alloc]init],  @[a,b]]

@@ -37,11 +37,11 @@
     UMDiscreteValue *result = [condition evaluateWithEnvironment:env];
     if(result.boolValue)
     {
-        [ifBlock evaluateWithEnvironment:env];
+        result = [ifBlock evaluateWithEnvironment:env];
     }
     else
     {
-        [elseBlock evaluateWithEnvironment:env];
+        result = [elseBlock evaluateWithEnvironment:env];
 
     }
     return result;

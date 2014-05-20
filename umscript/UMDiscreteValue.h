@@ -94,6 +94,8 @@ typedef enum UMDiscreteValueType
 - (UMDiscreteValue *)bitShiftLeft:(UMDiscreteValue *)bval;
 - (UMDiscreteValue *)bitShiftRight:(UMDiscreteValue *)bval;
 
+- (UMDiscreteValue *)increase;
+- (UMDiscreteValue *)decrease;
 
 - (BOOL)isNumberType;
 - (NSString *)codeWithEnvironment:(UMEnvironment *)env;

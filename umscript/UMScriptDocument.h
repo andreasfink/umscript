@@ -20,7 +20,7 @@
 }
 
 @property (readwrite,strong)    NSString *sourceCode;
-@property (readwrite, strong)    UMTerm   *compiledCode;
+@property (readwrite, strong)   UMTerm   *compiledCode;
 
 - (UMDiscreteValue *)runScriptWithEnvironment:(UMEnvironment *)env;
 - (NSString *)compileSource;

@@ -35,7 +35,7 @@
 
 - (UMDiscreteValue *)runScriptWithEnvironment:(UMEnvironment *)env
 {
-    if(isCompiled==NO)
+    if((isCompiled==NO) || (compiledCode==NULL))
     {
         [self compileSource];
     }

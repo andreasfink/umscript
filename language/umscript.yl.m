@@ -33,7 +33,8 @@ int redirected_fprintf(FILE *f,char *format,...)
 
 size_t readInputForLexer(char *buffer, size_t * numBytesRead, size_t maxBytesToRead)
 {
-    UMScriptCompilerEnvironment *g = [UMScriptCompilerEnvironment sharedInstance];
+    
+    UMScriptCompilerEnvironment *g=[UMScriptCompilerEnvironment sharedInstance];
     return [g readInputForLexer:buffer numBytesRead:numBytesRead maxBytesToRead:maxBytesToRead];
 }
 
