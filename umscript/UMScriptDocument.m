@@ -29,6 +29,18 @@
         {
             @throw err;
         }
+        isCompiled = NO;
+    }
+    return self;
+}
+
+- (id)initWithCode:(NSString *)code
+{
+    self = [super init];
+    if(self)
+    {
+        sourceCode = code;
+        isCompiled = NO;
     }
     return self;
 }
@@ -56,13 +68,13 @@
 
 - (NSString *)compileSource
 {
-
     UMScriptCompilerEnvironment *compilerEnvironment = [UMScriptCompilerEnvironment sharedInstance];
 
     NSString *out = @"";
     NSString *err = @"";
     
     self.compiledCode = [compilerEnvironment compile:sourceCode stdOut:&out stdErr:&err];
+    isCompiled = YES;
 
     return err;
 }

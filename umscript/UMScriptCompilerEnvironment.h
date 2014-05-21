@@ -9,6 +9,7 @@
 #import "UMEnvironment.h"
 #import "umscript.yl.h"
 
+extern size_t readInputForLexer(char *buffer, size_t * numBytesRead, size_t maxBytesToRead);
 
 @class UMScriptCompilerEnvironment;
 @class UMTerm;
@@ -31,6 +32,8 @@
     int last_syntax_error_line;
     UMTerm *root;
     int column;
+    
+    int stdin_pipe[2];
 }
 
 @property (readwrite,assign) int column;

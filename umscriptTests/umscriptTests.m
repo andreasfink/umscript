@@ -188,11 +188,75 @@
     }
 }
 
+- (void)testAddWithTerms
+{
+    UMTerm *a = [UMTerm termWithDirectInteger:3];
+    UMTerm *b = [UMTerm termWithDirectInteger:4];
+    UMTerm *c = [a add: b];
+    UMDiscreteValue *result = [c evaluateWithEnvironment:env];
+    XCTAssertTrue(result.intValue==7,@"3+4=7 not %d",result.intValue);
+}
+
+- (void)testDotStringsWithTerms
+{
+    UMTerm *a = [UMTerm termWithDirectString:@"3"];
+    UMTerm *b = [UMTerm termWithDirectString:@"4"];
+    UMTerm *c = [a dot: b];
+    UMDiscreteValue *result = [c evaluateWithEnvironment:env];
+    NSString *s = result.stringValue;
+    XCTAssertTrue([s isEqualToString:@"34"],@"\"3\"+\"4\"=\"34\" not %@",result);
+}
+
+- (void)testSubWithTerms
+{
+    UMTerm *a = [UMTerm termWithDirectInteger:3];
+    UMTerm *b = [UMTerm termWithDirectInteger:4];
+    UMTerm *c = [a sub: b];
+    UMDiscreteValue *result = [c evaluateWithEnvironment:env];
+    XCTAssertTrue( (result.intValue==-1),@"3-4=-1 not %d",result.intValue);
+}
+
+- (void)testSubStringsWithTerms
+{
+    UMTerm *a = [UMTerm termWithDirectString:@"3"];
+    UMTerm *b = [UMTerm termWithDirectString:@"4"];
+    UMTerm *c = [a sub: b];
+    UMDiscreteValue *result = [c evaluateWithEnvironment:env];
+    XCTAssertTrue(result.isNull,@"\"3\"-\"4\"=(null) not %@",result);
+}
+
+- (void)testMultiplyWithTerms
+{
+    UMTerm *a = [UMTerm termWithDirectInteger:3];
+    UMTerm *b = [UMTerm termWithDirectInteger:4];
+    UMTerm *c = [a mul: b];
+    UMDiscreteValue *result = [c evaluateWithEnvironment:env];
+    XCTAssertTrue(result.intValue==12,@"3*4=12 not %d",result.intValue);
+}
+
+- (void)testDivideWithTerms
+{
+    UMTerm *a = [UMTerm termWithDirectInteger:12];
+    UMTerm *b = [UMTerm termWithDirectInteger:4];
+    UMTerm *c = [a div: b];
+    UMDiscreteValue *result = [c evaluateWithEnvironment:env];
+    XCTAssertTrue( (result.intValue==3),@"12/4=3 not %d",result.intValue);
+}
 
 - (void)testCompileScript1
 {
     UMScriptDocument *s = [[UMScriptDocument alloc]initWithFilename:@"umscriptTests/test1.ums"];
     [s compileSource];
+    [s runScriptWithEnvironment:env];
+}
+
+- (void)testAddCompiled
+{
+    NSString *code = @"{ %A = 1+2 };";
+    UMScriptDocument *s = [[UMScriptDocument alloc]initWithCode:code];
+    [s compileSource];
     UMDiscreteValue *result = [s runScriptWithEnvironment:env];
+    XCTAssertTrue(result.intValue==3,@"1+2=3 not %d",result.intValue);
+
 }
 @end

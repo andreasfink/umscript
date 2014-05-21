@@ -14,6 +14,30 @@
 @synthesize type;
 @synthesize value;
 
+- (UMDiscreteValueType)outputType:(UMDiscreteValueType)btype
+{
+    if(type == btype)
+    {
+       return type;
+    }
+    if  (   ( (type == UMVALUE_INT)       && (btype==UMVALUE_LONGLONG) )
+         || ( (type == UMVALUE_LONGLONG)  && (btype==UMVALUE_INT)      ) )
+    {
+       return UMVALUE_LONGLONG;
+    }
+    if  (   ( (type == UMVALUE_INT)       && (btype==UMVALUE_DOUBLE) )
+         || ( (type == UMVALUE_DOUBLE)  && (btype==UMVALUE_INT)      ) )
+    {
+        return UMVALUE_DOUBLE;
+    }
+    if  (   ( (type == UMVALUE_LONGLONG)       && (btype==UMVALUE_DOUBLE) )
+         || ( (type == UMVALUE_DOUBLE)  && (btype==UMVALUE_LONGLONG)      ) )
+    {
+        return UMVALUE_DOUBLE;
+    }
+    return type;
+}
+
 - (UMDiscreteValue *)init
 {
     self = [super init];
@@ -525,9 +549,25 @@
 
 - (NSString *)description
 {
-    UMJsonWriter *writer = [[UMJsonWriter alloc]init];
-    NSString *s = [writer stringWithObject:[self descriptionDictVal]];
-    return s;
+    switch(type)
+    {
+        case UMVALUE_NULL:
+            return @"(null)";
+        case UMVALUE_BOOL:
+            return [NSString stringWithFormat:@"(BOOL)%@",self.boolValue ? @"YES" : @"NO"];
+        case UMVALUE_INT:
+            return [NSString stringWithFormat:@"(int)%d",self.intValue];
+        case UMVALUE_LONGLONG:
+            return [NSString stringWithFormat:@"(long long)%lld",self.longLongValue];
+        case UMVALUE_DOUBLE:
+            return [NSString stringWithFormat:@"(double)%lf",self.doubleValue];
+        case UMVALUE_STRING:
+            return [NSString stringWithFormat:@"(string)%@",self.stringValue];
+        case UMVALUE_DATA:
+            return [NSString stringWithFormat:@"(data)%@",self.dataValue];
+        default:
+            return @"(unknown)";
+    }
 }
 
 - (id)descriptionDictVal
@@ -553,31 +593,53 @@
 
 - (UMDiscreteValue *)addValue:(UMDiscreteValue *)bval
 {
-    if((self.isNumberType) && (bval.isNumberType))
+    UMDiscreteValueType t = [self outputType:bval.type];
+
+    if(t==UMVALUE_BOOL)
+    {
+       NSNumber *a = self.value;
+       NSNumber *b = bval.value;
+       BOOL c = a.boolValue + b.boolValue;
+       return [UMDiscreteValue discreteBool:c];
+    }
+    
+    else if(type==UMVALUE_INT)
     {
         NSNumber *a = self.value;
         NSNumber *b = bval.value;
-        if(type==UMVALUE_BOOL)
-        {
-            BOOL c = a.boolValue + b.boolValue;
-            return [UMDiscreteValue discreteBool:c];
-        }
-        if(type==UMVALUE_INT)
-        {
-            int c = a.intValue + b.intValue;
-            return [UMDiscreteValue discreteInt:c];
-        }
-        if(type==UMVALUE_LONGLONG)
-        {
-            long long c = a.longLongValue + b.longLongValue;
-            return [UMDiscreteValue discreteLongLong:c];
-        }
-        else
-        {
-            double c = a.doubleValue + b.doubleValue;
-            return [UMDiscreteValue discreteDouble:c];
-        }
+        int c = a.intValue + b.intValue;
+       return [UMDiscreteValue discreteInt:c];
     }
+    else if(type==UMVALUE_LONGLONG)
+    {
+        NSNumber *a = self.value;
+        NSNumber *b = bval.value;
+        long long c = a.longLongValue + b.longLongValue;
+        return [UMDiscreteValue discreteLongLong:c];
+    }
+    else if(type==UMVALUE_DOUBLE)
+    {
+         NSNumber *a = self.value;
+         NSNumber *b = bval.value;
+         double c = a.doubleValue + b.doubleValue;
+         return [UMDiscreteValue discreteDouble:c];
+    }
+    else if(type==UMVALUE_STRING)
+    {
+        NSString *a = self.value;
+        NSString *b = bval.value;
+        NSString *c = [a stringByAppendingString:b];
+        return [UMDiscreteValue discreteString:c];
+    }
+    else if(type==UMVALUE_DATA)
+    {
+        NSData *a = self.value;
+        NSData *b = bval.value;
+        NSMutableData *c = [a mutableCopy];
+        [c appendData:b];
+        return [UMDiscreteValue discreteData:c];
+    }
+
     else
     {
         return [UMDiscreteValue discreteNull];
@@ -587,36 +649,43 @@
 
 - (UMDiscreteValue *)subtractValue:(UMDiscreteValue *)bval
 {
-    if((self.isNumberType) && (bval.isNumberType))
+    UMDiscreteValueType t = [self outputType:bval.type];
+
+    if(t==UMVALUE_BOOL)
     {
         NSNumber *a = self.value;
         NSNumber *b = bval.value;
-        if(type==UMVALUE_BOOL)
-        {
-            BOOL c = a.boolValue - b.boolValue;
-            return [UMDiscreteValue discreteBool:c];
-        }
-        if(type==UMVALUE_INT)
-        {
-            int c = a.intValue - b.intValue;
-            return [UMDiscreteValue discreteInt:c];
-        }
-        if(type==UMVALUE_LONGLONG)
-        {
-            long long c = a.longLongValue - b.longLongValue;
-            return [UMDiscreteValue discreteLongLong:c];
-        }
-        else
-        {
-            double c = a.doubleValue - b.doubleValue;
-            return [UMDiscreteValue discreteDouble:c];
-        }
+        BOOL c = a.boolValue - b.boolValue;
+        return [UMDiscreteValue discreteBool:c];
+    }
+
+    else if(type==UMVALUE_INT)
+    {
+        NSNumber *a = self.value;
+        NSNumber *b = bval.value;
+        int c = a.intValue - b.intValue;
+        return [UMDiscreteValue discreteInt:c];
+    }
+    else if(type==UMVALUE_LONGLONG)
+    {
+        NSNumber *a = self.value;
+        NSNumber *b = bval.value;
+        long long c = a.longLongValue - b.longLongValue;
+        return [UMDiscreteValue discreteLongLong:c];
+    }
+    else if(type==UMVALUE_DOUBLE)
+    {
+        NSNumber *a = self.value;
+        NSNumber *b = bval.value;
+        double c = a.doubleValue - b.doubleValue;
+        return [UMDiscreteValue discreteDouble:c];
     }
     else
     {
         return [UMDiscreteValue discreteNull];
     }
 }
+
 
 - (UMDiscreteValue *)multiplyValue:(UMDiscreteValue *)bval
 {

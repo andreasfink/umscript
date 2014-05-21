@@ -30,6 +30,7 @@ typedef enum UMDiscreteValueType
 @property (readonly)    UMDiscreteValueType type;
 @property (readonly)    id value;
 
+- (UMDiscreteValueType)outputType:(UMDiscreteValueType)btype;
 
 - (BOOL)isNull;
 - (int)intValue;

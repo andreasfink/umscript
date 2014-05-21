@@ -75,6 +75,7 @@ typedef enum UMTermType
 
 + (id)termWithDirectInteger:(int)i;
 + (id)termWithDirectString:(NSString *)s;
++ (id)termWithDirectCString:(char *)s;
 
 - (void) setDiscreteString:(NSString *)s;
 - (NSString * )debugDescription;

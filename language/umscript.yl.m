@@ -31,18 +31,12 @@ int redirected_fprintf(FILE *f,char *format,...)
     return (int)strlen(buffer);
 }
 
-size_t readInputForLexer(char *buffer, size_t * numBytesRead, size_t maxBytesToRead)
-{
-    
-    UMScriptCompilerEnvironment *g=[UMScriptCompilerEnvironment sharedInstance];
-    return [g readInputForLexer:buffer numBytesRead:numBytesRead maxBytesToRead:maxBytesToRead];
-}
 
 
 
 extern int colum;
 
-void yyerror(char *s)
+void yyerror2(void *yyscanner,const char *s)
 {
     fflush(stdout);
     char buffer [1024];
@@ -52,3 +46,24 @@ void yyerror(char *s)
     [global_UMScriptCompilerEnvironment addStdErr:err];
 }
 
+
+
+typedef struct YYLTYPE YYLTYPE;
+struct YYLTYPE
+{
+    int first_line;
+    int first_column;
+    int last_line;
+    int last_column;
+};
+
+
+
+void yyerror (YYLTYPE *llocp, UMScriptCompilerEnvironment *cenv, const char *msg)
+{
+    NSString *err = [NSString stringWithFormat:@"\nLocation %d.%d - %d.%d: %s\n",
+             llocp->first_line,llocp->first_column,
+             llocp->last_line,llocp->last_column,msg];
+    [cenv addStdErr:err];
+}
+int  yyparse (int *randomness);

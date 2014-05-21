@@ -25,4 +25,7 @@
 - (UMDiscreteValue *)runScriptWithEnvironment:(UMEnvironment *)env;
 - (NSString *)compileSource;
 - (id)initWithFilename:(NSString *)filename;
+- (id)initWithCode:(NSString *)code;
+
+
 @end

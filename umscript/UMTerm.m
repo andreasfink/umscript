@@ -328,6 +328,14 @@
     
 }
 
++ (id)termWithDirectCString:(char *)s
+{
+    UMDiscreteValue *d = [UMDiscreteValue discreteString:[NSString stringWithUTF8String:s]];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    return term;
+    
+}
+
 
 + (id)termWithConstant:(UMTerm *)constantTerm
 {
