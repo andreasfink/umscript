@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>7C4C1BBC-4C2D-4317-AFFB-24C23E4C6BA3</string>
+	<string>EABA72E9-B28C-4CDD-BFA2-4DA04A85107B</string>
 	<key>IDESourceControlProjectName</key>
 	<string>umscript</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>1F71D2E0-7B20-4F70-B06D-CF89751903E7</key>
+		<key>4E78AE42-63E4-4812-8A2A-5BFF2CA17D55</key>
 		<string>ssh://metropolis.fink.org/git/umscript.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>umscript.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>1F71D2E0-7B20-4F70-B06D-CF89751903E7</key>
+		<key>4E78AE42-63E4-4812-8A2A-5BFF2CA17D55</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>1F71D2E0-7B20-4F70-B06D-CF89751903E7</string>
+	<string>4E78AE42-63E4-4812-8A2A-5BFF2CA17D55</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>1F71D2E0-7B20-4F70-B06D-CF89751903E7</string>
+			<string>4E78AE42-63E4-4812-8A2A-5BFF2CA17D55</string>
 			<key>IDESourceControlWCCName</key>
 			<string>umscript</string>
 		</dict>

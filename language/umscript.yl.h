@@ -13,12 +13,17 @@
 #import "UMTerm.h"
 #import "UMScriptCompilerEnvironment.h"
 #import "UMFunctionMacros.h"
+#import "bisonbridge.h"
+
+#define YY_TYPEDEF_YY_SCANNER_T 
+typedef  bisonbridge *yyscan_t;
 
 #undef YYSTYPE_IS_DECLARED
 #define YYSTYPE_IS_DECLARED 1
 #undef YYSTYPE
 
 typedef UMTerm *YYSTYPE;
+
 
 
 /*
@@ -46,14 +51,6 @@ int redirected_fprintf(FILE *f,char *format,...);
 
 #define YYERROR_VERBOSE 1
 #define YYDEBUG 1
-
-
-
-#undef YYPARSE_PARAM
-#define YYPARSE_PARAM	context
-
-#undef YYLEX_PARAM
-#define YYLEX_PARAM     context
 
 
 #define     ROOT    (global_UMScriptCompilerEnvironment.root)

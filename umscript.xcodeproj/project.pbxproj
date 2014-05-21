@@ -127,6 +127,8 @@
 		A6A3AA2019297741007FFC7B /* umscript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA0319297741007FFC7B /* umscript.framework */; };
 		A6A3AA2619297741007FFC7B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6A3AA2419297741007FFC7B /* InfoPlist.strings */; };
 		A6A3AA2819297741007FFC7B /* umscriptTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A3AA2719297741007FFC7B /* umscriptTests.m */; };
+		A6B5CE69192D218200F02FCA /* bisonbridge.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE67192D218200F02FCA /* bisonbridge.h */; };
+		A6B5CE6A192D218200F02FCA /* bisonbridge.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B5CE68192D218200F02FCA /* bisonbridge.m */; };
 		A6ECC2F7192CE7350090FC94 /* _generated_umscript.y.h in Headers */ = {isa = PBXBuildFile; fileRef = A6ECC2F6192CE7350090FC94 /* _generated_umscript.y.h */; };
 		A6EEDB691929DD1F0090FC94 /* umscript.yl.h in Headers */ = {isa = PBXBuildFile; fileRef = A6EEDB681929DD1F0090FC94 /* umscript.yl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6EEDB6C1929DE800090FC94 /* _generated_umscript.l.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EEDB6A1929DE800090FC94 /* _generated_umscript.l.m */; };
@@ -270,6 +272,8 @@
 		A6A3AA2319297741007FFC7B /* umscriptTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "umscriptTests-Info.plist"; sourceTree = "<group>"; };
 		A6A3AA2519297741007FFC7B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A6A3AA2719297741007FFC7B /* umscriptTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = umscriptTests.m; sourceTree = "<group>"; };
+		A6B5CE67192D218200F02FCA /* bisonbridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bisonbridge.h; sourceTree = "<group>"; };
+		A6B5CE68192D218200F02FCA /* bisonbridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bisonbridge.m; sourceTree = "<group>"; };
 		A6ECC2F6192CE7350090FC94 /* _generated_umscript.y.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _generated_umscript.y.h; path = language/_generated_umscript.y.h; sourceTree = "<group>"; };
 		A6EEDB681929DD1F0090FC94 /* umscript.yl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = umscript.yl.h; path = language/umscript.yl.h; sourceTree = "<group>"; };
 		A6EEDB6A1929DE800090FC94 /* _generated_umscript.l.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = _generated_umscript.l.m; path = language/_generated_umscript.l.m; sourceTree = "<group>"; };
@@ -364,6 +368,8 @@
 				A6835BE119297AE30090FC94 /* umscript.h */,
 				A63DD840192C97900090FC94 /* umscript_globals.h */,
 				A63DD841192C97900090FC94 /* umscript_globals.m */,
+				A6B5CE67192D218200F02FCA /* bisonbridge.h */,
+				A6B5CE68192D218200F02FCA /* bisonbridge.m */,
 				A6835BE319297AE30090FC94 /* UMTerm.h */,
 				A6835BE419297AE30090FC94 /* UMTerm.m */,
 				A63DD82C192C84CE0090FC94 /* UMFunction_int.h */,
@@ -529,6 +535,7 @@
 				A6835BE519297AE30090FC94 /* NSNumber+UMScript.h in Headers */,
 				A6835C1219297AE30090FC94 /* UMFunction_div.h in Headers */,
 				A6916CF1192BE5A500F6BFF4 /* UMFunction_while.h in Headers */,
+				A6B5CE69192D218200F02FCA /* bisonbridge.h in Headers */,
 				A63DD836192C84E20090FC94 /* UMFunction_longlong.h in Headers */,
 				A6835BFE19297AE30090FC94 /* UMFunction_getfield.h in Headers */,
 				A6835C0A19297AE30090FC94 /* UMFunction_not.h in Headers */,
@@ -731,6 +738,7 @@
 				A6835C1B19297AE30090FC94 /* UMFunction_sub.m in Sources */,
 				A6835BF919297AE30090FC94 /* UMFunction_block.m in Sources */,
 				A6835C2119297AE30090FC94 /* UMFunction_setfield.m in Sources */,
+				A6B5CE6A192D218200F02FCA /* bisonbridge.m in Sources */,
 				A6835C2919297AE30090FC94 /* UMFunction.m in Sources */,
 				A6835BF319297AE30090FC94 /* UMFunction_bit_shiftleft.m in Sources */,
 				A6835C1F19297AE30090FC94 /* UMFunction_return.m in Sources */,

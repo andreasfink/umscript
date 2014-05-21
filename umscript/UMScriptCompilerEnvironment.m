@@ -10,6 +10,7 @@
 #import "UMTerm.h"
 #include <string.h>
 #include "umscript_globals.h"
+#include "bisonbridge.h"
 
 extern int yyparse(void *);
 extern FILE *yyin;
@@ -93,6 +94,7 @@ typedef struct BisonBridge
             }
         }
     }
+    close(stdin_pipe[TXPIPE]);
 }
 
 - (UMTerm *)compile:(NSString *)code stdOut:(NSString **)sout  stdErr:(NSString **)serr
@@ -125,15 +127,15 @@ typedef struct BisonBridge
         
         NSLog(@"\r***Compiling:\r%@\r***\r",currentSource);
 
-        BisonBridge  bisonGlobals;
+        bisonbridge *bb = bisonbridge_alloc();
 
-        yylex_init (&bisonGlobals.scanner);
+        yylex_init      (bb);
+        FILE *infile = fdopen(stdin_pipe[RXPIPE], "r");
+        yyset_in(infile,bb);
+        yyparse(bb);
+        yylex_destroy   (bb);
         
- 
-        yyparse (&bisonGlobals);
-        yylex_destroy (&bisonGlobals.scanner);
-        
-        yyparse((__bridge void *)(self));
+        yyparse(bb);
         
         UMTerm *resultingCode = root;
         root = NULL;

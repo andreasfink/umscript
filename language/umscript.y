@@ -12,7 +12,6 @@
     
 #import "umscript.yl.h"
 
-
 /* Location type.  */
 #if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
 typedef struct YYLTYPE YYLTYPE;
@@ -31,14 +30,14 @@ struct YYLTYPE
 %}
 
 /*%pure-parser*/
-%lex-param      {UMScriptCompilerEnvironment *cenv}
-%parse-param    {UMScriptCompilerEnvironment *cenv}
+%lex-param      {bisonbridge *bb}
+%parse-param    {bisonbridge *bb}
 %define api.pure
 %locations
 
 %{
  
-extern void yyerror (YYLTYPE *llocp, UMScriptCompilerEnvironment *cenv, const char *msg);
+extern void yyerror (YYLTYPE *llocp, bisonbridge *bb, const char *msg);
 
 %}
 

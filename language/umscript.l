@@ -8,6 +8,11 @@
 //
 */
 
+%top{
+#import "umscript.yl.h"
+
+}
+
 %option reentrant
 %option bison-bridge
 %option bison-locations
@@ -17,27 +22,18 @@
 #import "umscript.yl.h"
 #import "_generated_umscript.y.h"
 
-
-
 //extern int yylex (YYSTYPE * yylval_param ,yyscan_t yyscanner);
 //extern int yylex (YYSTYPE * lvalp, YYLTYPE * llocp, yyscan_t scanner);
 
 static void yyunput (int c, register char * yy_bp , yyscan_t yyscanner);
 
 static void comment(yyscan_t yyscanner);
-static void count(yyscan_t yyscanner);
 int yywrap (yyscan_t yyscanner );
 
 #define YY_EXTRA_TYPE struct user_type *
 
 
 //#define  YYPARSEPARAM  yyparseparam
-
-
-#define COUNT   count(yyscanner);
-#define SAVE_TOKEN
-//yylval.discreteString = [[NSString alloc]initWithBytes:yytext length:yyleng encoding:NSUTF8StringEncoding];
-#define TOKEN(t)    t
 
 %}
 
@@ -54,83 +50,85 @@ IS			(u|U|l|L)*
 
 %%
 "/*"			{ comment(yyscanner);}
-"break"			{ COUNT; SAVE_TOKEN; return TOKEN(BREAK); }
-"case"			{ COUNT; SAVE_TOKEN; return TOKEN(CASE); }
-"continue"		{ COUNT; SAVE_TOKEN; return TOKEN(CONTINUE); }
-"default"		{ COUNT; SAVE_TOKEN; return TOKEN(DEFAULT); }
-"do"			{ COUNT; SAVE_TOKEN; return TOKEN(DO); }
-"else"			{ COUNT; SAVE_TOKEN; return TOKEN(ELSE); }
-"for"			{ COUNT; SAVE_TOKEN; return TOKEN(FOR); }
-"goto"			{ COUNT; SAVE_TOKEN; return TOKEN(GOTO); }
-"if"			{ COUNT; SAVE_TOKEN; return TOKEN(IF); }
-"return"		{ COUNT; SAVE_TOKEN; return TOKEN(RETURN); }
-"switch"		{ COUNT; SAVE_TOKEN; return TOKEN(SWITCH); }
-"while"			{ COUNT; SAVE_TOKEN; return TOKEN(WHILE); }
+"break"			{ return BREAK;    }
+"case"			{ return CASE;     }
+"continue"		{ return CONTINUE; }
+"default"		{ return DEFAULT;  }
+"do"			{ return DO;       }
+"else"			{ return ELSE;     }
+"for"			{ return FOR;      }
+"goto"			{ return GOTO;     }
+"if"			{ return IF;       }
+"return"		{ return RETURN;   }
+"switch"		{ return SWITCH;   }
+"while"			{ return WHILE;    }
 
-{LETTER}({LETTER}|{DECIMAL})*			{ COUNT; SAVE_TOKEN; return(IDENTIFIER); }
-\${LETTER}({LETTER}|{DECIMAL})*			{ COUNT; SAVE_TOKEN; return(VARIABLE); }
-\%{LETTER}({LETTER}|{DECIMAL})*			{ COUNT; SAVE_TOKEN; return(FIELD); }
+{LETTER}({LETTER}|{DECIMAL})*			{ return IDENTIFIER;  }
+\${LETTER}({LETTER}|{DECIMAL})*			{ return VARIABLE;    }
+\%{LETTER}({LETTER}|{DECIMAL})*			{ return FIELD;       }
 
-0[xX]{HEXDIGIT}+{IS}?					{ COUNT; SAVE_TOKEN; return TOKEN(CONSTANT); }
-0{DECIMAL}+{IS}?						{ COUNT; SAVE_TOKEN; return TOKEN(CONSTANT); }
-{DECIMAL}+{IS}?							{ COUNT; SAVE_TOKEN; return TOKEN(CONSTANT); }
-L?'(\\.|[^\\'])+'						{ COUNT; SAVE_TOKEN; return TOKEN(CONSTANT); }
-{DECIMAL}+{E}{FS}?						{ COUNT; SAVE_TOKEN; return TOKEN(CONSTANT); }
-{DECIMAL}*"."{DECIMAL}+({E})?{FS}?		{ COUNT; SAVE_TOKEN; return TOKEN(CONSTANT); }
-{DECIMAL}+"."{DECIMAL}*({E})?{FS}?		{ COUNT; SAVE_TOKEN; return TOKEN(CONSTANT); }
+0[xX]{HEXDIGIT}+{IS}?					{ return CONSTANT; }
+0{DECIMAL}+{IS}?						{ return CONSTANT; }
+{DECIMAL}+{IS}?							{ return CONSTANT; }
+L?'(\\.|[^\\'])+'						{ return CONSTANT; }
+{DECIMAL}+{E}{FS}?						{ return CONSTANT; }
+{DECIMAL}*"."{DECIMAL}+({E})?{FS}?		{ return CONSTANT; }
+{DECIMAL}+"."{DECIMAL}*({E})?{FS}?		{ return CONSTANT; }
 
-L?\"(\\.|[^\\"])*\"						{ COUNT; SAVE_TOKEN; return TOKEN(STRING_LITERAL); }
+L?\"(\\.|[^\\"])*\"						{ return STRING_LITERAL; }
 
-"="				{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_ASSIGNMENT); }
-">>="			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_RIGHT_ASSIGN); }
-"<<="			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_LEFT_ASSIGN); }
-"+="			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_ADD_ASSIGN); }
-"-="			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_SUB_ASSIGN); }
-"*="			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_MUL_ASSIGN); }
-"/="			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_DIV_ASSIGN); }
-"%="			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_MOD_ASSIGN); }
-"&="			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_AND_ASSIGN); }
-"^="			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_XOR_ASSIGN); }
-"|="			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_OR_ASSIGN); }
-">>"			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_RIGHT); }
-"<<"			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_LEFT); }
-"++"			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_INCREASE); }
-"--"			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_DECREASE); }
-"<"				{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_LESS); }
-">"				{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_GREATER); }
-"&&"			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_AND); }
-"||"			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_OR); }
-"<="			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_LESS_OR_EQUAL); }
-">="			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_GREATER_OR_EQUAL); }
-"=="			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_EQUAL); }
-"!="			{ COUNT; SAVE_TOKEN; return TOKEN(OPERATOR_NOT_EQUAL); }
-";"				{ COUNT; SAVE_TOKEN; return TOKEN(';'); }
-"{"				{ COUNT; SAVE_TOKEN; return TOKEN('{'); }
-"}"				{ COUNT; SAVE_TOKEN; return TOKEN('}'); }
-","				{ COUNT; SAVE_TOKEN; return TOKEN(','); }
-":"				{ COUNT; SAVE_TOKEN; return TOKEN(':'); }
-"("				{ COUNT; SAVE_TOKEN; return TOKEN('('); }
-")"				{ COUNT; SAVE_TOKEN; return TOKEN(')'); }
-("[")			{ COUNT; SAVE_TOKEN; return TOKEN('['); }
-("]")			{ COUNT; SAVE_TOKEN; return TOKEN(']'); }
-"."				{ COUNT; SAVE_TOKEN; return TOKEN('.'); }
-"&"				{ COUNT; SAVE_TOKEN; return TOKEN('&'); }
-"!"				{ COUNT; SAVE_TOKEN; return TOKEN('!'); }
-"~"				{ COUNT; SAVE_TOKEN; return TOKEN('~'); }
-"-"				{ COUNT; SAVE_TOKEN; return TOKEN('-'); }
-"+"				{ COUNT; SAVE_TOKEN; return TOKEN('+'); }
-"*"				{ COUNT; SAVE_TOKEN; return TOKEN('*'); }
-"/"				{ COUNT; SAVE_TOKEN; return TOKEN('/'); }
-"%"				{ COUNT; SAVE_TOKEN; return TOKEN('%'); }
-"^"				{ COUNT; SAVE_TOKEN; return TOKEN('^'); }
-"|"				{ COUNT; SAVE_TOKEN; return TOKEN('|'); }
-"?"				{ COUNT; SAVE_TOKEN; return TOKEN('?'); }
-"$"				{ COUNT; SAVE_TOKEN; return TOKEN('$'); }
+"="				{ return OPERATOR_ASSIGNMENT;   }
+">>="			{ return OPERATOR_RIGHT_ASSIGN; }
+"<<="			{ return OPERATOR_LEFT_ASSIGN;  }
+"+="			{ return OPERATOR_ADD_ASSIGN;   }
+"-="			{ return OPERATOR_SUB_ASSIGN;   }
+"*="			{ return OPERATOR_MUL_ASSIGN;   }
+"/="			{ return OPERATOR_DIV_ASSIGN;   }
+"%="			{ return OPERATOR_MOD_ASSIGN;   }
+"&="			{ return OPERATOR_AND_ASSIGN;   }
+"^="			{ return OPERATOR_XOR_ASSIGN;   }
+"|="			{ return OPERATOR_OR_ASSIGN;    }
+">>"			{ return OPERATOR_RIGHT;        }
+"<<"			{ return OPERATOR_LEFT;         }
+"++"			{ return OPERATOR_INCREASE;     }
+"--"			{ return OPERATOR_DECREASE;     }
+"<"				{ return OPERATOR_LESS;         }
+">"				{ return OPERATOR_GREATER;      }
+"&&"			{ return OPERATOR_AND;          }
+"||"			{ return OPERATOR_OR;           }
+"<="			{ return OPERATOR_LESS_OR_EQUAL;}
+">="			{ return OPERATOR_GREATER_OR_EQUAL; }
+"=="			{ return OPERATOR_EQUAL;            }
+"!="			{ return OPERATOR_NOT_EQUAL;        }
+";"				{ return ';'; }
+"{"				{ return '{'; }
+"}"				{ return '}'; }
+","				{ return ','; }
+":"				{ return ':'; }
+"("				{ return '('; }
+")"				{ return ')'; }
+("[")			{ return '['; }
+("]")			{ return ']'; }
+"."				{ return '.'; }
+"&"				{ return '&'; }
+"!"				{ return '!'; }
+"~"				{ return '~'; }
+"-"				{ return '-'; }
+"+"				{ return '+'; }
+"*"				{ return '*'; }
+"/"				{ return '/'; }
+"%"				{ return '%'; }
+"^"				{ return '^'; }
+"|"				{ return '|'; }
+"?"				{ return '?'; }
+"$"				{ return '$'; }
 
-[ \t\v\n\f]		{ COUNT; }
+[ \t\v\n\f]		{  }
 .				{ /* ignore bad characters */ }
 
 %%
+
+extern int yylex (YYSTYPE * yylval_param, YYLTYPE * yylloc_param , bisonbridge *bb);
 
 static void comment(yyscan_t yyscanner)
 {
@@ -152,34 +150,6 @@ loop:
 		putchar(c1);
 	}
 }
-
-
-static void count(yyscan_t yyscanner)
-{
-    return; /*
-    struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
-
-	int i;
-    
-	for (i = 0; yytext[i] != '\0'; i++)
-	{
-		if (yytext[i] == '\n')
-		{
-			yyscanner->column = 0;
-		}
-		else if (yytext[i] == '\t')
-		{
-			yyscanner->column += 8 - (yyscanner->column % 8);
-		}
-		else
-		{
-			yyscanner->column++;
-		}
-	}
- //   [global_UMScriptCompilerEnvironment setColumn:column];
-	ECHO;*/
-}
-
 
 int yywrap (yyscan_t scanner )
 {
