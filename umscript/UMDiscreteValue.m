@@ -105,6 +105,21 @@
     return self;
 }
 
+- (UMDiscreteValue *)initWithNumberString:(NSString *)numberString
+{
+    self = [super init];
+    if(self)
+    {
+        type = UMVALUE_INT;
+        int i = atoi(numberString.UTF8String);
+        /* FIXME: we must return other types if the string indicates its a long long or a double */
+        value = [NSNumber numberWithInteger:i];
+    }
+    return self;
+}
+
+
+
 - (UMDiscreteValue *)initWithData:(NSString *)d;
 {
     self = [super init];
@@ -114,6 +129,17 @@
         value = d;
     }
     return self;
+}
+
+
++ (UMDiscreteValue *)discreteYES
+{
+    return [[UMDiscreteValue alloc]initWithBool:YES];
+}
+
++ (UMDiscreteValue *)discreteNO
+{
+    return [[UMDiscreteValue alloc]initWithBool:NO];
 }
 
 
@@ -147,6 +173,11 @@
 + (UMDiscreteValue *)discreteNull;
 {
     return [[UMDiscreteValue alloc]init];
+}
+
++ (UMDiscreteValue *)discreteNumberString:(NSString *)numberString;
+{
+    return [[UMDiscreteValue alloc]initWithNumberString:numberString];
 }
 
 

@@ -14,7 +14,7 @@
 #import "glueterm.h"
 #define YYSTYPE_IS_DECLARED 1
 #define YYSTYPE glueterm
-
+#define YYDEBUG     1
 
 
 #import "flex_definitions.h"
@@ -23,14 +23,18 @@
 #import "umscript.yl.h"
 
 extern int yylex(YYSTYPE * yylval_param, YYLTYPE * yylloc_param , yyscan_t yyscanner);
+extern int yydebug;
 
-#define RETAIN(a)   CFBridgingRetain(a); NSLog(@"%@",a)
+#define RETAIN(a)   cenv.root=a;CFBridgingRetain(a); NSLog(@"%@",a)
+#define APPLY(a)    cenv.root=a;NSLog(@"%@",a)
+
 %}
 
 /*%pure-parser*/
 %lex-param      {yyscan_t yyscanner}
 %parse-param    {yyscan_t yyscanner}
 %parse-param    {UMScriptCompilerEnvironment *cenv}
+
 %define api.pure
 %locations
 %destructor     { CFBridgingRelease($$.value); } <>
@@ -43,8 +47,15 @@ extern void yyerror (YYLTYPE *llocp, yyscan_t yyscanner, UMScriptCompilerEnviron
 %token IDENTIFIER
 %token VARIABLE
 %token FIELD
-%token CONSTANT
-%token STRING_LITERAL
+%token CONST_BOOLEAN
+%token CONST_STRING
+%token CONST_HEX
+%token CONST_LONGLONG
+%token CONST_BINARY
+%token CONST_INTEGER
+%token CONST_OCTAL
+%token CONST_DOUBLE
+
 
 %token OPERATOR_ASSIGNMENT
 %token OPERATOR_INCREASE
@@ -83,30 +94,47 @@ extern void yyerror (YYLTYPE *llocp, yyscan_t yyscanner, UMScriptCompilerEnviron
 %token BREAK 
 %token RETURN
 
-%start translation_unit
+%start assignment_expression
+
 %%
 
-block : '{' '}'
-	  | '{' statement_list '}'
-	  ;
-
 statement_list
-	: statement
+: statement
+        {
+           UMTerm *t = [UMTerm blockWithStatement:$1.value];
+           $$.value=RETAIN(t);
+        };
 	| statement_list statement
+        {
+            cenv.root=$$.value;
+            [$$.value blockAppendStatement:$1.value];
+        };
 	;
+
+block : '{' '}'
+    | '{' statement_list '}'
+       { $$.value=RETAIN($2.value);};
+    ;
 
 statement
 	: labeled_statement
+        { $$.value=RETAIN($1.value);};
 	| block
+        { $$.value=RETAIN($1.value);};
 	| expression_statement
+        { $$.value=RETAIN($1.value);};
 	| selection_statement
+        { $$.value=RETAIN($1.value);};
 	| iteration_statement
+        { $$.value=RETAIN($1.value);};
 	| jump_statement
+        { $$.value=RETAIN($1.value);};
 	;
 
 expression_statement
 	: ';'
-| expression ';'                                    { $$=$1; }
+    | expression ';'
+        { $$.value=RETAIN($1.value);};
 	;
 
 labeled_statement
@@ -125,11 +153,11 @@ selection_statement
 	;
 
 jump_statement
-	: GOTO IDENTIFIER ';'
-	| CONTINUE ';'
-	| BREAK ';'
-	| RETURN ';'
-	| RETURN expression ';'  { $$.value=RETAIN($2.value);};
+    : GOTO IDENTIFIER ';'
+    | CONTINUE ';'
+    | BREAK ';'
+    | RETURN ';'
+	| RETURN expression ';'     { $$.value=RETAIN($2.value);};
 	;
 
 
@@ -147,11 +175,15 @@ iteration_statement
 
 expression
 	: assignment_expression
+        { $$.value=RETAIN($1.value);};
 	| expression ',' assignment_expression
+        { $$.value=RETAIN($1.value);};
+
 	;
 
 assignment_expression
 	: conditional_expression
+        { $$.value=RETAIN($1.value);};
 	| unary_expression '=' assignment_expression
         { $$.value=RETAIN([$1.value  assign:$3.value]);};
     | unary_expression OPERATOR_MUL_ASSIGN assignment_expression
@@ -178,22 +210,23 @@ assignment_expression
 
 conditional_expression
 	: logical_or_expression
+        { $$.value=RETAIN($1.value);};
     | logical_or_expression '?' expression ':' conditional_expression
         { $$.value=RETAIN([UMTerm ifCondition: $1.value thenDo: $3.value  elseDo: $5.value]);};
 	;
 
 logical_or_expression
 	: logical_and_expression
+        { $$.value=RETAIN($1.value);};
     | logical_or_expression OPERATOR_OR logical_and_expression
         { $$.value=RETAIN([$1.value logical_or: $3.value]);};
-
 	;
 
 logical_and_expression
-	: inclusive_or_expression
+    : inclusive_or_expression
+        { $$.value=RETAIN($1.value);};
     | logical_and_expression OPERATOR_AND inclusive_or_expression
         { $$.value=RETAIN([$1.value logical_and: $3.value]);};
-
 	;
 
 inclusive_or_expression
@@ -276,14 +309,15 @@ unary_expression
         { $$.value=RETAIN([$2.value preincrease]);};
 	| OPERATOR_DECREASE unary_expression
         { $$.value=RETAIN([$2.value predecrease]);};
-| '!' unary_expression
+    | '!' unary_expression
         { $$.value=RETAIN([$1.value logical_not]);};
-| '~' unary_expression
+    | '~' unary_expression
         { $$.value=RETAIN([$1.value bit_not]);};
 	;
 
 postfix_expression
 	: primary_expression
+        { $$.value=RETAIN($1.value);};
 	| postfix_expression '(' ')'
 	| postfix_expression '(' argument_expression_list ')'
 	| postfix_expression '.' IDENTIFIER
@@ -295,16 +329,29 @@ postfix_expression
 
 primary_expression
     : IDENTIFIER
-            { $$.value=RETAIN([UMTerm termWithIdentifier:$1.value]);};
+            { $$.value=RETAIN([UMTerm termWithIdentifierFromTag:$1.value]);};
     | VARIABLE
-            { $$.value=RETAIN([UMTerm termWithVariable:$1.value]);};
+            { $$.value=RETAIN([UMTerm termWithVariableFromTag:$1.value]);};
     | FIELD
-            { $$.value=RETAIN([UMTerm termWithField:$1.value]);};
-    | CONSTANT
-            { $$.value=RETAIN([UMTerm termWithConstant:$1.value]);};
-    | STRING_LITERAL
-            { $$.value=RETAIN([UMTerm termWithString:$1.value]);};
+            { $$.value=RETAIN([UMTerm termWithFieldFromTag:$1.value]);};
+    | CONST_BOOLEAN
+            { $$.value=RETAIN([UMTerm termWithBooleanFromTag:$1.value]);};
+    | CONST_STRING
+            { $$.value=RETAIN([UMTerm termWithStringFromTag:$1.value]);};
+    | CONST_HEX
+        { $$.value=RETAIN([UMTerm termWithHexFromTag:$1.value]);};
+    | CONST_LONGLONG
+        { $$.value=RETAIN([UMTerm termWithLongLongFromTag:$1.value]);};
+    | CONST_BINARY
+        { $$.value=RETAIN([UMTerm termWithBinaryFromTag:$1.value]);};
+    | CONST_INTEGER
+        { $$.value=RETAIN([UMTerm termWithIntegerFromTag:$1.value]);};
+    | CONST_OCTAL
+        { $$.value=RETAIN([UMTerm termWithOctalFromTag:$1.value]);};
+    | CONST_DOUBLE
+        { $$.value=RETAIN([UMTerm termWithDoubleFromTag:$1.value]);};
 	| '(' expression ')'
+        { $$.value=RETAIN($2.value);};
 	;
 
 

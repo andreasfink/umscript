@@ -53,7 +53,7 @@
         }
         case UMTermType_token:
         {
-            return [UMDiscreteValue discreteInt:token];
+            return [UMDiscreteValue discreteString:identifier];
         }
     }
     return [UMDiscreteValue discreteNull];
@@ -107,8 +107,8 @@
     self = [super init];
     if(self)
     {
-        self.type = UMTermType_field;
-        self.varname = varname;
+        self.type = UMTermType_variable;
+        self.varname = variableName;
     }
     return self;
 }
@@ -296,27 +296,90 @@
     return term;
 }
 
-+ (id)termWithIdentifier:(UMTerm *)identifier
++ (id)termWithIdentifierFromTag:(UMTerm *)identifier
 {
-    UMDiscreteValue *d = identifier.discrete;
-    UMTerm *term = [[UMTerm alloc]initWithIdentifier:d.stringValue];
+    UMTerm *term = [[UMTerm alloc]initWithIdentifier:identifier.identifier];
     return term;
 }
 
 
-+ (id)termWithVariable:(UMTerm *)varNameTerm
++ (id)termWithVariableFromTag:(UMTerm *)varNameTerm
 {
-    UMDiscreteValue *d = varNameTerm.discrete;
-    UMTerm *term = [[UMTerm alloc]initWithVariableName:d.stringValue];
+    UMTerm *term = [[UMTerm alloc]initWithVariableName:varNameTerm.identifier];
     return term;
 }
 
-+ (id)termWithField:(UMTerm *)fieldNameTerm
++ (id)termWithFieldFromTag:(UMTerm *)fieldNameTerm
 {
-    UMDiscreteValue *d = fieldNameTerm.discrete;
-    UMTerm *term = [[UMTerm alloc]initWithFieldName:d.stringValue];
+    /* the term being passed here is a token term */
+    UMTerm *term = [[UMTerm alloc]initWithFieldName:fieldNameTerm.identifier];
     return term;
 }
+
++ (id)termWithStringFromTag:(UMTerm *)stringTagTerm
+{
+    UMDiscreteValue *d = [UMDiscreteValue discreteString:stringTagTerm.identifier];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    return term;
+}
+
++ (id)termWithIntegerFromTag:(UMTerm *)tagTerm
+{
+    int i = atoi(tagTerm.identifier.UTF8String);
+    UMDiscreteValue *d = [UMDiscreteValue discreteInt:i];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    return term;
+}
+
++ (id)termWithLongLongFromTag:(UMTerm *)tagTerm
+{
+    long long ll = atoll(tagTerm.identifier.UTF8String);
+    UMDiscreteValue *d = [UMDiscreteValue discreteLongLong:ll];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    return term;
+}
+
++ (id)termWithDoubleFromTag:(UMTerm *)tagTerm
+{
+    double dd = atof(tagTerm.identifier.UTF8String);
+    UMDiscreteValue *d = [UMDiscreteValue discreteDouble:dd];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    return term;
+}
+
++ (id)termWithBooleanFromTag:(UMTerm *)tagTerm
+{
+    UMDiscreteValue *d = [UMDiscreteValue discreteBool:[tagTerm.identifier isEqualToString:@"YES"]];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    return term;
+}
+
++ (id)termWithHexFromTag:(UMTerm *)tagTerm
+{
+    /* TODO: parse the string in hex way to create an integer */
+    UMDiscreteValue *d = [UMDiscreteValue discreteString:tagTerm.identifier];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    return term;
+}
+
++ (id)termWithOctalFromTag:(UMTerm *)tagTerm
+{
+    /* TODO: parse the string in octal way to create an integer */
+    UMDiscreteValue *d = [UMDiscreteValue discreteString:tagTerm.identifier];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    return term;
+}
+
++ (id)termWithBinaryFromTag:(UMTerm *)tagTerm
+{
+    UMDiscreteValue *d = [UMDiscreteValue discreteString:tagTerm.identifier];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    return term;
+}
+
+
+
+
 
 + (id)termWithDirectInteger:(int)i
 {
@@ -342,11 +405,6 @@
     
 }
 
-
-+ (id)termWithConstant:(UMTerm *)constantTerm
-{
-    return constantTerm;
-}
 
 + (id)termWithString:(UMTerm *)stringTerm
 {
@@ -612,11 +670,25 @@
     return result;
 
 }
+
 - (UMTerm *)postdecrease
 {
     UMFunction *func = [[UMFunction_postdecrease alloc]init];
     UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self]];
     return result;
+}
+
++ (UMTerm *)blockWithStatement:(UMTerm *)statement
+{
+    UMFunction *func = [[UMFunction_block alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[statement]];
+    return result;
+}
+
+- (UMTerm *)blockAppendStatement:(UMTerm *)term
+{
+    param = [param arrayByAddingObject:term];
+    return self;
 }
 
 + (UMTerm *)switchCondition:(UMTerm *)condition thenDo:(UMTerm *)thenDo
@@ -633,4 +705,5 @@
     result.identifier = [NSString stringWithUTF8String:text];
     return result;
 }
+
 @end

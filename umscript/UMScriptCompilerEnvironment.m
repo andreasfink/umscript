@@ -44,20 +44,6 @@ typedef struct BisonBridge
 @synthesize column;
 @synthesize root;
 
-+ (UMScriptCompilerEnvironment *)sharedInstance
-{
-    @synchronized(self)
-    {
-        if(hasBeenCreated==0)
-        {
-            global_UMScriptCompilerEnvironment = [[UMScriptCompilerEnvironment alloc]init];
-            hasBeenCreated = YES;
-            NSLog(@"INITIALIZING hasBeenCreated=%d, &hasBeenCreated=%p",hasBeenCreated,&hasBeenCreated);
-        }
-        return global_UMScriptCompilerEnvironment;
-    }
-}
-
 - (void)zapOutput
 {
     stdErr = [[NSString alloc]init];
@@ -92,6 +78,7 @@ typedef struct BisonBridge
         }
     }
     close(stdin_pipe[TXPIPE]);
+    stdin_pipe[TXPIPE] = -1;
 }
 
 - (void)stdoutListener
@@ -124,6 +111,8 @@ typedef struct BisonBridge
     NSString *out = [[NSString alloc]initWithBytes:[outputData bytes] length:[outputData length] encoding:NSUTF8StringEncoding];
     [self addStdOut:out];
     outputDataComplete=YES;
+    close(stdout_pipe[RXPIPE]);
+    stdout_pipe[RXPIPE] = -1;
 }
 
 - (UMTerm *)compile:(NSString *)code stdOut:(NSString **)sout  stdErr:(NSString **)serr
@@ -168,14 +157,16 @@ typedef struct BisonBridge
             }
             return NULL;
         }
+        /* we have now 2 threads ready to stuff data into the compiler and to read its output */
         [NSThread detachNewThreadSelector:@selector(stdinFeeder:) toTarget:self withObject:data];
         [NSThread detachNewThreadSelector:@selector(stdoutListener) toTarget:self withObject:nil];
     
-        yycompile(self, stdin_pipe[RXPIPE], stdout_pipe[TXPIPE]);
+        yycompile(CFBridgingRetain(self), stdin_pipe[RXPIPE], stdout_pipe[TXPIPE]);
+        /* close the pipes from the yycompile side. this should terminate the helper threads if they are not already gone */
         close(stdout_pipe[TXPIPE]);
+        stdout_pipe[TXPIPE] = -1;
         close(stdin_pipe[RXPIPE]);
-        close(stdin_pipe[TXPIPE]);
-        
+        stdin_pipe[RXPIPE] = -1;
         while(outputDataComplete==NO)
         {
             sleep(1);
@@ -188,6 +179,8 @@ typedef struct BisonBridge
         NSLog(@"**STDERR: \r%@",stdErr);
         *serr = stdErr;
         *sout = stdOut;
+        
+        CFBridgingRelease(self);
         return resultingCode;
     }
 }
@@ -244,12 +237,4 @@ typedef struct BisonBridge
 }
 
 @end
-
-size_t readInputForLexer(char *buffer, size_t * numBytesRead, size_t maxBytesToRead)
-{
-    
-    UMScriptCompilerEnvironment *g=[UMScriptCompilerEnvironment sharedInstance];
-    return [g readInputForLexer:buffer numBytesRead:numBytesRead maxBytesToRead:maxBytesToRead];
-}
-
 

@@ -8,7 +8,3 @@
 
 #import <Foundation/Foundation.h>
 
-@class UMScriptCompilerEnvironment;
-
-extern UMScriptCompilerEnvironment *global_UMScriptCompilerEnvironment;
-extern int    hasBeenCreated;

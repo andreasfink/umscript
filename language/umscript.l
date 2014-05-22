@@ -15,15 +15,18 @@
 #define YYSTYPE_IS_DECLARED 1
 #define YYSTYPE glueterm
 
-
 #import "flex_definitions.h"
 #import "umscript.yl.h"
+
+typedef UMScriptCompilerEnvironment *YY_EXTRA_TYPE;
 
 }
 
 %option reentrant
 %option bison-bridge
 %option bison-locations
+%option noyywrap
+
 
 %{
 
@@ -34,26 +37,26 @@
 static void yyunput (int c, register char * yy_bp , yyscan_t yyscanner);
 
 static void comment(yyscan_t yyscanner);
-int yywrap (yyscan_t yyscanner );
-
-#define YY_EXTRA_TYPE struct user_type *
 
 
 //#define  YYPARSEPARAM  yyparseparam
 
-#define result(x)  (*yylval_param).value = (__bridge CFTypeRef)[UMTerm token:(x) text:yyget_text(yyscanner)];yylval_param->token = (x);
+#define result(x)  (*yylval_param).value = (__bridge CFTypeRef)[UMTerm token:(x) text:yyget_text(yyscanner)];yylval_param->token = (x); return(x)
 
 %}
 
 
 DECIMAL		[0-9]
+OCTAL       [0-7]
 LETTER		[a-zA-Z_]
 HEXDIGIT	[a-fA-F0-9]
+BINARYDIGIT [0,1];
 L			[a-zA-Z_]
 H			[a-fA-F0-9]
 E			[Ee][+-]?{DECIMAL}+
 FS			(f|F|l|L)
 IS			(u|U|l|L)*
+SIGN        [+-]?
 
 
 %%
@@ -71,19 +74,18 @@ IS			(u|U|l|L)*
 "switch"		{ result(SWITCH);   }
 "while"			{ result(WHILE);    }
 
-{LETTER}({LETTER}|{DECIMAL})*			{ result(IDENTIFIER);  }
-\${LETTER}({LETTER}|{DECIMAL})*			{ result(VARIABLE);    }
-\%{LETTER}({LETTER}|{DECIMAL})*			{ result(FIELD);       }
+"YES"|"NO"                              { result(CONST_BOOLEAN);  }
+0[xX]{HEXDIGIT}+                        { result(CONST_HEX);      }
+0[bB]{BINARYDIGIT}+                     { result(CONST_BINARY);   }
+0{OCTAL}+                               { result(CONST_OCTAL);    }
+{SIGN}?{DECIMAL}+                       { result(CONST_INTEGER);  }
+{DECIMAL}+LL                            { result(CONST_LONGLONG); }
+{DECIMAL}*"."{DECIMAL}+({E})?{FS}?		{ result(CONST_DOUBLE);   }
+{DECIMAL}+"."{DECIMAL}*({E})?{FS}?		{ result(CONST_DOUBLE);   }
 
-0[xX]{HEXDIGIT}+{IS}?					{ result(CONSTANT); }
-0{DECIMAL}+{IS}?						{ result(CONSTANT); }
-{DECIMAL}+{IS}?							{ result(CONSTANT); }
-L?'(\\.|[^\\'])+'						{ result(CONSTANT); }
-{DECIMAL}+{E}{FS}?						{ result(CONSTANT); }
-{DECIMAL}*"."{DECIMAL}+({E})?{FS}?		{ result(CONSTANT); }
-{DECIMAL}+"."{DECIMAL}*({E})?{FS}?		{ result(CONSTANT); }
-
-L?\"(\\.|[^\\"])*\"						{ result(STRING_LITERAL); }
+\${LETTER}({LETTER}|{DECIMAL})*			{ result(VARIABLE);       }
+\%{LETTER}({LETTER}|{DECIMAL})*			{ result(FIELD);          }
+{LETTER}({LETTER}|{DECIMAL})*			{ result(IDENTIFIER);     }
 
 "="				{ result(OPERATOR_ASSIGNMENT);   }
 ">>="			{ result(OPERATOR_RIGHT_ASSIGN); }
@@ -159,13 +161,8 @@ loop:
 	}
 }
 
-int yywrap (yyscan_t scanner )
-{
-	return 1;
-}
-
-
 extern int yyparse (yyscan_t yyscanner, UMScriptCompilerEnvironment *cenv);
+extern int yydebug;
 
 int yycompile(UMScriptCompilerEnvironment *cenv, int fdes_input, int fdes_output)
 {
@@ -175,8 +172,10 @@ int yycompile(UMScriptCompilerEnvironment *cenv, int fdes_input, int fdes_output
     FILE *outfile = fdopen(fdes_output,"w");
     yyset_in(infile,yyscanner);
     yyset_out(outfile,yyscanner);
-
-    struct glueterm return_value;
+    yyset_extra(cenv,yyscanner);
+    
+    yydebug = 1;
+struct glueterm return_value;
     return_value.token = 0;
     return_value.value = 0;
 
