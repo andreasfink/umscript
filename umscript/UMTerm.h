@@ -21,6 +21,7 @@ typedef enum UMTermType
     UMTermType_function,
     UMTermType_identifier,
     UMTermType_nullterm,
+    UMTermType_token,
 } UMTermType;
 
 @interface UMTerm : UMObject
@@ -78,7 +79,7 @@ typedef enum UMTermType
 + (id)termWithDirectCString:(char *)s;
 
 - (void) setDiscreteString:(NSString *)s;
-- (NSString * )debugDescription;
+- (NSString * )descriptionJson;
 
 - (UMTerm *)add:(UMTerm *)b;
 - (UMTerm *)sub:(UMTerm *)b;
@@ -110,6 +111,8 @@ typedef enum UMTermType
 + (UMTerm *)thenDo:(UMTerm *)thendo whileCondition:(UMTerm *)condition;
 + (UMTerm *)forInitializer:(UMTerm *)initializer endCondition:(UMTerm *)condition every:(UMTerm *)every thenDo:(UMTerm *)thenDo;
 + (UMTerm *)switchCondition:(UMTerm *)condition thenDo:(UMTerm *)thenDo;
+
++ (UMTerm *)token:(int)tok text:(const char *)text;
 
 - (UMTerm *)preincrease;
 - (UMTerm *)postincrease;

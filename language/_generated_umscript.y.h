@@ -111,6 +111,6 @@ struct YYLTYPE
 
 
 
-int yyparse (bisonbridge *bb);
+int yyparse (yyscan_t yyscanner, UMScriptCompilerEnvironment *cenv);
 
 #endif /* !YY_YY_LANGUAGE_GENERATED_UMSCRIPT_Y_H_INCLUDED  */

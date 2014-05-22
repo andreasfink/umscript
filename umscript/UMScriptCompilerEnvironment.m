@@ -8,15 +8,12 @@
 
 #import "UMScriptCompilerEnvironment.h"
 #import "UMTerm.h"
-#include <string.h>
-#include "umscript_globals.h"
-#include "bisonbridge.h"
-
-extern int yyparse(void *);
-extern FILE *yyin;
-
-extern int yylex_init(void *scanner);
-extern int yylex_destroy(void *scanner);
+#import <string.h>
+#import "umscript_globals.h"
+#import "bisonbridge.h"
+#import "_generated_umscript.y.h"
+#import "flex_definitions.h"
+#import "bison_definitions.h"
 
 
 typedef struct BisonBridge
@@ -97,6 +94,34 @@ typedef struct BisonBridge
     close(stdin_pipe[TXPIPE]);
 }
 
+- (void)stdoutListener
+{
+    outputDataComplete = NO;
+    char buf[1025];
+    
+    memset(buf,0x00,sizeof(buf));
+    
+    ssize_t read_bytes = 0;
+    do
+    {
+        read_bytes = read(stdout_pipe[RXPIPE],buf,sizeof(buf)-1);
+        if(read_bytes > 0)
+        {
+            @synchronized(outputData)
+            {
+                [outputData appendBytes:buf length:read_bytes];
+            }
+            memset(buf,0x00,sizeof(buf));
+        }
+        if((read_bytes < 0) && (errno=EAGAIN))
+        {
+            read_bytes = 99;
+        }
+    }
+    while (read_bytes > 0);
+    outputDataComplete=YES;
+}
+
 - (UMTerm *)compile:(NSString *)code stdOut:(NSString **)sout  stdErr:(NSString **)serr
 {
     @synchronized(self)
@@ -123,20 +148,42 @@ typedef struct BisonBridge
             }
             return NULL;
         }
+        if (pipe(stdout_pipe) < 0)
+        {
+            switch(errno)
+            {
+                case EMFILE:
+                    NSLog(@"Too many file descriptors are in use by the process ([GWThread initInThread])");
+                    break;
+                case ENFILE:
+                    NSLog(@"The system file table is full. ([GWThread initInThread])");
+                    break;
+                default:
+                    NSLog(@"cannot allocate wakeup pipe for new thread");
+                    break;
+            }
+            return NULL;
+        }
         [NSThread detachNewThreadSelector:@selector(stdinFeeder:) toTarget:self withObject:data];
+
+        outputData = [[NSMutableData alloc]init];
+        [NSThread detachNewThreadSelector:@selector(stdoutListener) toTarget:self withObject:nil];
+        
+    stdoutListener:
         
         NSLog(@"\r***Compiling:\r%@\r***\r",currentSource);
 
-        bisonbridge *bb = bisonbridge_alloc();
+        yycompile(self, stdin_pipe[RXPIPE], stdout_pipe[TXPIPE]);
+        close(stdout_pipe[TXPIPE]);
+        close(stdin_pipe[RXPIPE]);
+        close(stdin_pipe[TXPIPE]);
+        
+        while(outputDataComplete==NO)
+        {
+            sleep(1);
+        }
+        close(stdout_pipe[RXPIPE]);
 
-        yylex_init      (bb);
-        FILE *infile = fdopen(stdin_pipe[RXPIPE], "r");
-        yyset_in(infile,bb);
-        yyparse(bb);
-        yylex_destroy   (bb);
-        
-        yyparse(bb);
-        
         UMTerm *resultingCode = root;
         root = NULL;
         printf("\r***STDOUT:\r");

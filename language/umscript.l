@@ -9,6 +9,14 @@
 */
 
 %top{
+
+
+#import "glueterm.h"
+#define YYSTYPE_IS_DECLARED 1
+#define YYSTYPE glueterm
+
+
+#import "flex_definitions.h"
 #import "umscript.yl.h"
 
 }
@@ -22,8 +30,6 @@
 #import "umscript.yl.h"
 #import "_generated_umscript.y.h"
 
-//extern int yylex (YYSTYPE * yylval_param ,yyscan_t yyscanner);
-//extern int yylex (YYSTYPE * lvalp, YYLTYPE * llocp, yyscan_t scanner);
 
 static void yyunput (int c, register char * yy_bp , yyscan_t yyscanner);
 
@@ -34,6 +40,8 @@ int yywrap (yyscan_t yyscanner );
 
 
 //#define  YYPARSEPARAM  yyparseparam
+
+#define result(x)  (*yylval_param).value = [UMTerm token:(x) text:yyget_text(yyscanner)];yylval_param->token = (x);
 
 %}
 
@@ -50,85 +58,85 @@ IS			(u|U|l|L)*
 
 %%
 "/*"			{ comment(yyscanner);}
-"break"			{ return BREAK;    }
-"case"			{ return CASE;     }
-"continue"		{ return CONTINUE; }
-"default"		{ return DEFAULT;  }
-"do"			{ return DO;       }
-"else"			{ return ELSE;     }
-"for"			{ return FOR;      }
-"goto"			{ return GOTO;     }
-"if"			{ return IF;       }
-"return"		{ return RETURN;   }
-"switch"		{ return SWITCH;   }
-"while"			{ return WHILE;    }
+"break"			{ result(BREAK);    }
+"case"			{ result(CASE);     }
+"continue"		{ result(CONTINUE); }
+"default"		{ result(DEFAULT);  }
+"do"			{ result(DO);       }
+"else"			{ result(ELSE);     }
+"for"			{ result(FOR);      }
+"goto"			{ result(GOTO);     }
+"if"			{ result(IF);       }
+"return"		{ result(RETURN);   }
+"switch"		{ result(SWITCH);   }
+"while"			{ result(WHILE);    }
 
-{LETTER}({LETTER}|{DECIMAL})*			{ return IDENTIFIER;  }
-\${LETTER}({LETTER}|{DECIMAL})*			{ return VARIABLE;    }
-\%{LETTER}({LETTER}|{DECIMAL})*			{ return FIELD;       }
+{LETTER}({LETTER}|{DECIMAL})*			{ result(IDENTIFIER);  }
+\${LETTER}({LETTER}|{DECIMAL})*			{ result(VARIABLE);    }
+\%{LETTER}({LETTER}|{DECIMAL})*			{ result(FIELD);       }
 
-0[xX]{HEXDIGIT}+{IS}?					{ return CONSTANT; }
-0{DECIMAL}+{IS}?						{ return CONSTANT; }
-{DECIMAL}+{IS}?							{ return CONSTANT; }
-L?'(\\.|[^\\'])+'						{ return CONSTANT; }
-{DECIMAL}+{E}{FS}?						{ return CONSTANT; }
-{DECIMAL}*"."{DECIMAL}+({E})?{FS}?		{ return CONSTANT; }
-{DECIMAL}+"."{DECIMAL}*({E})?{FS}?		{ return CONSTANT; }
+0[xX]{HEXDIGIT}+{IS}?					{ result(CONSTANT); }
+0{DECIMAL}+{IS}?						{ result(CONSTANT); }
+{DECIMAL}+{IS}?							{ result(CONSTANT); }
+L?'(\\.|[^\\'])+'						{ result(CONSTANT); }
+{DECIMAL}+{E}{FS}?						{ result(CONSTANT); }
+{DECIMAL}*"."{DECIMAL}+({E})?{FS}?		{ result(CONSTANT); }
+{DECIMAL}+"."{DECIMAL}*({E})?{FS}?		{ result(CONSTANT); }
 
-L?\"(\\.|[^\\"])*\"						{ return STRING_LITERAL; }
+L?\"(\\.|[^\\"])*\"						{ result(STRING_LITERAL); }
 
-"="				{ return OPERATOR_ASSIGNMENT;   }
-">>="			{ return OPERATOR_RIGHT_ASSIGN; }
-"<<="			{ return OPERATOR_LEFT_ASSIGN;  }
-"+="			{ return OPERATOR_ADD_ASSIGN;   }
-"-="			{ return OPERATOR_SUB_ASSIGN;   }
-"*="			{ return OPERATOR_MUL_ASSIGN;   }
-"/="			{ return OPERATOR_DIV_ASSIGN;   }
-"%="			{ return OPERATOR_MOD_ASSIGN;   }
-"&="			{ return OPERATOR_AND_ASSIGN;   }
-"^="			{ return OPERATOR_XOR_ASSIGN;   }
-"|="			{ return OPERATOR_OR_ASSIGN;    }
-">>"			{ return OPERATOR_RIGHT;        }
-"<<"			{ return OPERATOR_LEFT;         }
-"++"			{ return OPERATOR_INCREASE;     }
-"--"			{ return OPERATOR_DECREASE;     }
-"<"				{ return OPERATOR_LESS;         }
-">"				{ return OPERATOR_GREATER;      }
-"&&"			{ return OPERATOR_AND;          }
-"||"			{ return OPERATOR_OR;           }
-"<="			{ return OPERATOR_LESS_OR_EQUAL;}
-">="			{ return OPERATOR_GREATER_OR_EQUAL; }
-"=="			{ return OPERATOR_EQUAL;            }
-"!="			{ return OPERATOR_NOT_EQUAL;        }
-";"				{ return ';'; }
-"{"				{ return '{'; }
-"}"				{ return '}'; }
-","				{ return ','; }
-":"				{ return ':'; }
-"("				{ return '('; }
-")"				{ return ')'; }
-("[")			{ return '['; }
-("]")			{ return ']'; }
-"."				{ return '.'; }
-"&"				{ return '&'; }
-"!"				{ return '!'; }
-"~"				{ return '~'; }
-"-"				{ return '-'; }
-"+"				{ return '+'; }
-"*"				{ return '*'; }
-"/"				{ return '/'; }
-"%"				{ return '%'; }
-"^"				{ return '^'; }
-"|"				{ return '|'; }
-"?"				{ return '?'; }
-"$"				{ return '$'; }
+"="				{ result(OPERATOR_ASSIGNMENT);   }
+">>="			{ result(OPERATOR_RIGHT_ASSIGN); }
+"<<="			{ result(OPERATOR_LEFT_ASSIGN);  }
+"+="			{ result(OPERATOR_ADD_ASSIGN);   }
+"-="			{ result(OPERATOR_SUB_ASSIGN);   }
+"*="			{ result(OPERATOR_MUL_ASSIGN);   }
+"/="			{ result(OPERATOR_DIV_ASSIGN);   }
+"%="			{ result(OPERATOR_MOD_ASSIGN);   }
+"&="			{ result(OPERATOR_AND_ASSIGN);   }
+"^="			{ result(OPERATOR_XOR_ASSIGN);   }
+"|="			{ result(OPERATOR_OR_ASSIGN);    }
+">>"			{ result(OPERATOR_RIGHT);        }
+"<<"			{ result(OPERATOR_LEFT);         }
+"++"			{ result(OPERATOR_INCREASE);     }
+"--"			{ result(OPERATOR_DECREASE);     }
+"<"				{ result(OPERATOR_LESS);         }
+">"				{ result(OPERATOR_GREATER);      }
+"&&"			{ result(OPERATOR_AND);          }
+"||"			{ result(OPERATOR_OR);           }
+"<="			{ result(OPERATOR_LESS_OR_EQUAL);}
+">="			{ result(OPERATOR_GREATER_OR_EQUAL); }
+"=="			{ result(OPERATOR_EQUAL);            }
+"!="			{ result(OPERATOR_NOT_EQUAL);        }
+";"				{ result(';'); }
+"{"				{ result('{'); }
+"}"				{ result('}'); }
+","				{ result(','); }
+":"				{ result(':'); }
+"("				{ result('('); }
+")"				{ result(')'); }
+("[")			{ result('['); }
+("]")			{ result(']'); }
+"."				{ result('.'); }
+"&"				{ result('&'); }
+"!"				{ result('!'); }
+"~"				{ result('~'); }
+"-"				{ result('-'); }
+"+"				{ result('+'); }
+"*"				{ result('*'); }
+"/"				{ result('/'); }
+"%"				{ result('%'); }
+"^"				{ result('^'); }
+"|"				{ result('|'); }
+"?"				{ result('?'); }
+"$"				{ result('$'); }
 
 [ \t\v\n\f]		{  }
 .				{ /* ignore bad characters */ }
 
 %%
 
-extern int yylex (YYSTYPE * yylval_param, YYLTYPE * yylloc_param , bisonbridge *bb);
+extern int yylex (YYSTYPE * yylval_param, YYLTYPE * yylloc_param , yyscan_t bb);
 
 static void comment(yyscan_t yyscanner)
 {
@@ -157,4 +165,31 @@ int yywrap (yyscan_t scanner )
 }
 
 
+extern int yyparse (yyscan_t yyscanner, UMScriptCompilerEnvironment *cenv);
+
+int yycompile(UMScriptCompilerEnvironment *cenv, int fdes_input, int fdes_output)
+{
+    yyscan_t yyscanner;
+    yylex_init(&yyscanner);
+    FILE *infile = fdopen(fdes_input, "r");
+    FILE *outfile = fdopen(fdes_output,"w");
+    yyset_in(infile,yyscanner);
+    yyset_out(outfile,yyscanner);
+
+    struct glueterm return_value;
+    return_value.token = 0;
+    return_value.value = 0;
+
+    yyparse(yyscanner,cenv);
+    /*
+yyscanner
+     while (yylex(&return_value, &location_info, yyscanner) > 0)
+    {
+        NSLog(@"Tok: %d yytext=%@\n",return_value.token, return_value.value);
+        return_value.token = 0;
+    }
+     */
+    yylex_destroy(yyscanner);
+    return 0;
+}
 

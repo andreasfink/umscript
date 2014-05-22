@@ -29,7 +29,7 @@
     {
         case UMTermType_identifier:
         {
-            return discrete;
+            return [UMDiscreteValue discreteString:identifier];
         }
         case UMTermType_discrete:
         {
@@ -50,6 +50,10 @@
         case UMTermType_nullterm:
         {
             return [UMDiscreteValue discreteNull];
+        }
+        case UMTermType_token:
+        {
+            return [UMDiscreteValue discreteInt:token];
         }
     }
     return [UMDiscreteValue discreteNull];
@@ -157,7 +161,7 @@
 }
 
 
-- (NSString *)description
+- (NSString *)descriptionJson
 {
     UMJsonWriter *writer = [[UMJsonWriter alloc]init];
     NSString *s = [writer stringWithObject:[self descriptionDictVal]];
@@ -178,6 +182,8 @@
             return @{@"VAR" : varname}; //[env variableForKey:varname];
         case UMTermType_field:
             return @{@"FIELD" : fieldname};
+        case UMTermType_token:
+            return @{@"TOKEN" : [NSString stringWithFormat:@"%d",token], @"IDENTIFIER" : identifier};
         case UMTermType_function:
         {
             NSMutableDictionary *dict =[[NSMutableDictionary alloc]init];
@@ -353,35 +359,37 @@
     self.discrete = d;
 }
 
-- (NSString * )debugDescription
+- (NSString * )description
 {
     
-NSMutableString *s = [[NSMutableString alloc]init];
+    NSMutableString *s = [[NSMutableString alloc]init];
     [s appendString: [super description]];
     switch(type)
     {
         case UMTermType_discrete:
-            [s appendString:@"\r type=discrete\r"];
+            [s appendFormat:@"discrete: %@\r",[discrete description]];
             break;
         case UMTermType_field:
-            [s appendString:@"\r type=field\r"];
+            [s appendFormat:@"field: %@\r",fieldname];
             break;
         case UMTermType_variable:
-            [s appendString:@"\r type=variable\r"];
+            [s appendFormat:@"variable: %@\r",varname];
             break;
         case UMTermType_function:
-            [s appendString:@"\r type=function\r"];
+            [s appendFormat:@"function: %@\r",[function name]];
+            [s appendFormat:@" parameter.count=%d\r", (int)param.count ];
+            break;
+        case UMTermType_identifier:
+            [s appendFormat:@"identifier: %@\r",identifier];
+            break;
+        case UMTermType_token:
+            [s appendFormat:@"token: %d\r",token];
+            [s appendFormat:@"value: %@\r",identifier];
             break;
         default:
-            [s appendString:@"\r type=unknown\r"];
+            [s appendString:@"unknown UMTerm type\r"];
             break;
     }
-    [s appendFormat:@" discrete=%@\r", discrete ? [discrete debugDescription] : @"nil"];
-    [s appendFormat:@" function=%@\r", function ? [function debugDescription] : @"nil"];
-    [s appendFormat:@" fieldname=%@\r", fieldname ? fieldname : @"nil"];
-    [s appendFormat:@" varname=%@\r", varname ? varname : @"nil"];
-    [s appendFormat:@" paramcount=%d\r", (int)param.count ];
-    [s appendFormat:@" token=%d\r", token];
     return s;
 }
 
@@ -618,4 +626,11 @@ NSMutableString *s = [[NSMutableString alloc]init];
     return result;
 }
 
++ (UMTerm *)token:(int)tok text:(const char *)text
+{
+    UMTerm *result = [[UMTerm alloc] init];
+    result.type =UMTermType_token;
+    result.identifier = [NSString stringWithUTF8String:text];
+    return result;
+}
 @end

@@ -29,4 +29,4 @@ UMScriptCompilerEnvironment *bisonbridge_getcenv(bisonbridge *bb);
 void bisonbridge_set_input_data(bisonbridge *bb, const char *ptr, size_t len);
 void bisonbridge_free(bisonbridge *bb);
 
-bisonbridge_set_input_file_descriptor(bisonbridge *bb,int fd);
+void bisonbridge_set_input_file_descriptor(bisonbridge *bb,int fd);

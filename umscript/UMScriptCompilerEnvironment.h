@@ -7,7 +7,8 @@
 //
 
 #import "UMEnvironment.h"
-#import "umscript.yl.h"
+#import "flex_definitions.h"
+#import "bison_definitions.h"
 
 extern size_t readInputForLexer(char *buffer, size_t * numBytesRead, size_t maxBytesToRead);
 
@@ -19,6 +20,8 @@ extern size_t readInputForLexer(char *buffer, size_t * numBytesRead, size_t maxB
     NSString *stdErr;
     NSString *stdOut;
     NSString *currentSource;
+    NSMutableData *outputData;
+    BOOL outputDataComplete;
     const char *currentSourceCString;
     size_t  currentSourcePosition;
     
@@ -34,6 +37,7 @@ extern size_t readInputForLexer(char *buffer, size_t * numBytesRead, size_t maxB
     int column;
     
     int stdin_pipe[2];
+    int stdout_pipe[2];
 }
 
 @property (readwrite,assign) int column;
@@ -50,9 +54,5 @@ extern size_t readInputForLexer(char *buffer, size_t * numBytesRead, size_t maxB
 - (NSString *)stdErr;
 - (NSString *)stdOut;
 
-- (size_t)readInputForLexer:(char *)buffer numBytesRead:(size_t *)numBytesRead maxBytesToRead:(size_t)maxBytesToRead;
-
 @end
-
-extern UMScriptCompilerEnvironment *global_UMScriptCompilerEnvironment;
 
