@@ -590,7 +590,7 @@ int yywrap (yyscan_t yyscanner );
 
 //#define  YYPARSEPARAM  yyparseparam
 
-#define result(x)  (*yylval_param).value = [UMTerm token:(x) text:yyget_text(yyscanner)];yylval_param->token = (x);
+#define result(x)  (*yylval_param).value = (__bridge CFTypeRef)[UMTerm token:(x) text:yyget_text(yyscanner)];yylval_param->token = (x);
 
 #line 596 "language/_generated_umscript.l.m"
 

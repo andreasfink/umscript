@@ -96,6 +96,7 @@ typedef struct BisonBridge
 
 - (void)stdoutListener
 {
+    NSMutableData *outputData = [[NSMutableData alloc]init];
     outputDataComplete = NO;
     char buf[1025];
     
@@ -119,6 +120,9 @@ typedef struct BisonBridge
         }
     }
     while (read_bytes > 0);
+
+    NSString *out = [[NSString alloc]initWithBytes:[outputData bytes] length:[outputData length] encoding:NSUTF8StringEncoding];
+    [self addStdOut:out];
     outputDataComplete=YES;
 }
 
@@ -165,14 +169,8 @@ typedef struct BisonBridge
             return NULL;
         }
         [NSThread detachNewThreadSelector:@selector(stdinFeeder:) toTarget:self withObject:data];
-
-        outputData = [[NSMutableData alloc]init];
         [NSThread detachNewThreadSelector:@selector(stdoutListener) toTarget:self withObject:nil];
-        
-    stdoutListener:
-        
-        NSLog(@"\r***Compiling:\r%@\r***\r",currentSource);
-
+    
         yycompile(self, stdin_pipe[RXPIPE], stdout_pipe[TXPIPE]);
         close(stdout_pipe[TXPIPE]);
         close(stdin_pipe[RXPIPE]);
@@ -186,9 +184,10 @@ typedef struct BisonBridge
 
         UMTerm *resultingCode = root;
         root = NULL;
-        printf("\r***STDOUT:\r");
         NSLog(@"**STDOUT: \r%@",stdOut);
         NSLog(@"**STDERR: \r%@",stdErr);
+        *serr = stdErr;
+        *sout = stdOut;
         return resultingCode;
     }
 }

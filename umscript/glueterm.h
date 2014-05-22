@@ -13,6 +13,6 @@
 typedef struct glueterm
 {
     int     token;
-    UMTerm  *value;
+    __unsafe_unretained UMTerm  *value;
 } glueterm;
 

@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A63DD82E192C84CE0090FC94 /* UMFunction_int.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD82C192C84CE0090FC94 /* UMFunction_int.h */; };
+		A63DD82E192C84CE0090FC94 /* UMFunction_int.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD82C192C84CE0090FC94 /* UMFunction_int.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A63DD82F192C84CE0090FC94 /* UMFunction_int.m in Sources */ = {isa = PBXBuildFile; fileRef = A63DD82D192C84CE0090FC94 /* UMFunction_int.m */; };
-		A63DD832192C84D80090FC94 /* UMFunction_string.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD830192C84D80090FC94 /* UMFunction_string.h */; };
+		A63DD832192C84D80090FC94 /* UMFunction_string.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD830192C84D80090FC94 /* UMFunction_string.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A63DD833192C84D80090FC94 /* UMFunction_string.m in Sources */ = {isa = PBXBuildFile; fileRef = A63DD831192C84D80090FC94 /* UMFunction_string.m */; };
-		A63DD836192C84E20090FC94 /* UMFunction_longlong.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD834192C84E20090FC94 /* UMFunction_longlong.h */; };
+		A63DD836192C84E20090FC94 /* UMFunction_longlong.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD834192C84E20090FC94 /* UMFunction_longlong.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A63DD837192C84E20090FC94 /* UMFunction_longlong.m in Sources */ = {isa = PBXBuildFile; fileRef = A63DD835192C84E20090FC94 /* UMFunction_longlong.m */; };
-		A63DD83A192C84EB0090FC94 /* UMFunction_double.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD838192C84EB0090FC94 /* UMFunction_double.h */; };
+		A63DD83A192C84EB0090FC94 /* UMFunction_double.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD838192C84EB0090FC94 /* UMFunction_double.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A63DD83B192C84EB0090FC94 /* UMFunction_double.m in Sources */ = {isa = PBXBuildFile; fileRef = A63DD839192C84EB0090FC94 /* UMFunction_double.m */; };
-		A63DD83E192C84F60090FC94 /* UMFunction_data.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD83C192C84F60090FC94 /* UMFunction_data.h */; };
+		A63DD83E192C84F60090FC94 /* UMFunction_data.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD83C192C84F60090FC94 /* UMFunction_data.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A63DD83F192C84F60090FC94 /* UMFunction_data.m in Sources */ = {isa = PBXBuildFile; fileRef = A63DD83D192C84F60090FC94 /* UMFunction_data.m */; };
-		A63DD842192C97900090FC94 /* umscript_globals.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD840192C97900090FC94 /* umscript_globals.h */; };
+		A63DD842192C97900090FC94 /* umscript_globals.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD840192C97900090FC94 /* umscript_globals.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A63DD843192C97900090FC94 /* umscript_globals.m in Sources */ = {isa = PBXBuildFile; fileRef = A63DD841192C97900090FC94 /* umscript_globals.m */; };
 		A65D34B5192B7BE60090FC94 /* umscript.yl.m in Sources */ = {isa = PBXBuildFile; fileRef = A65D34B4192B7BE60090FC94 /* umscript.yl.m */; };
 		A65D34C0192BAA8A0090FC94 /* UMFunction_greaterorequal.m in Sources */ = {isa = PBXBuildFile; fileRef = A65D34BE192BAA8A0090FC94 /* UMFunction_greaterorequal.m */; };
@@ -104,21 +104,21 @@
 		A6835CA019298C110090FC94 /* UMScriptCompilerEnvironment.h in Headers */ = {isa = PBXBuildFile; fileRef = A6835C9E19298C110090FC94 /* UMScriptCompilerEnvironment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6835CA119298C110090FC94 /* UMScriptCompilerEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = A6835C9F19298C110090FC94 /* UMScriptCompilerEnvironment.m */; };
 		A6916CEE192BDFAC00F6BFF4 /* UMFunction_greaterorequal.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916CED192BDFAC00F6BFF4 /* UMFunction_greaterorequal.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A6916CF1192BE5A500F6BFF4 /* UMFunction_while.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916CEF192BE5A500F6BFF4 /* UMFunction_while.h */; };
+		A6916CF1192BE5A500F6BFF4 /* UMFunction_while.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916CEF192BE5A500F6BFF4 /* UMFunction_while.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6916CF2192BE5A500F6BFF4 /* UMFunction_while.m in Sources */ = {isa = PBXBuildFile; fileRef = A6916CF0192BE5A500F6BFF4 /* UMFunction_while.m */; };
-		A6916CF6192BE77F00F6BFF4 /* UMFunction_dowhile.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916CF4192BE77F00F6BFF4 /* UMFunction_dowhile.h */; };
+		A6916CF6192BE77F00F6BFF4 /* UMFunction_dowhile.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916CF4192BE77F00F6BFF4 /* UMFunction_dowhile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6916CF7192BE77F00F6BFF4 /* UMFunction_dowhile.m in Sources */ = {isa = PBXBuildFile; fileRef = A6916CF5192BE77F00F6BFF4 /* UMFunction_dowhile.m */; };
-		A6916CFB192BE7BE00F6BFF4 /* UMFunction_for.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916CF9192BE7BE00F6BFF4 /* UMFunction_for.h */; };
+		A6916CFB192BE7BE00F6BFF4 /* UMFunction_for.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916CF9192BE7BE00F6BFF4 /* UMFunction_for.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6916CFC192BE7BE00F6BFF4 /* UMFunction_for.m in Sources */ = {isa = PBXBuildFile; fileRef = A6916CFA192BE7BE00F6BFF4 /* UMFunction_for.m */; };
-		A6916D05192BEE4100F6BFF4 /* UMFunction_preincrease.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916D03192BEE4100F6BFF4 /* UMFunction_preincrease.h */; };
+		A6916D05192BEE4100F6BFF4 /* UMFunction_preincrease.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916D03192BEE4100F6BFF4 /* UMFunction_preincrease.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6916D06192BEE4100F6BFF4 /* UMFunction_preincrease.m in Sources */ = {isa = PBXBuildFile; fileRef = A6916D04192BEE4100F6BFF4 /* UMFunction_preincrease.m */; };
-		A6916D0A192BEE4B00F6BFF4 /* UMFunction_predecrease.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916D08192BEE4B00F6BFF4 /* UMFunction_predecrease.h */; };
+		A6916D0A192BEE4B00F6BFF4 /* UMFunction_predecrease.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916D08192BEE4B00F6BFF4 /* UMFunction_predecrease.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6916D0B192BEE4B00F6BFF4 /* UMFunction_predecrease.m in Sources */ = {isa = PBXBuildFile; fileRef = A6916D09192BEE4B00F6BFF4 /* UMFunction_predecrease.m */; };
-		A6916D0F192BEE5500F6BFF4 /* UMFunction_postincrease.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916D0D192BEE5500F6BFF4 /* UMFunction_postincrease.h */; };
+		A6916D0F192BEE5500F6BFF4 /* UMFunction_postincrease.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916D0D192BEE5500F6BFF4 /* UMFunction_postincrease.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6916D10192BEE5500F6BFF4 /* UMFunction_postincrease.m in Sources */ = {isa = PBXBuildFile; fileRef = A6916D0E192BEE5500F6BFF4 /* UMFunction_postincrease.m */; };
-		A6916D14192BEE6200F6BFF4 /* UMFunction_postdecrease.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916D12192BEE6200F6BFF4 /* UMFunction_postdecrease.h */; };
+		A6916D14192BEE6200F6BFF4 /* UMFunction_postdecrease.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916D12192BEE6200F6BFF4 /* UMFunction_postdecrease.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6916D15192BEE6200F6BFF4 /* UMFunction_postdecrease.m in Sources */ = {isa = PBXBuildFile; fileRef = A6916D13192BEE6200F6BFF4 /* UMFunction_postdecrease.m */; };
-		A6916D19192BF61500F6BFF4 /* UMFunction_switch.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916D17192BF61500F6BFF4 /* UMFunction_switch.h */; };
+		A6916D19192BF61500F6BFF4 /* UMFunction_switch.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916D17192BF61500F6BFF4 /* UMFunction_switch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6916D1A192BF61500F6BFF4 /* UMFunction_switch.m in Sources */ = {isa = PBXBuildFile; fileRef = A6916D18192BF61500F6BFF4 /* UMFunction_switch.m */; };
 		A6A3AA0719297741007FFC7B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA0619297741007FFC7B /* Cocoa.framework */; };
 		A6A3AA1119297741007FFC7B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6A3AA0F19297741007FFC7B /* InfoPlist.strings */; };
@@ -127,13 +127,13 @@
 		A6A3AA2019297741007FFC7B /* umscript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA0319297741007FFC7B /* umscript.framework */; };
 		A6A3AA2619297741007FFC7B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6A3AA2419297741007FFC7B /* InfoPlist.strings */; };
 		A6A3AA2819297741007FFC7B /* umscriptTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A3AA2719297741007FFC7B /* umscriptTests.m */; };
-		A6B5CE69192D218200F02FCA /* bisonbridge.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE67192D218200F02FCA /* bisonbridge.h */; };
+		A6B5CE69192D218200F02FCA /* bisonbridge.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE67192D218200F02FCA /* bisonbridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6B5CE6A192D218200F02FCA /* bisonbridge.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B5CE68192D218200F02FCA /* bisonbridge.m */; };
-		A6B5CE6C192D4CF700F02FCA /* flex_definitions.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE6B192D4CF700F02FCA /* flex_definitions.h */; };
-		A6B5CE6E192D4D0500F02FCA /* bison_definitions.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE6D192D4D0500F02FCA /* bison_definitions.h */; };
-		A6B5CE71192D626B00F02FCA /* glueterm.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE6F192D626B00F02FCA /* glueterm.h */; };
+		A6B5CE6C192D4CF700F02FCA /* flex_definitions.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE6B192D4CF700F02FCA /* flex_definitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6B5CE6E192D4D0500F02FCA /* bison_definitions.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE6D192D4D0500F02FCA /* bison_definitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6B5CE71192D626B00F02FCA /* glueterm.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE6F192D626B00F02FCA /* glueterm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6B5CE72192D626B00F02FCA /* glueterm.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B5CE70192D626B00F02FCA /* glueterm.m */; };
-		A6ECC2F7192CE7350090FC94 /* _generated_umscript.y.h in Headers */ = {isa = PBXBuildFile; fileRef = A6ECC2F6192CE7350090FC94 /* _generated_umscript.y.h */; };
+		A6ECC2F7192CE7350090FC94 /* _generated_umscript.y.h in Headers */ = {isa = PBXBuildFile; fileRef = A6ECC2F6192CE7350090FC94 /* _generated_umscript.y.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6EEDB691929DD1F0090FC94 /* umscript.yl.h in Headers */ = {isa = PBXBuildFile; fileRef = A6EEDB681929DD1F0090FC94 /* umscript.yl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6EEDB6C1929DE800090FC94 /* _generated_umscript.l.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EEDB6A1929DE800090FC94 /* _generated_umscript.l.m */; };
 		A6EEDB6D1929DE800090FC94 /* _generated_umscript.y.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EEDB6B1929DE800090FC94 /* _generated_umscript.y.m */; };
@@ -530,66 +530,66 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6916D19192BF61500F6BFF4 /* UMFunction_switch.h in Headers */,
 				A6835C1E19297AE30090FC94 /* UMFunction_return.h in Headers */,
 				A6835C2A19297AE30090FC94 /* UMFunctionMacros.h in Headers */,
 				A6835C2819297AE30090FC94 /* UMFunction.h in Headers */,
 				A6835C3319297AE30090FC94 /* UMTerm.h in Headers */,
-				A6B5CE71192D626B00F02FCA /* glueterm.h in Headers */,
 				A6835C1A19297AE30090FC94 /* UMFunction_sub.h in Headers */,
 				A6835BEE19297AE30090FC94 /* UMFunction_bit_not.h in Headers */,
-				A6916CFB192BE7BE00F6BFF4 /* UMFunction_for.h in Headers */,
 				A6835BE919297AE30090FC94 /* UMEnvironment.h in Headers */,
-				A6916D0A192BEE4B00F6BFF4 /* UMFunction_predecrease.h in Headers */,
-				A6B5CE6C192D4CF700F02FCA /* flex_definitions.h in Headers */,
-				A6ECC2F7192CE7350090FC94 /* _generated_umscript.y.h in Headers */,
 				A6835BF819297AE30090FC94 /* UMFunction_block.h in Headers */,
 				A6835C2219297AE30090FC94 /* UMFunction_setvar.h in Headers */,
 				A6835C0E19297AE30090FC94 /* UMFunction_xor.h in Headers */,
 				A6835BE519297AE30090FC94 /* NSNumber+UMScript.h in Headers */,
 				A6835C1219297AE30090FC94 /* UMFunction_div.h in Headers */,
-				A6916CF1192BE5A500F6BFF4 /* UMFunction_while.h in Headers */,
-				A6B5CE69192D218200F02FCA /* bisonbridge.h in Headers */,
-				A63DD836192C84E20090FC94 /* UMFunction_longlong.h in Headers */,
 				A6835BFE19297AE30090FC94 /* UMFunction_getfield.h in Headers */,
 				A6835C0A19297AE30090FC94 /* UMFunction_not.h in Headers */,
 				A6835C2419297AE30090FC94 /* UMFunction_startswith.h in Headers */,
-				A6916D14192BEE6200F6BFF4 /* UMFunction_postdecrease.h in Headers */,
-				A63DD82E192C84CE0090FC94 /* UMFunction_int.h in Headers */,
 				A6835BFA19297AE30090FC94 /* UMFunction_endswith.h in Headers */,
 				A6835BF019297AE30090FC94 /* UMFunction_bit_or.h in Headers */,
 				A6835C0019297AE30090FC94 /* UMFunction_getvar.h in Headers */,
 				A6835C0C19297AE30090FC94 /* UMFunction_or.h in Headers */,
 				A6835C1619297AE30090FC94 /* UMFunction_mul.h in Headers */,
-				A6916D0F192BEE5500F6BFF4 /* UMFunction_postincrease.h in Headers */,
 				A6835BF419297AE30090FC94 /* UMFunction_bit_shiftright.h in Headers */,
-				A63DD842192C97900090FC94 /* umscript_globals.h in Headers */,
 				A6835C0619297AE30090FC94 /* UMFunction_lessthan.h in Headers */,
 				A6835C0419297AE30090FC94 /* UMFunction_if.h in Headers */,
 				A6835C0219297AE30090FC94 /* UMFunction_greaterthan.h in Headers */,
 				A6835BF619297AE30090FC94 /* UMFunction_bit_xor.h in Headers */,
 				A6835BEC19297AE30090FC94 /* UMFunction_bit_and.h in Headers */,
 				A6835C1C19297AE30090FC94 /* UMFunction_notequal.h in Headers */,
+				A6835C2019297AE30090FC94 /* UMFunction_setfield.h in Headers */,
+				A6916D19192BF61500F6BFF4 /* UMFunction_switch.h in Headers */,
+				A6B5CE71192D626B00F02FCA /* glueterm.h in Headers */,
+				A6916CFB192BE7BE00F6BFF4 /* UMFunction_for.h in Headers */,
+				A6916D0A192BEE4B00F6BFF4 /* UMFunction_predecrease.h in Headers */,
+				A6B5CE6C192D4CF700F02FCA /* flex_definitions.h in Headers */,
+				A6ECC2F7192CE7350090FC94 /* _generated_umscript.y.h in Headers */,
+				A6916CF1192BE5A500F6BFF4 /* UMFunction_while.h in Headers */,
+				A6B5CE69192D218200F02FCA /* bisonbridge.h in Headers */,
+				A63DD836192C84E20090FC94 /* UMFunction_longlong.h in Headers */,
+				A6916D14192BEE6200F6BFF4 /* UMFunction_postdecrease.h in Headers */,
+				A63DD82E192C84CE0090FC94 /* UMFunction_int.h in Headers */,
+				A6916D0F192BEE5500F6BFF4 /* UMFunction_postincrease.h in Headers */,
+				A63DD842192C97900090FC94 /* umscript_globals.h in Headers */,
 				A63DD83A192C84EB0090FC94 /* UMFunction_double.h in Headers */,
 				A6B5CE6E192D4D0500F02FCA /* bison_definitions.h in Headers */,
-				A6835C2019297AE30090FC94 /* UMFunction_setfield.h in Headers */,
 				A6916CF6192BE77F00F6BFF4 /* UMFunction_dowhile.h in Headers */,
+				A63DD83E192C84F60090FC94 /* UMFunction_data.h in Headers */,
+				A6916D05192BEE4100F6BFF4 /* UMFunction_preincrease.h in Headers */,
+				A63DD832192C84D80090FC94 /* UMFunction_string.h in Headers */,
 				A6835BF219297AE30090FC94 /* UMFunction_bit_shiftleft.h in Headers */,
 				A6835C3119297AE30090FC94 /* umscript.h in Headers */,
-				A63DD83E192C84F60090FC94 /* UMFunction_data.h in Headers */,
 				A6EEDB691929DD1F0090FC94 /* umscript.yl.h in Headers */,
 				A6835C8F19297F990090FC94 /* UMScriptDocument.h in Headers */,
 				A6835BE719297AE30090FC94 /* UMDiscreteValue.h in Headers */,
 				A6835C1819297AE30090FC94 /* UMFunction_modulo.h in Headers */,
 				A65D34C9192BAE130090FC94 /* UMFunction_assign.h in Headers */,
 				A6835CA019298C110090FC94 /* UMScriptCompilerEnvironment.h in Headers */,
-				A6916D05192BEE4100F6BFF4 /* UMFunction_preincrease.h in Headers */,
 				A65D34C4192BAAA40090FC94 /* UMFunction_lessorequal.h in Headers */,
 				A6916CEE192BDFAC00F6BFF4 /* UMFunction_greaterorequal.h in Headers */,
 				A6835BFC19297AE30090FC94 /* UMFunction_equal.h in Headers */,
 				A6835C1019297AE30090FC94 /* UMFunction_add.h in Headers */,
 				A6835C2619297AE30090FC94 /* UMFunction_typecast_int.h in Headers */,
-				A63DD832192C84D80090FC94 /* UMFunction_string.h in Headers */,
 				A6835C1419297AE30090FC94 /* UMFunction_dot.h in Headers */,
 				A6835C0819297AE30090FC94 /* UMFunction_and.h in Headers */,
 			);

@@ -16,7 +16,7 @@ typedef struct bisonbridge
     unsigned char *input_data;
     size_t input_position;
     size_t input_size;
-    UMScriptCompilerEnvironment *cenv;
+    __unsafe_unretained UMScriptCompilerEnvironment *cenv;
 } bisonbridge;
 
 bisonbridge *bisonbridge_allocate(void);

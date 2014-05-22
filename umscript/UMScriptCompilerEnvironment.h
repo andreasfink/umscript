@@ -20,7 +20,6 @@ extern size_t readInputForLexer(char *buffer, size_t * numBytesRead, size_t maxB
     NSString *stdErr;
     NSString *stdOut;
     NSString *currentSource;
-    NSMutableData *outputData;
     BOOL outputDataComplete;
     const char *currentSourceCString;
     size_t  currentSourcePosition;

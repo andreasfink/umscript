@@ -79,7 +79,7 @@
 
 extern int yylex(YYSTYPE * yylval_param, YYLTYPE * yylloc_param , yyscan_t yyscanner);
 
-#define SET  $$.value =
+#define RETAIN(a)   CFBridgingRetain(a); NSLog(@"%@",a)
 #line 37 "language/umscript.y" /* yacc.c:339  */
 
  
@@ -477,16 +477,16 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    90,    90,    91,    95,    96,   100,   101,   102,   103,
-     104,   105,   109,   110,   114,   115,   116,   120,   121,   122,
-     126,   127,   128,   129,   130,   135,   136,   137,   139,   145,
-     146,   150,   151,   153,   155,   157,   159,   161,   163,   165,
-     167,   169,   171,   176,   177,   182,   183,   189,   190,   196,
-     198,   203,   205,   210,   212,   216,   218,   220,   225,   227,
-     229,   230,   231,   235,   236,   237,   241,   242,   243,   247,
-     248,   249,   250,   255,   256,   257,   258,   259,   263,   264,
-     265,   266,   267,   268,   272,   274,   276,   278,   280,   282,
-     287,   288,   292,   296,   297,   301,   305
+       0,    89,    89,    90,    94,    95,    99,   100,   101,   102,
+     103,   104,   108,   109,   113,   114,   115,   119,   121,   123,
+     128,   129,   130,   131,   132,   137,   139,   141,   143,   149,
+     150,   154,   155,   157,   159,   161,   163,   165,   167,   169,
+     171,   173,   175,   180,   181,   186,   187,   193,   194,   200,
+     202,   207,   209,   214,   216,   221,   223,   225,   230,   232,
+     234,   236,   238,   243,   245,   247,   252,   254,   256,   261,
+     263,   265,   267,   273,   275,   277,   279,   281,   286,   287,
+     288,   289,   290,   292,   297,   299,   301,   303,   305,   307,
+     312,   313,   317,   321,   322,   326,   330
 };
 #endif
 
@@ -1242,7 +1242,546 @@ yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep, YYLTYPE *yylocatio
   YY_SYMBOL_PRINT (yymsg, yytype, yyvaluep, yylocationp);
 
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  YYUSE (yytype);
+  switch (yytype)
+    {
+          case 3: /* IDENTIFIER  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1251 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 4: /* VARIABLE  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1257 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 5: /* FIELD  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1263 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 6: /* CONSTANT  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1269 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 7: /* STRING_LITERAL  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1275 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 8: /* OPERATOR_ASSIGNMENT  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1281 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 9: /* OPERATOR_INCREASE  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1287 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 10: /* OPERATOR_DECREASE  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1293 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 11: /* OPERATOR_LEFT  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1299 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 12: /* OPERATOR_RIGHT  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1305 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 13: /* OPERATOR_LESS  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1311 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 14: /* OPERATOR_LESS_OR_EQUAL  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1317 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 15: /* OPERATOR_GREATER  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1323 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 16: /* OPERATOR_GREATER_OR_EQUAL  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1329 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 17: /* OPERATOR_EQUAL  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1335 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 18: /* OPERATOR_NOT_EQUAL  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1341 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 19: /* OPERATOR_AND  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1347 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 20: /* OPERATOR_OR  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1353 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 21: /* OPERATOR_MUL_ASSIGN  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1359 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 22: /* OPERATOR_DIV_ASSIGN  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1365 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 23: /* OPERATOR_MOD_ASSIGN  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1371 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 24: /* OPERATOR_ADD_ASSIGN  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1377 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 25: /* OPERATOR_SUB_ASSIGN  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1383 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 26: /* OPERATOR_LEFT_ASSIGN  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1389 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 27: /* OPERATOR_RIGHT_ASSIGN  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1395 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 28: /* OPERATOR_AND_ASSIGN  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1401 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 29: /* OPERATOR_XOR_ASSIGN  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1407 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 30: /* OPERATOR_OR_ASSIGN  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1413 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 31: /* CASE  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1419 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 32: /* DEFAULT  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1425 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 33: /* IF  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1431 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 34: /* ELSE  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1437 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 35: /* SWITCH  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1443 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 36: /* WHILE  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1449 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 37: /* DO  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1455 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 38: /* FOR  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1461 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 39: /* GOTO  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1467 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 40: /* CONTINUE  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1473 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 41: /* BREAK  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1479 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 42: /* RETURN  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1485 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 43: /* '{'  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1491 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 44: /* '}'  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1497 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 45: /* ';'  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1503 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 46: /* ':'  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1509 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 47: /* '('  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1515 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 48: /* ')'  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1521 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 49: /* ','  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1527 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 50: /* '='  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1533 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 51: /* '?'  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1539 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 52: /* '|'  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1545 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 53: /* '^'  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1551 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 54: /* '&'  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1557 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 55: /* '+'  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1563 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 56: /* '-'  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1569 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 57: /* '*'  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1575 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 58: /* '/'  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1581 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 59: /* '%'  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1587 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 60: /* '!'  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1593 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 61: /* '~'  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1599 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 62: /* '.'  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1605 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 64: /* block  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1611 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 65: /* statement_list  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1617 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 66: /* statement  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1623 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 67: /* expression_statement  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1629 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 68: /* labeled_statement  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1635 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 69: /* selection_statement  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1641 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 70: /* jump_statement  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1647 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 71: /* iteration_statement  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1653 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 72: /* expression  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1659 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 73: /* assignment_expression  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1665 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 74: /* conditional_expression  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1671 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 75: /* logical_or_expression  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1677 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 76: /* logical_and_expression  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1683 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 77: /* inclusive_or_expression  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1689 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 78: /* exclusive_or_expression  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1695 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 79: /* and_expression  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1701 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 80: /* equality_expression  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1707 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 81: /* relational_expression  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1713 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 82: /* shift_expression  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1719 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 83: /* additive_expression  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1725 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 84: /* multiplicative_expression  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1731 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 85: /* unary_expression  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1737 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 86: /* postfix_expression  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1743 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 87: /* primary_expression  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1749 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 88: /* argument_expression_list  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1755 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 89: /* constant_expression  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1761 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 90: /* translation_unit  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1767 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 91: /* external_declaration  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1773 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+    case 92: /* function_definition  */
+#line 36 "language/umscript.y" /* yacc.c:1257  */
+      { CFBridgingRelease(((*yyvaluep)).value); }
+#line 1779 "language/_generated_umscript.y.m" /* yacc.c:1257  */
+        break;
+
+
+      default:
+        break;
+    }
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
@@ -1528,355 +2067,361 @@ yyreduce:
   switch (yyn)
     {
         case 13:
-#line 110 "language/umscript.y" /* yacc.c:1661  */
+#line 109 "language/umscript.y" /* yacc.c:1661  */
     { (yyval)=(yyvsp[-1]); }
-#line 1534 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 2073 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 17:
 #line 120 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[UMTerm ifCondition: (yyvsp[-3]).value .value  thenDo: (yyvsp[0]).value .value  elseDo: [UMTerm termWithNull]];  }
-#line 1540 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+    {(yyval).value=RETAIN([UMTerm ifCondition: (yyvsp[-3]).value .value  thenDo: (yyvsp[0]).value .value  elseDo: [UMTerm termWithNull]]);}
+#line 2079 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 18:
-#line 121 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[UMTerm ifCondition: (yyvsp[-5]).value  thenDo: (yyvsp[-2]).value  elseDo: (yyvsp[0]).value ];  }
-#line 1546 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 122 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([UMTerm ifCondition: (yyvsp[-5]).value  thenDo: (yyvsp[-2]).value  elseDo: (yyvsp[0]).value]);}
+#line 2085 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 19:
-#line 122 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[UMTerm switchCondition: (yyvsp[-3]).value  thenDo: (yyvsp[0]).value  ];  }
-#line 1552 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 124 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([UMTerm switchCondition: (yyvsp[-3]).value  thenDo: (yyvsp[0]).value]);}
+#line 2091 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+    break;
+
+  case 24:
+#line 132 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN((yyvsp[-1]).value);}
+#line 2097 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 25:
-#line 135 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[UMTerm whileCondition: (yyvsp[-3]).value  thenDo: (yyvsp[-2]).value ];  }
-#line 1558 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 138 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([UMTerm whileCondition: (yyvsp[-3]).value  thenDo: (yyvsp[-2]).value]);}
+#line 2103 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 26:
-#line 136 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[UMTerm thenDo: (yyvsp[-5]).value  whileCondition: (yyvsp[-4]).value ];  }
-#line 1564 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 140 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([UMTerm thenDo: (yyvsp[-5]).value  whileCondition: (yyvsp[-4]).value]);}
+#line 2109 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 27:
-#line 138 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[UMTerm forInitializer:(yyvsp[-3]).value  endCondition:(yyvsp[-2]).value  every:NULL thenDo: (yyvsp[0]).value ]; }
-#line 1570 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 142 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([UMTerm forInitializer:(yyvsp[-3]).value endCondition:(yyvsp[-2]).value every:NULL thenDo: (yyvsp[0]).value]);}
+#line 2115 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 28:
-#line 140 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[UMTerm forInitializer:(yyvsp[-4]).value  endCondition:(yyvsp[-3]).value  every:(yyvsp[-2]).value  thenDo: (yyvsp[0]).value ]; }
-#line 1576 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 144 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([UMTerm forInitializer:(yyvsp[-4]).value endCondition:(yyvsp[-3]).value every:(yyvsp[-2]).value  thenDo: (yyvsp[0]).value]);}
+#line 2121 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 32:
-#line 152 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value  assign:(yyvsp[0]).value ];  }
-#line 1582 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 156 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value  assign:(yyvsp[0]).value]);}
+#line 2127 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 33:
-#line 154 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value  assign:[(yyvsp[-2]).value mul: (yyvsp[0]).value ]];  }
-#line 1588 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 158 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value  assign:[(yyvsp[-2]).value mul: (yyvsp[0]).value]]);}
+#line 2133 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 34:
-#line 156 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value  assign:[(yyvsp[-2]).value div: (yyvsp[0]).value ]];  }
-#line 1594 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 160 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value  assign:[(yyvsp[-2]).value div: (yyvsp[0]).value]]);}
+#line 2139 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 35:
-#line 158 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value  assign:[(yyvsp[-2]).value mul: (yyvsp[0]).value ]];  }
-#line 1600 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 162 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value  assign:[(yyvsp[-2]).value mul: (yyvsp[0]).value]]);}
+#line 2145 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 36:
-#line 160 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value  assign:[(yyvsp[-2]).value add: (yyvsp[0]).value ]];  }
-#line 1606 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 164 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value  assign:[(yyvsp[-2]).value add: (yyvsp[0]).value]]);}
+#line 2151 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 37:
-#line 162 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value  assign:[(yyvsp[-2]).value sub: (yyvsp[-1]).value ]];  }
-#line 1612 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 166 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value  assign:[(yyvsp[-2]).value sub: (yyvsp[-1]).value]]);}
+#line 2157 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 38:
-#line 164 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value  assign:[(yyvsp[-2]).value leftshift: (yyvsp[0]).value ]];  }
-#line 1618 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 168 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value  assign:[(yyvsp[-2]).value leftshift: (yyvsp[0]).value]]);}
+#line 2163 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 39:
-#line 166 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value  assign:[(yyvsp[-2]).value rightshift: (yyvsp[0]).value ]];  }
-#line 1624 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 170 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value  assign:[(yyvsp[-2]).value rightshift: (yyvsp[0]).value]]);}
+#line 2169 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 40:
-#line 168 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value  assign:[(yyvsp[-2]).value logical_and: (yyvsp[0]).value ]];  }
-#line 1630 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 172 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value  assign:[(yyvsp[-2]).value logical_and: (yyvsp[0]).value]]);}
+#line 2175 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 41:
-#line 170 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value  assign:[(yyvsp[-2]).value logical_xor: (yyvsp[0]).value ]];  }
-#line 1636 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 174 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value  assign:[(yyvsp[-2]).value logical_xor: (yyvsp[0]).value]]);}
+#line 2181 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 42:
-#line 172 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value  assign:[(yyvsp[-2]).value logical_or: (yyvsp[0]).value ]];  }
-#line 1642 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 176 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value  assign:[(yyvsp[-2]).value logical_or: (yyvsp[0]).value]]);}
+#line 2187 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 44:
-#line 178 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[UMTerm ifCondition: (yyvsp[-4]).value thenDo: (yyvsp[-2]).value  elseDo: (yyvsp[0]).value ];  }
-#line 1648 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 182 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([UMTerm ifCondition: (yyvsp[-4]).value thenDo: (yyvsp[-2]).value  elseDo: (yyvsp[0]).value]);}
+#line 2193 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 46:
-#line 184 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value logical_or: (yyvsp[0]).value ];  }
-#line 1654 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 188 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value logical_or: (yyvsp[0]).value]);}
+#line 2199 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 48:
-#line 191 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value logical_and: (yyvsp[0]).value ];  }
-#line 1660 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 195 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value logical_and: (yyvsp[0]).value]);}
+#line 2205 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 49:
-#line 197 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =(yyvsp[0]).value;}
-#line 1666 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 201 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN((yyvsp[0]).value);}
+#line 2211 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 50:
-#line 199 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value bit_or: (yyvsp[0]).value ];  }
-#line 1672 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 203 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value bit_or: (yyvsp[0]).value]);}
+#line 2217 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 51:
-#line 204 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value = (yyvsp[0]).value;}
-#line 1678 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 208 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN((yyvsp[0]).value);}
+#line 2223 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 52:
-#line 206 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value bit_xor: (yyvsp[0]).value];  }
-#line 1684 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 210 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value bit_xor: (yyvsp[0]).value]);}
+#line 2229 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 53:
-#line 211 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value = (yyvsp[0]).value;}
-#line 1690 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 215 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN((yyvsp[0]).value);}
+#line 2235 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 54:
-#line 212 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value bit_and: (yyvsp[0]).value ];  }
-#line 1696 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 217 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value bit_and: (yyvsp[0]).value]);}
+#line 2241 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 55:
-#line 217 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =(yyvsp[0]).value;}
-#line 1702 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 222 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN((yyvsp[0]).value);}
+#line 2247 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 56:
-#line 219 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value equal: (yyvsp[0]).value ];     }
-#line 1708 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 224 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value equal: (yyvsp[0]).value]);}
+#line 2253 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 57:
-#line 221 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value notequal: (yyvsp[0]).value ];  }
-#line 1714 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 226 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value notequal: (yyvsp[0]).value]);}
+#line 2259 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 58:
-#line 226 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =(yyvsp[0]).value;}
-#line 1720 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 231 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN((yyvsp[0]).value);}
+#line 2265 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 59:
-#line 228 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value lessthan:       (yyvsp[0]).value ];  }
-#line 1726 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 233 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value lessthan: (yyvsp[0]).value]);}
+#line 2271 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 60:
-#line 229 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value greaterthan:    (yyvsp[0]).value ];  }
-#line 1732 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 235 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value greaterthan:    (yyvsp[0]).value]);}
+#line 2277 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 61:
-#line 230 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value lessorequal:    (yyvsp[0]).value ];  }
-#line 1738 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 237 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value lessorequal:    (yyvsp[0]).value]);}
+#line 2283 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 62:
-#line 231 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value greaterorequal: (yyvsp[0]).value ];  }
-#line 1744 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 239 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value greaterorequal: (yyvsp[0]).value]);}
+#line 2289 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 63:
-#line 235 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =(yyvsp[0]).value;}
-#line 1750 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 244 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN((yyvsp[0]).value);}
+#line 2295 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 64:
-#line 236 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value leftshift:  (yyvsp[0]).value ];  }
-#line 1756 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 246 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value leftshift:  (yyvsp[0]).value]);}
+#line 2301 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 65:
-#line 237 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value rightshift: (yyvsp[0]).value ];  }
-#line 1762 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 248 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value rightshift: (yyvsp[0]).value]);}
+#line 2307 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 66:
-#line 241 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =(yyvsp[0]).value;}
-#line 1768 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 253 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN((yyvsp[0]).value);}
+#line 2313 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 67:
-#line 242 "language/umscript.y" /* yacc.c:1661  */
-    { /* $$.value =[$1.value add: $3.value ]; */ }
-#line 1774 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 255 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value add: (yyvsp[0]).value]);}
+#line 2319 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 68:
-#line 243 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value sub: (yyvsp[0]).value ];  }
-#line 1780 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 257 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value sub: (yyvsp[0]).value]);}
+#line 2325 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 69:
-#line 247 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =(yyvsp[0]).value;}
-#line 1786 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 262 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN((yyvsp[0]).value);}
+#line 2331 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 70:
-#line 248 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value mul:    (yyvsp[0]).value ]; }
-#line 1792 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 264 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value mul:    (yyvsp[0]).value]);}
+#line 2337 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 71:
-#line 249 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value div:    (yyvsp[0]).value ]; }
-#line 1798 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 266 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value div:    (yyvsp[0]).value]);}
+#line 2343 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 72:
-#line 250 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-2]).value modulo: (yyvsp[0]).value ]; }
-#line 1804 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 268 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-2]).value modulo: (yyvsp[0]).value]);}
+#line 2349 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 73:
-#line 255 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =(yyvsp[0]).value;}
-#line 1810 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 274 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN((yyvsp[0]).value);}
+#line 2355 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 74:
-#line 256 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[0]).value  preincrease]; }
-#line 1816 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 276 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[0]).value preincrease]);}
+#line 2361 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 75:
-#line 257 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[0]).value  predecrease]; }
-#line 1822 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 278 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[0]).value predecrease]);}
+#line 2367 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 76:
-#line 258 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-1]).value logical_not];}
-#line 1828 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 280 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-1]).value logical_not]);}
+#line 2373 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 77:
-#line 259 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-1]).value bit_not];}
-#line 1834 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 282 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-1]).value bit_not]);}
+#line 2379 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 82:
-#line 267 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-1]).value postincrease]; }
-#line 1840 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 291 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-1]).value postincrease]);}
+#line 2385 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 83:
-#line 268 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[(yyvsp[-1]).value postdecrease]; }
-#line 1846 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 293 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([(yyvsp[-1]).value postdecrease]);}
+#line 2391 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 84:
-#line 273 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[UMTerm termWithIdentifier:(yyvsp[0]).value];  }
-#line 1852 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 298 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([UMTerm termWithIdentifier:(yyvsp[0]).value]);}
+#line 2397 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 85:
-#line 275 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[UMTerm termWithVariable:(yyvsp[0]).value];    }
-#line 1858 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 300 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([UMTerm termWithVariable:(yyvsp[0]).value]);}
+#line 2403 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 86:
-#line 277 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[UMTerm termWithField:(yyvsp[0]).value];       }
-#line 1864 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 302 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([UMTerm termWithField:(yyvsp[0]).value]);}
+#line 2409 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 87:
-#line 279 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[UMTerm termWithConstant:(yyvsp[0]).value];    }
-#line 1870 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 304 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([UMTerm termWithConstant:(yyvsp[0]).value]);}
+#line 2415 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
   case 88:
-#line 281 "language/umscript.y" /* yacc.c:1661  */
-    { (yyval).value =[UMTerm termWithString:(yyvsp[0]).value];      }
-#line 1876 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 306 "language/umscript.y" /* yacc.c:1661  */
+    { (yyval).value=RETAIN([UMTerm termWithString:(yyvsp[0]).value]);}
+#line 2421 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
 
-#line 1880 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+#line 2425 "language/_generated_umscript.y.m" /* yacc.c:1661  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2111,7 +2656,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 308 "language/umscript.y" /* yacc.c:1906  */
+#line 333 "language/umscript.y" /* yacc.c:1906  */
 
 #include <stdio.h>
 
