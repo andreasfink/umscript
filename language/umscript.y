@@ -28,6 +28,18 @@ extern int yydebug;
 #define RETAIN(a)   cenv.root=a;CFBridgingRetain(a); NSLog(@"%@",a)
 #define APPLY(a)    cenv.root=a;NSLog(@"%@",a)
 
+#define SET_RESULT(r,n)                     \
+{                                           \
+    UMTerm *new_value = n;                  \
+    CFBridgingRetain(new_value);            \
+    if(r!=NULL)                             \
+    {                                       \
+        CFBridgingRelease(r);               \
+    }                                       \
+    cenv.root=new_value;                    \
+    r=n;                                    \
+}
+
 %}
 
 /*%pure-parser*/
@@ -94,47 +106,39 @@ extern void yyerror (YYLTYPE *llocp, yyscan_t yyscanner, UMScriptCompilerEnviron
 %token BREAK 
 %token RETURN
 
-%start assignment_expression
+%start statement_list
 
 %%
 
 statement_list
-: statement
-        {
-           UMTerm *t = [UMTerm blockWithStatement:$1.value];
-           $$.value=RETAIN(t);
-        };
-	| statement_list statement
-        {
-            cenv.root=$$.value;
-            [$$.value blockAppendStatement:$1.value];
-        };
+    : statement                     {   SET_RESULT($$.value,[UMTerm blockWithStatement:$1.value]);      };
+    | statement_list statement      {   SET_RESULT($$.value,[$1.value blockAppendStatement:$2.value]);   };
 	;
 
 block : '{' '}'
     | '{' statement_list '}'
-       { $$.value=RETAIN($2.value);};
+       { SET_RESULT($$.value,$2.value);};
     ;
 
 statement
 	: labeled_statement
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 	| block
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 	| expression_statement
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 	| selection_statement
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 	| iteration_statement
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 	| jump_statement
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 	;
 
 expression_statement
 	: ';'
     | expression ';'
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 	;
 
 labeled_statement
@@ -145,213 +149,213 @@ labeled_statement
 
 selection_statement
     : IF '(' expression ')' block
-        {$$.value=RETAIN([UMTerm ifCondition: $2.value .value  thenDo: $5.value .value  elseDo: [UMTerm termWithNull]]);};
+        {SET_RESULT($$.value,[UMTerm ifCondition: $2.value .value  thenDo: $5.value .value  elseDo: [UMTerm termWithNull]]);};
     | IF '(' expression ')' block ELSE block
-        { $$.value=RETAIN([UMTerm ifCondition: $2.value  thenDo: $5.value  elseDo: $7.value]);};
+        { SET_RESULT($$.value,[UMTerm ifCondition: $2.value  thenDo: $5.value  elseDo: $7.value]);};
 	| SWITCH '(' expression ')' block
-        { $$.value=RETAIN([UMTerm switchCondition: $2.value  thenDo: $5.value]);};
+        { SET_RESULT($$.value,[UMTerm switchCondition: $2.value  thenDo: $5.value]);};
 	;
 
 jump_statement
     : GOTO IDENTIFIER ';'
     | CONTINUE ';'
     | BREAK ';'
+    | RETURN expression ';'     { SET_RESULT($$.value,$2.value);};
     | RETURN ';'
-	| RETURN expression ';'     { $$.value=RETAIN($2.value);};
 	;
 
 
 iteration_statement
     : WHILE '(' expression ')' statement
-        { $$.value=RETAIN([UMTerm whileCondition: $2.value  thenDo: $3.value]);};
+        { SET_RESULT($$.value,[UMTerm whileCondition: $2.value  thenDo: $3.value]);};
     | DO statement WHILE '(' expression ')' ';'
-        { $$.value=RETAIN([UMTerm thenDo: $2.value  whileCondition: $3.value]);};
+        { SET_RESULT($$.value,[UMTerm thenDo: $2.value  whileCondition: $3.value]);};
 	| FOR '(' expression_statement expression_statement ')' statement
-        { $$.value=RETAIN([UMTerm forInitializer:$3.value endCondition:$4.value every:NULL thenDo: $6.value]);};
+        { SET_RESULT($$.value,[UMTerm forInitializer:$3.value endCondition:$4.value every:NULL thenDo: $6.value]);};
     | FOR '(' expression_statement expression_statement expression ')' statement
-        { $$.value=RETAIN([UMTerm forInitializer:$3.value endCondition:$4.value every:$5.value  thenDo: $7.value]);};
+        { SET_RESULT($$.value,[UMTerm forInitializer:$3.value endCondition:$4.value every:$5.value  thenDo: $7.value]);};
 	;
 
 
 expression
 	: assignment_expression
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 	| expression ',' assignment_expression
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 
 	;
 
 assignment_expression
 	: conditional_expression
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 	| unary_expression '=' assignment_expression
-        { $$.value=RETAIN([$1.value  assign:$3.value]);};
+        { SET_RESULT($$.value,[$1.value  assign:$3.value]);};
     | unary_expression OPERATOR_MUL_ASSIGN assignment_expression
-        { $$.value=RETAIN([$1.value  assign:[$1.value mul: $3.value]]);};
+        { SET_RESULT($$.value,[$1.value  assign:[$1.value mul: $3.value]]);};
     | unary_expression OPERATOR_DIV_ASSIGN assignment_expression
-        { $$.value=RETAIN([$1.value  assign:[$1.value div: $3.value]]);};
+        { SET_RESULT($$.value,[$1.value  assign:[$1.value div: $3.value]]);};
     | unary_expression OPERATOR_MOD_ASSIGN assignment_expression
-        { $$.value=RETAIN([$1.value  assign:[$1.value mul: $3.value]]);};
+        { SET_RESULT($$.value,[$1.value  assign:[$1.value mul: $3.value]]);};
     | unary_expression OPERATOR_ADD_ASSIGN assignment_expression
-        { $$.value=RETAIN([$1.value  assign:[$1.value add: $3.value]]);};
+        { SET_RESULT($$.value,[$1.value  assign:[$1.value add: $3.value]]);};
     | unary_expression OPERATOR_SUB_ASSIGN assignment_expression
-        { $$.value=RETAIN([$1.value  assign:[$1.value sub: $2.value]]);};
+        { SET_RESULT($$.value,[$1.value  assign:[$1.value sub: $2.value]]);};
     | unary_expression OPERATOR_LEFT_ASSIGN assignment_expression
-        { $$.value=RETAIN([$1.value  assign:[$1.value leftshift: $3.value]]);};
+        { SET_RESULT($$.value,[$1.value  assign:[$1.value leftshift: $3.value]]);};
     | unary_expression OPERATOR_RIGHT_ASSIGN assignment_expression
-        { $$.value=RETAIN([$1.value  assign:[$1.value rightshift: $3.value]]);};
+        { SET_RESULT($$.value,[$1.value  assign:[$1.value rightshift: $3.value]]);};
     | unary_expression OPERATOR_AND_ASSIGN assignment_expression
-        { $$.value=RETAIN([$1.value  assign:[$1.value logical_and: $3.value]]);};
+        { SET_RESULT($$.value,[$1.value  assign:[$1.value logical_and: $3.value]]);};
     | unary_expression OPERATOR_XOR_ASSIGN assignment_expression
-        { $$.value=RETAIN([$1.value  assign:[$1.value logical_xor: $3.value]]);};
+        { SET_RESULT($$.value,[$1.value  assign:[$1.value logical_xor: $3.value]]);};
     | unary_expression OPERATOR_OR_ASSIGN assignment_expression
-        { $$.value=RETAIN([$1.value  assign:[$1.value logical_or: $3.value]]);};
+        { SET_RESULT($$.value,[$1.value  assign:[$1.value logical_or: $3.value]]);};
 	;
 
 conditional_expression
 	: logical_or_expression
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
     | logical_or_expression '?' expression ':' conditional_expression
-        { $$.value=RETAIN([UMTerm ifCondition: $1.value thenDo: $3.value  elseDo: $5.value]);};
+        { SET_RESULT($$.value,[UMTerm ifCondition: $1.value thenDo: $3.value  elseDo: $5.value]);};
 	;
 
 logical_or_expression
 	: logical_and_expression
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
     | logical_or_expression OPERATOR_OR logical_and_expression
-        { $$.value=RETAIN([$1.value logical_or: $3.value]);};
+        { SET_RESULT($$.value,[$1.value logical_or: $3.value]);};
 	;
 
 logical_and_expression
     : inclusive_or_expression
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
     | logical_and_expression OPERATOR_AND inclusive_or_expression
-        { $$.value=RETAIN([$1.value logical_and: $3.value]);};
+        { SET_RESULT($$.value,[$1.value logical_and: $3.value]);};
 	;
 
 inclusive_or_expression
     : exclusive_or_expression
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 	| inclusive_or_expression '|' exclusive_or_expression
-        { $$.value=RETAIN([$1.value bit_or: $3.value]);};
+        { SET_RESULT($$.value,[$1.value bit_or: $3.value]);};
 	;
 
 exclusive_or_expression
 	: and_expression
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 	| exclusive_or_expression '^' and_expression
-        { $$.value=RETAIN([$1.value bit_xor: $3.value]);};
+        { SET_RESULT($$.value,[$1.value bit_xor: $3.value]);};
 	;
 
 and_expression
 	: equality_expression
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 	| and_expression '&' equality_expression
-        { $$.value=RETAIN([$1.value bit_and: $3.value]);};
+        { SET_RESULT($$.value,[$1.value bit_and: $3.value]);};
 	;
 
 equality_expression
 	: relational_expression
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 	| equality_expression OPERATOR_EQUAL relational_expression
-        { $$.value=RETAIN([$1.value equal: $3.value]);};
+        { SET_RESULT($$.value,[$1.value equal: $3.value]);};
 	| equality_expression OPERATOR_NOT_EQUAL relational_expression
-        { $$.value=RETAIN([$1.value notequal: $3.value]);};
+        { SET_RESULT($$.value,[$1.value notequal: $3.value]);};
 	;
 
 relational_expression
 	: shift_expression
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 	| relational_expression OPERATOR_LESS shift_expression
-        { $$.value=RETAIN([$1.value lessthan: $3.value]);};
+        { SET_RESULT($$.value,[$1.value lessthan: $3.value]);};
 	| relational_expression OPERATOR_GREATER shift_expression
-        { $$.value=RETAIN([$1.value greaterthan:    $3.value]);};
+        { SET_RESULT($$.value,[$1.value greaterthan:    $3.value]);};
 	| relational_expression OPERATOR_LESS_OR_EQUAL shift_expression
-        { $$.value=RETAIN([$1.value lessorequal:    $3.value]);};
+        { SET_RESULT($$.value,[$1.value lessorequal:    $3.value]);};
 	| relational_expression OPERATOR_GREATER_OR_EQUAL shift_expression
-        { $$.value=RETAIN([$1.value greaterorequal: $3.value]);};
+        { SET_RESULT($$.value,[$1.value greaterorequal: $3.value]);};
 	;
 
 shift_expression
 	: additive_expression
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 	| shift_expression OPERATOR_LEFT additive_expression
-    { $$.value=RETAIN([$1.value leftshift:  $3.value]);};
+    { SET_RESULT($$.value,[$1.value leftshift:  $3.value]);};
 	| shift_expression OPERATOR_RIGHT additive_expression
-        { $$.value=RETAIN([$1.value rightshift: $3.value]);};
+        { SET_RESULT($$.value,[$1.value rightshift: $3.value]);};
 	;
 
 additive_expression
 	: multiplicative_expression
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
     | additive_expression '+' multiplicative_expression
-        { $$.value=RETAIN([$1.value add: $3.value]);};
+        { SET_RESULT($$.value,[$1.value add: $3.value]);};
 	| additive_expression '-' multiplicative_expression
-        { $$.value=RETAIN([$1.value sub: $3.value]);};
+        { SET_RESULT($$.value,[$1.value sub: $3.value]);};
 	;
 
 multiplicative_expression
 	: unary_expression
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 	| multiplicative_expression '*' unary_expression
-        { $$.value=RETAIN([$1.value mul:    $3.value]);};
+        { SET_RESULT($$.value,[$1.value mul:    $3.value]);};
 	| multiplicative_expression '/' unary_expression
-        { $$.value=RETAIN([$1.value div:    $3.value]);};
+        { SET_RESULT($$.value,[$1.value div:    $3.value]);};
     | multiplicative_expression '%' unary_expression
-        { $$.value=RETAIN([$1.value modulo: $3.value]);};
+        { SET_RESULT($$.value,[$1.value modulo: $3.value]);};
 
 	;
 	
 unary_expression
 	: postfix_expression
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
     | OPERATOR_INCREASE unary_expression
-        { $$.value=RETAIN([$2.value preincrease]);};
+        { SET_RESULT($$.value,[$2.value preincrease]);};
 	| OPERATOR_DECREASE unary_expression
-        { $$.value=RETAIN([$2.value predecrease]);};
+        { SET_RESULT($$.value,[$2.value predecrease]);};
     | '!' unary_expression
-        { $$.value=RETAIN([$1.value logical_not]);};
+        { SET_RESULT($$.value,[$1.value logical_not]);};
     | '~' unary_expression
-        { $$.value=RETAIN([$1.value bit_not]);};
+        { SET_RESULT($$.value,[$1.value bit_not]);};
 	;
 
 postfix_expression
 	: primary_expression
-        { $$.value=RETAIN($1.value);};
+        { SET_RESULT($$.value,$1.value);};
 	| postfix_expression '(' ')'
 	| postfix_expression '(' argument_expression_list ')'
 	| postfix_expression '.' IDENTIFIER
 	| postfix_expression OPERATOR_INCREASE
-        { $$.value=RETAIN([$1.value postincrease]);};
+        { SET_RESULT($$.value,[$1.value postincrease]);};
 	| postfix_expression OPERATOR_DECREASE
-        { $$.value=RETAIN([$1.value postdecrease]);};
+        { SET_RESULT($$.value,[$1.value postdecrease]);};
 	;
 
 primary_expression
     : IDENTIFIER
-            { $$.value=RETAIN([UMTerm termWithIdentifierFromTag:$1.value]);};
+            { SET_RESULT($$.value,[UMTerm termWithIdentifierFromTag:$1.value]);};
     | VARIABLE
-            { $$.value=RETAIN([UMTerm termWithVariableFromTag:$1.value]);};
+            { SET_RESULT($$.value,[UMTerm termWithVariableFromTag:$1.value]);};
     | FIELD
-            { $$.value=RETAIN([UMTerm termWithFieldFromTag:$1.value]);};
+            { SET_RESULT($$.value,[UMTerm termWithFieldFromTag:$1.value]);};
     | CONST_BOOLEAN
-            { $$.value=RETAIN([UMTerm termWithBooleanFromTag:$1.value]);};
+            { SET_RESULT($$.value,[UMTerm termWithBooleanFromTag:$1.value]);};
     | CONST_STRING
-            { $$.value=RETAIN([UMTerm termWithStringFromTag:$1.value]);};
+            { SET_RESULT($$.value,[UMTerm termWithStringFromTag:$1.value]);};
     | CONST_HEX
-        { $$.value=RETAIN([UMTerm termWithHexFromTag:$1.value]);};
+        { SET_RESULT($$.value,[UMTerm termWithHexFromTag:$1.value]);};
     | CONST_LONGLONG
-        { $$.value=RETAIN([UMTerm termWithLongLongFromTag:$1.value]);};
+        { SET_RESULT($$.value,[UMTerm termWithLongLongFromTag:$1.value]);};
     | CONST_BINARY
-        { $$.value=RETAIN([UMTerm termWithBinaryFromTag:$1.value]);};
+        { SET_RESULT($$.value,[UMTerm termWithBinaryFromTag:$1.value]);};
     | CONST_INTEGER
-        { $$.value=RETAIN([UMTerm termWithIntegerFromTag:$1.value]);};
+        { SET_RESULT($$.value,[UMTerm termWithIntegerFromTag:$1.value]);};
     | CONST_OCTAL
-        { $$.value=RETAIN([UMTerm termWithOctalFromTag:$1.value]);};
+        { SET_RESULT($$.value,[UMTerm termWithOctalFromTag:$1.value]);};
     | CONST_DOUBLE
-        { $$.value=RETAIN([UMTerm termWithDoubleFromTag:$1.value]);};
+        { SET_RESULT($$.value,[UMTerm termWithDoubleFromTag:$1.value]);};
 	| '(' expression ')'
-        { $$.value=RETAIN($2.value);};
+        { SET_RESULT($$.value,$2.value);};
 	;
 
 

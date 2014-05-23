@@ -10,4 +10,32 @@
 
 @implementation UMFunction_print
 
+
+
+- (id)init
+{
+    self = [super init];
+    if(self)
+    {
+        self.name = @"(double)";
+    }
+    return self;
+}
+
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+{
+    for (UMTerm *param in params)
+    {
+        
+    }
+    UMTerm *currentTerm = params[0];
+    UMDiscreteValue *d = [currentTerm evaluateWithEnvironment:env];
+    
+    if(d.type == UMVALUE_DOUBLE)
+    {
+        return d;
+    }
+    return [UMDiscreteValue discreteDouble:d.doubleValue];
+}
+
 @end

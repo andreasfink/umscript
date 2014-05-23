@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A63A82F9192F46340090FC94 /* UMFunction_print.h in Headers */ = {isa = PBXBuildFile; fileRef = A63A82F7192F46340090FC94 /* UMFunction_print.h */; };
+		A63A82FA192F46340090FC94 /* UMFunction_print.m in Sources */ = {isa = PBXBuildFile; fileRef = A63A82F8192F46340090FC94 /* UMFunction_print.m */; };
 		A63DD82E192C84CE0090FC94 /* UMFunction_int.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD82C192C84CE0090FC94 /* UMFunction_int.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A63DD82F192C84CE0090FC94 /* UMFunction_int.m in Sources */ = {isa = PBXBuildFile; fileRef = A63DD82D192C84CE0090FC94 /* UMFunction_int.m */; };
 		A63DD832192C84D80090FC94 /* UMFunction_string.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD830192C84D80090FC94 /* UMFunction_string.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -151,6 +153,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A63A82F7192F46340090FC94 /* UMFunction_print.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_print.h; sourceTree = "<group>"; };
+		A63A82F8192F46340090FC94 /* UMFunction_print.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_print.m; sourceTree = "<group>"; };
 		A63DD82C192C84CE0090FC94 /* UMFunction_int.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_int.h; sourceTree = "<group>"; };
 		A63DD82D192C84CE0090FC94 /* UMFunction_int.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_int.m; sourceTree = "<group>"; };
 		A63DD830192C84D80090FC94 /* UMFunction_string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_string.h; sourceTree = "<group>"; };
@@ -384,6 +388,8 @@
 				A6B5CE68192D218200F02FCA /* bisonbridge.m */,
 				A6835BE319297AE30090FC94 /* UMTerm.h */,
 				A6835BE419297AE30090FC94 /* UMTerm.m */,
+				A63A82F7192F46340090FC94 /* UMFunction_print.h */,
+				A63A82F8192F46340090FC94 /* UMFunction_print.m */,
 				A63DD82C192C84CE0090FC94 /* UMFunction_int.h */,
 				A63DD82D192C84CE0090FC94 /* UMFunction_int.m */,
 				A63DD830192C84D80090FC94 /* UMFunction_string.h */,
@@ -540,6 +546,7 @@
 				A6835BF819297AE30090FC94 /* UMFunction_block.h in Headers */,
 				A6835C2219297AE30090FC94 /* UMFunction_setvar.h in Headers */,
 				A6835C0E19297AE30090FC94 /* UMFunction_xor.h in Headers */,
+				A63A82F9192F46340090FC94 /* UMFunction_print.h in Headers */,
 				A6835BE519297AE30090FC94 /* NSNumber+UMScript.h in Headers */,
 				A6835C1219297AE30090FC94 /* UMFunction_div.h in Headers */,
 				A6835BFE19297AE30090FC94 /* UMFunction_getfield.h in Headers */,
@@ -746,6 +753,7 @@
 				A6916CF7192BE77F00F6BFF4 /* UMFunction_dowhile.m in Sources */,
 				A63DD83B192C84EB0090FC94 /* UMFunction_double.m in Sources */,
 				A6835BE819297AE30090FC94 /* UMDiscreteValue.m in Sources */,
+				A63A82FA192F46340090FC94 /* UMFunction_print.m in Sources */,
 				A65D34C5192BAAA40090FC94 /* UMFunction_lessorequal.m in Sources */,
 				A6835BF119297AE30090FC94 /* UMFunction_bit_or.m in Sources */,
 				A6835C0319297AE30090FC94 /* UMFunction_greaterthan.m in Sources */,
