@@ -67,11 +67,17 @@ typedef enum UMTermType
 - (id)initFunction:(UMFunction *)name params:(NSArray *)parm;
 - (NSString *)codeWithEnvironment:(UMEnvironment *)env;
 
-+ (id)termWithIdentifier:(UMTerm *)identifierName;
-+ (id)termWithVariable:(UMTerm *)varNameTerm;
-+ (id)termWithField:(UMTerm *)fieldNameTerm;
-+ (id)termWithConstant:(UMTerm *)constantTerm;
-+ (id)termWithString:(UMTerm *)stringTerm;
++ (id)termWithIdentifierFromTag:(UMTerm *)identifierName;
++ (id)termWithVariableFromTag:(UMTerm *)varNameTerm;
++ (id)termWithFieldFromTag:(UMTerm *)fieldNameTerm;
++ (id)termWithStringFromTag:(UMTerm *)stringTerm;
++ (id)termWithIntegerFromTag:(UMTerm *)stringTerm;
++ (id)termWithLongLongFromTag:(UMTerm *)stringTerm;
++ (id)termWithDoubleFromTag:(UMTerm *)stringTerm;
++ (id)termWithBooleanFromTag:(UMTerm *)stringTerm;
++ (id)termWithHexFromTag:(UMTerm *)stringTerm;
++ (id)termWithBinaryFromTag:(UMTerm *)stringTerm;
++ (id)termWithOctalFromTag:(UMTerm *)stringTerm;
 + (id)termWithNull;
 
 + (id)termWithDirectInteger:(int)i;
@@ -111,6 +117,9 @@ typedef enum UMTermType
 + (UMTerm *)thenDo:(UMTerm *)thendo whileCondition:(UMTerm *)condition;
 + (UMTerm *)forInitializer:(UMTerm *)initializer endCondition:(UMTerm *)condition every:(UMTerm *)every thenDo:(UMTerm *)thenDo;
 + (UMTerm *)switchCondition:(UMTerm *)condition thenDo:(UMTerm *)thenDo;
+
+- (UMTerm *)blockAppendStatement:(UMTerm *)term;
++ (UMTerm *)blockWithStatement:(UMTerm *)term;
 
 + (UMTerm *)token:(int)tok text:(const char *)text;
 

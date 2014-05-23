@@ -43,8 +43,6 @@ extern size_t readInputForLexer(char *buffer, size_t * numBytesRead, size_t maxB
 @property (readwrite,strong)    UMTerm *root;
 @property (readwrite,strong)    NSString *currentSource;
 
-+ (UMScriptCompilerEnvironment *)sharedInstance;
-
 - (UMTerm *)compile:(NSString *)code stdOut:(NSString **)sout  stdErr:(NSString **)serr;
 
 - (void)zapOutput;

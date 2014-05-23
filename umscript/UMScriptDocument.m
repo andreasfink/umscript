@@ -68,14 +68,20 @@
 
 - (NSString *)compileSource
 {
-    UMScriptCompilerEnvironment *compilerEnvironment = [UMScriptCompilerEnvironment sharedInstance];
+    UMScriptCompilerEnvironment *compilerEnvironment = [[UMScriptCompilerEnvironment alloc]init];
 
     NSString *out = @"";
     NSString *err = @"";
     
     self.compiledCode = [compilerEnvironment compile:sourceCode stdOut:&out stdErr:&err];
-    isCompiled = YES;
-
+    if(self.compiledCode)
+    {
+        isCompiled = YES;
+    }
+    else
+    {
+        isCompiled = NO;
+    }
     return err;
 }
 

@@ -8,6 +8,3 @@
 
 #import "umscript_globals.h"
 
-
-UMScriptCompilerEnvironment *global_UMScriptCompilerEnvironment = NULL;
-int    hasBeenCreated = NO;
