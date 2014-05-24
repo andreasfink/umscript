@@ -45,7 +45,7 @@
 
     @synchronized(self)
     {
-        result = [variables objectForKey:key];
+        result = variables[key];
     }
     return result;
 }
@@ -54,7 +54,8 @@
 {
     @synchronized(self)
     {
-        [variables setObject:val forKey:key];
+        variables[key] = val;
+//        variables[key] = val;
     }
 }
 
@@ -64,7 +65,7 @@
     
     @synchronized(self)
     {
-        result = [fields objectForKey:key];
+        result = fields[key];
     }
     return result;
    
@@ -74,7 +75,7 @@
 {
     @synchronized(self)
     {
-        [fields setObject:val forKey:key];
+        fields[key] = val;
     }
    
 }
@@ -90,7 +91,7 @@
         }
         else
         {
-            UMFunction *func = [functionDictionary objectForKey:n];
+            UMFunction *func = functionDictionary[n];
             return func;
         }
     }
@@ -101,6 +102,8 @@
     @synchronized(self)
     {
         functionDictionary[f.name] = f;
+        
+//        functionDictionary[f.name] = f;
     }
    
 }
@@ -165,7 +168,9 @@
     }
     for (NSString *fname in functionDictionary)
     {
+  //      id func = functionDictionary[fname];
         id func = functionDictionary[fname];
+
         [s appendFormat:@"func %@=%@\n",fname,[func description]];
     }
     return s;

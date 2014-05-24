@@ -400,7 +400,7 @@
 
 + (id)termWithDirectCString:(char *)s
 {
-    UMDiscreteValue *d = [UMDiscreteValue discreteString:[NSString stringWithUTF8String:s]];
+    UMDiscreteValue *d = [UMDiscreteValue discreteString:@(s)];
     UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
     return term;
     
@@ -703,7 +703,7 @@
 {
     UMTerm *result = [[UMTerm alloc] init];
     result.type =UMTermType_token;
-    result.identifier = [NSString stringWithUTF8String:text];
+    result.identifier = @(text);
     return result;
 }
 

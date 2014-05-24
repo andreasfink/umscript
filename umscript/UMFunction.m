@@ -49,6 +49,7 @@
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
     if(name)
     {
+    //    dict[@"function"] = name;
         dict[@"function"] = name;
     }
     return dict;

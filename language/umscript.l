@@ -41,7 +41,22 @@ static void comment(yyscan_t yyscanner);
 
 //#define  YYPARSEPARAM  yyparseparam
 
-#define result(x)  (*yylval_param).value = (__bridge CFTypeRef)[UMTerm token:(x) text:yyget_text(yyscanner)];yylval_param->token = (x); return(x)
+#define result(x)                                                                               \
+    (*yylval_param).value =  CFBridgingRetain([UMTerm token:(x) text:yyget_text(yyscanner)]);   \
+    yylval_param->token = (x);                                                                  \
+    return(x)
+
+
+#define RETAIN(a)   cenv.root=a;CFBridgingRetain(a); NSLog(@"%@",a)
+#define APPLY(a)    cenv.root=a;NSLog(@"%@",a)
+
+#define SET_RESULT(n)                       \
+{                                           \
+    UMTerm *new_value = n;                  \
+    CFBridgingRetain(new_value);            \
+    cenv.root=new_value;                    \
+    return n;                               \
+}
 
 %}
 

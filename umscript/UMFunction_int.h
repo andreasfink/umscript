@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 SMSRelay AG. All rights reserved.
 //
 
-#import <umscript/umscript.h>
+#import <UMFunction.h>
 
 @interface UMFunction_int : UMFunction
 

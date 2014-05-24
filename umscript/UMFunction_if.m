@@ -20,19 +20,19 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(id)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)p environment:(id)env
 {
-    if(params.count < 2)
+    if(p.count < 2)
     {
         return [UMDiscreteValue discreteNull];
     }
     
-    UMTerm *condition = params[0];
-    UMTerm *ifBlock = params[1];
+    UMTerm *condition = p[0];
+    UMTerm *ifBlock = p[1];
     UMTerm *elseBlock = nil;
-    if(params.count == 3)
+    if(p.count == 3)
     {
-        elseBlock = params[2];
+        elseBlock = p[2];
     }
     UMDiscreteValue *result = [condition evaluateWithEnvironment:env];
     if(result.boolValue)

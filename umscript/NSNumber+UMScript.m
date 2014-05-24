@@ -15,19 +15,19 @@
 {
     if(s==NULL)
     {
-        return [NSNumber numberWithInt:0];
+        return @0;
     }
     if([s isEqualToString:@"YES"])
     {
-        return [NSNumber numberWithBool:YES];
+        return @YES;
     }
     if([s isEqualToString:@"NO"])
     {
-        return [NSNumber numberWithBool:NO];
+        return @NO;
     }
     if([s isEqualToString:@""])
     {
-        return [NSNumber numberWithInt:0];
+        return @0;
     }
     const char *c = [s UTF8String];
     size_t i;
@@ -107,17 +107,17 @@
             sscanf(c,"%lld",&v);
             if(v < 0x7F)
             {
-                return [NSNumber numberWithChar:(char)v];
+                return @((char)v);
             }
             if(v < 0x7FFF)
             {
-                return [NSNumber numberWithShort:(short)v];
+                return @((short)v);
             }
             if(v < 0x7FFFFFFF)
             {
-                return [NSNumber numberWithInt:(int)v];
+                return @((int)v);
             }
-            return [NSNumber numberWithLongLong:v];
+            return @(v);
         }
         else
         {
@@ -125,28 +125,28 @@
             sscanf(c,"%llu",&v);
             if(v <= 0xFF)
             {
-                return [NSNumber numberWithUnsignedChar:(unsigned char)v];
+                return @((unsigned char)v);
             }
             if(v <= 0xFFFF)
             {
-                return [NSNumber numberWithUnsignedShort:(unsigned short)v];
+                return @((unsigned short)v);
             }
             if(v <= 0xFFFFFFFF)
             {
-                return [NSNumber numberWithUnsignedInt:(unsigned int)v];
+                return @((unsigned int)v);
             }
-            return [NSNumber numberWithUnsignedLongLong:v];
+            return @(v);
         }
     }
     if(digitSeen && dotSeen)
     {
         double d;
         sscanf(c,"%lf",&d);
-        return [NSNumber numberWithDouble:d];
+        return @(d);
     }
     int iv;
     sscanf(c,"%d",&iv);
-    return [NSNumber numberWithInt:iv];
+    return @(iv);
 }
 
 @end

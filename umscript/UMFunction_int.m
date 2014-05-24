@@ -20,9 +20,11 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)p environment:(UMEnvironment *)env
 {
-    UMTerm *currentTerm = params[0];
+    id entry0 = [p objectsAtIndexes:0];
+    
+    UMTerm *currentTerm =entry0;
     UMDiscreteValue *d = [currentTerm evaluateWithEnvironment:env];
     
     if(d.type == UMVALUE_INT)

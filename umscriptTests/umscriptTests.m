@@ -253,7 +253,7 @@
 - (void)testAddCompiled
 {
     NSString *code = @"return 1 + 2;";
-    UMScriptDocument *s = [[UMScriptDocument alloc]initWithCode:code];
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
     [s compileSource];
     UMDiscreteValue *result = [s runScriptWithEnvironment:env];
     XCTAssertTrue(result.intValue==3,@"1+2=3 not %d",result.intValue);

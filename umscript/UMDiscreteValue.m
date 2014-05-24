@@ -54,7 +54,7 @@
     if(self)
     {
         type = UMVALUE_BOOL;
-        value = [NSNumber numberWithBool:b];
+        value = @(b);
     }
     return self;
 }
@@ -65,7 +65,7 @@
     if(self)
     {
         type = UMVALUE_INT;
-        value = [NSNumber numberWithInt:i];
+        value = @(i);
     }
     return self;
 
@@ -77,7 +77,7 @@
     if(self)
     {
         type = UMVALUE_LONGLONG;
-        value = [NSNumber numberWithLongLong:ll];
+        value = @(ll);
     }
     return self;
  
@@ -88,7 +88,7 @@
     if(self)
     {
         type = UMVALUE_DOUBLE;
-        value = [NSNumber numberWithDouble:d];
+        value = @(d);
     }
     return self;
 
@@ -113,7 +113,7 @@
         type = UMVALUE_INT;
         int i = atoi(numberString.UTF8String);
         /* FIXME: we must return other types if the string indicates its a long long or a double */
-        value = [NSNumber numberWithInteger:i];
+        value = @(i);
     }
     return self;
 }
