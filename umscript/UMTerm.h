@@ -33,6 +33,7 @@ typedef enum UMTermType
     NSString        *varname;
     NSString        *identifier;
     NSArray         *param;
+    NSString        *label;
     int             token;
 }
 
@@ -44,6 +45,8 @@ typedef enum UMTermType
 @property (readwrite,strong) UMFunction      *function;
 @property (readwrite,strong) NSArray         *param;
 @property (readwrite,assign) int             token;
+@property (readwrite,assign) NSString        *label;
+
 
 - (id)initWithNull;
 - (id)initWithDiscreteValue:(UMDiscreteValue *)d;
@@ -127,6 +130,11 @@ typedef enum UMTermType
 - (UMTerm *)postincrease;
 - (UMTerm *)predecrease;
 - (UMTerm *)postdecrease;
+- (NSString *)constantStringValue;
+
++ (UMTerm *)letsGoto:(UMTerm *)labelTerm;
++ (UMTerm *)letsBreak;
++ (UMTerm *)letsContinue;
 
 
 @end

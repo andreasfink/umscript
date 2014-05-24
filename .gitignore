@@ -1,4 +1,13 @@
 build/
+install_root/
+
+Makefile
+autom4te.cache/
+config.h
+config.log
+config.status
+stamp-h1
+
 
 #########################
 # .gitignore file for Xcode4 and Xcode5 Source projects

@@ -26,7 +26,7 @@
 {
     for (UMTerm *param in params)
     {
-        
+        NSLog(@"%@",param);
     }
     UMTerm *currentTerm = params[0];
     UMDiscreteValue *d = [currentTerm evaluateWithEnvironment:env];

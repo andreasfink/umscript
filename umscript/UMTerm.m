@@ -22,6 +22,7 @@
 @synthesize function;
 @synthesize token;
 @synthesize identifier;
+@synthesize label;
 
 - (UMDiscreteValue *)evaluateWithEnvironment:(UMEnvironment *)env;
 {
@@ -704,6 +705,55 @@
     result.type =UMTermType_token;
     result.identifier = [NSString stringWithUTF8String:text];
     return result;
+}
+
++ (UMTerm *)letsGoto:(UMTerm *)labelTerm
+{
+    UMFunction *func = [[UMFunction_goto alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[labelTerm]];
+    return result;
+}
+
++ (UMTerm *)letsContinue
+{
+    UMFunction *func = [[UMFunction_goto alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[]];
+    return result;
+}
+
++ (UMTerm *)letsBreak
+{
+    UMFunction *func = [[UMFunction_goto alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[]];
+    return result;
+}
+
+- (NSString *)constantStringValue
+{
+    switch(type)
+    {
+        case UMTermType_discrete:
+            return [discrete stringValue];
+            break;
+        case UMTermType_field:
+            return fieldname;
+            break;
+        case UMTermType_variable:
+            return varname;
+            break;
+        case UMTermType_function:
+            return [function name];
+            break;
+        case UMTermType_identifier:
+            return identifier;
+            break;
+        case UMTermType_token:
+            return identifier;
+            break;
+        default:
+            return @"";
+            break;
+    }
 }
 
 @end

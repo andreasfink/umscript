@@ -48,6 +48,10 @@
 #import "UMFunction_postincrease.h"
 #import "UMFunction_postdecrease.h"
 #import "UMFunction_switch.h"
+#import "UMFunction_print.h"
+#import "UMFunction_goto.h"
+#import "UMFunction_continue.h"
+#import "UMFunction_break.h"
 
 #define TermLogicNOT(a)           [[UMTerm alloc]initWithFunction:[[UMFunction_logic_not alloc]init], @[a]]
 #define TermLogicAND(a,b)         [[UMTerm alloc]initWithFunction:[[UMFunction_logic_and alloc]init],  @[a,b]]

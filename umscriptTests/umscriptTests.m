@@ -252,7 +252,7 @@
 
 - (void)testAddCompiled
 {
-    NSString *code = @"{ $AVAR = 1111 + 2;";
+    NSString *code = @"return 1 + 2;";
     UMScriptDocument *s = [[UMScriptDocument alloc]initWithCode:code];
     [s compileSource];
     UMDiscreteValue *result = [s runScriptWithEnvironment:env];
