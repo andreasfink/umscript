@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A63A82F9192F46340090FC94 /* UMFunction_print.h in Headers */ = {isa = PBXBuildFile; fileRef = A63A82F7192F46340090FC94 /* UMFunction_print.h */; };
+		A63A82F9192F46340090FC94 /* UMFunction_print.h in Headers */ = {isa = PBXBuildFile; fileRef = A63A82F7192F46340090FC94 /* UMFunction_print.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A63A82FA192F46340090FC94 /* UMFunction_print.m in Sources */ = {isa = PBXBuildFile; fileRef = A63A82F8192F46340090FC94 /* UMFunction_print.m */; };
 		A63DD82E192C84CE0090FC94 /* UMFunction_int.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD82C192C84CE0090FC94 /* UMFunction_int.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A63DD82F192C84CE0090FC94 /* UMFunction_int.m in Sources */ = {isa = PBXBuildFile; fileRef = A63DD82D192C84CE0090FC94 /* UMFunction_int.m */; };
@@ -135,11 +135,11 @@
 		A6B5CE6E192D4D0500F02FCA /* bison_definitions.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE6D192D4D0500F02FCA /* bison_definitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6B5CE71192D626B00F02FCA /* glueterm.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE6F192D626B00F02FCA /* glueterm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6B5CE72192D626B00F02FCA /* glueterm.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B5CE70192D626B00F02FCA /* glueterm.m */; };
-		A6B5CE79192FF0C300F02FCA /* UMFunction_goto.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE77192FF0C300F02FCA /* UMFunction_goto.h */; };
+		A6B5CE79192FF0C300F02FCA /* UMFunction_goto.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE77192FF0C300F02FCA /* UMFunction_goto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6B5CE7A192FF0C300F02FCA /* UMFunction_goto.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B5CE78192FF0C300F02FCA /* UMFunction_goto.m */; };
-		A6B5CE8D19301FE300F02FCA /* UMFunction_continue.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE8B19301FE300F02FCA /* UMFunction_continue.h */; };
+		A6B5CE8D19301FE300F02FCA /* UMFunction_continue.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE8B19301FE300F02FCA /* UMFunction_continue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6B5CE8E19301FE300F02FCA /* UMFunction_continue.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B5CE8C19301FE300F02FCA /* UMFunction_continue.m */; };
-		A6B5CE9119301FEB00F02FCA /* UMFunction_break.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE8F19301FEB00F02FCA /* UMFunction_break.h */; };
+		A6B5CE9119301FEB00F02FCA /* UMFunction_break.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE8F19301FEB00F02FCA /* UMFunction_break.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6B5CE9219301FEB00F02FCA /* UMFunction_break.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B5CE9019301FEB00F02FCA /* UMFunction_break.m */; };
 		A6ECC2F7192CE7350090FC94 /* _generated_umscript.y.h in Headers */ = {isa = PBXBuildFile; fileRef = A6ECC2F6192CE7350090FC94 /* _generated_umscript.y.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6EEDB691929DD1F0090FC94 /* umscript.yl.h in Headers */ = {isa = PBXBuildFile; fileRef = A6EEDB681929DD1F0090FC94 /* umscript.yl.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -564,7 +564,6 @@
 				A6835BF819297AE30090FC94 /* UMFunction_block.h in Headers */,
 				A6835C2219297AE30090FC94 /* UMFunction_setvar.h in Headers */,
 				A6835C0E19297AE30090FC94 /* UMFunction_xor.h in Headers */,
-				A63A82F9192F46340090FC94 /* UMFunction_print.h in Headers */,
 				A6835BE519297AE30090FC94 /* NSNumber+UMScript.h in Headers */,
 				A6835C1219297AE30090FC94 /* UMFunction_div.h in Headers */,
 				A6835BFE19297AE30090FC94 /* UMFunction_getfield.h in Headers */,
@@ -586,7 +585,6 @@
 				A6916D19192BF61500F6BFF4 /* UMFunction_switch.h in Headers */,
 				A6B5CE71192D626B00F02FCA /* glueterm.h in Headers */,
 				A6916CFB192BE7BE00F6BFF4 /* UMFunction_for.h in Headers */,
-				A6B5CE9119301FEB00F02FCA /* UMFunction_break.h in Headers */,
 				A6916D0A192BEE4B00F6BFF4 /* UMFunction_predecrease.h in Headers */,
 				A6B5CE6C192D4CF700F02FCA /* flex_definitions.h in Headers */,
 				A6ECC2F7192CE7350090FC94 /* _generated_umscript.y.h in Headers */,
@@ -594,8 +592,6 @@
 				A6B5CE69192D218200F02FCA /* bisonbridge.h in Headers */,
 				A63DD836192C84E20090FC94 /* UMFunction_longlong.h in Headers */,
 				A6916D14192BEE6200F6BFF4 /* UMFunction_postdecrease.h in Headers */,
-				A6B5CE8D19301FE300F02FCA /* UMFunction_continue.h in Headers */,
-				A6B5CE79192FF0C300F02FCA /* UMFunction_goto.h in Headers */,
 				A63DD82E192C84CE0090FC94 /* UMFunction_int.h in Headers */,
 				A6916D0F192BEE5500F6BFF4 /* UMFunction_postincrease.h in Headers */,
 				A63DD842192C97900090FC94 /* umscript_globals.h in Headers */,
@@ -616,9 +612,13 @@
 				A65D34C4192BAAA40090FC94 /* UMFunction_lessorequal.h in Headers */,
 				A6916CEE192BDFAC00F6BFF4 /* UMFunction_greaterorequal.h in Headers */,
 				A6835BFC19297AE30090FC94 /* UMFunction_equal.h in Headers */,
+				A63A82F9192F46340090FC94 /* UMFunction_print.h in Headers */,
 				A6835C1019297AE30090FC94 /* UMFunction_add.h in Headers */,
+				A6B5CE9119301FEB00F02FCA /* UMFunction_break.h in Headers */,
 				A6835C2619297AE30090FC94 /* UMFunction_typecast_int.h in Headers */,
+				A6B5CE8D19301FE300F02FCA /* UMFunction_continue.h in Headers */,
 				A6835C1419297AE30090FC94 /* UMFunction_dot.h in Headers */,
+				A6B5CE79192FF0C300F02FCA /* UMFunction_goto.h in Headers */,
 				A6835C0819297AE30090FC94 /* UMFunction_and.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -884,7 +884,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
-				DSTROOT = "/tmp/$(PROJECT_NAME).dst";
+				DSTROOT = /;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -937,7 +937,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
-				DSTROOT = "/tmp/$(PROJECT_NAME).dst";
+				DSTROOT = /;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;

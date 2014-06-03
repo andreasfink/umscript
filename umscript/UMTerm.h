@@ -130,6 +130,9 @@ typedef enum UMTermType
 - (UMTerm *)postincrease;
 - (UMTerm *)predecrease;
 - (UMTerm *)postdecrease;
+
+- (UMTerm *)functionCallWithArguments:(UMTerm *)list; /* function call with arguments */
+- (UMTerm *)dotIdentifier:(UMTerm *)list; /* object.access */
 - (NSString *)constantStringValue;
 
 + (UMTerm *)letsGoto:(UMTerm *)labelTerm;

@@ -688,8 +688,17 @@
 
 - (UMTerm *)blockAppendStatement:(UMTerm *)term
 {
-    param = [param arrayByAddingObject:term];
-    return self;
+    if([self isKindOfClass:[UMFunction_block class]])
+    {
+        param = [param arrayByAddingObject:term];
+        return self;
+    }
+    else
+    {
+        UMTerm *block = [UMTerm blockWithStatement:self];
+        block.param = [block.param arrayByAddingObject:term];
+        return block;
+    }
 }
 
 + (UMTerm *)switchCondition:(UMTerm *)condition thenDo:(UMTerm *)thenDo
@@ -726,6 +735,18 @@
     UMFunction *func = [[UMFunction_goto alloc]init];
     UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[]];
     return result;
+}
+
+- (UMTerm *)functionCallWithArguments:(UMTerm *)list /* function call with arguments */
+{
+    /*TODO: missing implemementation */
+    return self;
+}
+
+- (UMTerm *)dotIdentifier:(UMTerm *)list /* object.access */
+{
+    /*TODO: missing implemementation */
+    return self;
 }
 
 - (NSString *)constantStringValue
