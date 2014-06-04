@@ -19,11 +19,15 @@
     UMDiscreteValue *returnValue;
     int     identValue;
     NSString *identPrefix;
+    BOOL    traceExecutionFlag;
+    BOOL    traceTreeBuildupFlag;
+    UMHistoryLog    *environmentLog;
 }
 
 @property (readwrite,strong) UMDiscreteValue *returnValue;
 @property (readwrite,assign) int     identValue;
 @property (readwrite,strong) NSString *identPrefix;
+@property (readwrite,strong) UMHistoryLog *environmentLog;
 
 - (void)identAdd;
 - (void)identRemove;
@@ -36,5 +40,6 @@
 
 - (UMFunction *)functionByName:(NSString *)name;
 - (void) addFunction:(UMFunction *)f;
+- (void) log:(NSString *)entry;
 
 @end

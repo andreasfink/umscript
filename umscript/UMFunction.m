@@ -16,13 +16,15 @@
 
 @synthesize comment;
 @synthesize name;
+@synthesize cenv;
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)compile_env
 {
     self = [super init];
     if(self)
     {
         self.name = @"Undefined";
+        self.cenv = compile_env;
     }
     return self;
 }

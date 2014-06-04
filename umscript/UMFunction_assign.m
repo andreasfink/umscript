@@ -11,12 +11,13 @@
 @implementation UMFunction_assign
 
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
         self.name = @"ASSIGN";
+        [cenv log:@"ASSIGN"];
     }
     return self;
 }

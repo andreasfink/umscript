@@ -112,6 +112,9 @@ extern void yyerror (YYLTYPE *llocp, yyscan_t yyscanner, UMScriptCompilerEnviron
 %token CONTINUE
 %token BREAK 
 %token RETURN
+%token FUNC_NAME
+%token FILE_NAME
+%token LINE_NUMBER
 
 %start statement_list
 

@@ -90,7 +90,10 @@ extern int yydebug;
     GOTO = 300,
     CONTINUE = 301,
     BREAK = 302,
-    RETURN = 303
+    RETURN = 303,
+    FUNC_NAME = 304,
+    FILE_NAME = 305,
+    LINE_NUMBER = 306
   };
 #endif
 

@@ -15,6 +15,7 @@
 @synthesize identValue;
 @synthesize identPrefix;
 @synthesize returnValue;
+@synthesize environmentLog;
 
 - (void)identAdd
 {
@@ -113,6 +114,9 @@
     self = [super init];
     if(self)
     {
+        
+        environmentLog = [[UMHistoryLog alloc]init];
+        
         identPrefix = @"";
         functionDictionary  = [[NSMutableDictionary alloc]init];
         variables = [[NSMutableDictionary alloc]init];
@@ -176,4 +180,8 @@
     return s;
 }
 
+- (void) log:(NSString *)entry
+{
+    [environmentLog addLogEntry:entry];
+}
 @end

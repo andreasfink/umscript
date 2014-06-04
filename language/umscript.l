@@ -60,22 +60,29 @@ static void comment(yyscan_t yyscanner);
 
 %}
 
-
-DECIMAL		[0-9]
 OCTAL       [0-7]
+DECIMAL		[0-9]
+NONZERO     [1-9]
 LETTER		[a-zA-Z_]
+ALPHA       [a-zA-Z_0-9]
 HEXDIGIT	[a-fA-F0-9]
-BINARYDIGIT [0,1];
+HEXPREFIX   (0[xX])
+BINARYDIGIT [0,1]
+BINARYPREFIX (0[bB])
+OCTALPREFIX  (0)
 L			[a-zA-Z_]
 H			[a-fA-F0-9]
 E			[Ee][+-]?{DECIMAL}+
 FS			(f|F|l|L)
 IS			(u|U|l|L)*
 SIGN        [+-]?
-
+SP  (u8|u|U|L)
+ESCAPE_SEQUENCE  (\\(['"\?\\abfnrtv]|[0-7]{1,3}|x[a-fA-F0-9]+))
+WHITESPACE  [ \t\v\n\f]
 
 %%
 "/*"			{ comment(yyscanner);}
+"//".*          { /* consume // comment */ }
 "break"			{ result(BREAK);    }
 "case"			{ result(CASE);     }
 "continue"		{ result(CONTINUE); }
@@ -88,11 +95,14 @@ SIGN        [+-]?
 "return"		{ result(RETURN);   }
 "switch"		{ result(SWITCH);   }
 "while"			{ result(WHILE);    }
+"__func__"      { return(FUNC_NAME);  }
+"__FILE__"      { return(FILE_NAME);  }
+"__LINE__"      { return(LINE_NUMBER);}
 
 "YES"|"NO"                              { result(CONST_BOOLEAN);  }
-0[xX]{HEXDIGIT}+                        { result(CONST_HEX);      }
-0[bB]{BINARYDIGIT}+                     { result(CONST_BINARY);   }
-0{OCTAL}+                               { result(CONST_OCTAL);    }
+{HEXPREFIX}{HEXDIGIT}+                  { result(CONST_HEX);      }
+{BINARYPREFIX}{BINARYDIGIT}+            { result(CONST_BINARY);   }
+{OCTALPREFIX}{OCTAL}+                   { result(CONST_OCTAL);    }
 {SIGN}?{DECIMAL}+                       { result(CONST_INTEGER);  }
 {DECIMAL}+LL                            { result(CONST_LONGLONG); }
 {DECIMAL}*"."{DECIMAL}+({E})?{FS}?		{ result(CONST_DOUBLE);   }
@@ -101,6 +111,8 @@ SIGN        [+-]?
 \${LETTER}({LETTER}|{DECIMAL})*			{ result(VARIABLE);       }
 \%{LETTER}({LETTER}|{DECIMAL})*			{ result(FIELD);          }
 {LETTER}({LETTER}|{DECIMAL})*			{ result(IDENTIFIER);     }
+
+({SP}?\"([^"\\\n]|{ESCAPE_SEQUENCE})*\"{WHITESPACE}*)+       { result(CONST_STRING); }
 
 "="				{ result(OPERATOR_ASSIGNMENT);   }
 ">>="			{ result(OPERATOR_RIGHT_ASSIGN); }
@@ -148,7 +160,7 @@ SIGN        [+-]?
 "?"				{ result('?'); }
 "$"				{ result('$'); }
 
-[ \t\v\n\f]		{  }
+{WHITESPACE}    { /* whitespace separates tokens */ }
 .				{ /* ignore bad characters */ }
 
 %%

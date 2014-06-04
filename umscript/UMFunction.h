@@ -16,9 +16,16 @@
 {
     NSString                *name;
     NSString                *comment;
+    UMEnvironment           *cenv;
 }
+
+#define LOG_TO_ENVBUILDUP(env,message)
+#define LOG_TO_ENVTRACE(env,message)
 @property(readwrite,strong) NSString *comment;
 @property(readwrite,strong) NSString *name;
+@property(readwrite,weak) UMEnvironment *cenv;
+
+- (id)initWithEnvironment:(UMEnvironment *)cenv;
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env;
 - (NSString *)description;
