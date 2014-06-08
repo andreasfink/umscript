@@ -39,7 +39,7 @@
     }
     else if(entry1.type == UMTermType_field)
     {
-        [env setVariable:d2 forKey:entry1.fieldname];
+        [env setField:d2 forKey:entry1.fieldname];
     }
     else
     {
