@@ -14,6 +14,7 @@
 
 @interface UMScriptDocument : UMObject
 {
+    NSString *name;
     NSString *sourceCode;
     UMTerm *compiledCode;
     BOOL isCompiled;
@@ -21,8 +22,9 @@
     NSString *lexerLog;
 }
 
-@property (readwrite,strong)    NSString *sourceCode;
-@property (readwrite, strong)   UMTerm   *compiledCode;
+@property (readwrite,strong)    NSString    *name;
+@property (readwrite,strong)    NSString    *sourceCode;
+@property (readwrite, strong)   UMTerm      *compiledCode;
 @property (readwrite,strong)    NSString    *parserLog;
 @property (readwrite,strong)    NSString    *lexerLog;
 

@@ -75,12 +75,12 @@ typedef enum UMDiscreteValueType
 - (NSString *)description;
 - (id)descriptionDictVal;
 
-- (UMDiscreteValue *)isEqualTo:(UMDiscreteValue *)bval;
-- (UMDiscreteValue *)isNotEqualTo:(UMDiscreteValue *)bval;
-- (UMDiscreteValue *)isGreaterThan:(UMDiscreteValue *)bval;
-- (UMDiscreteValue *)isGreaterThanOrEqualTo:(UMDiscreteValue *)bval;
-- (UMDiscreteValue *)isLessThan:(UMDiscreteValue *)bval;
-- (UMDiscreteValue *)isLessThanOrEqualTo:(UMDiscreteValue *)bval;
+- (UMDiscreteValue *)discreteIsEqualTo:(UMDiscreteValue *)bval;
+- (UMDiscreteValue *)discreteIsNotEqualTo:(UMDiscreteValue *)bval;
+- (UMDiscreteValue *)discreteIsGreaterThan:(UMDiscreteValue *)bval;
+- (UMDiscreteValue *)discreteIsGreaterThanOrEqualTo:(UMDiscreteValue *)bval;
+- (UMDiscreteValue *)discreteIsLessThan:(UMDiscreteValue *)bval;
+- (UMDiscreteValue *)discreteIsLessThanOrEqualTo:(UMDiscreteValue *)bval;
 
 - (UMDiscreteValue *)addValue:(UMDiscreteValue *)bval;
 - (UMDiscreteValue *)subtractValue:(UMDiscreteValue *)bval;

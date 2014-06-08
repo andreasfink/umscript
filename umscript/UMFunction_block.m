@@ -39,7 +39,18 @@
         }
     }
 
-    i=0;
+    if(env.jumpTo != NULL) /* a block of a switch statement where we are being jumped into */
+    {
+        NSNumber *goTo = [labelsDict objectForKey:env.jumpTo];
+        if(goTo != NULL)
+        {
+            i =  [goTo integerValue];
+        }
+    }
+    else
+    {
+        i=0;
+    }
     do
     {
         if(i>=n)
@@ -49,12 +60,17 @@
         UMTerm *term  = [params objectAtIndex:i];
 
         env.jumpTo = NULL;
-        env.executionDone = NO;
+        env.returnCalled = NO;
+        env.breakCalled = NO;
 
         UMDiscreteValue *r = [term evaluateWithEnvironment:env];
-        if(env.executionDone)
+        if(env.returnCalled)
         {
             env.returnValue = r;
+            break;
+        }
+        if(env.breakCalled)
+        {
             break;
         }
         if(env.jumpTo)

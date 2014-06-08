@@ -17,7 +17,8 @@
 @synthesize returnValue;
 @synthesize environmentLog;
 @synthesize jumpTo;
-@synthesize executionDone;
+@synthesize returnCalled;
+@synthesize breakCalled;
 
 - (void)identAdd
 {
@@ -105,8 +106,6 @@
     @synchronized(self)
     {
         functionDictionary[f.name] = f;
-        
-//        functionDictionary[f.name] = f;
     }
    
 }
@@ -123,37 +122,36 @@
         functionDictionary  = [[NSMutableDictionary alloc]init];
         variables = [[NSMutableDictionary alloc]init];
         fields = [[NSMutableDictionary alloc]init];
-/*
-        [self addFunction:[[UMFunction_add alloc]init]];
-        [self addFunction:[[UMFunction_sub alloc]init]];
-        [self addFunction:[[UMFunction_mul alloc]init]];
-        [self addFunction:[[UMFunction_div alloc]init]];
-        [self addFunction:[[UMFunction_dot alloc]init]];
-        [self addFunction:[[UMFunction_modulo alloc]init]];
-        [self addFunction:[[UMFunction_if alloc]init]];
-        [self addFunction:[[UMFunction_not alloc]init]];
-        [self addFunction:[[UMFunction_and alloc]init]];
-        [self addFunction:[[UMFunction_or alloc]init]];
-        [self addFunction:[[UMFunction_xor alloc]init]];
-        [self addFunction:[[UMFunction_bit_not alloc]init]];
-        [self addFunction:[[UMFunction_bit_and alloc]init]];
-        [self addFunction:[[UMFunction_bit_or alloc]init]];
-        [self addFunction:[[UMFunction_bit_xor alloc]init]];
-        [self addFunction:[[UMFunction_bit_shiftleft alloc]init]];
-        [self addFunction:[[UMFunction_bit_shiftright alloc]init]];
-        [self addFunction:[[UMFunction_equal alloc]init]];
-        [self addFunction:[[UMFunction_notequal alloc]init]];
-        [self addFunction:[[UMFunction_greaterthan alloc]init]];
-        [self addFunction:[[UMFunction_lessthan alloc]init]];
-        [self addFunction:[[UMFunction_startswith alloc]init]];
-        [self addFunction:[[UMFunction_endswith alloc]init]];
-        [self addFunction:[[UMFunction_setvar alloc]init]];
-        [self addFunction:[[UMFunction_getvar alloc]init]];
-        [self addFunction:[[UMFunction_setfield alloc]init]];
-        [self addFunction:[[UMFunction_getfield alloc]init]];
-        [self addFunction:[[UMFunction_block alloc]init]];
-        [self addFunction:[[UMFunction_return alloc]init]];
- */
+
+        [self addFunction:[[UMFunction_add alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_sub alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_mul alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_div alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_dot alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_modulo alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_if alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_not alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_and alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_or alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_xor alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_bit_not alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_bit_and alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_bit_or alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_bit_xor alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_bit_shiftleft alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_bit_shiftright alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_equal alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_notequal alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_greaterthan alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_lessthan alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_startswith alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_endswith alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_setvar alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_getvar alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_setfield alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_getfield alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_block alloc]initWithEnvironment:NULL]];
+        [self addFunction:[[UMFunction_return alloc]initWithEnvironment:NULL]];
         /* we TODO: have to preload all the functions defined and add them to a dictionary */
     }
     return self;

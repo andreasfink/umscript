@@ -34,14 +34,21 @@
     UMTerm *thenDoTerm = params[3];
     
     [initTerm evaluateWithEnvironment:env];
+    
+    env.breakCalled=NO;
 
     UMDiscreteValue *condition = [conditionTerm evaluateWithEnvironment:env];
     while (condition.boolValue==YES)
     {
         [thenDoTerm evaluateWithEnvironment:env];
+        if(env.breakCalled==YES)
+        {
+            break;
+        }
         condition = [conditionTerm evaluateWithEnvironment:env];
         [everyTerm evaluateWithEnvironment:env];
     };
+    env.breakCalled=NO;
     return condition;
 }
 

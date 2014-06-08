@@ -127,52 +127,52 @@
 - (void)testSimpleFunction
 {
     UMDiscreteValue *result = nil;
-    UMTerm *discrete1 = [[UMTerm alloc]initWithDiscreteValue:[UMDiscreteValue discreteInt:55]];
+    UMTerm *discrete1 = [[UMTerm alloc]initWithDiscreteValue:[UMDiscreteValue discreteInt:55] withEnvironment:env];
     
     result = [discrete1 evaluateWithEnvironment:env];
     XCTAssertTrue(result.intValue==55,@"block returns %d but should return 1",result.intValue);
     
-    UMTerm *discrete2 = [[UMTerm alloc]initWithDiscreteValue:[UMDiscreteValue discreteInt:123]];
+    UMTerm *discrete2 = [[UMTerm alloc]initWithDiscreteValue:[UMDiscreteValue discreteInt:123] withEnvironment:env];
     result = [discrete2 evaluateWithEnvironment:env];
     XCTAssertTrue(result.intValue==123,@"block returns %d but should return 1",result.intValue);
     
-    UMFunction *mathaddfunc = [env functionByName:@"MATHADD"];
+    UMFunction *mathaddfunc = [env functionByName:@"add"];
     XCTAssertTrue(mathaddfunc!=NULL,@"function mathadd is not found %@",mathaddfunc);
     
-    UMFunction *blockfunc = [env functionByName:@"BLOCK"];
+    UMFunction *blockfunc = [env functionByName:@"block"];
     XCTAssertTrue(blockfunc!=NULL,@"function block is not found %@",blockfunc);
     
-    UMFunction *setvarfunc = [env functionByName:@"SETVAR"];
+    UMFunction *setvarfunc = [env functionByName:@"setvar"];
     XCTAssertTrue(setvarfunc!=NULL,@"function block is not found %@",blockfunc);
     
-    UMFunction *getvarfunc = [env functionByName:@"GETVAR"];
+    UMFunction *getvarfunc = [env functionByName:@"getvar"];
     XCTAssertTrue(getvarfunc!=NULL,@"function block is not found %@",blockfunc);
     
     UMFunction *returnfunc = [env functionByName:@"return"];
     XCTAssertTrue(returnfunc!=NULL,@"function return is not found %@",returnfunc);
     
     UMTerm *additionTerm1 = [[UMTerm alloc]initWithFunction:mathaddfunc
-                                                  andParams:@[discrete1,discrete2]];
+                                                  andParams:@[discrete1,discrete2] withEnvironment:env];
     result = [additionTerm1 evaluateWithEnvironment:env];
     XCTAssertTrue(result.intValue==178,@"block returns %d but should return 178",result.intValue);
     
-    UMTerm *discrete3 = [[UMTerm alloc]initWithDiscreteValue:[UMDiscreteValue discreteInt:23]];
-    UMTerm *discrete4 = [[UMTerm alloc]initWithDiscreteValue:[UMDiscreteValue discreteInt:41]];
-    UMTerm *varname1 = [[UMTerm alloc]initWithDiscreteValue:[UMDiscreteValue discreteString:@"var1"]];
+    UMTerm *discrete3 = [[UMTerm alloc]initWithDiscreteValue:[UMDiscreteValue discreteInt:23] withEnvironment:env];
+    UMTerm *discrete4 = [[UMTerm alloc]initWithDiscreteValue:[UMDiscreteValue discreteInt:41] withEnvironment:env];
+    UMTerm *varname1 = [[UMTerm alloc]initWithDiscreteValue:[UMDiscreteValue discreteString:@"var1"] withEnvironment:env];
     
     
     UMTerm *additionTerm2 = [[UMTerm alloc]initWithFunction:mathaddfunc
-                                                  andParams:@[discrete3,discrete4]];
+                                                  andParams:@[discrete3,discrete4] withEnvironment:env];
     result = [additionTerm2 evaluateWithEnvironment:env];
-    XCTAssertTrue(result.intValue==64,@"block returns %d but should return 73",result.intValue);
+    XCTAssertTrue(result.intValue==64,@"block returns %d",result.intValue);
     
-    UMTerm *setvarterm = [[UMTerm alloc]initWithFunction:setvarfunc andParams:@[varname1,additionTerm1]];
-    UMTerm *getvarterm = [[UMTerm alloc]initWithFunction:getvarfunc andParams:@[varname1]];
+    UMTerm *setvarterm = [[UMTerm alloc]initWithFunction:setvarfunc andParams:@[varname1,additionTerm1] withEnvironment:env];
+    UMTerm *getvarterm = [[UMTerm alloc]initWithFunction:getvarfunc andParams:@[varname1] withEnvironment:env];
     
-    UMTerm *returnterm = [[UMTerm alloc]initWithFunction:returnfunc andParams:@[getvarterm]];
+    UMTerm *returnterm = [[UMTerm alloc]initWithFunction:returnfunc andParams:@[getvarterm] withEnvironment:env];
     
     UMTerm *additionTerm12 = [[UMTerm alloc]initWithFunction:blockfunc
-                                                   andParams:@[setvarterm,additionTerm2,returnterm]];
+                                                   andParams:@[setvarterm,additionTerm2,returnterm] withEnvironment:env];
     
     result = [additionTerm12 evaluateWithEnvironment:env];
     XCTAssertTrue(result.intValue==178,@"block returns %d but should return 178",result.intValue);
@@ -190,8 +190,8 @@
 
 - (void)testAddWithTerms
 {
-    UMTerm *a = [UMTerm termWithDirectInteger:3];
-    UMTerm *b = [UMTerm termWithDirectInteger:4];
+    UMTerm *a = [UMTerm termWithDirectInteger:3 withEnvironment:env];
+    UMTerm *b = [UMTerm termWithDirectInteger:4 withEnvironment:env];
     UMTerm *c = [a add: b];
     UMDiscreteValue *result = [c evaluateWithEnvironment:env];
     XCTAssertTrue(result.intValue==7,@"3+4=7 not %d",result.intValue);
@@ -199,8 +199,8 @@
 
 - (void)testDotStringsWithTerms
 {
-    UMTerm *a = [UMTerm termWithDirectString:@"3"];
-    UMTerm *b = [UMTerm termWithDirectString:@"4"];
+    UMTerm *a = [UMTerm termWithDirectString:@"3" withEnvironment:env];
+    UMTerm *b = [UMTerm termWithDirectString:@"4" withEnvironment:env];
     UMTerm *c = [a dot: b];
     UMDiscreteValue *result = [c evaluateWithEnvironment:env];
     NSString *s = result.stringValue;
@@ -209,8 +209,8 @@
 
 - (void)testSubWithTerms
 {
-    UMTerm *a = [UMTerm termWithDirectInteger:3];
-    UMTerm *b = [UMTerm termWithDirectInteger:4];
+    UMTerm *a = [UMTerm termWithDirectInteger:3 withEnvironment:env];
+    UMTerm *b = [UMTerm termWithDirectInteger:4 withEnvironment:env];
     UMTerm *c = [a sub: b];
     UMDiscreteValue *result = [c evaluateWithEnvironment:env];
     XCTAssertTrue( (result.intValue==-1),@"3-4=-1 not %d",result.intValue);
@@ -218,8 +218,8 @@
 
 - (void)testSubStringsWithTerms
 {
-    UMTerm *a = [UMTerm termWithDirectString:@"3"];
-    UMTerm *b = [UMTerm termWithDirectString:@"4"];
+    UMTerm *a = [UMTerm termWithDirectString:@"3" withEnvironment:env];
+    UMTerm *b = [UMTerm termWithDirectString:@"4" withEnvironment:env];
     UMTerm *c = [a sub: b];
     UMDiscreteValue *result = [c evaluateWithEnvironment:env];
     XCTAssertTrue(result.isNull,@"\"3\"-\"4\"=(null) not %@",result);
@@ -227,8 +227,8 @@
 
 - (void)testMultiplyWithTerms
 {
-    UMTerm *a = [UMTerm termWithDirectInteger:3];
-    UMTerm *b = [UMTerm termWithDirectInteger:4];
+    UMTerm *a = [UMTerm termWithDirectInteger:3 withEnvironment:env];
+    UMTerm *b = [UMTerm termWithDirectInteger:4 withEnvironment:env];
     UMTerm *c = [a mul: b];
     UMDiscreteValue *result = [c evaluateWithEnvironment:env];
     XCTAssertTrue(result.intValue==12,@"3*4=12 not %d",result.intValue);
@@ -236,8 +236,8 @@
 
 - (void)testDivideWithTerms
 {
-    UMTerm *a = [UMTerm termWithDirectInteger:12];
-    UMTerm *b = [UMTerm termWithDirectInteger:4];
+    UMTerm *a = [UMTerm termWithDirectInteger:12 withEnvironment:env];
+    UMTerm *b = [UMTerm termWithDirectInteger:4 withEnvironment:env];
     UMTerm *c = [a div: b];
     UMDiscreteValue *result = [c evaluateWithEnvironment:env];
     XCTAssertTrue( (result.intValue==3),@"12/4=3 not %d",result.intValue);
@@ -259,4 +259,66 @@
     XCTAssertTrue(result.intValue==3,@"1+2=3 not %d",result.intValue);
 
 }
+
+- (void)testScript1
+{
+    NSString *code = @"$a = 1;"
+    @"$b=2;"
+    @"$c=3;"
+    @"if($a==1) { return $b + 100; } else { return $c + 200; }; return 222;";
+    
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    [s compileSource];
+    UMDiscreteValue *result = [s runScriptWithEnvironment:env];
+
+    XCTAssertTrue(result.intValue==102,@"should be 102 but is %d",result.intValue);
+}
+
+- (void)testScript2
+{
+    NSString *code = @"$a = 1;"
+    @"$b=2;"
+    @"$c=3;"
+    @"while($a==1)"
+    @"{"
+    @"  $b++;"
+    @"  if( $b > 100)"
+    @"  {"
+    @"     break;"
+    @"  }"
+    @"}"
+    @"return $b;";
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    [s compileSource];
+    UMDiscreteValue *result = [s runScriptWithEnvironment:env];
+    
+    XCTAssertTrue(result.intValue==101,@"should be 102 but is %d",result.intValue);
+}
+
+- (void)testScript3
+{
+    NSString *code = @"$a = 1;"
+    @"$b=-1;"
+    @"switch($a)"
+    @"{"
+    @"   case 1:"
+    @"        $b = $b + 100;"
+    @"   case 2:"
+    @"        $b = $b + 200;"
+    @"        break;"
+    @"   case 3:"
+    @"        $b = $b + 400;"
+    @"        break;"
+    @"   default:"
+    @"        $b = $b + 800;"
+    @"        break;"
+    @"}"
+    @"return $b;";
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    [s compileSource];
+    UMDiscreteValue *result = [s runScriptWithEnvironment:env];
+    
+    XCTAssertTrue(result.intValue==102,@"should be 102 but is %d",result.intValue);
+}
+
 @end

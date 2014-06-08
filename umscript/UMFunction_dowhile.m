@@ -31,11 +31,17 @@
     UMTerm *conditionTerm = params[1];
     
     UMDiscreteValue *condition;
+    env.breakCalled=NO;
     do
     {
         [thenDoTerm evaluateWithEnvironment:env];
+        if(    env.breakCalled==YES)
+        {
+            break;
+        }
         condition = [conditionTerm evaluateWithEnvironment:env];
     } while(condition.boolValue);
+    env.breakCalled=NO;
     return condition;
 }
 

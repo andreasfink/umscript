@@ -27,20 +27,13 @@
     {
         return [UMDiscreteValue discreteNull];
     }
-    UMTerm *initTerm = params[0];
-    UMTerm *conditionTerm = params[1];
-    UMTerm *everyTerm = params[2];
-    UMTerm *thenDoTerm = params[3];
+    UMTerm *switchTerm = params[0];
+    UMTerm *switchBlock = params[1];
     
-    [initTerm evaluateWithEnvironment:env];
-    
-    UMDiscreteValue *condition = [conditionTerm evaluateWithEnvironment:env];
-    while (condition.boolValue==YES)
-    {
-        [thenDoTerm evaluateWithEnvironment:env];
-        condition = [conditionTerm evaluateWithEnvironment:env];
-        [everyTerm evaluateWithEnvironment:env];
-    };
-    return condition;
+    UMDiscreteValue *switchValue = [switchTerm evaluateWithEnvironment:env];
+    env.jumpTo = [switchValue stringValue];
+    [switchBlock evaluateWithEnvironment:env];
+    return [UMDiscreteValue discreteNull];
 }
+
 @end

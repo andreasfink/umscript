@@ -17,7 +17,8 @@
     NSMutableDictionary *fields;
     NSMutableDictionary *functionDictionary;
     UMDiscreteValue *returnValue;
-    BOOL    executionDone; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
+    BOOL    returnCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
+    BOOL    breakCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
     NSString *jumpTo; /* if this is set, a block should jump to that label like in a goto or continue statement */
     int     identValue;
     NSString *identPrefix;
@@ -31,7 +32,8 @@
 @property (readwrite,strong) NSString *identPrefix;
 @property (readwrite,strong) UMHistoryLog *environmentLog;
 @property (readwrite,strong) NSString *jumpTo;
-@property (readwrite,assign) BOOL executionDone;
+@property (readwrite,assign) BOOL returnCalled;
+@property (readwrite,assign) BOOL breakCalled;
 
 - (void)identAdd;
 - (void)identRemove;

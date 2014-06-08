@@ -29,7 +29,7 @@
     }
     UMDiscreteValue *returnValue =[params[0] evaluateWithEnvironment:env];
     env.returnValue =  returnValue;
-    env.executionDone = YES;
+    env.returnCalled = YES;
     return returnValue;
 }
 @end

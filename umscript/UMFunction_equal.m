@@ -23,29 +23,19 @@
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(id)env
 {
-    if(params.count < 2)
+    if(params.count != 2)
     {
         return [UMDiscreteValue discreteNull];
     }
-
-    UMDiscreteValue *lastValue = nil;
-
-    for(UMTerm *entry in params)
-    {
-        UMDiscreteValue *d = [entry evaluateWithEnvironment:env];
-        if(lastValue == nil)
-        {
-            lastValue = d;
-        }
-        else
-        {
-            if([d isNotEqualTo:lastValue])
-            {
-                return [UMDiscreteValue discreteBool:NO];
-            }
-        }
-    }
-    return [UMDiscreteValue discreteBool:YES];
+    
+    UMTerm *param0 = params[0];
+    UMDiscreteValue *value0 = [param0 evaluateWithEnvironment:env];
+    
+    UMTerm *param1 = params[1];
+    UMDiscreteValue *value1 = [param1 evaluateWithEnvironment:env];
+    
+    UMDiscreteValue *r = [value0 discreteIsEqualTo:value1];
+    return r;
 }
 
 @end

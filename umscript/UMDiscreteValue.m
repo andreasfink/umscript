@@ -386,39 +386,42 @@
 
 }
 
-- (UMDiscreteValue *)isEqualTo:(UMDiscreteValue *)bval
+- (UMDiscreteValue *)discreteIsEqualTo:(UMDiscreteValue *)bval
 {
+    BOOL r;
     if((type==UMVALUE_NULL) || (bval.type==UMVALUE_NULL))
     {
-        return [UMDiscreteValue discreteBool:(type == bval.type)];
+        r = (type == bval.type);
     }
     else if((self.isNumberType) && (bval.isNumberType))
     {
-        return [UMDiscreteValue discreteBool:[value isEqualToValue:bval.value]];
+        r = [value isEqualToValue:bval.value];
     }
     else if((type==UMVALUE_STRING) || (bval.type==UMVALUE_STRING))
     {
-        return [UMDiscreteValue discreteBool:[value isEqualToString:bval.value]];
+        r = [value isEqualToString:bval.value];
     }
     else if((type==UMVALUE_DATA) || (bval.type==UMVALUE_DATA))
     {
-        return [UMDiscreteValue discreteBool:[value isEqualToData:bval.value]];
+        r = [value isEqualToData:bval.value];
     }
     else
     {
         NSString *a = [self stringValue];
         NSString *b = [bval stringValue];
-        return [UMDiscreteValue discreteBool:[a isEqualToString:b]];
+        r = [a isEqualToString:b];
     }
+    UMDiscreteValue *result = [UMDiscreteValue discreteBool:r];
+    return result;
 }
 
-- (UMDiscreteValue *)isNotEqualTo:(UMDiscreteValue *)bval
+- (UMDiscreteValue *)discreteIsNotEqualTo:(UMDiscreteValue *)bval
 {
-    UMDiscreteValue *result = [self isEqualTo:(UMDiscreteValue *)bval];
+    UMDiscreteValue *result = [self discreteIsEqualTo:(UMDiscreteValue *)bval];
     return [result notValue];
 }
 
-- (UMDiscreteValue *)isGreaterThan:(UMDiscreteValue *)bval
+- (UMDiscreteValue *)discreteIsGreaterThan:(UMDiscreteValue *)bval
 {
     if((type==UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
     {
@@ -458,7 +461,7 @@
     }
 }
 
-- (UMDiscreteValue *)isGreaterThanOrEqualTo:(UMDiscreteValue *)bval
+- (UMDiscreteValue *)discreteIsGreaterThanOrEqualTo:(UMDiscreteValue *)bval
 {
     if((type==UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
     {
@@ -498,7 +501,7 @@
     }
 }
 
-- (UMDiscreteValue *)isLessThan:(UMDiscreteValue *)bval
+- (UMDiscreteValue *)discreteIsLessThan:(UMDiscreteValue *)bval
 {
     if((type==UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
     {
@@ -538,7 +541,7 @@
     }
 }
 
-- (UMDiscreteValue *)isLessThanOrEqualTo:(UMDiscreteValue *)bval
+- (UMDiscreteValue *)discreteIsLessThanOrEqualTo:(UMDiscreteValue *)bval
 {
     if((type==UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
     {

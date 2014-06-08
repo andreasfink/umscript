@@ -744,7 +744,7 @@
 
 + (UMTerm *)letsBreakWithEnvironment:(UMEnvironment *)cenv
 {
-    UMFunction *func = [[UMFunction_goto alloc]initWithEnvironment:cenv];
+    UMFunction *func = [[UMFunction_break alloc]initWithEnvironment:cenv];
     UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[] withEnvironment:cenv];
     return result;
 }

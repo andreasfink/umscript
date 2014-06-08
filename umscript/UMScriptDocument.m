@@ -15,6 +15,7 @@
 
 @implementation UMScriptDocument
 
+@synthesize name;
 @synthesize sourceCode;
 @synthesize compiledCode;
 @synthesize parserLog;

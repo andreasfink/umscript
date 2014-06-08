@@ -24,7 +24,8 @@
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
 {
-    return NULL;
+    env.breakCalled = YES;
+    return [UMDiscreteValue discreteNull];
 }
 
 @end
