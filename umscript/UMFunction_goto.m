@@ -11,13 +11,14 @@
 @implementation UMFunction_goto
 
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"GOTO";
-    }
+        self.name = @"goto";
+        [env log:self.name];
+   }
     return self;
 }
 

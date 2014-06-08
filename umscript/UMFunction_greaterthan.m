@@ -10,12 +10,13 @@
 
 @implementation UMFunction_greaterthan
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"GREATERTHAN";
+        self.name = @"greaterthan";
+        [env log:self.name];
     }
     return self;
 }

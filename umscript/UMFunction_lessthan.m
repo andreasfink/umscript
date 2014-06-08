@@ -10,12 +10,13 @@
 
 @implementation UMFunction_lessthan
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"LESSTHAN";
+        self.name = @"lessthan";
+        [env log:self.name];
     }
     return self;
 }

@@ -11,13 +11,14 @@
 @implementation UMFunction_continue
 
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"GOTO";
-    }
+        self.name = @"continue";
+        [env log:self.name];
+   }
     return self;
 }
 

@@ -10,12 +10,13 @@
 
 @implementation UMFunction_endswith
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"ENDSWITH";
+        self.name = @"endswith";
+        [env log:self.name];
     }
     return self;
 }

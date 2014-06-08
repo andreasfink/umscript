@@ -10,12 +10,13 @@
 
 @implementation UMFunction_switch
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"SWITCH";
+        self.name = @"switch";
+        [env log:self.name];
     }
     return self;
 }

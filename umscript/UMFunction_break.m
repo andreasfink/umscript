@@ -11,12 +11,13 @@
 @implementation UMFunction_break
 
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"GOTO";
+        self.name = @"break";
+        [env log:self.name];
     }
     return self;
 }

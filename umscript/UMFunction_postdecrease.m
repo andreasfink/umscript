@@ -10,13 +10,14 @@
 
 @implementation UMFunction_postdecrease
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"POSTDECREASE";
-    }
+        self.name = @"postdecrease";
+        [env log:self.name];
+   }
     return self;
 }
 

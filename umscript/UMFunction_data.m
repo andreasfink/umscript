@@ -11,13 +11,14 @@
 @implementation UMFunction_data
 
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"(data)";
-    }
+        self.name = @"data";
+        [env log:self.name];
+   }
     return self;
 }
 

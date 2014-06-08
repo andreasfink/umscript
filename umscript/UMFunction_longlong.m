@@ -10,12 +10,13 @@
 
 @implementation UMFunction_longlong
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"(long long)";
+        self.name = @"longlong";
+        [env log:self.name];
     }
     return self;
 }

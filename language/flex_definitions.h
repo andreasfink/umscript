@@ -10,12 +10,10 @@
 #import "UMScriptCompilerEnvironment.h"
 #import "UMFunctionMacros.h"
 
-#import "bisonbridge.h"
 
 #define YY_TYPEDEF_YY_SCANNER_T
 typedef  void *yyscan_t;
 
-
 #import "_generated_umscript.y.h"
-
-extern int yycompile(UMScriptCompilerEnvironment *env, int fdes_in, int fdes_out);
+//@class UMScriptCompilerEnvironment;
+//extern int yycompile(UMScriptCompilerEnvironment *env, int fdes_in, int fdes_out);

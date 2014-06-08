@@ -10,12 +10,13 @@
 
 @implementation UMFunction_setvar
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"SETVAR";
+        self.name = @"setvar";
+        [env log:self.name];
     }
     return self;
 }

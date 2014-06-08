@@ -10,12 +10,13 @@
 
 @implementation UMFunction_bit_xor
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"BITXOR";
+        self.name = @"bit_xor";
+        [env log:self.name];
     }
     return self;
 }

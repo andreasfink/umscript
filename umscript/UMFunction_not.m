@@ -10,12 +10,13 @@
 
 @implementation UMFunction_not
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name=@"LOGICNOT";
+        self.name=@"not";
+        [env log:self.name];
     }
     return self;
 }

@@ -10,12 +10,13 @@
 
 @implementation UMFunction_if
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"IF";
+        self.name = @"if";
+        [env log:self.name];
     }
     return self;
 }

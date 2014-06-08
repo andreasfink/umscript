@@ -10,12 +10,13 @@
 
 @implementation UMFunction_dowhile
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"DOWHILE";
+        self.name = @"dowhile";
+        [env log:self.name];
     }
     return self;
 }

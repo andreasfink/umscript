@@ -10,12 +10,13 @@
 
 @implementation UMFunction_getvar
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"GETVAR";
+        self.name = @"getvar";
+        [env log:self.name];
     }
     return self;
 }

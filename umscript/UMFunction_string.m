@@ -10,12 +10,13 @@
 
 @implementation UMFunction_string
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"(string)";
+        self.name = @"string";
+        [env log:self.name];
     }
     return self;
 }

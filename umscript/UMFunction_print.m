@@ -11,14 +11,14 @@
 @implementation UMFunction_print
 
 
-
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"(double)";
-    }
+        self.name = @"print";
+        [env log:self.name];
+   }
     return self;
 }
 

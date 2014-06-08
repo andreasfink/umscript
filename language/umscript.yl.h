@@ -8,3 +8,4 @@
 
 // common definitions for lex and bison files
 
+typedef void *yyscan_t;

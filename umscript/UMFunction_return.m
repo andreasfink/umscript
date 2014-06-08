@@ -10,12 +10,13 @@
 #import "UMEnvironment.h"
 @implementation UMFunction_return
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
         self.name = @"return";
+        [env log:self.name];
     }
     return self;
 }

@@ -16,7 +16,7 @@
 {
     NSString                *name;
     NSString                *comment;
-    UMEnvironment           *cenv;
+    UMEnvironment    __weak *cenv;
 }
 
 #define LOG_TO_ENVBUILDUP(env,message)

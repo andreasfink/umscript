@@ -11,13 +11,14 @@
 @implementation UMFunction_for
 
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"FOR";
-    }
+        self.name = @"for";
+        [env log:self.name];
+   }
     return self;
 }
 

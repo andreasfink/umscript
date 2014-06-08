@@ -7,13 +7,13 @@
 //
 
 #import "UMEnvironment.h"
-#import "flex_definitions.h"
-#import "bison_definitions.h"
 
 extern size_t readInputForLexer(char *buffer, size_t * numBytesRead, size_t maxBytesToRead);
 
 @class UMScriptCompilerEnvironment;
 @class UMTerm;
+
+extern int yycompile(UMScriptCompilerEnvironment *cenv, int fdes_input, int fdes_output);
 
 @interface UMScriptCompilerEnvironment : UMEnvironment
 {
@@ -32,16 +32,21 @@ extern size_t readInputForLexer(char *buffer, size_t * numBytesRead, size_t maxB
     int num_local_functions;
     int errors;
     int last_syntax_error_line;
-    UMTerm *root;
+    CFTypeRef root;
     int column;
     
     int stdin_pipe[2];
     int stdout_pipe[2];
+    UMHistoryLog *parserLog;
+    UMHistoryLog *lexerLog;
 }
 
 @property (readwrite,assign) int column;
-@property (readwrite,strong)    UMTerm *root;
+@property (readwrite,assign)    CFTypeRef root;
 @property (readwrite,strong)    NSString *currentSource;
+@property (readwrite,strong)    UMHistoryLog *parserLog;
+@property (readwrite,strong)    UMHistoryLog *lexerLog;
+
 
 - (UMTerm *)compile:(NSString *)code stdOut:(NSString **)sout  stdErr:(NSString **)serr;
 

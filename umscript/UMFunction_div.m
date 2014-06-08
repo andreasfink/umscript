@@ -11,12 +11,13 @@
 @implementation UMFunction_div
 
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"MATHDIVISION";
+        self.name = @"div";
+        [env log:self.name];
     }
     return self;
 }

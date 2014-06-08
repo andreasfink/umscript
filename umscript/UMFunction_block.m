@@ -11,13 +11,14 @@
 
 @implementation UMFunction_block
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"BLOCK";
-    }
+        self.name = @"block";
+        [env log:self.name];
+   }
     return self;
 }
 

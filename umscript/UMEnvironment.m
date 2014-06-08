@@ -121,7 +121,7 @@
         functionDictionary  = [[NSMutableDictionary alloc]init];
         variables = [[NSMutableDictionary alloc]init];
         fields = [[NSMutableDictionary alloc]init];
-
+/*
         [self addFunction:[[UMFunction_add alloc]init]];
         [self addFunction:[[UMFunction_sub alloc]init]];
         [self addFunction:[[UMFunction_mul alloc]init]];
@@ -151,6 +151,7 @@
         [self addFunction:[[UMFunction_getfield alloc]init]];
         [self addFunction:[[UMFunction_block alloc]init]];
         [self addFunction:[[UMFunction_return alloc]init]];
+ */
         /* we TODO: have to preload all the functions defined and add them to a dictionary */
     }
     return self;

@@ -10,12 +10,13 @@
 
 @implementation UMFunction_bit_shiftright
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"BITSHIFTRIGHT";
+        self.name = @"bit_shiftright";
+        [env log:self.name];
     }
     return self;
 }

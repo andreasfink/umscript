@@ -11,13 +11,14 @@
 @implementation UMFunction_double
 
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"(double)";
-    }
+        self.name = @"double";
+        [env log:self.name];
+   }
     return self;
 }
 

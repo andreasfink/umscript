@@ -8,11 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@class UMTerm;
-
 typedef struct glueterm
 {
-    int     token;
-    __unsafe_unretained UMTerm  *value;
+    int         token;
+    CFTypeRef   value;
 } glueterm;
-

@@ -10,12 +10,13 @@
 
 @implementation UMFunction_add
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"MATHADD";
+        self.name = @"add";
+        [env log:self.name];
     }
     return self;
 }

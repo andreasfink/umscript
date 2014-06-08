@@ -10,12 +10,13 @@
 
 @implementation UMFunction_and
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name=@"LOGICAND";
+        self.name=@"and";
+        [env log:self.name];
     }
     return self;
 }

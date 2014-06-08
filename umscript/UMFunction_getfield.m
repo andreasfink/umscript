@@ -10,12 +10,13 @@
 
 @implementation UMFunction_getfield
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"GETFIELD";
+        self.name = @"getfield";
+        [env log:self.name];
     }
     return self;
 }

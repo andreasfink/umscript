@@ -10,22 +10,16 @@
 #import "UMTerm.h"
 #import <string.h>
 #import "umscript_globals.h"
-#import "bisonbridge.h"
 #import "_generated_umscript.y.h"
 #import "flex_definitions.h"
 #import "bison_definitions.h"
 
 
-typedef struct BisonBridge
-{
-    void *scanner;
-} BisonBridge;
-
-
 @implementation UMScriptCompilerEnvironment
 
 @synthesize currentSource;
-
+@synthesize parserLog;
+@synthesize lexerLog;
 
 -(id)init
 {
@@ -35,6 +29,8 @@ typedef struct BisonBridge
         currentSource = @"DUMMY";
         currentSourceCString = currentSource.UTF8String;
         currentSourcePosition = 0;
+        parserLog = [[UMHistoryLog alloc]init];
+        lexerLog = [[UMHistoryLog alloc]init];
         NSLog(@"init called");
     }
     return self;
@@ -161,7 +157,7 @@ typedef struct BisonBridge
         [NSThread detachNewThreadSelector:@selector(stdinFeeder:) toTarget:self withObject:data];
         [NSThread detachNewThreadSelector:@selector(stdoutListener) toTarget:self withObject:nil];
     
-        yycompile(CFBridgingRetain(self), stdin_pipe[RXPIPE], stdout_pipe[TXPIPE]);
+        yycompile(self, stdin_pipe[RXPIPE], stdout_pipe[TXPIPE]);
         /* close the pipes from the yycompile side. this should terminate the helper threads if they are not already gone */
         close(stdout_pipe[TXPIPE]);
         stdout_pipe[TXPIPE] = -1;
@@ -173,14 +169,12 @@ typedef struct BisonBridge
         }
         close(stdout_pipe[RXPIPE]);
 
-        UMTerm *resultingCode = root;
+        UMTerm *resultingCode = (__bridge UMTerm *)root;
         root = NULL;
         NSLog(@"**STDOUT: \r%@",stdOut);
         NSLog(@"**STDERR: \r%@",stdErr);
         *serr = stdErr;
         *sout = stdOut;
-        
-        CFBridgingRelease(self);
         return resultingCode;
     }
 }
@@ -234,6 +228,21 @@ typedef struct BisonBridge
     *numBytesRead = numBytesToRead;
     currentSourcePosition += numBytesToRead;
     return 0;
+}
+
+- (CFTypeRef)root
+{
+    return root;
+}
+
+- (void)setRoot:(CFTypeRef)r
+{
+    CFRetain(r);
+    if(root!=NULL)
+    {
+        CFRelease(root);
+    }
+    root = r;
 }
 
 @end

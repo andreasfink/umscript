@@ -16,8 +16,8 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"ASSIGN";
-        [cenv log:@"ASSIGN"];
+        self.name = @"assign";
+        [env log:self.name];
     }
     return self;
 }

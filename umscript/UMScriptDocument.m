@@ -17,6 +17,9 @@
 
 @synthesize sourceCode;
 @synthesize compiledCode;
+@synthesize parserLog;
+@synthesize lexerLog;
+
 
 - (id)initWithFilename:(NSString *)filename
 {
@@ -82,6 +85,8 @@
     {
         isCompiled = NO;
     }
+    self.parserLog = [compilerEnvironment.parserLog getLog];
+    self.lexerLog = [compilerEnvironment.lexerLog getLog];
     return err;
 }
 

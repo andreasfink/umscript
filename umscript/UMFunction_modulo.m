@@ -10,12 +10,13 @@
 
 @implementation UMFunction_modulo
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"MATHPERCENT";
+        self.name = @"modulo";
+        [env log:self.name];
     }
     return self;
 }

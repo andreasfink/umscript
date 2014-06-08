@@ -10,6 +10,19 @@
 
 @implementation UMFunction_typecast_int
 
+
+- (id)initWithEnvironment:(UMEnvironment *)env
+{
+    self = [super initWithEnvironment:env];
+    if(self)
+    {
+        self.name = @"typecast_int";
+        [env log:self.name];
+    }
+    return self;
+}
+
+
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(id)env
 {
     if([params count] != 1)

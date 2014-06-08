@@ -10,12 +10,13 @@
 
 @implementation UMFunction_setfield
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"SETFIELD";
+        self.name = @"setfield";
+        [env log:self.name];
     }
     return self;
 }

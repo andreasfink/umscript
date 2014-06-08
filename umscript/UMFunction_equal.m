@@ -10,12 +10,13 @@
 
 @implementation UMFunction_equal
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"EQUAL";
+        self.name = @"equal";
+        [env log:self.name];
     }
     return self;
 }

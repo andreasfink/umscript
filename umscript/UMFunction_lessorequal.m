@@ -10,12 +10,13 @@
 
 @implementation UMFunction_lessorequal
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"LESSOREQUAL";
+        self.name = @"lessorequal";
+        [env log:self.name];
     }
     return self;
 }

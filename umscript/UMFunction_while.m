@@ -10,12 +10,13 @@
 
 @implementation UMFunction_while
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"WHILE";
+        self.name = @"while";
+        [env log:self.name];
     }
     return self;
 }

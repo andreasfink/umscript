@@ -26,6 +26,7 @@ typedef enum UMTermType
 
 @interface UMTerm : UMObject
 {
+    UMEnvironment   *cenv;
     UMTermType      type;
     UMDiscreteValue *discrete;
     UMFunction      *function;
@@ -45,15 +46,17 @@ typedef enum UMTermType
 @property (readwrite,strong) UMFunction      *function;
 @property (readwrite,strong) NSArray         *param;
 @property (readwrite,assign) int             token;
-@property (readwrite,assign) NSString        *label;
+@property (readwrite,strong) NSString        *label;
+@property (readwrite,weak)   UMEnvironment   *env;
 
 
-- (id)initWithNull;
-- (id)initWithDiscreteValue:(UMDiscreteValue *)d;
-- (id)initWithFieldName:(NSString *)fieldName;
-- (id)initWithVariableName:(NSString *)variableName;
-- (id)initWithIdentifier:(NSString *)identifierName;
-- (id)initWithFunction:(UMFunction *)func andParams:(NSArray *)params;
+//- (id)initWithEnvironment:(UMEnvironment *)env;
+- (id)initWithNullWithEnvironment:(UMEnvironment *)cenv;
+- (id)initWithDiscreteValue:(UMDiscreteValue *)d withEnvironment:(UMEnvironment *)cenv;
+- (id)initWithFieldName:(NSString *)fieldName withEnvironment:(UMEnvironment *)cenv;
+- (id)initWithVariableName:(NSString *)variableName withEnvironment:(UMEnvironment *)cenv;
+- (id)initWithIdentifier:(NSString *)identifierName withEnvironment:(UMEnvironment *)cenv;
+- (id)initWithFunction:(UMFunction *)func andParams:(NSArray *)params withEnvironment:(UMEnvironment *)cenv;
 
 - (UMDiscreteValue *)evaluateWithEnvironment:(UMEnvironment *)env;
 - (BOOL)boolValue:(UMEnvironment *)env;
@@ -70,22 +73,22 @@ typedef enum UMTermType
 - (id)initFunction:(UMFunction *)name params:(NSArray *)parm;
 - (NSString *)codeWithEnvironment:(UMEnvironment *)env;
 
-+ (id)termWithIdentifierFromTag:(UMTerm *)identifierName;
-+ (id)termWithVariableFromTag:(UMTerm *)varNameTerm;
-+ (id)termWithFieldFromTag:(UMTerm *)fieldNameTerm;
-+ (id)termWithStringFromTag:(UMTerm *)stringTerm;
-+ (id)termWithIntegerFromTag:(UMTerm *)stringTerm;
-+ (id)termWithLongLongFromTag:(UMTerm *)stringTerm;
-+ (id)termWithDoubleFromTag:(UMTerm *)stringTerm;
-+ (id)termWithBooleanFromTag:(UMTerm *)stringTerm;
-+ (id)termWithHexFromTag:(UMTerm *)stringTerm;
-+ (id)termWithBinaryFromTag:(UMTerm *)stringTerm;
-+ (id)termWithOctalFromTag:(UMTerm *)stringTerm;
-+ (id)termWithNull;
++ (id)termWithIdentifierFromTag:(UMTerm *)identifierName withEnvironment:(UMEnvironment *)cenv;
++ (id)termWithVariableFromTag:(UMTerm *)varNameTerm withEnvironment:(UMEnvironment *)cenv;
++ (id)termWithFieldFromTag:(UMTerm *)fieldNameTerm withEnvironment:(UMEnvironment *)cenv;
++ (id)termWithStringFromTag:(UMTerm *)stringTerm withEnvironment:(UMEnvironment *)cenv;
++ (id)termWithIntegerFromTag:(UMTerm *)stringTerm withEnvironment:(UMEnvironment *)cenv;
++ (id)termWithLongLongFromTag:(UMTerm *)stringTerm withEnvironment:(UMEnvironment *)cenv;
++ (id)termWithDoubleFromTag:(UMTerm *)stringTerm withEnvironment:(UMEnvironment *)cenv;
++ (id)termWithBooleanFromTag:(UMTerm *)stringTerm withEnvironment:(UMEnvironment *)cenv;
++ (id)termWithHexFromTag:(UMTerm *)stringTerm withEnvironment:(UMEnvironment *)cenv;
++ (id)termWithBinaryFromTag:(UMTerm *)stringTerm withEnvironment:(UMEnvironment *)cenv;
++ (id)termWithOctalFromTag:(UMTerm *)stringTerm withEnvironment:(UMEnvironment *)cenv;
++ (id)termWithNullWithEnvironment:(UMEnvironment *)cenv;
 
-+ (id)termWithDirectInteger:(int)i;
-+ (id)termWithDirectString:(NSString *)s;
-+ (id)termWithDirectCString:(char *)s;
++ (id)termWithDirectInteger:(int)i withEnvironment:(UMEnvironment *)cenv;
++ (id)termWithDirectString:(NSString *)s withEnvironment:(UMEnvironment *)cenv;
++ (id)termWithDirectCString:(char *)s withEnvironment:(UMEnvironment *)cenv;
 
 - (void) setDiscreteString:(NSString *)s;
 - (NSString * )descriptionJson;
@@ -115,16 +118,16 @@ typedef enum UMTermType
 
 - (UMTerm *)leftshift:(UMTerm *)b;
 - (UMTerm *)rightshift:(UMTerm *)b;
-+ (UMTerm *)whileCondition:(UMTerm *)condition thenDo:(UMTerm *)thendo;
-+ (UMTerm *)ifCondition:(UMTerm *)condition thenDo:(UMTerm *)thendo elseDo:(UMTerm *)elsedo;
-+ (UMTerm *)thenDo:(UMTerm *)thendo whileCondition:(UMTerm *)condition;
-+ (UMTerm *)forInitializer:(UMTerm *)initializer endCondition:(UMTerm *)condition every:(UMTerm *)every thenDo:(UMTerm *)thenDo;
-+ (UMTerm *)switchCondition:(UMTerm *)condition thenDo:(UMTerm *)thenDo;
++ (UMTerm *)whileCondition:(UMTerm *)condition thenDo:(UMTerm *)thendo withEnvironment:(UMEnvironment *)cenv;
++ (UMTerm *)ifCondition:(UMTerm *)condition thenDo:(UMTerm *)thendo elseDo:(UMTerm *)elsedo withEnvironment:(UMEnvironment *)cenv;
++ (UMTerm *)thenDo:(UMTerm *)thendo whileCondition:(UMTerm *)condition withEnvironment:(UMEnvironment *)cenv;
++ (UMTerm *)forInitializer:(UMTerm *)initializer endCondition:(UMTerm *)condition every:(UMTerm *)every thenDo:(UMTerm *)thenDo withEnvironment:(UMEnvironment *)cenv;
++ (UMTerm *)switchCondition:(UMTerm *)condition thenDo:(UMTerm *)thenDo withEnvironment:(UMEnvironment *)cenv;
 
 - (UMTerm *)blockAppendStatement:(UMTerm *)term;
-+ (UMTerm *)blockWithStatement:(UMTerm *)term;
++ (UMTerm *)blockWithStatement:(UMTerm *)term withEnvironment:(UMEnvironment *)cenv;
 
-+ (UMTerm *)token:(int)tok text:(const char *)text;
++ (UMTerm *)token:(int)tok text:(const char *)text withEnvironment:(UMEnvironment *)cenv;
 
 - (UMTerm *)preincrease;
 - (UMTerm *)postincrease;
@@ -135,9 +138,9 @@ typedef enum UMTermType
 - (UMTerm *)dotIdentifier:(UMTerm *)list; /* object.access */
 - (NSString *)constantStringValue;
 
-+ (UMTerm *)letsGoto:(UMTerm *)labelTerm;
-+ (UMTerm *)letsBreak;
-+ (UMTerm *)letsContinue;
++ (UMTerm *)letsGoto:(UMTerm *)labelTerm withEnvironment:(UMEnvironment *)cenv;
++ (UMTerm *)letsBreakWithEnvironment:(UMEnvironment *)cenv;
++ (UMTerm *)letsContinueWithEnvironment:(UMEnvironment *)cenv;
 
 
 @end

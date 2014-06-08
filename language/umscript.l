@@ -37,25 +37,30 @@ typedef UMScriptCompilerEnvironment *YY_EXTRA_TYPE;
 static void yyunput (int c, register char * yy_bp , yyscan_t yyscanner);
 
 static void comment(yyscan_t yyscanner);
+@class UMScriptCompilerEnvironment;
+extern UMScriptCompilerEnvironment *cenv;
 
+#define UMGET(x)          ((__bridge UMTerm *)x.value)
+#define UMSET(x,val)  \
+{                   \
+    if((x).value!=NULL) \
+    {                   \
+        CFBridgingRelease((x).value); \
+    }           \
+    (x).value=CFBridgingRetain(val); \
+}
 
-//#define  YYPARSEPARAM  yyparseparam
-
-#define result(x)                                                                               \
-    (*yylval_param).value =  CFBridgingRetain([UMTerm token:(x) text:yyget_text(yyscanner)]);   \
-    yylval_param->token = (x);                                                                  \
-    return(x)
-
-
-#define RETAIN(a)   cenv.root=a;CFBridgingRetain(a); NSLog(@"%@",a)
-#define APPLY(a)    cenv.root=a;NSLog(@"%@",a)
-
-#define SET_RESULT(n)                       \
-{                                           \
-    UMTerm *new_value = n;                  \
-    CFBridgingRetain(new_value);            \
-    cenv.root=new_value;                    \
-    return n;                               \
+/* Note: we are not using UMSET here as the structure is allocated by malloc and not initialized to zero */
+#define result(x)       \
+{       \
+    UMScriptCompilerEnvironment *cenv = (__bridge UMScriptCompilerEnvironment *)yyextra; \
+    char *text =yyget_text(yyscanner); \
+    UMTerm *term = [UMTerm token:(x) text:text withEnvironment:cenv];      \
+    yylval_param->value=CFBridgingRetain(term);                                              \
+    yylval_param->token = (x);                                                              \
+    NSString *s = [NSString stringWithFormat:@"%d %s {%s}",x,#x,text]; \
+    [cenv.lexerLog addLogEntry:s];  \
+    return (x);\
 }
 
 %}
@@ -199,22 +204,11 @@ int yycompile(UMScriptCompilerEnvironment *cenv, int fdes_input, int fdes_output
     FILE *outfile = fdopen(fdes_output,"w");
     yyset_in(infile,yyscanner);
     yyset_out(outfile,yyscanner);
-    yyset_extra(cenv,yyscanner);
-    
+    void * cenv2 = (void *)CFBridgingRetain(cenv);
+    yyset_extra(cenv2,yyscanner);
     yydebug = 1;
-struct glueterm return_value;
-    return_value.token = 0;
-    return_value.value = 0;
-
     yyparse(yyscanner,cenv);
-    /*
-yyscanner
-     while (yylex(&return_value, &location_info, yyscanner) > 0)
-    {
-        NSLog(@"Tok: %d yytext=%@\n",return_value.token, return_value.value);
-        return_value.token = 0;
-    }
-     */
+    CFBridgingRelease(cenv2);
     yylex_destroy(yyscanner);
     return 0;
 }

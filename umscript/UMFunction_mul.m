@@ -11,12 +11,13 @@
 @implementation UMFunction_mul
 
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"MATHMULTIPLY";
+        self.name = @"mul";
+        [env log:self.name];
     }
     return self;
 }

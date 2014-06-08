@@ -10,12 +10,13 @@
 
 @implementation UMFunction_xor
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"LOGICXOR";
+        self.name = @"xor";
+        [env log:self.name];
     }
     return self;
 }

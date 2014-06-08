@@ -10,13 +10,14 @@
 
 @implementation UMFunction_predecrease
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"PREDECREASE";
-    }
+        self.name = @"predecrease";
+        [env log:self.name];
+   }
     return self;
 }
 

@@ -11,13 +11,14 @@
 @implementation UMFunction_bit_and
 
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"BITAND";
-    }
+        self.name = @"bit_and";
+        [env log:self.name];
+   }
     return self;
 }
 

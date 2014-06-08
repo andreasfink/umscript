@@ -10,12 +10,13 @@
 
 @implementation UMFunction_bit_not
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"BITNOT";
+        self.name = @"bit_not";
+        [env log:self.name];
     }
     return self;
 }

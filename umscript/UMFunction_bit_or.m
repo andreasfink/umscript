@@ -10,12 +10,13 @@
 
 @implementation UMFunction_bit_or
 
-- (id)init
+- (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super init];
+    self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"BITOR";
+        self.name = @"bit_or";
+        [env log:self.name];
     }
     return self;
 }

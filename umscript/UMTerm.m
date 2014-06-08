@@ -23,8 +23,9 @@
 @synthesize token;
 @synthesize identifier;
 @synthesize label;
+@synthesize env;
 
-- (UMDiscreteValue *)evaluateWithEnvironment:(UMEnvironment *)env;
+- (UMDiscreteValue *)evaluateWithEnvironment:(UMEnvironment *)xenv;
 {
     switch(type)
     {
@@ -38,15 +39,15 @@
         }
         case UMTermType_variable:
         {
-            return [env variableForKey:varname];
+            return [xenv variableForKey:varname];
         }
         case UMTermType_field:
         {
-            return [env fieldForKey:fieldname];
+            return [xenv fieldForKey:fieldname];
         }
         case UMTermType_function:
         {
-            return [function evaluateWithParams:param environment:env];
+            return [function evaluateWithParams:param environment:xenv];
         }
         case UMTermType_nullterm:
         {
@@ -60,61 +61,66 @@
     return [UMDiscreteValue discreteNull];
 }
 
-- (id)initWithNull
+- (id)initWithNullWithEnvironment:(UMEnvironment *)e
 {
     self = [super init];
     if(self)
     {
         self.type = UMTermType_nullterm;
+        self.env = e;
     }
     return self;
 }
 
-- (id)initWithDiscreteValue:(UMDiscreteValue *)d
+- (id)initWithDiscreteValue:(UMDiscreteValue *)d withEnvironment:(UMEnvironment *)e
 {
     self = [super init];
     if(self)
     {
         self.type = UMTermType_discrete;
         self.discrete = d;
+        self.env = e;
     }
     return self;
 }
 
-- (id)initWithIdentifier:(NSString *)ident
+- (id)initWithIdentifier:(NSString *)ident withEnvironment:(UMEnvironment *)e
 {
     self = [super init];
     if(self)
     {
         self.type = UMTermType_identifier;
         self.identifier = ident;
+        self.env = e;
     }
     return self;
 }
 
-- (id)initWithFieldName:(NSString *)fieldName
+- (id)initWithFieldName:(NSString *)fieldName withEnvironment:(UMEnvironment *)e
 {
     self = [super init];
     if(self)
     {
         self.type = UMTermType_field;
         self.fieldname = fieldName;
+        self.env = e;
     }
     return self;
 }
 
-- (id)initWithVariableName:(NSString *)variableName
+- (id)initWithVariableName:(NSString *)variableName  withEnvironment:(UMEnvironment *)e
 {
     self = [super init];
     if(self)
     {
         self.type = UMTermType_variable;
         self.varname = variableName;
+        self.env = e;
     }
     return self;
 }
 
-- (id)initWithFunction:(UMFunction *)func andParams:(NSArray *)params
+- (id)initWithFunction:(UMFunction *)func andParams:(NSArray *)params  withEnvironment:(UMEnvironment *)e
 {
     self = [super init];
     if(self)
@@ -122,42 +128,43 @@
         self.type = UMTermType_function;
         self.function = func;
         self.param = params;
+        self.env = e;
     }
     return self;
 }
 
-- (id)initWithString:(NSString *)s
+- (id)initWithString:(NSString *)s  withEnvironment:(UMEnvironment *)e
 {
-    return [self initWithDiscreteValue:[UMDiscreteValue discreteString:s]];
+    return [self initWithDiscreteValue:[UMDiscreteValue discreteString:s] withEnvironment:e];
 }
 
-- (id)initWithInt:(int)i
+- (id)initWithInt:(int)i  withEnvironment:(UMEnvironment *)e
 {
-    return [self initWithDiscreteValue:[UMDiscreteValue discreteInt:i]];
+    return [self initWithDiscreteValue:[UMDiscreteValue discreteInt:i] withEnvironment:e];
 }
 
 
-- (BOOL)boolValue:(UMEnvironment *)env
+- (BOOL)boolValue:(UMEnvironment *)e
 {
-    UMDiscreteValue *d = [self evaluateWithEnvironment:env];
+    UMDiscreteValue *d = [self evaluateWithEnvironment:e];
     return [d boolValue];
 }
 
-- (NSString *)stringValue:(UMEnvironment *)env
+- (NSString *)stringValue:(UMEnvironment *)e
 {
-    UMDiscreteValue *d = [self evaluateWithEnvironment:env];
+    UMDiscreteValue *d = [self evaluateWithEnvironment:e];
     return [d stringValue];
 }
 
-- (NSData *)dataValue:(UMEnvironment *)env
+- (NSData *)dataValue:(UMEnvironment *)e
 {
-    UMDiscreteValue *d = [self evaluateWithEnvironment:env];
+    UMDiscreteValue *d = [self evaluateWithEnvironment:e];
     return [d dataValue];
 }
 
-- (int)intValue:(UMEnvironment *)env
+- (int)intValue:(UMEnvironment *)e
 {
-    UMDiscreteValue *d = [self evaluateWithEnvironment:env];
+    UMDiscreteValue *d = [self evaluateWithEnvironment:e];
     return [d intValue];
 }
 
@@ -248,12 +255,12 @@
     return self;
 }
 
-- (NSString *)codeWithEnvironment:(UMEnvironment *)env
+- (NSString *)codeWithEnvironment:(UMEnvironment *)e
 {
 
     if(type==UMTermType_discrete)
     {
-        return [discrete codeWithEnvironment:env];
+        return [discrete codeWithEnvironment:e];
     }
     if(type==UMTermType_field)
     {
@@ -266,7 +273,7 @@
     if(type==UMTermType_function)
     {
         NSMutableString *s = [[NSMutableString alloc]init];
-        [s appendString:[function codeWithEnvironmentStart:env]];
+        [s appendString:[function codeWithEnvironmentStart:e]];
         NSUInteger i=0;
         NSUInteger n = param.count;
         for(UMTerm *p in param)
@@ -274,15 +281,15 @@
             i++;
             if(i==1)
             {
-                [s appendString:[function codeWithEnvironmentFirstParam:p env:env]];
+                [s appendString:[function codeWithEnvironmentFirstParam:p env:e]];
             }
             else if(i==n)
             {
-                [s appendString:[function codeWithEnvironmentLastParam:p env:env]];
+                [s appendString:[function codeWithEnvironmentLastParam:p env:e]];
             }
             else 
             {
-                [s appendString:[function codeWithEnvironmentNextParam:p env:env]];
+                [s appendString:[function codeWithEnvironmentNextParam:p env:e]];
             }
         }
         [s appendString:[function codeWithEnvironmentStop:env]];
@@ -291,117 +298,114 @@
     return @"/*unknown UMTerm */";
 }
 
-+ (id)termWithNull
++ (id)termWithNullWithEnvironment:(UMEnvironment *)e
 {
-    UMTerm *term = [[UMTerm alloc]initWithNull];
+    UMTerm *term = [[UMTerm alloc]initWithNullWithEnvironment:e];
     return term;
 }
 
-+ (id)termWithIdentifierFromTag:(UMTerm *)identifier
++ (id)termWithIdentifierFromTag:(UMTerm *)identifier  withEnvironment:(UMEnvironment *)e
 {
-    UMTerm *term = [[UMTerm alloc]initWithIdentifier:identifier.identifier];
+    UMTerm *term = [[UMTerm alloc]initWithIdentifier:identifier.identifier  withEnvironment:e];
     return term;
 }
 
 
-+ (id)termWithVariableFromTag:(UMTerm *)varNameTerm
++ (id)termWithVariableFromTag:(UMTerm *)varNameTerm  withEnvironment:(UMEnvironment *)e
 {
-    UMTerm *term = [[UMTerm alloc]initWithVariableName:varNameTerm.identifier];
+    UMTerm *term = [[UMTerm alloc]initWithVariableName:varNameTerm.identifier  withEnvironment:e];
     return term;
 }
 
-+ (id)termWithFieldFromTag:(UMTerm *)fieldNameTerm
++ (id)termWithFieldFromTag:(UMTerm *)fieldNameTerm  withEnvironment:(UMEnvironment *)e
 {
     /* the term being passed here is a token term */
-    UMTerm *term = [[UMTerm alloc]initWithFieldName:fieldNameTerm.identifier];
+    UMTerm *term = [[UMTerm alloc]initWithFieldName:fieldNameTerm.identifier withEnvironment:e];
     return term;
 }
 
-+ (id)termWithStringFromTag:(UMTerm *)stringTagTerm
++ (id)termWithStringFromTag:(UMTerm *)stringTagTerm  withEnvironment:(UMEnvironment *)e
 {
     UMDiscreteValue *d = [UMDiscreteValue discreteString:stringTagTerm.identifier];
-    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d withEnvironment:e];
     return term;
 }
 
-+ (id)termWithIntegerFromTag:(UMTerm *)tagTerm
++ (id)termWithIntegerFromTag:(UMTerm *)tagTerm  withEnvironment:(UMEnvironment *)e
 {
     int i = atoi(tagTerm.identifier.UTF8String);
     UMDiscreteValue *d = [UMDiscreteValue discreteInt:i];
-    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d  withEnvironment:e];
     return term;
 }
 
-+ (id)termWithLongLongFromTag:(UMTerm *)tagTerm
++ (id)termWithLongLongFromTag:(UMTerm *)tagTerm  withEnvironment:(UMEnvironment *)e
 {
     long long ll = atoll(tagTerm.identifier.UTF8String);
     UMDiscreteValue *d = [UMDiscreteValue discreteLongLong:ll];
-    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d withEnvironment:e];
     return term;
 }
 
-+ (id)termWithDoubleFromTag:(UMTerm *)tagTerm
++ (id)termWithDoubleFromTag:(UMTerm *)tagTerm  withEnvironment:(UMEnvironment *)e
 {
     double dd = atof(tagTerm.identifier.UTF8String);
     UMDiscreteValue *d = [UMDiscreteValue discreteDouble:dd];
-    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d withEnvironment:e];
     return term;
 }
 
-+ (id)termWithBooleanFromTag:(UMTerm *)tagTerm
++ (id)termWithBooleanFromTag:(UMTerm *)tagTerm  withEnvironment:(UMEnvironment *)e
 {
     UMDiscreteValue *d = [UMDiscreteValue discreteBool:[tagTerm.identifier isEqualToString:@"YES"]];
-    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d withEnvironment:e];
     return term;
 }
 
-+ (id)termWithHexFromTag:(UMTerm *)tagTerm
++ (id)termWithHexFromTag:(UMTerm *)tagTerm  withEnvironment:(UMEnvironment *)e
 {
     /* TODO: parse the string in hex way to create an integer */
     UMDiscreteValue *d = [UMDiscreteValue discreteString:tagTerm.identifier];
-    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d withEnvironment:e];
     return term;
 }
 
-+ (id)termWithOctalFromTag:(UMTerm *)tagTerm
++ (id)termWithOctalFromTag:(UMTerm *)tagTerm  withEnvironment:(UMEnvironment *)e
 {
     /* TODO: parse the string in octal way to create an integer */
     UMDiscreteValue *d = [UMDiscreteValue discreteString:tagTerm.identifier];
-    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d withEnvironment:e];
     return term;
 }
 
-+ (id)termWithBinaryFromTag:(UMTerm *)tagTerm
++ (id)termWithBinaryFromTag:(UMTerm *)tagTerm  withEnvironment:(UMEnvironment *)e
 {
     UMDiscreteValue *d = [UMDiscreteValue discreteString:tagTerm.identifier];
-    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d  withEnvironment:e];
     return term;
 }
 
 
-
-
-
-+ (id)termWithDirectInteger:(int)i
++ (id)termWithDirectInteger:(int)i  withEnvironment:(UMEnvironment *)e
 {
     UMDiscreteValue *d = [UMDiscreteValue discreteInt:i];
-    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d withEnvironment:e];
     return term;
    
 }
 
-+ (id)termWithDirectString:(NSString *)s
++ (id)termWithDirectString:(NSString *)s  withEnvironment:(UMEnvironment *)e
 {
     UMDiscreteValue *d = [UMDiscreteValue discreteString:s];
-    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d withEnvironment:e];
     return term;
     
 }
 
-+ (id)termWithDirectCString:(char *)s
++ (id)termWithDirectCString:(char *)s  withEnvironment:(UMEnvironment *)e
 {
     UMDiscreteValue *d = [UMDiscreteValue discreteString:@(s)];
-    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d withEnvironment:e];
     return term;
     
 }
@@ -454,235 +458,235 @@
 
 - (UMTerm *)add:(UMTerm *)b
 {
-    UMFunction *func = [[UMFunction_add alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_add alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]  withEnvironment:self.env];
     return result;
 }
 
 - (UMTerm *)sub:(UMTerm *)b
 {
-    UMFunction *func = [[UMFunction_sub alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_sub alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 }
 
 - (UMTerm *)mul:(UMTerm *)b
 {
-    UMFunction *func = [[UMFunction_mul alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_mul alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 }
 
 - (UMTerm *)div:(UMTerm *)b
 {
-    UMFunction *func = [[UMFunction_div alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_div alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 }
 
 - (UMTerm *)modulo:(UMTerm *)b
 {
-    UMFunction *func = [[UMFunction_div alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_div alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 }
 
 - (UMTerm *)dot:(UMTerm *)b
 {
-    UMFunction *func = [[UMFunction_dot alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_dot alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 }
 
 - (UMTerm *)logical_not
 {
-    UMFunction *func = [[UMFunction_not alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self]];
+    UMFunction *func = [[UMFunction_not alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self] withEnvironment:self.env];
     return result;
 }
 
 - (UMTerm *)equal:(UMTerm *)b;
 {
-    UMFunction *func = [[UMFunction_equal alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_equal alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 }
 
 - (UMTerm *)notequal:(UMTerm *)b;
 {
-    UMFunction *func = [[UMFunction_notequal alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_notequal alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 }
 
 - (UMTerm *)greaterthan:(UMTerm *)b;
 {
-    UMFunction *func = [[UMFunction_greaterthan alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_greaterthan alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 }
 
 - (UMTerm *)lessthan:(UMTerm *)b;
 {
-    UMFunction *func = [[UMFunction_lessthan alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_lessthan alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 }
 
 - (UMTerm *)greaterorequal:(UMTerm *)b;
 {
-    UMFunction *func = [[UMFunction_greaterorequal alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_greaterorequal alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 }
 
 - (UMTerm *)lessorequal:(UMTerm *)b;
 {
-    UMFunction *func = [[UMFunction_lessorequal alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_lessorequal alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 }
 
 - (UMTerm *)assign:(UMTerm *)b
 {
-    UMFunction *func = [[UMFunction_assign alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_assign alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 }
 
 - (UMTerm *)logical_and:(UMTerm *)b
 {
-    UMFunction *func = [[UMFunction_and alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_and alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 
 }
 
 - (UMTerm *)logical_or:(UMTerm *)b
 {
-    UMFunction *func = [[UMFunction_or alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_or alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 }
 
 - (UMTerm *)logical_xor:(UMTerm *)b
 {
-    UMFunction *func = [[UMFunction_xor alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_xor alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 }
 
 - (UMTerm *)bit_and:(UMTerm *)b
 {
-    UMFunction *func = [[UMFunction_bit_and alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_bit_and alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 
 }
 
 - (UMTerm *)bit_or:(UMTerm *)b
 {
-    UMFunction *func = [[UMFunction_bit_or alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_bit_or alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 
 }
 
 - (UMTerm *)bit_xor:(UMTerm *)b
 {
-    UMFunction *func = [[UMFunction_bit_xor alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_bit_xor alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 
 }
 
 - (UMTerm *)bit_not
 {
-    UMFunction *func = [[UMFunction_bit_not alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self]];
+    UMFunction *func = [[UMFunction_bit_not alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self] withEnvironment:self.env];
     return result;
 
 }
 
 - (UMTerm *)leftshift:(UMTerm *)b
 {
-    UMFunction *func = [[UMFunction_bit_shiftleft alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_bit_shiftleft alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 }
 
 - (UMTerm *)rightshift:(UMTerm *)b
 {
-    UMFunction *func = [[UMFunction_bit_shiftright alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b]];
+    UMFunction *func = [[UMFunction_bit_shiftright alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self,b] withEnvironment:self.env];
     return result;
 }
 
-+ (UMTerm *)whileCondition:(UMTerm *)condition thenDo:(UMTerm *)thendo
++ (UMTerm *)whileCondition:(UMTerm *)condition thenDo:(UMTerm *)thendo withEnvironment:(UMEnvironment *)cenv
 {
-    UMFunction *func = [[UMFunction_while alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[condition,thendo]];
+    UMFunction *func = [[UMFunction_while alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[condition,thendo] withEnvironment:cenv];
     return result;
 }
 
-+ (UMTerm *)ifCondition:(UMTerm *)condition thenDo:(UMTerm *)thendo elseDo:(UMTerm *)elsedo
++ (UMTerm *)ifCondition:(UMTerm *)condition thenDo:(UMTerm *)thendo elseDo:(UMTerm *)elsedo withEnvironment:(UMEnvironment *)cenv
 {
-    UMFunction *func = [[UMFunction_if alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[condition,thendo,(elsedo ? elsedo : [NSNull null])]];
+    UMFunction *func = [[UMFunction_if alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[condition,thendo,(elsedo ? elsedo : [NSNull null])] withEnvironment:cenv];
     return result;
 }
 
-+ (UMTerm *)thenDo:(UMTerm *)thendo whileCondition:(UMTerm *)condition
++ (UMTerm *)thenDo:(UMTerm *)thendo whileCondition:(UMTerm *)condition withEnvironment:(UMEnvironment *)cenv
 {
-    UMFunction *func = [[UMFunction_dowhile alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[thendo,condition]];
+    UMFunction *func = [[UMFunction_dowhile alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[thendo,condition]  withEnvironment:cenv];
     return result;
 
 }
 
-+ (UMTerm *)forInitializer:(UMTerm *)initializer endCondition:(UMTerm *)condition every:(UMTerm *)every thenDo:(UMTerm *)thenDo
++ (UMTerm *)forInitializer:(UMTerm *)initializer endCondition:(UMTerm *)condition every:(UMTerm *)every thenDo:(UMTerm *)thenDo withEnvironment:(UMEnvironment *)cenv
 {
-    UMFunction *func = [[UMFunction_for alloc]init];
+    UMFunction *func = [[UMFunction_for alloc]initWithEnvironment:cenv];
     UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams:
                        @[ (initializer ? initializer: [NSNull null]),
                           (condition ? condition : [NSNull null]),
                            (every ? every : [NSNull null]),
-                          thenDo]];
+                          thenDo]  withEnvironment:cenv];
     return result;
 }
 
 - (UMTerm *)preincrease
 {
-    UMFunction *func = [[UMFunction_preincrease alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self]];
+    UMFunction *func = [[UMFunction_preincrease alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self] withEnvironment:cenv];
     return result;
 }
 
 - (UMTerm *)postincrease
 {
-    UMFunction *func = [[UMFunction_postincrease alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self]];
+    UMFunction *func = [[UMFunction_postincrease alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self] withEnvironment:cenv];
     return result;
 }
 - (UMTerm *)predecrease
 {
-    UMFunction *func = [[UMFunction_predecrease alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self]];
+    UMFunction *func = [[UMFunction_predecrease alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self] withEnvironment:cenv];
     return result;
 
 }
 
 - (UMTerm *)postdecrease
 {
-    UMFunction *func = [[UMFunction_postdecrease alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self]];
+    UMFunction *func = [[UMFunction_postdecrease alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[self]  withEnvironment:cenv];
     return result;
 }
 
-+ (UMTerm *)blockWithStatement:(UMTerm *)statement
++ (UMTerm *)blockWithStatement:(UMTerm *)statement withEnvironment:(UMEnvironment *)cenv
 {
-    UMFunction *func = [[UMFunction_block alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[statement]];
+    UMFunction *func = [[UMFunction_block alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[statement] withEnvironment:cenv];
     return result;
 }
 
@@ -695,49 +699,50 @@
     }
     else
     {
-        UMTerm *block = [UMTerm blockWithStatement:self];
+        UMTerm *block = [UMTerm blockWithStatement:self withEnvironment:self.env];
         block.param = [block.param arrayByAddingObject:term];
         return block;
     }
 }
 
-+ (UMTerm *)switchCondition:(UMTerm *)condition thenDo:(UMTerm *)thenDo
++ (UMTerm *)switchCondition:(UMTerm *)condition thenDo:(UMTerm *)thenDo withEnvironment:(UMEnvironment *)cenv
 {
-    UMFunction *func = [[UMFunction_switch alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[condition,thenDo]];
+    UMFunction *func = [[UMFunction_switch alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[condition,thenDo]  withEnvironment:cenv];
     return result;
 }
 
-+ (UMTerm *)token:(int)tok text:(const char *)text
++ (UMTerm *)token:(int)tok text:(const char *)text withEnvironment:(UMEnvironment *)cenv
 {
     UMTerm *result = [[UMTerm alloc] init];
+    result.env = cenv;
     result.type =UMTermType_token;
     result.identifier = @(text);
     return result;
 }
 
-+ (UMTerm *)letsGoto:(UMTerm *)labelTerm
++ (UMTerm *)letsGoto:(UMTerm *)labelTerm withEnvironment:(UMEnvironment *)cenv
 {
-    UMFunction *func = [[UMFunction_goto alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[labelTerm]];
+    UMFunction *func = [[UMFunction_goto alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[labelTerm] withEnvironment:cenv];
     return result;
 }
 
-+ (UMTerm *)letsContinue
++ (UMTerm *)letsContinueWithEnvironment:(UMEnvironment *)cenv
 {
-    UMFunction *func = [[UMFunction_goto alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[]];
+    UMFunction *func = [[UMFunction_goto alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[] withEnvironment:cenv];
     return result;
 }
 
-+ (UMTerm *)letsBreak
++ (UMTerm *)letsBreakWithEnvironment:(UMEnvironment *)cenv
 {
-    UMFunction *func = [[UMFunction_goto alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[]];
+    UMFunction *func = [[UMFunction_goto alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[] withEnvironment:cenv];
     return result;
 }
 
-- (UMTerm *)functionCallWithArguments:(UMTerm *)list /* function call with arguments */
+- (UMTerm *)functionCallWithArguments:(UMTerm *)list  /* function call with arguments */
 {
     /*TODO: missing implemementation */
     return self;
