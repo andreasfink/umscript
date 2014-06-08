@@ -622,6 +622,13 @@
     return result;
 }
 
++ (UMTerm *)returnValue:(UMTerm *)val withEnvironment:(UMEnvironment *)cenv
+{
+    UMFunction *func = [[UMFunction_return alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[val] withEnvironment:cenv];
+    return result;
+}
+
 + (UMTerm *)whileCondition:(UMTerm *)condition thenDo:(UMTerm *)thendo withEnvironment:(UMEnvironment *)cenv
 {
     UMFunction *func = [[UMFunction_while alloc]initWithEnvironment:cenv];

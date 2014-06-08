@@ -118,6 +118,7 @@ typedef enum UMTermType
 
 - (UMTerm *)leftshift:(UMTerm *)b;
 - (UMTerm *)rightshift:(UMTerm *)b;
++ (UMTerm *)returnValue:(UMTerm *)val withEnvironment:(UMEnvironment *)cenv;
 + (UMTerm *)whileCondition:(UMTerm *)condition thenDo:(UMTerm *)thendo withEnvironment:(UMEnvironment *)cenv;
 + (UMTerm *)ifCondition:(UMTerm *)condition thenDo:(UMTerm *)thendo elseDo:(UMTerm *)elsedo withEnvironment:(UMEnvironment *)cenv;
 + (UMTerm *)thenDo:(UMTerm *)thendo whileCondition:(UMTerm *)condition withEnvironment:(UMEnvironment *)cenv;

@@ -26,13 +26,54 @@
 {
     UMDiscreteValue *previousReturnValue = env.returnValue;
     env.returnValue = nil;
-    for(UMTerm *term in params)
+
+    NSMutableDictionary *labelsDict = [[NSMutableDictionary alloc]init];
+    NSUInteger i=0;
+    NSUInteger n=[params count];
+    for(i=0;i<n;i++)
     {
-        [term evaluateWithEnvironment:env];
+        UMTerm *term  = [params objectAtIndex:i];
+        if(term.label)
+        {
+            [labelsDict setObject:[NSNumber numberWithInteger:i] forKey:term.label];
+        }
     }
-    UMDiscreteValue *returnValue = env.returnValue;
-    env.returnValue = previousReturnValue;
-    return returnValue;
+
+    i=0;
+    do
+    {
+        if(i>=n)
+        {
+            break;
+        }
+        UMTerm *term  = [params objectAtIndex:i];
+
+        env.jumpTo = NULL;
+        env.executionDone = NO;
+
+        UMDiscreteValue *r = [term evaluateWithEnvironment:env];
+        if(env.executionDone)
+        {
+            env.returnValue = r;
+            break;
+        }
+        if(env.jumpTo)
+        {
+            NSNumber *goTo = [labelsDict objectForKey:env.jumpTo];
+            if(goTo != NULL)
+            {
+                i =  [goTo integerValue];
+                continue;
+            }
+            else
+            {
+                /* TODO: goto a unknown label */
+                break;
+            }
+        }
+        i++;
+    } while (i<n);
+    return  env.returnValue;
 }
 
 - (NSString *)codeWithEnvironmentStart:(UMEnvironment *)env

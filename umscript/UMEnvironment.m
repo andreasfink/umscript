@@ -16,6 +16,8 @@
 @synthesize identPrefix;
 @synthesize returnValue;
 @synthesize environmentLog;
+@synthesize jumpTo;
+@synthesize executionDone;
 
 - (void)identAdd
 {

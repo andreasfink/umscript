@@ -242,7 +242,8 @@ jump_statement
         };
     | RETURN expression ';'
         {
-            UMTerm *r = UMGET($2);
+            UMTerm *a = UMGET($2);
+            UMTerm *r = [UMTerm returnValue:a withEnvironment:cenv];
             UMSET($$,r);
         };
 
@@ -586,82 +587,148 @@ multiplicative_expression
 	;
 	
 unary_expression
-	: postfix_expression  { UMASSIGN($$,$1); };
-    | OPERATOR_INCREASE unary_expression  { UMSET($$,[UMGET($2) preincrease]); };
-	| OPERATOR_DECREASE unary_expression  { UMSET($$,[UMGET($2) predecrease]); };
-    | '!' unary_expression                { UMSET($$,[UMGET($1) logical_not]); };
-    | '~' unary_expression                { UMSET($$,[UMGET($1) bit_not]); };
+	: postfix_expression
+        {
+            UMASSIGN($$,$1);
+        };
+    | OPERATOR_INCREASE unary_expression
+        {
+            UMTerm *a = UMGET($2);
+            UMTerm *r = [a preincrease];
+            UMSET($$,r);
+        }
+	| OPERATOR_DECREASE unary_expression
+        {
+            UMTerm *a = UMGET($2);
+            UMTerm *r = [a predecrease];
+            UMSET($$,r);
+        }
+
+    | '!' unary_expression
+        {
+            UMTerm *a = UMGET($2);
+            UMTerm *r = [a logical_not];
+            UMSET($$,r);
+        }
+    | '~' unary_expression
+        {
+            UMTerm *a = UMGET($2);
+            UMTerm *r = [a bit_not];
+            UMSET($$,r);
+        };
 	;
 
 postfix_expression
-	: primary_expression                  { UMASSIGN($$,$1); };
-	| postfix_expression '(' ')'          { UMASSIGN($$,$1); };
-    | postfix_expression '(' argument_expression_list ')'  { UMSET($$,[UMGET($1) functionCallWithArguments:UMGET($3)]); };
-    | postfix_expression '.' IDENTIFIER                    { UMSET($$,[UMGET($1) dotIdentifier:UMGET($3)]); };
-	| postfix_expression OPERATOR_INCREASE                 { UMSET($$,[UMGET($1) postincrease]); };
-	| postfix_expression OPERATOR_DECREASE                 { UMSET($$,[UMGET($1) postdecrease]); };
+	: primary_expression
+        {
+            UMASSIGN($$,$1);
+        };
+	| postfix_expression '(' ')'
+        {
+            UMTerm *a = UMGET($1);
+            UMTerm *r = [a functionCallWithArguments:NULL];
+            UMSET($$,r);
+        };
+    | postfix_expression '(' argument_expression_list ')'
+        {
+            UMTerm *a = UMGET($1);
+            UMTerm *b = UMGET($3);
+            UMTerm *r = [a functionCallWithArguments: b];
+            UMSET($$,r);
+        };
+    | postfix_expression '.' IDENTIFIER
+        {
+            UMTerm *a = UMGET($1);
+            UMTerm *b = UMGET($3);
+            UMTerm *r = [a dotIdentifier: b];
+            UMSET($$,r);
+        };
+	| postfix_expression OPERATOR_INCREASE
+        {
+            UMTerm *a = UMGET($1);
+            UMTerm *r = [a postincrease];
+            UMSET($$,r);
+        };
+	| postfix_expression OPERATOR_DECREASE
+        {
+            UMTerm *a = UMGET($1);
+            UMTerm *r = [a postdecrease];
+            UMSET($$,r);
+        };
 	;
 
 primary_expression
-    : IDENTIFIER        {
-                            UMTerm *tag = UMGET($1);
-                            UMTerm *r = [UMTerm termWithIdentifierFromTag:tag withEnvironment:cenv];
-                            UMSET($$,r);
-                        };
-    | VARIABLE          {
-                            UMTerm *tag = UMGET($1);
-                            UMTerm *r = [UMTerm termWithVariableFromTag:tag withEnvironment:cenv];
-                            UMSET($$,r);
-                        };
-    | FIELD             {
-                            UMTerm *tag = UMGET($1);
-                            UMTerm *r = [UMTerm termWithFieldFromTag:tag withEnvironment:cenv];
-                            UMSET($$,r);
-                        };
-    | CONST_BOOLEAN     {
-                            UMTerm *tag = UMGET($1);
-                            UMTerm *r = [UMTerm termWithBooleanFromTag:tag withEnvironment:cenv];
-                            UMSET($$,r);
-                        };
-    | CONST_STRING      {
-                            UMTerm *tag = UMGET($1);
-                            UMTerm *r = [UMTerm termWithStringFromTag:tag withEnvironment:cenv];
-                            UMSET($$,r);
-                        };
-    | CONST_HEX         {
-                            UMTerm *tag = UMGET($1);
-                            UMTerm *r = [UMTerm termWithHexFromTag:tag withEnvironment:cenv];
-                            UMSET($$,r);
-                        };
-    | CONST_LONGLONG    {
-                            UMTerm *tag = UMGET($1);
-                            UMTerm *r = [UMTerm termWithLongLongFromTag:tag withEnvironment:cenv];
-                            UMSET($$,r);
-                        };
-    | CONST_BINARY      {
-                            UMTerm *tag = UMGET($1);
-                            UMTerm *r = [UMTerm termWithBinaryFromTag:tag withEnvironment:cenv];
-                            UMSET($$,r);
-                        };
-    | CONST_INTEGER     {
-                            UMTerm *tag = UMGET($1);
-                            UMTerm *r = [UMTerm termWithIntegerFromTag:tag withEnvironment:cenv];
-                            UMSET($$,r);
-                        };
-    | CONST_OCTAL       {
-                            UMTerm *tag = UMGET($1);
-                            UMTerm *r = [UMTerm termWithOctalFromTag:tag withEnvironment:cenv];
-                            UMSET($$,r);
-                        };
-    | CONST_DOUBLE      {
-                            UMTerm *tag = UMGET($1);
-                            UMTerm *r = [UMTerm termWithDoubleFromTag:tag withEnvironment:cenv];
-                            UMSET($$,r);
-                        };
-	| '(' expression ')'    {
-                                UMTerm *term = UMGET($1);
-                                UMSET($$,term);
-                            }
+    : IDENTIFIER
+        {
+            UMTerm *tag = UMGET($1);
+            UMTerm *r = [UMTerm termWithIdentifierFromTag:tag withEnvironment:cenv];
+            UMSET($$,r);
+        };
+    | VARIABLE
+        {
+            UMTerm *tag = UMGET($1);
+            UMTerm *r = [UMTerm termWithVariableFromTag:tag withEnvironment:cenv];
+            UMSET($$,r);
+        };
+    | FIELD
+        {
+            UMTerm *tag = UMGET($1);
+            UMTerm *r = [UMTerm termWithFieldFromTag:tag withEnvironment:cenv];
+            UMSET($$,r);
+        };
+    | CONST_BOOLEAN
+        {
+            UMTerm *tag = UMGET($1);
+            UMTerm *r = [UMTerm termWithBooleanFromTag:tag withEnvironment:cenv];
+            UMSET($$,r);
+        };
+    | CONST_STRING
+        {
+            UMTerm *tag = UMGET($1);
+            UMTerm *r = [UMTerm termWithStringFromTag:tag withEnvironment:cenv];
+            UMSET($$,r);
+        };
+    | CONST_HEX
+        {
+            UMTerm *tag = UMGET($1);
+            UMTerm *r = [UMTerm termWithHexFromTag:tag withEnvironment:cenv];
+            UMSET($$,r);
+        };
+    | CONST_LONGLONG
+        {
+            UMTerm *tag = UMGET($1);
+            UMTerm *r = [UMTerm termWithLongLongFromTag:tag withEnvironment:cenv];
+            UMSET($$,r);
+        };
+    | CONST_BINARY
+        {
+            UMTerm *tag = UMGET($1);
+            UMTerm *r = [UMTerm termWithBinaryFromTag:tag withEnvironment:cenv];
+            UMSET($$,r);
+        };
+    | CONST_INTEGER
+        {
+            UMTerm *tag = UMGET($1);
+            UMTerm *r = [UMTerm termWithIntegerFromTag:tag withEnvironment:cenv];
+            UMSET($$,r);
+        };
+    | CONST_OCTAL
+        {
+            UMTerm *tag = UMGET($1);
+            UMTerm *r = [UMTerm termWithOctalFromTag:tag withEnvironment:cenv];
+            UMSET($$,r);
+        };
+    | CONST_DOUBLE
+        {
+            UMTerm *tag = UMGET($1);
+            UMTerm *r = [UMTerm termWithDoubleFromTag:tag withEnvironment:cenv];
+            UMSET($$,r);
+        };
+	| '(' expression ')'
+        {
+            UMTerm *term = UMGET($1);
+            UMSET($$,term);
+        }
 	;
 
 
