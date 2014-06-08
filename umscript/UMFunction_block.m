@@ -24,7 +24,7 @@
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
 {
-    UMDiscreteValue *previousReturnValue = env.returnValue;
+//    UMDiscreteValue *previousReturnValue = env.returnValue;
     env.returnValue = nil;
 
     NSMutableDictionary *labelsDict = [[NSMutableDictionary alloc]init];
