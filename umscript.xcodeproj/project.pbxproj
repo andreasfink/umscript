@@ -99,8 +99,6 @@
 		A6835C3119297AE30090FC94 /* umscript.h in Headers */ = {isa = PBXBuildFile; fileRef = A6835BE119297AE30090FC94 /* umscript.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6835C3319297AE30090FC94 /* UMTerm.h in Headers */ = {isa = PBXBuildFile; fileRef = A6835BE319297AE30090FC94 /* UMTerm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6835C3419297AE30090FC94 /* UMTerm.m in Sources */ = {isa = PBXBuildFile; fileRef = A6835BE419297AE30090FC94 /* UMTerm.m */; };
-		A6835C3619297B2F0090FC94 /* libulib.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A6835C3519297B2F0090FC94 /* libulib.1.1.dylib */; };
-		A6835C3719297B2F0090FC94 /* libulib.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A6835C3519297B2F0090FC94 /* libulib.1.1.dylib */; };
 		A6835C8F19297F990090FC94 /* UMScriptDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = A6835C8D19297F990090FC94 /* UMScriptDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6835C9019297F990090FC94 /* UMScriptDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = A6835C8E19297F990090FC94 /* UMScriptDocument.m */; };
 		A6835CA019298C110090FC94 /* UMScriptCompilerEnvironment.h in Headers */ = {isa = PBXBuildFile; fileRef = A6835C9E19298C110090FC94 /* UMScriptCompilerEnvironment.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -139,6 +137,7 @@
 		A6B5CE8E19301FE300F02FCA /* UMFunction_continue.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B5CE8C19301FE300F02FCA /* UMFunction_continue.m */; };
 		A6B5CE9119301FEB00F02FCA /* UMFunction_break.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE8F19301FEB00F02FCA /* UMFunction_break.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6B5CE9219301FEB00F02FCA /* UMFunction_break.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B5CE9019301FEB00F02FCA /* UMFunction_break.m */; };
+		A6C4E0EA1945237D0090FC94 /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C4E0E91945237D0090FC94 /* ulib.framework */; };
 		A6ECC2F7192CE7350090FC94 /* _generated_umscript.y.h in Headers */ = {isa = PBXBuildFile; fileRef = A6ECC2F6192CE7350090FC94 /* _generated_umscript.y.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6EEDB691929DD1F0090FC94 /* umscript.yl.h in Headers */ = {isa = PBXBuildFile; fileRef = A6EEDB681929DD1F0090FC94 /* umscript.yl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6EEDB6C1929DE800090FC94 /* _generated_umscript.l.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EEDB6A1929DE800090FC94 /* _generated_umscript.l.m */; };
@@ -249,7 +248,6 @@
 		A6835BE119297AE30090FC94 /* umscript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = umscript.h; sourceTree = "<group>"; };
 		A6835BE319297AE30090FC94 /* UMTerm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMTerm.h; sourceTree = "<group>"; };
 		A6835BE419297AE30090FC94 /* UMTerm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTerm.m; sourceTree = "<group>"; };
-		A6835C3519297B2F0090FC94 /* libulib.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libulib.1.1.dylib; path = /usr/local/lib/libulib.1.1.dylib; sourceTree = "<absolute>"; };
 		A6835C8D19297F990090FC94 /* UMScriptDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMScriptDocument.h; sourceTree = "<group>"; };
 		A6835C8E19297F990090FC94 /* UMScriptDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMScriptDocument.m; sourceTree = "<group>"; };
 		A6835C9E19298C110090FC94 /* UMScriptCompilerEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMScriptCompilerEnvironment.h; sourceTree = "<group>"; };
@@ -294,6 +292,7 @@
 		A6B5CE8C19301FE300F02FCA /* UMFunction_continue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_continue.m; sourceTree = "<group>"; };
 		A6B5CE8F19301FEB00F02FCA /* UMFunction_break.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_break.h; sourceTree = "<group>"; };
 		A6B5CE9019301FEB00F02FCA /* UMFunction_break.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_break.m; sourceTree = "<group>"; };
+		A6C4E0E91945237D0090FC94 /* ulib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ulib.framework; path = /Library/Frameworks/ulib.framework; sourceTree = "<absolute>"; };
 		A6ECC2F6192CE7350090FC94 /* _generated_umscript.y.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _generated_umscript.y.h; path = language/_generated_umscript.y.h; sourceTree = "<group>"; };
 		A6EEDB681929DD1F0090FC94 /* umscript.yl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = umscript.yl.h; path = language/umscript.yl.h; sourceTree = "<group>"; };
 		A6EEDB6A1929DE800090FC94 /* _generated_umscript.l.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = _generated_umscript.l.m; path = language/_generated_umscript.l.m; sourceTree = "<group>"; };
@@ -308,7 +307,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6835C3619297B2F0090FC94 /* libulib.1.1.dylib in Frameworks */,
+				A6C4E0EA1945237D0090FC94 /* ulib.framework in Frameworks */,
 				A6A3AA0719297741007FFC7B /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,7 +316,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6835C3719297B2F0090FC94 /* libulib.1.1.dylib in Frameworks */,
 				A6A3AA2019297741007FFC7B /* umscript.framework in Frameworks */,
 				A6A3AA1D19297741007FFC7B /* Cocoa.framework in Frameworks */,
 				A6A3AA1C19297741007FFC7B /* XCTest.framework in Frameworks */,
@@ -368,7 +366,7 @@
 		A6A3AA0519297741007FFC7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A6835C3519297B2F0090FC94 /* libulib.1.1.dylib */,
+				A6C4E0E91945237D0090FC94 /* ulib.framework */,
 				A6A3AA0619297741007FFC7B /* Cocoa.framework */,
 				A6A3AA1B19297741007FFC7B /* XCTest.framework */,
 				A6A3AA0819297741007FFC7B /* Other Frameworks */,
@@ -898,7 +896,7 @@
 				);
 				INSTALL_PATH = /Library/Frameworks/;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				VALID_ARCHS = "$(inherited)";
@@ -944,7 +942,7 @@
 				);
 				INSTALL_PATH = /Library/Frameworks/;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 				VALID_ARCHS = "$(inherited)";
@@ -960,6 +958,10 @@
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
@@ -982,6 +984,10 @@
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
