@@ -2565,7 +2565,7 @@ case "$host" in
 
     ARCH="-arch x86_64"
     CFLAGS="$CFLAGS -fobjc-arc -mmacosx-version-min=10.7 -D_REENTRANT=1 -DDARWIN=1 -Iinclude -Iinclude/ulib -I/usr/local/ssl/include -I/usr/local/include   ${ARCH}"
-    LDFLAGS="-L/usr/local/lib -framework Foundation -framework CoreFoundation -framework Security -framework ulib ${ARCH}"
+    LDFLAGS="-F/Library/Frameworks -framework Foundation -framework CoreFoundation -framework Security -framework ulib ${ARCH}"
     BUILD_DIR="build/osx"
     SHARED_LIBRARY_EXTENSION="dylib"
     LIBTOOL="libtool -static -o"
