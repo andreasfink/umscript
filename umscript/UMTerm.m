@@ -699,7 +699,7 @@
 
 - (UMTerm *)blockAppendStatement:(UMTerm *)term
 {
-    if([self isKindOfClass:[UMFunction_block class]])
+    if((type == UMTermType_function) && ([function isKindOfClass:[UMFunction_block class]]))
     {
         param = [param arrayByAddingObject:term];
         return self;
@@ -776,6 +776,34 @@
             break;
         case UMTermType_function:
             return [function name];
+            break;
+        case UMTermType_identifier:
+            return identifier;
+            break;
+        case UMTermType_token:
+            return identifier;
+            break;
+        default:
+            return @"";
+            break;
+    }
+}
+
+- (NSString *)labelValue
+{
+    switch(type)
+    {
+        case UMTermType_discrete:
+            return [discrete labelValue];
+            break;
+        case UMTermType_field:
+            @throw [NSError errorWithDomain:@"umscript" code:2 userInfo:@{@"sysmsg":[NSString stringWithFormat:@"Nonstatic label %@",fieldname]}];
+            break;
+        case UMTermType_variable:
+            @throw [NSError errorWithDomain:@"umscript" code:2 userInfo:@{@"sysmsg":[NSString stringWithFormat:@"Nonstatic label %@",varname]}];
+            break;
+        case UMTermType_function:
+            @throw [NSError errorWithDomain:@"umscript" code:2 userInfo:@{@"sysmsg":[NSString stringWithFormat:@"Unknown label %@",[function name]]}];
             break;
         case UMTermType_identifier:
             return identifier;

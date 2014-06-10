@@ -55,7 +55,15 @@
     {
         [self compileSource];
     }
-    UMDiscreteValue *result = [compiledCode evaluateWithEnvironment:env];
+    UMDiscreteValue *result = NULL;
+    @try
+    {
+        result = [compiledCode evaluateWithEnvironment:env];
+    }
+    @catch(NSError *nse)
+    {
+        NSLog(@"Error: %@",nse);
+    }
     return result;
 }
 

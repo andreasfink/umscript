@@ -25,23 +25,6 @@
 {
     [super setUp];
     env = [[UMEnvironment alloc]init];
-    [env setVariable:[UMDiscreteValue discreteString:@"A"] forKey:@"var1"];
-    [env setVariable:[UMDiscreteValue discreteString:@"A"] forKey:@"var2"];
-    [env setVariable:[UMDiscreteValue discreteString:@"B"] forKey:@"var3"];
-    [env setVariable:[UMDiscreteValue discreteString:@"BBB"] forKey:@"var4"];
-    [env setVariable:[UMDiscreteValue discreteBool:NO] forKey:@"var5"];
-    [env setVariable:[UMDiscreteValue discreteInt:123] forKey:@"var6"];
-    NSData *d = [NSData dataWithBytes:"hello world" length:11];
-    [env setVariable:[UMDiscreteValue discreteData:d] forKey:@"var7"];
-    
-    [env setField:[UMDiscreteValue discreteString:@"A"] forKey:@"field1"];
-    [env setField:[UMDiscreteValue discreteString:@"A"] forKey:@"field2"];
-    [env setField:[UMDiscreteValue discreteString:@"B"] forKey:@"field3"];
-    [env setField:[UMDiscreteValue discreteString:@"BBB"] forKey:@"field4"];
-    [env setField:[UMDiscreteValue discreteBool:NO] forKey:@"var5"];
-    [env setField:[UMDiscreteValue discreteInt:123] forKey:@"var6"];
-    [env setField:[UMDiscreteValue discreteData:d] forKey:@"var7"];
-    
     
 }
 
@@ -127,6 +110,24 @@
 - (void)testSimpleFunction
 {
     UMDiscreteValue *result = nil;
+
+    [env setVariable:[UMDiscreteValue discreteString:@"A"] forKey:@"var1"];
+    [env setVariable:[UMDiscreteValue discreteString:@"A"] forKey:@"var2"];
+    [env setVariable:[UMDiscreteValue discreteString:@"B"] forKey:@"var3"];
+    [env setVariable:[UMDiscreteValue discreteString:@"BBB"] forKey:@"var4"];
+    [env setVariable:[UMDiscreteValue discreteBool:NO] forKey:@"var5"];
+    [env setVariable:[UMDiscreteValue discreteInt:123] forKey:@"var6"];
+    NSData *d = [NSData dataWithBytes:"hello world" length:11];
+    [env setVariable:[UMDiscreteValue discreteData:d] forKey:@"var7"];
+    
+    [env setField:[UMDiscreteValue discreteString:@"A"] forKey:@"field1"];
+    [env setField:[UMDiscreteValue discreteString:@"A"] forKey:@"field2"];
+    [env setField:[UMDiscreteValue discreteString:@"B"] forKey:@"field3"];
+    [env setField:[UMDiscreteValue discreteString:@"BBB"] forKey:@"field4"];
+    [env setField:[UMDiscreteValue discreteBool:NO] forKey:@"var5"];
+    [env setField:[UMDiscreteValue discreteInt:123] forKey:@"var6"];
+    [env setField:[UMDiscreteValue discreteData:d] forKey:@"var7"];
+
     UMTerm *discrete1 = [[UMTerm alloc]initWithDiscreteValue:[UMDiscreteValue discreteInt:55] withEnvironment:env];
     
     result = [discrete1 evaluateWithEnvironment:env];
@@ -295,10 +296,56 @@
     XCTAssertTrue(result.intValue==101,@"should be 102 but is %d",result.intValue);
 }
 
-- (void)testScript3
+- (void)testBlock
 {
     NSString *code = @"$a = 1;"
     @"$b=-1;"
+    @"$c=-1;"
+    @"$d=-1;"
+    @"$e=-1;"
+    @"$f=-1;"
+    @"$g=-1;";
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    [s compileSource];
+    XCTAssertTrue(s.compiledCode.param.count == 7,@"value is %d",(int)s.compiledCode.param.count);
+}
+
+- (void)testAddingVariables
+{
+        NSString *code =
+    @"$a = 1;"
+    @"$b = 2;"
+    @"$c = 4;"
+    @"$d = $a + $b + $c;"
+    @"$e = -1;"
+    @"return $d;";
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    [s compileSource];
+    UMDiscreteValue *result = [s runScriptWithEnvironment:env];
+    XCTAssertTrue(result.intValue==7,@"should be 7 but is %d",result.intValue);
+}
+
+- (void)testAddingVariablesInBlock
+{
+    NSString *code =
+    @"{"
+    @"$a = 1;"
+    @"$b = 2;"
+    @"$c = 4;"
+    @"$d = $a + $b + $c;"
+    @"$e = -1;"
+    @"return $d;"
+    @"}";
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    [s compileSource];
+    UMDiscreteValue *result = [s runScriptWithEnvironment:env];
+    XCTAssertTrue(result.intValue==7,@"should be 7 but is %d",result.intValue);
+}
+
+- (void)testSwitchWithFallthrough
+{
+    NSString *code = @"$a = 1;"
+    @"$b = -1;"
     @"switch($a)"
     @"{"
     @"   case 1:"
@@ -318,7 +365,48 @@
     [s compileSource];
     UMDiscreteValue *result = [s runScriptWithEnvironment:env];
     
-    XCTAssertTrue(result.intValue==102,@"should be 102 but is %d",result.intValue);
+    XCTAssertTrue(result.intValue==299,@"should be 299 but is %d",result.intValue);
+}
+
+- (void)testSwitchWithDefault
+{
+    NSString *code = @"$a = 99;"
+    @"$b = -1;"
+    @"switch($a)"
+    @"{"
+    @"   case 1:"
+    @"        $b = $b + 100;"
+    @"   case 2:"
+    @"        $b = $b + 200;"
+    @"        break;"
+    @"   case 3:"
+    @"        $b = $b + 400;"
+    @"        break;"
+    @"   default:"
+    @"        $b = $b + 800;"
+    @"        break;"
+    @"}"
+    @"return $b;";
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    [s compileSource];
+    UMDiscreteValue *result = [s runScriptWithEnvironment:env];
+    
+    XCTAssertTrue(result.intValue==799,@"should be 799 but is %d",result.intValue);
+}
+
+
+- (void)testGoto
+{
+    NSString *code = @"$a = 100;"
+    @"goto test;"
+    @"$a++;"
+    @"test:"
+    @"return $a;";
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    [s compileSource];
+    UMDiscreteValue *result = [s runScriptWithEnvironment:env];
+    
+    XCTAssertTrue(result.intValue==100,@"should be 100 but is %d",result.intValue);
 }
 
 @end

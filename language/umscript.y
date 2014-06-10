@@ -55,7 +55,8 @@ extern int yyparse (yyscan_t yyscanner, UMScriptCompilerEnvironment *cenv);
 
 #define SET_NULL(r) { if(r.value) CFBridgingRelease(r.value);}
 
-#define SET_LABEL(r,n) { UMTerm *t = UMGET(r); t.label = n.constantStringValue;}
+#define SET_LABEL(r,n) { UMTerm *t = UMGET(r); t.label = n.labelValue;}
+#define SET_DEFAULT_LABEL(r) { UMTerm *t = UMGET(r); t.label = @"default"; }
 //unused macro to silence the compiler
 #define UU(x)   (x.token=x.token)
 
@@ -195,7 +196,7 @@ labeled_statement
     | DEFAULT ':' statement
             {
                 UMASSIGN($$,$3);
-                SET_LABEL($$,UMGET($1));
+                SET_DEFAULT_LABEL($$);
             };
 	;
 

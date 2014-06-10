@@ -31,8 +31,9 @@
     UMTerm *switchBlock = params[1];
     
     UMDiscreteValue *switchValue = [switchTerm evaluateWithEnvironment:env];
-    env.jumpTo = [switchValue stringValue];
+    env.jumpTo = switchValue.labelValue;
     [switchBlock evaluateWithEnvironment:env];
+    env.breakCalled = NO;
     return [UMDiscreteValue discreteNull];
 }
 

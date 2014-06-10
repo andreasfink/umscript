@@ -40,6 +40,7 @@ typedef enum UMDiscreteValueType
 - (double) doubleValue;
 - (long long)longLongValue;
 - (UMDiscreteValue *) notValue;
+- (NSString *)labelValue;
 
 - (UMDiscreteValue *)initWithBool:(BOOL)b;
 - (UMDiscreteValue *)initWithInt:(int)i;

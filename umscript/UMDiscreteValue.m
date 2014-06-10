@@ -624,6 +624,28 @@
     }
 }
 
+- (NSString *)labelValue
+{
+    switch(type)
+    {
+        case UMVALUE_NULL:
+            return @"(null)";
+        case UMVALUE_BOOL:
+            return [NSString stringWithFormat:@"(bool)%@",self.boolValue ? @"YES" : @"NO"];
+        case UMVALUE_INT:
+            return [NSString stringWithFormat:@"(number)%d",self.intValue];
+        case UMVALUE_LONGLONG:
+            return [NSString stringWithFormat:@"(number)%lld",self.longLongValue];
+        case UMVALUE_DOUBLE:
+            return [NSString stringWithFormat:@"(number)%lf",self.doubleValue];
+        case UMVALUE_STRING:
+            return [NSString stringWithFormat:@"(string)%@",self.stringValue];
+        case UMVALUE_DATA:
+            return [NSString stringWithFormat:@"(data)%@",self.dataValue.hexString];
+        default:
+            return @"(unknown)";
+    }
+}
 
 - (UMDiscreteValue *)addValue:(UMDiscreteValue *)bval
 {

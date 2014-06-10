@@ -138,6 +138,7 @@ typedef enum UMTermType
 - (UMTerm *)functionCallWithArguments:(UMTerm *)list; /* function call with arguments */
 - (UMTerm *)dotIdentifier:(UMTerm *)list; /* object.access */
 - (NSString *)constantStringValue;
+- (NSString *)labelValue;
 
 + (UMTerm *)letsGoto:(UMTerm *)labelTerm withEnvironment:(UMEnvironment *)cenv;
 + (UMTerm *)letsBreakWithEnvironment:(UMEnvironment *)cenv;

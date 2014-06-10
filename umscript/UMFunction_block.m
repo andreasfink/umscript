@@ -46,6 +46,19 @@
         {
             i =  [goTo integerValue];
         }
+        else
+        {
+            NSNumber *goTo = [labelsDict objectForKey:@"default"];
+            if(goTo != NULL)
+            {
+                i =  [goTo integerValue];
+            }
+            else
+            {
+                /* fall through the whole block */
+                i = n+1;
+            }
+        }
     }
     else
     {
@@ -75,7 +88,7 @@
         }
         if(env.jumpTo)
         {
-            NSNumber *goTo = [labelsDict objectForKey:env.jumpTo];
+            NSNumber *goTo = [labelsDict objectForKey:[env.jumpTo description]];
             if(goTo != NULL)
             {
                 i =  [goTo integerValue];
@@ -83,7 +96,14 @@
             }
             else
             {
-                /* TODO: goto a unknown label */
+                /* we use discreteNull as placeholder for any default: switch statement */
+                NSNumber *goTo = [labelsDict objectForKey:[[UMDiscreteValue discreteNull]description]];
+                if(goTo != NULL)
+                {
+                    i =  [goTo integerValue];
+                    continue;
+                }
+                @throw [NSError errorWithDomain:@"umscript" code:1 userInfo:@{@"sysmsg":[NSString stringWithFormat:@"Unknown label %@",env.jumpTo.description]}];
                 break;
             }
         }
