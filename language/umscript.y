@@ -627,14 +627,14 @@ postfix_expression
 	| postfix_expression '(' ')'
         {
             UMTerm *a = UMGET($1);
-            UMTerm *r = [a functionCallWithArguments:NULL];
+            UMTerm *r = [a functionCallWithArguments:NULL environment:cenv];
             UMSET($$,r);
         };
     | postfix_expression '(' argument_expression_list ')'
         {
             UMTerm *a = UMGET($1);
             UMTerm *b = UMGET($3);
-            UMTerm *r = [a functionCallWithArguments: b];
+            UMTerm *r = [a functionCallWithArguments:b environment:cenv];
             UMSET($$,r);
         };
     | postfix_expression '.' IDENTIFIER
@@ -735,7 +735,17 @@ primary_expression
 
 argument_expression_list
 	: assignment_expression
+        {
+            UMTerm *term = UMGET($1);
+            UMSET($$,term);
+        }
 	| argument_expression_list ',' assignment_expression
+        {
+            UMTerm *a = UMGET($1);
+            UMTerm *b = UMGET($3);
+            UMTerm *r = [a listAppendStatement:b];
+            UMSET($$,r);
+        };
 	;
 
 constant_expression

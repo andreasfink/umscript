@@ -166,6 +166,15 @@
     return [[UMDiscreteValue alloc]initWithString:s];
 }
 
++ (UMDiscreteValue *)discreteQuotedString:(NSString *)s;
+{
+    NSUInteger start = 1;
+    NSUInteger len = s.length - 2;
+    /* TODO: we should not only remove quotes at beginning and end, we should also take care of escape sequences */
+    
+    return [[UMDiscreteValue alloc]initWithString:[s substringWithRange:NSMakeRange(start,len)]];
+}
+
 + (UMDiscreteValue *)discreteData:(NSData *)data;
 {
     return [[UMDiscreteValue alloc]initWithData:data];

@@ -534,7 +534,7 @@ static const yytype_uint16 yyrline[] =
      502,   509,   516,   526,   530,   537,   547,   548,   555,   565,
      566,   573,   581,   591,   595,   601,   608,   614,   623,   627,
      633,   640,   647,   653,   662,   668,   674,   680,   686,   692,
-     698,   704,   710,   716,   722,   728,   737,   738,   742
+     698,   704,   710,   716,   722,   728,   737,   742,   752
 };
 #endif
 
@@ -2929,7 +2929,7 @@ yyreduce:
 #line 628 "language/umscript.y" /* yacc.c:1661  */
     {
             UMTerm *a = UMGET((yyvsp[-2]));
-            UMTerm *r = [a functionCallWithArguments:NULL];
+            UMTerm *r = [a functionCallWithArguments:NULL environment:cenv];
             UMSET((yyval),r);
         }
 #line 2936 "language/_generated_umscript.y.m" /* yacc.c:1661  */
@@ -2940,7 +2940,7 @@ yyreduce:
     {
             UMTerm *a = UMGET((yyvsp[-3]));
             UMTerm *b = UMGET((yyvsp[-1]));
-            UMTerm *r = [a functionCallWithArguments: b];
+            UMTerm *r = [a functionCallWithArguments:b environment:cenv];
             UMSET((yyval),r);
         }
 #line 2947 "language/_generated_umscript.y.m" /* yacc.c:1661  */
@@ -3096,8 +3096,28 @@ yyreduce:
 #line 3097 "language/_generated_umscript.y.m" /* yacc.c:1661  */
     break;
 
+  case 96:
+#line 738 "language/umscript.y" /* yacc.c:1661  */
+    {
+            UMTerm *term = UMGET((yyvsp[0]));
+            UMSET((yyval),term);
+        }
+#line 3106 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+    break;
 
-#line 3101 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+  case 97:
+#line 743 "language/umscript.y" /* yacc.c:1661  */
+    {
+            UMTerm *a = UMGET((yyvsp[-2]));
+            UMTerm *b = UMGET((yyvsp[0]));
+            UMTerm *r = [a listAppendStatement:b];
+            UMSET((yyval),r);
+        }
+#line 3117 "language/_generated_umscript.y.m" /* yacc.c:1661  */
+    break;
+
+
+#line 3121 "language/_generated_umscript.y.m" /* yacc.c:1661  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -3332,7 +3352,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 758 "language/umscript.y" /* yacc.c:1906  */
+#line 768 "language/umscript.y" /* yacc.c:1906  */
 
 #include <stdio.h>
 

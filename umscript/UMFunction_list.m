@@ -1,0 +1,113 @@
+//
+//  UMFunction_list.m
+//  umscript
+//
+//  Created by Andreas Fink on 10.06.14.
+//  Copyright (c) 2014 SMSRelay AG. All rights reserved.
+//
+
+#import "UMFunction_list.h"
+
+@implementation UMFunction_list
+
+- (id)initWithEnvironment:(UMEnvironment *)env
+{
+    self = [super initWithEnvironment:env];
+    if(self)
+    {
+        self.name = @"list";
+        [env log:self.name];
+    }
+    return self;
+}
+
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+{
+    env.returnValue = nil;
+    
+    NSMutableDictionary *labelsDict = [[NSMutableDictionary alloc]init];
+    NSUInteger i=0;
+    NSUInteger n=[params count];
+    for(i=0;i<n;i++)
+    {
+        UMTerm *term  = [params objectAtIndex:i];
+        if(term.label)
+        {
+            [labelsDict setObject:[NSNumber numberWithInteger:i] forKey:term.label];
+        }
+    }
+    
+    if(env.jumpTo != NULL) /* a block of a switch statement where we are being jumped into */
+    {
+        NSNumber *goTo = [labelsDict objectForKey:env.jumpTo];
+        if(goTo != NULL)
+        {
+            i =  [goTo integerValue];
+        }
+        else
+        {
+            NSNumber *goTo = [labelsDict objectForKey:@"default"];
+            if(goTo != NULL)
+            {
+                i =  [goTo integerValue];
+            }
+            else
+            {
+                /* fall through the whole block */
+                i = n+1;
+            }
+        }
+    }
+    else
+    {
+        i=0;
+    }
+    do
+    {
+        if(i>=n)
+        {
+            break;
+        }
+        UMTerm *term  = [params objectAtIndex:i];
+        
+        env.jumpTo = NULL;
+        env.returnCalled = NO;
+        env.breakCalled = NO;
+        
+        UMDiscreteValue *r = [term evaluateWithEnvironment:env];
+        if(env.returnCalled)
+        {
+            env.returnValue = r;
+            break;
+        }
+        if(env.breakCalled)
+        {
+            break;
+        }
+        if(env.jumpTo)
+        {
+            NSNumber *goTo = [labelsDict objectForKey:[env.jumpTo description]];
+            if(goTo != NULL)
+            {
+                i =  [goTo integerValue];
+                continue;
+            }
+            else
+            {
+                /* we use discreteNull as placeholder for any default: switch statement */
+                NSNumber *goTo = [labelsDict objectForKey:[[UMDiscreteValue discreteNull]description]];
+                if(goTo != NULL)
+                {
+                    i =  [goTo integerValue];
+                    continue;
+                }
+                @throw [NSError errorWithDomain:@"umscript" code:1 userInfo:@{@"sysmsg":[NSString stringWithFormat:@"Unknown label %@",env.jumpTo.description]}];
+                break;
+            }
+        }
+        i++;
+    } while (i<n);
+    return  env.returnValue;
+}
+
+@end

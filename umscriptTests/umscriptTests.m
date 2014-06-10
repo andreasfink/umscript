@@ -107,87 +107,6 @@
     
 }
 
-- (void)testSimpleFunction
-{
-    UMDiscreteValue *result = nil;
-
-    [env setVariable:[UMDiscreteValue discreteString:@"A"] forKey:@"var1"];
-    [env setVariable:[UMDiscreteValue discreteString:@"A"] forKey:@"var2"];
-    [env setVariable:[UMDiscreteValue discreteString:@"B"] forKey:@"var3"];
-    [env setVariable:[UMDiscreteValue discreteString:@"BBB"] forKey:@"var4"];
-    [env setVariable:[UMDiscreteValue discreteBool:NO] forKey:@"var5"];
-    [env setVariable:[UMDiscreteValue discreteInt:123] forKey:@"var6"];
-    NSData *d = [NSData dataWithBytes:"hello world" length:11];
-    [env setVariable:[UMDiscreteValue discreteData:d] forKey:@"var7"];
-    
-    [env setField:[UMDiscreteValue discreteString:@"A"] forKey:@"field1"];
-    [env setField:[UMDiscreteValue discreteString:@"A"] forKey:@"field2"];
-    [env setField:[UMDiscreteValue discreteString:@"B"] forKey:@"field3"];
-    [env setField:[UMDiscreteValue discreteString:@"BBB"] forKey:@"field4"];
-    [env setField:[UMDiscreteValue discreteBool:NO] forKey:@"var5"];
-    [env setField:[UMDiscreteValue discreteInt:123] forKey:@"var6"];
-    [env setField:[UMDiscreteValue discreteData:d] forKey:@"var7"];
-
-    UMTerm *discrete1 = [[UMTerm alloc]initWithDiscreteValue:[UMDiscreteValue discreteInt:55] withEnvironment:env];
-    
-    result = [discrete1 evaluateWithEnvironment:env];
-    XCTAssertTrue(result.intValue==55,@"block returns %d but should return 1",result.intValue);
-    
-    UMTerm *discrete2 = [[UMTerm alloc]initWithDiscreteValue:[UMDiscreteValue discreteInt:123] withEnvironment:env];
-    result = [discrete2 evaluateWithEnvironment:env];
-    XCTAssertTrue(result.intValue==123,@"block returns %d but should return 1",result.intValue);
-    
-    UMFunction *mathaddfunc = [env functionByName:@"add"];
-    XCTAssertTrue(mathaddfunc!=NULL,@"function mathadd is not found %@",mathaddfunc);
-    
-    UMFunction *blockfunc = [env functionByName:@"block"];
-    XCTAssertTrue(blockfunc!=NULL,@"function block is not found %@",blockfunc);
-    
-    UMFunction *setvarfunc = [env functionByName:@"setvar"];
-    XCTAssertTrue(setvarfunc!=NULL,@"function block is not found %@",blockfunc);
-    
-    UMFunction *getvarfunc = [env functionByName:@"getvar"];
-    XCTAssertTrue(getvarfunc!=NULL,@"function block is not found %@",blockfunc);
-    
-    UMFunction *returnfunc = [env functionByName:@"return"];
-    XCTAssertTrue(returnfunc!=NULL,@"function return is not found %@",returnfunc);
-    
-    UMTerm *additionTerm1 = [[UMTerm alloc]initWithFunction:mathaddfunc
-                                                  andParams:@[discrete1,discrete2] withEnvironment:env];
-    result = [additionTerm1 evaluateWithEnvironment:env];
-    XCTAssertTrue(result.intValue==178,@"block returns %d but should return 178",result.intValue);
-    
-    UMTerm *discrete3 = [[UMTerm alloc]initWithDiscreteValue:[UMDiscreteValue discreteInt:23] withEnvironment:env];
-    UMTerm *discrete4 = [[UMTerm alloc]initWithDiscreteValue:[UMDiscreteValue discreteInt:41] withEnvironment:env];
-    UMTerm *varname1 = [[UMTerm alloc]initWithDiscreteValue:[UMDiscreteValue discreteString:@"var1"] withEnvironment:env];
-    
-    
-    UMTerm *additionTerm2 = [[UMTerm alloc]initWithFunction:mathaddfunc
-                                                  andParams:@[discrete3,discrete4] withEnvironment:env];
-    result = [additionTerm2 evaluateWithEnvironment:env];
-    XCTAssertTrue(result.intValue==64,@"block returns %d",result.intValue);
-    
-    UMTerm *setvarterm = [[UMTerm alloc]initWithFunction:setvarfunc andParams:@[varname1,additionTerm1] withEnvironment:env];
-    UMTerm *getvarterm = [[UMTerm alloc]initWithFunction:getvarfunc andParams:@[varname1] withEnvironment:env];
-    
-    UMTerm *returnterm = [[UMTerm alloc]initWithFunction:returnfunc andParams:@[getvarterm] withEnvironment:env];
-    
-    UMTerm *additionTerm12 = [[UMTerm alloc]initWithFunction:blockfunc
-                                                   andParams:@[setvarterm,additionTerm2,returnterm] withEnvironment:env];
-    
-    result = [additionTerm12 evaluateWithEnvironment:env];
-    XCTAssertTrue(result.intValue==178,@"block returns %d but should return 178",result.intValue);
-    
-    NSString *code = [additionTerm12 codeWithEnvironment:env];
-    FILE *f = fopen("/Users/afink/output.txt","w+");
-    if(f)
-    {
-        const char *c = [code UTF8String];
-        size_t len = strlen(c);
-        fwrite(c,len,1,f);
-        fclose(f);
-    }
-}
 
 - (void)testAddWithTerms
 {
@@ -408,5 +327,57 @@
     
     XCTAssertTrue(result.intValue==100,@"should be 100 but is %d",result.intValue);
 }
+
+- (void)testSubstring1
+{
+    NSString *code = @"$a = \"0123456789ABCDEFG\";"
+    @"$b = substr($a,0,3);"
+    @"return $b;";
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    [s compileSource];
+    UMDiscreteValue *result = [s runScriptWithEnvironment:env];
+    
+    XCTAssertTrue([result.stringValue isEqualToString:@"012"],@"should be 012 but is %@",result.stringValue);
+}
+
+
+- (void)testSubstring2
+{
+    NSString *code = @"$a = \"0123456789ABCDEFG\";"
+    @"$b = substr($a,1,2);"
+    @"return $b;";
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    [s compileSource];
+    UMDiscreteValue *result = [s runScriptWithEnvironment:env];
+    
+    XCTAssertTrue([result.stringValue isEqualToString:@"12"],@"should be 12 but is %@",result.stringValue);
+}
+
+- (void)testSubstring3
+{
+    NSString *code = @"$a = \"0123456789ABCDEFG\";"
+    @"$b = substr($a,3,5);"
+    @"return $b;";
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    [s compileSource];
+    UMDiscreteValue *result = [s runScriptWithEnvironment:env];
+    
+    XCTAssertTrue([result.stringValue isEqualToString:@"34567"],@"should be 34567 but is %@",result.stringValue);
+}
+
+- (void)testSubstringWithoutLength
+{
+    NSString *code = @"$a = \"0123456789ABCDEFG\";"
+    @"$b = substr($a,3);"
+    @"return $b;";
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    [s compileSource];
+    UMDiscreteValue *result = [s runScriptWithEnvironment:env];
+    
+    XCTAssertTrue([result.stringValue isEqualToString:@"3456789ABCDEFG"],@"should be 3456789ABCDEFG but is %@",result.stringValue);
+}
+
+
+
 
 @end

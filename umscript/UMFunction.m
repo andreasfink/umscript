@@ -16,7 +16,7 @@
 
 @synthesize comment;
 @synthesize name;
-@synthesize cenv;
+//@synthesize cenv;
 
 - (id)initWithEnvironment:(UMEnvironment *)compile_env
 {
@@ -27,6 +27,17 @@
         self.cenv = compile_env;
     }
     return self;
+}
+
+- (void)setCenv:(UMEnvironment *)env;
+{
+    cenv = env;
+    [cenv log:self.name];
+}
+
+- (UMEnvironment *)cenv
+{
+    return cenv;
 }
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env

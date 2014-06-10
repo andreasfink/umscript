@@ -59,6 +59,7 @@ typedef enum UMDiscreteValueType
 + (UMDiscreteValue *)discreteNumberString:(NSString *)string;
 + (UMDiscreteValue *)discreteYES;
 + (UMDiscreteValue *)discreteNO;
++ (UMDiscreteValue *)discreteQuotedString:(NSString *)s;
 
 
 + (UMDiscreteValue *)discreteNull;
