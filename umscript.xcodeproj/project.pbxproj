@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A62B98F11946A8A6005B48BC /* UMFunction_substr.h in Headers */ = {isa = PBXBuildFile; fileRef = A62B98EF1946A8A6005B48BC /* UMFunction_substr.h */; };
+		A62B98F11946A8A6005B48BC /* UMFunction_substr.h in Headers */ = {isa = PBXBuildFile; fileRef = A62B98EF1946A8A6005B48BC /* UMFunction_substr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A62B98F21946A8A6005B48BC /* UMFunction_substr.m in Sources */ = {isa = PBXBuildFile; fileRef = A62B98F01946A8A6005B48BC /* UMFunction_substr.m */; };
-		A62B98F51946B255005B48BC /* UMFunction_list.h in Headers */ = {isa = PBXBuildFile; fileRef = A62B98F31946B255005B48BC /* UMFunction_list.h */; };
+		A62B98F51946B255005B48BC /* UMFunction_list.h in Headers */ = {isa = PBXBuildFile; fileRef = A62B98F31946B255005B48BC /* UMFunction_list.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A62B98F61946B255005B48BC /* UMFunction_list.m in Sources */ = {isa = PBXBuildFile; fileRef = A62B98F41946B255005B48BC /* UMFunction_list.m */; };
 		A63A82F9192F46340090FC94 /* UMFunction_print.h in Headers */ = {isa = PBXBuildFile; fileRef = A63A82F7192F46340090FC94 /* UMFunction_print.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A63A82FA192F46340090FC94 /* UMFunction_print.m in Sources */ = {isa = PBXBuildFile; fileRef = A63A82F8192F46340090FC94 /* UMFunction_print.m */; };
@@ -573,7 +573,6 @@
 				A6835BFE19297AE30090FC94 /* UMFunction_getfield.h in Headers */,
 				A6835C0A19297AE30090FC94 /* UMFunction_not.h in Headers */,
 				A6835C2419297AE30090FC94 /* UMFunction_startswith.h in Headers */,
-				A62B98F51946B255005B48BC /* UMFunction_list.h in Headers */,
 				A6835BFA19297AE30090FC94 /* UMFunction_endswith.h in Headers */,
 				A6835BF019297AE30090FC94 /* UMFunction_bit_or.h in Headers */,
 				A6835C0019297AE30090FC94 /* UMFunction_getvar.h in Headers */,
@@ -581,7 +580,6 @@
 				A6835C1619297AE30090FC94 /* UMFunction_mul.h in Headers */,
 				A6835BF419297AE30090FC94 /* UMFunction_bit_shiftright.h in Headers */,
 				A6835C0619297AE30090FC94 /* UMFunction_lessthan.h in Headers */,
-				A62B98F11946A8A6005B48BC /* UMFunction_substr.h in Headers */,
 				A6835C0419297AE30090FC94 /* UMFunction_if.h in Headers */,
 				A6835C0219297AE30090FC94 /* UMFunction_greaterthan.h in Headers */,
 				A6835BF619297AE30090FC94 /* UMFunction_bit_xor.h in Headers */,
@@ -623,6 +621,8 @@
 				A6835C2619297AE30090FC94 /* UMFunction_typecast_int.h in Headers */,
 				A6B5CE8D19301FE300F02FCA /* UMFunction_continue.h in Headers */,
 				A6835C1419297AE30090FC94 /* UMFunction_dot.h in Headers */,
+				A62B98F51946B255005B48BC /* UMFunction_list.h in Headers */,
+				A62B98F11946A8A6005B48BC /* UMFunction_substr.h in Headers */,
 				A6B5CE79192FF0C300F02FCA /* UMFunction_goto.h in Headers */,
 				A6835C0819297AE30090FC94 /* UMFunction_and.h in Headers */,
 			);
