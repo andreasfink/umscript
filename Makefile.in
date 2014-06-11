@@ -1,57 +1,32 @@
 ##
 # File: Makefile
-# Project "umscript"
-# (c) 2014 Andreas FInk
+# Project "ulib"
+# (c) 2012 SMSRelay AG
 # Create: Andreas Fink (andreas@fink.org)
 #
 #
 
-
 PROJECT_NAME=@PROJECT_NAME@
-FRAMEWORKNAME=@PROJECT_NAME@.framework
-FRAMEWORKDIR=/Library/Frameworks
-XCODETARGET=@PROJECT_NAME@
-CONFIGURATION=@CONFIGURATION@
+VERSION=`cat VERSION`
 PROJECT_ID=com.smsrelay.@PROJECT_NAME@
 INSTALLER_CERT="Developer ID Installer: SMSRelay AG"
 
-CFLAGS=$(CFLAGS) -DCONFIGURATION=$(CONFIGURATION)
-
-TESTLIBS=-lssl -lcrypto -ldl -lm -lpthread -lulib
-
-HFILES=$(wildcard src/*.h umscript/*.h umscript/*/*.h)
-CFILES=$(wildcard src/*.c umscript/*.c umscript/*/*.c)
-MFILES=$(wildcard src/*.m) $(wildcard umscript/*.m) $(wildcard umscript/*/*.m)
-PUBLIC_HFILES=$(HFILES)
-
-COFILES=$(CFILES:.c=.c.o)
-MOFILES=$(MFILES:.m=.m.o)
-OFILES=$(COFILES) $(MOFILES)
-
-TESTSRCS = $(wildcard ulibTestsLinux/*.m)
-TESTOBJS = $(TESTSRCS:.m=.m.o)
-TESTPROGS = $(TESTSRCS:.m=)
-CHECKS = $(wildcard ulibTestsLinux/*.sh)
+CC=@CC@
 
 all:
-	-xcodebuild -target ${XCODETARGET} -configuration $(CONFIGURATION)
-	-xcodebuild -target ${XCODETARGET} -configuration $(CONFIGURATION) install
-
+	xcodebuild
+	
 unlock:
 	security unlock-keychain ~/Library/Keychains/login.keychain
 
 clean:
-	-xcodebuild -target ${XCODETARGET} -configuration $(CONFIGURATION) clean
+	rm -f $(BUILD_DIR)
 
 install:
-	-xcodebuild -target ${XCODETARGET} -configuration ${CONFIGURATION} install
-	
-install_for_pkg:
-	xcodebuild -target ${XCODETARGET} -configuration ${CONFIGURATION} install
-	mkdir -p $(DESTDIR)
-	find $(FRAMEWORKDIR)/$(FRAMEWORKNAME) -print | cpio -pdmuv $(DESTDIR)
-	
+	xcodebuild install
+
+install_for_pkg: 
+	xcodebuild DSTROOT="install_root" install
+
 pkg:
 	/bin/bash ./make_pkg.sh @PROJECT_NAME@ "install_root" "install_resources" "install_scripts"
-
-
