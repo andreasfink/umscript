@@ -128,6 +128,9 @@ typedef enum UMTermType
 - (UMTerm *)blockAppendStatement:(UMTerm *)term;
 + (UMTerm *)blockWithStatement:(UMTerm *)term withEnvironment:(UMEnvironment *)cenv;
 
+- (UMTerm *)listAppendStatement:(UMTerm *)term;
++ (UMTerm *)listWithStatement:(UMTerm *)term withEnvironment:(UMEnvironment *)cenv;
+
 + (UMTerm *)token:(int)tok text:(const char *)text withEnvironment:(UMEnvironment *)cenv;
 
 - (UMTerm *)preincrease;
@@ -135,9 +138,10 @@ typedef enum UMTermType
 - (UMTerm *)predecrease;
 - (UMTerm *)postdecrease;
 
-- (UMTerm *)functionCallWithArguments:(UMTerm *)list; /* function call with arguments */
+- (UMTerm *)functionCallWithArguments:(UMTerm *)list environment:(UMEnvironment *)cenv;
 - (UMTerm *)dotIdentifier:(UMTerm *)list; /* object.access */
 - (NSString *)constantStringValue;
+- (NSString *)labelValue;
 
 + (UMTerm *)letsGoto:(UMTerm *)labelTerm withEnvironment:(UMEnvironment *)cenv;
 + (UMTerm *)letsBreakWithEnvironment:(UMEnvironment *)cenv;

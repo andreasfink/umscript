@@ -52,33 +52,6 @@
 #import "UMFunction_goto.h"
 #import "UMFunction_continue.h"
 #import "UMFunction_break.h"
+#import "UMFunction_substr.h"
+#import "UMFunction_list.h"
 
-#define TermLogicNOT(a)           [[UMTerm alloc]initWithFunction:[[UMFunction_logic_not alloc]init], @[a]]
-#define TermLogicAND(a,b)         [[UMTerm alloc]initWithFunction:[[UMFunction_logic_and alloc]init],  @[a,b]]
-#define TermLogicOR(a,b)          [[UMTerm alloc]initWithFunction:[[UMFunction_logic_or alloc]init],  @[a,b]]
-#define TermLogicXOR(a,b)         [[UMTerm alloc]initWithFunction:[[UMFunction_logic_xor alloc]init],  @[a,b]]
-
-#define TermBitNOT(a)             [[UMTerm alloc]initWithFunction:[[UMFunction_bit_not alloc]init],  @[a]]
-#define TermBitAND(a,b)           [[UMTerm alloc]initWithFunction:[[UMFunction_bit_and alloc]init],  @[a,b]]
-#define TermBitOR(a,b)            [[UMTerm alloc]initWithFunction:[[UMFunction_bit_or alloc]init],  @[a,b]]
-#define TermBitXOR(a,b)           [[UMTerm alloc]initWithFunction:[[UMFunction_bit_xor alloc]init],  @[a,b]]
-
-#define TermBitSHIFTLEFT(a,b)     [[UMTerm alloc]initWithFunction:[[UMFunction_bitshiftright alloc]init],  @[a,b]]
-#define TermBitSHIFTRIGHT(a,b)    [[UMTerm alloc]initWithFunction:[[UMFunction_bit_sifhtright alloc]init],  @[a,b]]
-
-#define TermEQUAL(a,b)              [[UMTerm alloc]initWithFunction:[[UMFunction_equal alloc]init],  @[a,b]]
-#define TermNOTEQUAL(a,b)           [[UMTerm alloc]initWithFunction:[[UMFunction_notequal alloc]init],  @[a,b]]
-#define TermGREATERTHAN(a,b)        [[UMTerm alloc]initWithFunction:[[UMFunction_greaterthan alloc]init],  @[a,b]]
-#define TermLESSTHAN(a,b)           [[UMTerm alloc]initWithFunction:[[UMFunction_lessthan, alloc]init]  @[a,b]]
-#define TermSTARTSWITH(a,b)         [[UMTerm alloc]initWithFunction:[[UMFunction_startswith alloc]init],  @[a,b]]
-#define TermENDSWITH(a,b)           [[UMTerm alloc]initWithFunction:[[UMFunction_endswith alloc]init],  @[a,b]]
-#define TermSETVAR(name,value)      [[UMTerm alloc]initWithFunction:[[UMFunction_setvar alloc]init],  @[name,value]]
-#define TermGETVAR(name)            [[UMTerm alloc]initWithFunction:[[UMFunction_getvar alloc]init],  @[name]]
-#define TermSETFIELD(name,value)    [[UMTerm alloc]initWithFunction:[[UMFunction_setfield alloc]init],  @[name,value]]
-#define TermGETFIELD(name)          [[UMTerm alloc]initWithFunction:[[UMFunction_getfield alloc]init],  @[name])
-
-#define TermADD(a,b)                [[UMTerm alloc]initWithFunction:[[UMFunction_add alloc]init],  @[a,b]]
-#define TermSUB(a,b)                [[UMTerm alloc]initWithFunction:[[UMFunction_sub alloc]init],  @[a,b]]
-#define TermMUL(a,b)                [[UMTerm alloc]initWithFunction:[[UMFunction_mul alloc]init],  @[a,b]]
-#define TermDIV(a,b)                [[UMTerm alloc]initWithFunction:[[UMFunction_div alloc]init],  @[a,b]]
-#define TermMODULO(a,b)             [[UMTerm alloc]initWithFunction:[[UMFunction_modulo alloc]init],  @[a,b]]

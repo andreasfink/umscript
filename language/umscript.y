@@ -55,7 +55,8 @@ extern int yyparse (yyscan_t yyscanner, UMScriptCompilerEnvironment *cenv);
 
 #define SET_NULL(r) { if(r.value) CFBridgingRelease(r.value);}
 
-#define SET_LABEL(r,n) { UMTerm *t = UMGET(r); t.label = n.constantStringValue;}
+#define SET_LABEL(r,n) { UMTerm *t = UMGET(r); t.label = n.labelValue;}
+#define SET_DEFAULT_LABEL(r) { UMTerm *t = UMGET(r); t.label = @"default"; }
 //unused macro to silence the compiler
 #define UU(x)   (x.token=x.token)
 
@@ -195,7 +196,7 @@ labeled_statement
     | DEFAULT ':' statement
             {
                 UMASSIGN($$,$3);
-                SET_LABEL($$,UMGET($1));
+                SET_DEFAULT_LABEL($$);
             };
 	;
 
@@ -626,14 +627,14 @@ postfix_expression
 	| postfix_expression '(' ')'
         {
             UMTerm *a = UMGET($1);
-            UMTerm *r = [a functionCallWithArguments:NULL];
+            UMTerm *r = [a functionCallWithArguments:NULL environment:cenv];
             UMSET($$,r);
         };
     | postfix_expression '(' argument_expression_list ')'
         {
             UMTerm *a = UMGET($1);
             UMTerm *b = UMGET($3);
-            UMTerm *r = [a functionCallWithArguments: b];
+            UMTerm *r = [a functionCallWithArguments:b environment:cenv];
             UMSET($$,r);
         };
     | postfix_expression '.' IDENTIFIER
@@ -734,7 +735,17 @@ primary_expression
 
 argument_expression_list
 	: assignment_expression
+        {
+            UMTerm *term = UMGET($1);
+            UMSET($$,term);
+        }
 	| argument_expression_list ',' assignment_expression
+        {
+            UMTerm *a = UMGET($1);
+            UMTerm *b = UMGET($3);
+            UMTerm *r = [a listAppendStatement:b];
+            UMSET($$,r);
+        };
 	;
 
 constant_expression

@@ -326,7 +326,7 @@
 
 + (id)termWithStringFromTag:(UMTerm *)stringTagTerm  withEnvironment:(UMEnvironment *)e
 {
-    UMDiscreteValue *d = [UMDiscreteValue discreteString:stringTagTerm.identifier];
+    UMDiscreteValue *d = [UMDiscreteValue discreteQuotedString:stringTagTerm.identifier];
     UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d withEnvironment:e];
     return term;
 }
@@ -699,7 +699,7 @@
 
 - (UMTerm *)blockAppendStatement:(UMTerm *)term
 {
-    if([self isKindOfClass:[UMFunction_block class]])
+    if((type == UMTermType_function) && ([function isKindOfClass:[UMFunction_block class]]))
     {
         param = [param arrayByAddingObject:term];
         return self;
@@ -711,6 +711,31 @@
         return block;
     }
 }
+
+
+
++ (UMTerm *)listWithStatement:(UMTerm *)statement withEnvironment:(UMEnvironment *)cenv
+{
+    UMFunction *func = [[UMFunction_list alloc]initWithEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[statement] withEnvironment:cenv];
+    return result;
+}
+
+- (UMTerm *)listAppendStatement:(UMTerm *)term
+{
+    if((type == UMTermType_function) && ([function isKindOfClass:[UMFunction_list class]]))
+    {
+        param = [param arrayByAddingObject:term];
+        return self;
+    }
+    else
+    {
+        UMTerm *block = [UMTerm listWithStatement:self withEnvironment:self.env];
+        block.param = [block.param arrayByAddingObject:term];
+        return block;
+    }
+}
+
 
 + (UMTerm *)switchCondition:(UMTerm *)condition thenDo:(UMTerm *)thenDo withEnvironment:(UMEnvironment *)cenv
 {
@@ -749,10 +774,38 @@
     return result;
 }
 
-- (UMTerm *)functionCallWithArguments:(UMTerm *)list  /* function call with arguments */
+- (UMTerm *)functionCallWithArguments:(UMTerm *)list environment:(UMEnvironment *)env1;
 {
-    /*TODO: missing implemementation */
-    return self;
+    if(type != UMTermType_identifier)
+    {
+        return [UMTerm termWithNullWithEnvironment:env1];
+    }
+    NSArray *params;
+    if(list == NULL)
+    {
+        params = @[];
+    }
+     else if((list.type == UMTermType_function) && ([list.function isKindOfClass:[UMFunction_list class]]))
+    {
+        /* this is a list with multiple items */
+        params = list.param;
+    }
+    else
+    {
+        /* this is not yet a list but a single item */
+        params = @[list];
+    }
+
+    NSString *name=identifier;
+    UMFunction *f = [env functionByName:name];
+    if(f == NULL)
+    {
+        return [UMTerm termWithNullWithEnvironment:env1];
+    }
+    f.cenv = env1;
+    
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:f andParams:params withEnvironment:cenv];
+    return result;
 }
 
 - (UMTerm *)dotIdentifier:(UMTerm *)list /* object.access */
@@ -776,6 +829,34 @@
             break;
         case UMTermType_function:
             return [function name];
+            break;
+        case UMTermType_identifier:
+            return identifier;
+            break;
+        case UMTermType_token:
+            return identifier;
+            break;
+        default:
+            return @"";
+            break;
+    }
+}
+
+- (NSString *)labelValue
+{
+    switch(type)
+    {
+        case UMTermType_discrete:
+            return [discrete labelValue];
+            break;
+        case UMTermType_field:
+            @throw [NSError errorWithDomain:@"umscript" code:2 userInfo:@{@"sysmsg":[NSString stringWithFormat:@"Nonstatic label %@",fieldname]}];
+            break;
+        case UMTermType_variable:
+            @throw [NSError errorWithDomain:@"umscript" code:2 userInfo:@{@"sysmsg":[NSString stringWithFormat:@"Nonstatic label %@",varname]}];
+            break;
+        case UMTermType_function:
+            @throw [NSError errorWithDomain:@"umscript" code:2 userInfo:@{@"sysmsg":[NSString stringWithFormat:@"Unknown label %@",[function name]]}];
             break;
         case UMTermType_identifier:
             return identifier;

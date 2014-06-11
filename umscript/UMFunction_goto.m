@@ -24,6 +24,8 @@
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
 {
+    UMTerm *label = params[0];
+    env.jumpTo = label.labelValue;
     return NULL;
 }
 

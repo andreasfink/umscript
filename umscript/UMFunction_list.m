@@ -1,32 +1,30 @@
 //
-//  UMFunction_block.m
+//  UMFunction_list.m
 //  umscript
 //
-//  Created by Andreas Fink on 17.05.14.
+//  Created by Andreas Fink on 10.06.14.
 //  Copyright (c) 2014 SMSRelay AG. All rights reserved.
 //
 
-#import "UMFunction_block.h"
-#import "UMEnvironment.h"
+#import "UMFunction_list.h"
 
-@implementation UMFunction_block
+@implementation UMFunction_list
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"block";
+        self.name = @"list";
         [env log:self.name];
-   }
+    }
     return self;
 }
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
 {
-//    UMDiscreteValue *previousReturnValue = env.returnValue;
     env.returnValue = nil;
-
+    
     NSMutableDictionary *labelsDict = [[NSMutableDictionary alloc]init];
     NSUInteger i=0;
     NSUInteger n=[params count];
@@ -38,7 +36,7 @@
             [labelsDict setObject:[NSNumber numberWithInteger:i] forKey:term.label];
         }
     }
-
+    
     if(env.jumpTo != NULL) /* a block of a switch statement where we are being jumped into */
     {
         NSNumber *goTo = [labelsDict objectForKey:env.jumpTo];
@@ -71,11 +69,11 @@
             break;
         }
         UMTerm *term  = [params objectAtIndex:i];
-
+        
         env.jumpTo = NULL;
         env.returnCalled = NO;
         env.breakCalled = NO;
-
+        
         UMDiscreteValue *r = [term evaluateWithEnvironment:env];
         if(env.returnCalled)
         {
@@ -110,37 +108,6 @@
         i++;
     } while (i<n);
     return  env.returnValue;
-}
-
-- (NSString *)codeWithEnvironmentStart:(UMEnvironment *)env
-{
-    NSString *s=[NSString stringWithFormat:@"%@{\r%@    ",[env identPrefix],[env identPrefix]];
-    [env identAdd];
-    return s;
-}
-
-- (NSString *)codeWithEnvironmentFirstParam:(UMTerm *)param env:(UMEnvironment *)env
-{
-    NSString *pstring = [param codeWithEnvironment:env];
-    return [NSString stringWithFormat:@"%@;\r%@",pstring,[env identPrefix]];
-}
-
-- (NSString *)codeWithEnvironmentNextParam:(UMTerm *)param env:(UMEnvironment *)env
-{
-    NSString *pstring = [param codeWithEnvironment:env];
-    return [NSString stringWithFormat:@"%@;\r%@",pstring,[env identPrefix]];
-}
-
-- (NSString *)codeWithEnvironmentLastParam:(UMTerm *)param env:(UMEnvironment *)env
-{
-    NSString *pstring = [param codeWithEnvironment:env];
-    return [NSString stringWithFormat:@"%@;\r",pstring];
-}
-
-- (NSString *)codeWithEnvironmentStop:(UMEnvironment *)env
-{
-    [env identRemove];
-    return [NSString stringWithFormat:@"%@}\r",[env identPrefix]];
 }
 
 @end
