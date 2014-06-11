@@ -1,4 +1,4 @@
-#define VERSION "1.0.0"
-#define BUILD "79a79efc070f5bae0070ea7c998ebb79752631bb"
-#define BUILDDATE "Mon Jun 9 20:43:42 2014 +0200"
-#define COMPILEDATE "2014.06.09-20:44:15"
+#define VERSION "1.2.1"
+#define BUILD "e10345f0b4b75b97c8d8f83afe9ba48fab87bf3d"
+#define BUILDDATE "Wed Jun 11 14:49:39 2014 +0200"
+#define COMPILEDATE "2014.06.11-19:11:47"
