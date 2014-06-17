@@ -29,4 +29,9 @@ install_for_pkg:
 	xcodebuild DSTROOT="install_root" install
 
 pkg:
-	/bin/bash ./make_pkg.sh @PROJECT_NAME@ "install_root" "install_resources" "install_scripts"
+	xcodebuild DSTROOT="install_root" install
+	pkgbuild --root install_root --install-location /  --sign "Developer ID Installer: SMSRelay AG" --version "`cat VERSION`" --identifier "com.smsrelay.@PROJECT_NAME@" "@PROJECT_NAME@_`cat VERSION`.pkg"
+
+pkg2:
+	xcodebuild DSTROOT="install_root" install
+	pkgbuild --root install_root --install-location /  --sign "Developer ID Installer: SMSRelay AG" --version "`cat VERSION`" --identifier "com.smsrelay.@PROJECT_NAME@" "@PROJECT_NAME@.pkg"
