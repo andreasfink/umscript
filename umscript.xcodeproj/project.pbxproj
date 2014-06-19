@@ -678,6 +678,9 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "SMSRelay AG";
 				TargetAttributes = {
+					A6A3AA0219297741007FFC7B = {
+						DevelopmentTeam = WMTUF4B7XX;
+					};
 					A6A3AA1919297741007FFC7B = {
 						TestTargetID = A6A3AA0219297741007FFC7B;
 					};
@@ -968,7 +971,7 @@
 		A6A3AA2C19297741007FFC7B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application: SMSRelay AG (WMTUF4B7XX)";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -993,7 +996,7 @@
 		A6A3AA2D19297741007FFC7B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application: SMSRelay AG (WMTUF4B7XX)";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = YES;
