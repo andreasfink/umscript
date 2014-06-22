@@ -48,7 +48,7 @@
     else if(currentValue.type == UMTermType_discrete)
     {
         currentValue = currentTerm.discrete;
-        newValue = [currentValue increase];
+        [currentValue increase];
         /* we cant write back to a const */
     }
     return currentValue;

@@ -35,8 +35,8 @@ extern int yyparse (yyscan_t yyscanner, UMScriptCompilerEnvironment *cenv);
 #define APPLY(a)    cenv.root=a;NSLog(@"%@",a)
 
 
-#define UMGET(x)          ((__bridge UMTerm *)x.value)
-
+#define UMTERM_NULL [UMTerm termWithNullWithEnvironment:cenv]
+#define UMGET(x)          ((__bridge UMTerm *)x.value ? (__bridge UMTerm *)x.value : UMTERM_NULL )
 #define UMSET(x,val)  \
 {                   \
     if((x).value!=NULL) \
@@ -150,7 +150,7 @@ statement_list
 block
 : '{' '}'
         {
-            UMTerm *r = [UMTerm termWithNullWithEnvironment:cenv];
+            UMTerm *r = UMTERM_NULL;
             UMSET($$,r);
         }
     | '{' statement_list '}'
@@ -171,7 +171,7 @@ statement
 expression_statement
 	: ';'
         {
-            UMTerm *r = [UMTerm termWithNullWithEnvironment:cenv];
+            UMTerm *r = UMTERM_NULL;
             UMSET($$,r);
         }
     | expression ';'
@@ -205,7 +205,7 @@ selection_statement
         {
             UMTerm *a = UMGET($3);
             UMTerm *b = UMGET($5);
-            UMTerm *r = [UMTerm ifCondition:a  thenDo:b  elseDo: [UMTerm termWithNullWithEnvironment:cenv] withEnvironment:cenv];
+            UMTerm *r = [UMTerm ifCondition:a  thenDo:b  elseDo: UMTERM_NULL withEnvironment:cenv];
             UMSET($$,r);
         };
     | IF '(' expression ')' block ELSE block
@@ -250,7 +250,7 @@ jump_statement
 
     | RETURN ';'
         {
-            UMTerm *r = [UMTerm termWithNullWithEnvironment:cenv];
+            UMTerm *r = UMTERM_NULL;
             UMSET($$,r);
         };
 	;

@@ -85,8 +85,8 @@ extern int yyparse (yyscan_t yyscanner, UMScriptCompilerEnvironment *cenv);
 #define APPLY(a)    cenv.root=a;NSLog(@"%@",a)
 
 
-#define UMGET(x)          ((__bridge UMTerm *)x.value)
-
+#define UMTERM_NULL [UMTerm termWithNullWithEnvironment:cenv]
+#define UMGET(x)          ((__bridge UMTerm *)x.value ? (__bridge UMTerm *)x.value : UMTERM_NULL )
 #define UMSET(x,val)  \
 {                   \
     if((x).value!=NULL) \
@@ -2212,7 +2212,7 @@ yyreduce:
   case 4:
 #line 152 "language/umscript.y" /* yacc.c:1661  */
     {
-            UMTerm *r = [UMTerm termWithNullWithEnvironment:cenv];
+            UMTerm *r = UMTERM_NULL;
             UMSET((yyval),r);
         }
 #line 2219 "language/_generated_umscript.y.m" /* yacc.c:1661  */
@@ -2265,7 +2265,7 @@ yyreduce:
   case 12:
 #line 173 "language/umscript.y" /* yacc.c:1661  */
     {
-            UMTerm *r = [UMTerm termWithNullWithEnvironment:cenv];
+            UMTerm *r = UMTERM_NULL;
             UMSET((yyval),r);
         }
 #line 2272 "language/_generated_umscript.y.m" /* yacc.c:1661  */
@@ -2313,7 +2313,7 @@ yyreduce:
     {
             UMTerm *a = UMGET((yyvsp[-2]));
             UMTerm *b = UMGET((yyvsp[0]));
-            UMTerm *r = [UMTerm ifCondition:a  thenDo:b  elseDo: [UMTerm termWithNullWithEnvironment:cenv] withEnvironment:cenv];
+            UMTerm *r = [UMTerm ifCondition:a  thenDo:b  elseDo: UMTERM_NULL withEnvironment:cenv];
             UMSET((yyval),r);
         }
 #line 2320 "language/_generated_umscript.y.m" /* yacc.c:1661  */
@@ -2382,7 +2382,7 @@ yyreduce:
   case 24:
 #line 252 "language/umscript.y" /* yacc.c:1661  */
     {
-            UMTerm *r = [UMTerm termWithNullWithEnvironment:cenv];
+            UMTerm *r = UMTERM_NULL;
             UMSET((yyval),r);
         }
 #line 2389 "language/_generated_umscript.y.m" /* yacc.c:1661  */
