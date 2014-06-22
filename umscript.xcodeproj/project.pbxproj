@@ -680,6 +680,7 @@
 				TargetAttributes = {
 					A6A3AA0219297741007FFC7B = {
 						DevelopmentTeam = 38L827M334;
+						DevelopmentTeam = WMTUF4B7XX;
 					};
 					A6A3AA1919297741007FFC7B = {
 						TestTargetID = A6A3AA0219297741007FFC7B;
