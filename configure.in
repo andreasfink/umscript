@@ -74,19 +74,6 @@ case "$host" in
     SHARED_LIBRARY_EXTENSION="dylib"
     LIBTOOL="libtool -static -o"
     INSTALL_NAME_TOOL="install_name_tool"
-    if [[ -f "/Applications/Auxiliary Tools/PackageMaker.app/Contents/MacOS/PackageMaker" ]]
-    then 
-    	PACKAGE_MAKER="/Applications/Auxiliary Tools/PackageMaker.app/Contents/MacOS/PackageMaker"
-    else
-		if [[ -f "/Applications/PackageMaker.app/Contents/MacOS/PackageMaker" ]]
-		then
-	    	PACKAGE_MAKER="/Applications/PackageMaker.app/Contents/MacOS/PackageMaker"
-	    else
-	    	echo "Can not find Package maker, neither in /Applications nor in /Applications/Auxiliary Tools"
-	    	echo "Please install it"
-	    	exit -1
-	    fi
-	fi
     SHARED_FLAGS="-dynamiclib -Wl,-dylib"
     ;;
   *-linux-*)
