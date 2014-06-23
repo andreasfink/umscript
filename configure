@@ -5421,9 +5421,7 @@ if test "${enable_debug+set}" = set; then :
 fi
 
 
-
 CFLAGS="$CFLAGS -DCONFIGURATION=${CONFIG}"
-
 
 ./make_version
 
