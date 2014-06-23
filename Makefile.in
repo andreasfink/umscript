@@ -10,11 +10,12 @@ PROJECT_NAME=@PROJECT_NAME@
 VERSION=`cat VERSION`
 PROJECT_ID=com.smsrelay.@PROJECT_NAME@
 INSTALLER_CERT="Developer ID Installer: SMSRelay AG"
+CODESIGN=CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
 CC=@CC@
 
 all:
-	xcodebuild
+	xcodebuild $(CODESIGN)
 	
 unlock:
 	security unlock-keychain ~/Library/Keychains/login.keychain
@@ -23,7 +24,7 @@ clean:
 	rm -f $(BUILD_DIR)
 
 install:
-	xcodebuild install
+	xcodebuild $(CODESIGN) install
 
 install_for_pkg: 
 	xcodebuild DSTROOT="install_root" install
