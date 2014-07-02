@@ -184,6 +184,7 @@
 		A65D34C3192BAAA40090FC94 /* UMFunction_lessorequal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_lessorequal.m; sourceTree = "<group>"; };
 		A65D34C7192BAE130090FC94 /* UMFunction_assign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_assign.h; sourceTree = "<group>"; };
 		A65D34C8192BAE130090FC94 /* UMFunction_assign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_assign.m; sourceTree = "<group>"; };
+		A672F731195C2D040090FC94 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A6835B9519297AE30090FC94 /* NSNumber+UMScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+UMScript.h"; sourceTree = "<group>"; };
 		A6835B9619297AE30090FC94 /* NSNumber+UMScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+UMScript.m"; sourceTree = "<group>"; };
 		A6835B9719297AE30090FC94 /* UMDiscreteValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMDiscreteValue.h; sourceTree = "<group>"; };
@@ -377,6 +378,7 @@
 				A6C4E0E91945237D0090FC94 /* ulib.framework */,
 				A6A3AA0619297741007FFC7B /* Cocoa.framework */,
 				A6A3AA1B19297741007FFC7B /* XCTest.framework */,
+				A672F731195C2D040090FC94 /* Foundation.framework */,
 				A6A3AA0819297741007FFC7B /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -679,7 +681,6 @@
 				ORGANIZATIONNAME = "SMSRelay AG";
 				TargetAttributes = {
 					A6A3AA0219297741007FFC7B = {
-						DevelopmentTeam = 38L827M334;
 						DevelopmentTeam = WMTUF4B7XX;
 					};
 					A6A3AA1919297741007FFC7B = {

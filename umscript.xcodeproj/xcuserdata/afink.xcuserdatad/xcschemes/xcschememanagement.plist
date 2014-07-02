@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>asntest.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>14</integer>
+		</dict>
 		<key>umscript.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>A672F72F195C2D040090FC94</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A6A3AA0219297741007FFC7B</key>
 		<dict>
 			<key>primary</key>
