@@ -21,7 +21,7 @@
 @synthesize parserLog;
 @synthesize lexerLog;
 
-
+ 
 - (id)initWithFilename:(NSString *)filename
 {
     self = [super init];
