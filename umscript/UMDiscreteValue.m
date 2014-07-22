@@ -790,11 +790,8 @@
             return [UMDiscreteValue discreteDouble:c];
         }
     }
-    else
-    {
-        /* no idea how to multiply data and strings */
-        return [UMDiscreteValue discreteNull];
-    }
+    /* no idea how to multiply data and strings */
+    return [UMDiscreteValue discreteNull];
 }
 
 - (UMDiscreteValue *)divideValue:(UMDiscreteValue *)bval
