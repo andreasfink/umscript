@@ -773,6 +773,17 @@
             long long c = a.longLongValue * b.longLongValue;
             return [UMDiscreteValue discreteLongLong:c];
         }
+        if((type==UMVALUE_STRING) && (bval.type == UMVALUE_INT))
+        {
+            /* string multiplied by integer */
+            int count = b.intValue;
+            UMDiscreteValue *result = [UMDiscreteValue discreteString:@""];
+            for(int i=0;i<count;i++)
+            {
+                [result addValue:self.value];
+            }
+            return result;
+        }
         else
         {
             double c = a.doubleValue * b.doubleValue;
