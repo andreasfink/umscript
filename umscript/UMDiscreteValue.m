@@ -25,13 +25,13 @@
     {
        return UMVALUE_LONGLONG;
     }
-    if  (   ( (type == UMVALUE_INT)       && (btype==UMVALUE_DOUBLE) )
-         || ( (type == UMVALUE_DOUBLE)  && (btype==UMVALUE_INT)      ) )
+    if  (   ( (type == UMVALUE_INT)        && (btype==UMVALUE_DOUBLE) )
+         || ( (type == UMVALUE_DOUBLE)     && (btype==UMVALUE_INT)      ) )
     {
         return UMVALUE_DOUBLE;
     }
-    if  (   ( (type == UMVALUE_LONGLONG)       && (btype==UMVALUE_DOUBLE) )
-         || ( (type == UMVALUE_DOUBLE)  && (btype==UMVALUE_LONGLONG)      ) )
+    if  (   ( (type == UMVALUE_LONGLONG)    && (btype==UMVALUE_DOUBLE) )
+         || ( (type == UMVALUE_DOUBLE)      && (btype==UMVALUE_LONGLONG)      ) )
     {
         return UMVALUE_DOUBLE;
     }
@@ -751,7 +751,6 @@
     }
 }
 
-
 - (UMDiscreteValue *)multiplyValue:(UMDiscreteValue *)bval
 {
     if((self.isNumberType) && (bval.isNumberType))
@@ -773,22 +772,22 @@
             long long c = a.longLongValue * b.longLongValue;
             return [UMDiscreteValue discreteLongLong:c];
         }
-        if((type==UMVALUE_STRING) && (bval.type == UMVALUE_INT))
-        {
-            /* string multiplied by integer */
-            int count = b.intValue;
-            UMDiscreteValue *result = [UMDiscreteValue discreteString:@""];
-            for(int i=0;i<count;i++)
-            {
-                [result addValue:self.value];
-            }
-            return result;
-        }
         else
         {
             double c = a.doubleValue * b.doubleValue;
             return [UMDiscreteValue discreteDouble:c];
         }
+    }
+    else if ((type==UMVALUE_STRING) && (bval.isNumberType))
+    {
+        /* string multiplied by integer */
+        int count = bval.intValue;
+        UMDiscreteValue *result = [UMDiscreteValue discreteString:@""];
+        for(int i=0;i<count;i++)
+        {
+            [result addValue:self.value];
+        }
+        return result;
     }
     /* no idea how to multiply data and strings */
     return [UMDiscreteValue discreteNull];
