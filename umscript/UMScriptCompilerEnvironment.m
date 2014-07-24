@@ -169,8 +169,14 @@
 
         UMTerm *resultingCode = (__bridge UMTerm *)root;
         root = NULL;
-        NSLog(@"**STDOUT: \r%@",stdOut);
-        NSLog(@"**STDERR: \r%@",stdErr);
+        if(stdOut.length > 0)
+        {
+            NSLog(@"**STDOUT: \r%@",stdOut);
+        }
+        if(stdErr.length> 0)
+        {
+            NSLog(@"**STDERR: \r%@",stdErr);
+        }
         *serr = stdErr;
         *sout = stdOut;
         return resultingCode;
