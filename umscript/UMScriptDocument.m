@@ -84,7 +84,7 @@
 
     NSString *out = @"";
     NSString *err = @"";
-    
+    NSLog(@"Compiling %@",name);
     self.compiledCode = [compilerEnvironment compile:sourceCode stdOut:&out stdErr:&err];
     if(self.compiledCode)
     {

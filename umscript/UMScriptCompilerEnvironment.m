@@ -31,7 +31,6 @@
         currentSourcePosition = 0;
         parserLog = [[UMHistoryLog alloc]init];
         lexerLog = [[UMHistoryLog alloc]init];
-        NSLog(@"init called");
     }
     return self;
 }
@@ -120,7 +119,6 @@
         const char *c = code.UTF8String;
         NSData *data = [NSData dataWithBytes:c length:strlen(c)];
         self.currentSource = code;
-        
         if (pipe(stdin_pipe) < 0)
         {
             switch(errno)
