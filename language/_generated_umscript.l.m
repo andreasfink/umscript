@@ -2610,7 +2610,7 @@ int yycompile(UMScriptCompilerEnvironment *cenv, int fdes_input, int fdes_output
     yyset_out(outfile,yyscanner);
     void * cenv2 = (void *)CFBridgingRetain(cenv);
     yyset_extra(cenv2,yyscanner);
-    yydebug = 1;
+//    yydebug = 1;
     yyparse(yyscanner,cenv);
     CFBridgingRelease(cenv2);
     yylex_destroy(yyscanner);
