@@ -28,7 +28,7 @@
         return [UMDiscreteValue discreteNull];
     }
     UMTerm *entry1 = params[0];
-    UMTerm *entry2 = params[2];
+    UMTerm *entry2 = params[1];
     UMDiscreteValue *d1 = [entry1 evaluateWithEnvironment:env];
     UMDiscreteValue *d2 = [entry2 evaluateWithEnvironment:env];
     return [d1 bitOr:d2];
