@@ -27,7 +27,7 @@
     {
         return [UMDiscreteValue discreteNull];
     }
-   UMDiscreteValue *result = nil;
+    UMDiscreteValue *result = nil;
     for(UMTerm *entry in params)
     {
         UMDiscreteValue *d = [entry evaluateWithEnvironment:env];
