@@ -758,7 +758,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/bison  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y\n\n\n#/usr/local/bin/yacc -o language/_generated_umscript.y.m -P language/umscript.y\n";
+			shellScript = "/usr/local/bin/bison  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none\n\n\n#/usr/local/bin/yacc -o language/_generated_umscript.y.m -P language/umscript.y\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
