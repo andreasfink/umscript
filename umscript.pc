@@ -1,0 +1,14 @@
+#umscripb pkg-config source file
+
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: umscript
+Description: universal scriptlibrary
+Version: 1.2.1
+Requires: ulib 
+
+~                                                                                                                                                                              
+
