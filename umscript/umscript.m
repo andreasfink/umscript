@@ -8,6 +8,3 @@
 
 #import "umscript.h"
 
-@implementation umscript
-
-@end
