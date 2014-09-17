@@ -21,6 +21,8 @@
 @synthesize currentSource;
 @synthesize parserLog;
 @synthesize lexerLog;
+@synthesize root;
+@synthesize column;
 
 - (id)init
 {
@@ -35,10 +37,6 @@
     }
     return self;
 }
-
-
-@synthesize column;
-@synthesize root;
 
 - (void)zapOutput
 {
@@ -168,7 +166,7 @@
         }
         close(stdout_pipe[RXPIPE]);
 
-        UMTerm *resultingCode = (__bridge UMTerm *)root;
+        UMTerm *resultingCode = root;
         root = NULL;
         if(stdOut.length > 0)
         {
@@ -233,21 +231,6 @@
     *numBytesRead = numBytesToRead;
     currentSourcePosition += numBytesToRead;
     return 0;
-}
-
-- (CFTypeRef)root
-{
-    return root;
-}
-
-- (void)setRoot:(CFTypeRef)r
-{
-    CFRetain(r);
-    if(root!=NULL)
-    {
-        CFRelease(root);
-    }
-    root = r;
 }
 
 @end

@@ -73,7 +73,7 @@ extern int yycompile(UMScriptCompilerEnvironment *cenv, int fdes_input, int fdes
     int num_local_functions;
     int errors;
     int last_syntax_error_line;
-    CFTypeRef root;
+    UMTerm *root;
     int column;
     
     int stdin_pipe[2];
@@ -83,7 +83,7 @@ extern int yycompile(UMScriptCompilerEnvironment *cenv, int fdes_input, int fdes
 }
 
 @property (readwrite,assign) int column;
-@property (readwrite,assign)    CFTypeRef root;
+@property (readwrite,strong)	UMTerm *root;
 @property (readwrite,strong)    NSString *currentSource;
 @property (readwrite,strong)    UMHistoryLog *parserLog;
 @property (readwrite,strong)    UMHistoryLog *lexerLog;
