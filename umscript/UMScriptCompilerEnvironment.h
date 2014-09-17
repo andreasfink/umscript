@@ -8,6 +8,12 @@
 
 #import "UMEnvironment.h"
 
+#ifdef	LINUX
+#ifndef	CFTypeRef
+typedef void *CFTypeRef;
+#endif
+#endif
+
 extern size_t readInputForLexer(char *buffer, size_t * numBytesRead, size_t maxBytesToRead);
 
 @class UMScriptCompilerEnvironment;

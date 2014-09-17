@@ -14,16 +14,13 @@ LDFLAGS=@LDFLAGS@
 LIB=libumscript.so
 PKGCONFIGFILE=umscript.pc
 
-MFILES = $(wildcard umsccript/*.m) language/_generated_umscript.l.m language/_generated_umscript.y.m
-HFILES = version.h $(wildcard umsccript/*.h)
+MFILES = $(wildcard umscript/*.m) language/_generated_umscript.l.m language/_generated_umscript.y.m language/umscript.yl.m
+HFILES = version.h $(wildcard umscript/*.h)
 MOFILES  = $(MFILES:.m=.m.o)
 OFILES = $(MOFILES)
 
 INCLUDEDIRS = -I umscript -I language
 DEBUG_RELEASE = -DCONFIGURATION_${CONFIGURATION}=1 -DCONFIGURATION=${CONFIGURATION}
-
-
-
 
 ${LIB}: ${OFILES}
 	./make_version
@@ -40,12 +37,16 @@ install: ${LIB}
 #/usr/local/bin/flex --outfile language/_generated_umscript.l.m language/umscript.l
 #/usr/local/bin/bison  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
 
+language/flex_definitions.h: language/_generated_umscript.y.h
 
-language/_generated_umscript.l.m:	language/umscript.l
+language/_generated_umscript.l.m:	language/umscript.l language/_generated_umscript.y.h
 	/usr/local/bin/flex --outfile language/_generated_umscript.l.m language/umscript.l
 
-_generated_umscript.y.m:	language/umscript.y
-	usr/local/bin/bison  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
+language/_generated_umscript.y.m:	language/umscript.y
+	/usr/local/bin/bison  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
+
+language/_generated_umscript.y.h:	language/umscript.y
+        /usr/local/bin/bison  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
 
 clean:
 	-mv ${LIB} ${LIB}.old

@@ -1176,7 +1176,7 @@
         NSNumber *a = self.value;
         if(type==UMVALUE_BOOL)
         {
-            BOOL c = a.boolValue + TRUE;
+            BOOL c =  YES;
             return [UMDiscreteValue discreteBool:c];
         }
         if(type==UMVALUE_INT)
@@ -1210,7 +1210,7 @@
         NSNumber *a = self.value;
         if(type==UMVALUE_BOOL)
         {
-            BOOL c = a.boolValue - TRUE;
+            BOOL c = NO;
             return [UMDiscreteValue discreteBool:c];
         }
         if(type==UMVALUE_INT)

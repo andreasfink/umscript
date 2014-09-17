@@ -31,7 +31,7 @@ extern int yydebug;
 typedef void *yyscan_t;
 extern int yyparse (yyscan_t yyscanner, UMScriptCompilerEnvironment *cenv);
 
-#define RETAIN(a)   cenv.root=a;CFBridgingRetain(a); NSLog(@"%@",a)
+#define XRETAIN(a)   cenv.root=a;CFBridgingRetain(a); NSLog(@"%@",a)
 #define APPLY(a)    cenv.root=a;NSLog(@"%@",a)
 
 

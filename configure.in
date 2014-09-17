@@ -77,37 +77,46 @@ case "$host" in
     SHARED_FLAGS="-dynamiclib -Wl,-dylib"
     ;;
   *-linux-*)
-    if [[ '$CC' = 'gcc' ]]
-    then
-        CFLAGS="$CFLAGS `gnustep-config --objc-flags`"
-        LDFLAGS="$LDFLAGS `gnustep-config --base-libs`"
+
+	CC=clang
+	CXX=clang++
+	CFLAGS="$CFLAGS -std=c99 -pg -g -O0 -fPIC -DLINUX=1  -DSCTP_IN_KERNEL=1"
+	CFLAGS="$CFLAGS  -Wno-trigraphs  -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties -Wno-receiver-is-weak"
+	CFLAGS="$CFLAGS -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label"
+	CFLAGS="$CFLAGS -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow"
+	CFLAGS="$CFLAGS -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion"
+	CFLAGS="$CFLAGS -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector"
+	CFLAGS="$CFLAGS -Wno-deprecated-implementations -Wprotocol -Wdeprecated-declarations -Wno-sign-conversion "
+	
+	CFLAGS="$CFLAGS -fasm-blocks -fstrict-aliasing -fobjc-arc -fobjc-runtime=gnustep"
+	CFLAGS="$CFLAGS -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0"
+	CFLAGS="$CFLAGS -fpascal-strings"
+
+	if [[ -x /usr/local/bin/gnustep-config ]] 
+	then
+		CFLAGS="$CFLAGS `/usr/local/bin/gnustep-config --objc-flags`"
+	    LDFLAGS="$LDFLAGS `/usr/local/bingnustep-config --base-libs --objc-libs`"
     else
-        CFLAGS="$CFLAGS `gnustep-config --objc-flags`"
-        LDFLAGS="$LDFLAGS -lgnustep-base"
+		CFLAGS="$CFLAGS `/usr/bin/gnustep-config --objc-flags`"
+	    LDFLAGS="$LDFLAGS `/usr/bin/gnustep-config--base-libs --objc-libs`"
     fi
-    CFLAGS="$CFLAGS -std=c99 -fPIC -DLINUX=1 -D_BSD_SOURCE -D_POSIX_C_SOURCE=200112L -DSCTP_IN_KERNEL=1 -I/usr/include/GNUstep/ -I/usr/local/ssl/include -Iinclude -Iinclude/ulib"
-    LDFLAGS="$LDFLAGS -rdynamic"
-    LIBS="$LIBS -lsctp"
-    BUILD_DIR="build-linux"
-    SHARED_LIBRARY_EXTENSION=so
-    PACKAGE_MAKER="#"
-    #LIBTOOL="libtool -static -o"
-    INSTALL_NAME_TOOL="#"
-    if [[ `uname -m`="x86_64" ]]
+    
+    if [[ -f /usr/local/lib/pkgconfig/ulib.pc ]]
     then
-        BUILD_DIR="build/linux64"
-     else
-         if [[ `uname -m`="i686" ]]
-         then
-            BUILD_DIR="build/linux32"
-         else
-            BUILD_DIR="build/linux"
-        fi
-     fi
+    	CFLAGS="$CFLAGS `pkg-config  /usr/local/lib/pkgconfig/ulib.pc --cflags`"
+    	LDFLAGS="$LDFLAGS `pkg-config  /usr/local/lib/pkgconfig/ulib.pc --libs`"
+    fi
+    
+    if [[ -f /usr/local/lib/pkgconfig/libssl.pc ]]
+    then
+    	CFLAGS="$CFLAGS `pkg-config  /usr/local/lib/pkgconfig/libssl.pc --cflags`"
+    	LDFLAGS="$LDFLAGS `pkg-config  /usr/local/lib/pkgconfig/libssl.pc --libs`"
+    fi    
+    LIBS="$LIBS -lsctp"
+    SHARED_LIBRARY_EXTENSION=so
     SHARED_FLAGS="-shared"
     ;;
 esac
-
 
 AC_SUBST(EXE_EXT)
 AC_SUBST(LIBTOOL)
@@ -511,8 +520,17 @@ AC_SUBST(PACKAGE_MAKER)
 AC_SUBST(LIBS)
 
 AC_CONFIG_SECTION([Generating output files]) 
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([Makefile.osx])
+AC_CONFIG_FILES([Makefile.linux])
 AC_OUTPUT
+case "$host" in
+  *apple-darwin*) 
+    cp Makefile.osx Makefile
+    ;;
+  *-linux-*)
+    cp Makefile.linux Makefile
+    ;;
+esac
 
 dnl LICENSE notice
 

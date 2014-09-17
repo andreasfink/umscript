@@ -10,7 +10,6 @@
 
 %top{
 
-
 #import "glueterm.h"
 #define YYSTYPE_IS_DECLARED 1
 #define YYSTYPE glueterm
