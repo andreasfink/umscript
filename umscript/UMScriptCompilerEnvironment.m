@@ -9,6 +9,7 @@
 #import "UMScriptCompilerEnvironment.h"
 #import "UMTerm.h"
 #import <string.h>
+
 #import "umscript_globals.h"
 #import "_generated_umscript.y.h"
 #import "flex_definitions.h"
@@ -21,7 +22,7 @@
 @synthesize parserLog;
 @synthesize lexerLog;
 
--(id)init
+- (id)init
 {
     self = [super init];
     if(self)

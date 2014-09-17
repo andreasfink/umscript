@@ -43,12 +43,18 @@ NS_INLINE id CFBridgingRelease(CFTypeRef CF_CONSUMED X)
 {
     return (__bridge_transfer id)X;
 }
+<<<<<<< HEAD
 
 
 #endif /* LINUX_GLUE */
 #endif /* LINUX */
 
 
+=======
+#endif /* LINUX_GLUE */
+#endif /* LINUX */
+
+>>>>>>> 39ceec2ab4b5a8de8aee088ccdb057360c709e7f
 typedef struct glueterm
 {
     int         token;
