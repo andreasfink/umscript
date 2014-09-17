@@ -40,12 +40,12 @@
 extern int yydebug;
 #endif
 /* "%code requires" blocks.  */
-#line 11 "language/umscript.y" /* yacc.c:1909  */
+#line 11 "language/umscript.y" /* yacc.c:1915  */
 
     typedef void*                 yyscan_t;
     @class UMScriptCompilerEnvironment;
 
-#line 49 "language/_generated_umscript.y.h" /* yacc.c:1909  */
+#line 49 "language/_generated_umscript.y.h" /* yacc.c:1915  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE

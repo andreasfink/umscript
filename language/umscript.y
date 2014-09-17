@@ -44,7 +44,7 @@ extern int yyparse (yyscan_t yyscanner, UMScriptCompilerEnvironment *cenv);
         CFBridgingRelease((x).value); \
     }           \
     (x).value=CFBridgingRetain(val); \
-    cenv.root = (x).value; \
+    cenv.root=(__bridge UMTerm *)x.value; \
 }
 
 #define UMASSIGN(a,b) \
