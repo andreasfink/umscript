@@ -80,7 +80,7 @@ case "$host" in
 
 	CC=clang
 	CXX=clang++
-	CFLAGS="$CFLAGS -std=c99 -pg -g -O0 -fPIC -DLINUX=1  -DSCTP_IN_KERNEL=1"
+	CFLAGS="$CFLAGS -std=c99 -g -O3 -fPIC -DLINUX=1  -DSCTP_IN_KERNEL=1"
 	CFLAGS="$CFLAGS  -Wno-trigraphs  -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties -Wno-receiver-is-weak"
 	CFLAGS="$CFLAGS -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label"
 	CFLAGS="$CFLAGS -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow"

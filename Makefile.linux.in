@@ -7,8 +7,6 @@
 
 CC=@CC@
 CFLAGS=@CFLAGS@
-CONFIGURATION=Release
-CFLAGS=-pg -g -O0 -fPIC -fobjc-runtime=gnustep -fobjc-arc -fpascal-strings -fasm-blocks -fstrict-aliasing -fdiagnostics-show-note-include-stack -Wmissing-prototypes -I.  -Isrc/asn  -Isrc -I/usr/include/postgresql -I/usr/include/mysql -DLINUX=1 -DSCTP_IN_KERNEL=1 -D_BSD_SOURCE -I/usr/include/libxml2 -DCONFIGURATION=${CONFIGURATION} -IClasses/UniversalUtilities
 LDFLAGS=@LDFLAGS@
 
 LIB=libumscript.so
@@ -20,7 +18,7 @@ MOFILES  = $(MFILES:.m=.m.o)
 OFILES = $(MOFILES)
 
 INCLUDEDIRS = -I umscript -I language
-DEBUG_RELEASE = -DCONFIGURATION_${CONFIGURATION}=1 -DCONFIGURATION=${CONFIGURATION}
+DEBUG_RELEASE = -DCONFIGURATION_RELEASE=1  -DCONFIGURATION=Release
 
 ${LIB}: ${OFILES}
 	./make_version
@@ -31,7 +29,7 @@ install: ${LIB}
 	-install -b -g root -o root -m 644 ${LIB} ${DESTDIR}/usr/local/lib/
 	-install -b -g root -o root -m 644 ${PKGCONFIGFILE} ${DESTDIR}/usr/local/lib/pkgconfig/
 	-mkdir -p ${DESTDIR}/usr/local/include/umscript
-	cp umscript/*.h ${DESTDIR}/usr/local/include/umscript
+	cp $(HFILES) ${DESTDIR}/usr/local/include/umscript
 
 
 #/usr/local/bin/flex --outfile language/_generated_umscript.l.m language/umscript.l
@@ -49,8 +47,7 @@ language/_generated_umscript.y.h:	language/umscript.y
         /usr/local/bin/bison  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
 
 clean:
-	-mv ${LIB} ${LIB}.old
-	-rm -f $(MOFILES)
+	rm -f $(LIB) $(OFILES)
 
 .SUFFIXES: .m.o .o .m .c
 
