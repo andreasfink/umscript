@@ -490,21 +490,17 @@ AC_CHECK_MEMBER([struct sockaddr_in.sin_len],
 ])
 
 dnl Implement --enable-debug option.
-
-
-CONFIG="Release"
-
 AC_ARG_ENABLE(debug,
 [  --enable-debug	  enable debugging configuration [disabled]], [
-  echo enabling Debuging target
-  if test -n "$GCC"; then
-    CFLAGS="$CFLAGS -Wall"
-    CONFIG="Debug"
-  fi
-  AC_DEFINE(WS_DEBUG)
+	echo Using Debuging target
+	CFLAGS="$CFLAGS -DCONFIG=Debug"
+	AC_DEFINE(WS_DEBUG)
+]
+,
+[
+	echo Using Release target
+	CFLAGS="$CFLAGS -DCONFIG=Release"
 ])
-
-CFLAGS="$CFLAGS -DCONFIGURATION=${CONFIG}"
 
 ./make_version
 
