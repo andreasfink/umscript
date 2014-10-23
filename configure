@@ -5399,25 +5399,22 @@ $as_echo "#define HAVE_SOCKADDR_SIN_LEN 1" >>confdefs.h
 fi
 
 
-
-
-CONFIG="Release"
-
 # Check whether --enable-debug was given.
 if test "${enable_debug+set}" = set; then :
   enableval=$enable_debug;
-  echo enabling Debuging target
-  if test -n "$GCC"; then
-    CFLAGS="$CFLAGS -Wall"
-    CONFIG="Debug"
-  fi
-  $as_echo "#define WS_DEBUG 1" >>confdefs.h
+	echo Using Debuging target
+	CFLAGS="$CFLAGS -DUMSCRIPT_CONFIG=Debug"
+	$as_echo "#define WS_DEBUG 1" >>confdefs.h
 
+
+
+else
+
+	echo Using Release target
+	CFLAGS="$CFLAGS -DUMSCRIPT_CONFIG=Release"
 
 fi
 
-
-CFLAGS="$CFLAGS -DCONFIGURATION=${CONFIG}"
 
 ./make_version
 
