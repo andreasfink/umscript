@@ -919,6 +919,7 @@
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-DCONFIG=Debug";
 				SDKROOT = macosx;
 				VALID_ARCHS = "$(inherited)";
 			};
@@ -965,6 +966,7 @@
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-DCONFIG=Release";
 				SDKROOT = macosx;
 				VALID_ARCHS = "$(inherited)";
 			};
