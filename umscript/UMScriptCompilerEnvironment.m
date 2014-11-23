@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 SMSRelay AG. All rights reserved.
 //
 
+#import <ulib/ulib.h>
 #import "UMScriptCompilerEnvironment.h"
 #import "UMTerm.h"
 #import <string.h>
@@ -49,6 +50,7 @@
 
 - (void)stdinFeeder:(NSData *)input
 {
+    ulib_set_thread_name([NSString stringWithFormat:@"[UMScriptCompilerEnvironment stdinFeeder] %@",currentSource]);
     const unsigned char  *bytes = [input bytes];
     size_t size = [input length];
     size_t write_size = size;
@@ -77,6 +79,9 @@
 
 - (void)stdoutListener
 {
+    
+    ulib_set_thread_name([NSString stringWithFormat:@"[UMScriptCompilerEnvironment stdoutListener] %@",currentSource]);
+
     NSMutableData *outputData = [[NSMutableData alloc]init];
     outputDataComplete = NO;
     char buf[1025];
