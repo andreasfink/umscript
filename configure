@@ -2576,7 +2576,7 @@ case "$host" in
 
 	CC=clang
 	CXX=clang++
-        CFLAGS="$CFLAGS -std=c99 -g -O3 -fPIC -DLINUX -D_BSD_SOURCE -D_POSIX_SOURCE -DSCTP_IN_KERNEL"
+        CFLAGS="$CFLAGS -std=c99 -fPIC -DLINUX -D_BSD_SOURCE -D_POSIX_SOURCE -DSCTP_IN_KERNEL"
 	CFLAGS="$CFLAGS  -Wno-trigraphs  -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties -Wno-receiver-is-weak"
 	CFLAGS="$CFLAGS -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label"
 	CFLAGS="$CFLAGS -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow"
@@ -5403,7 +5403,8 @@ fi
 if test "${enable_debug+set}" = set; then :
   enableval=$enable_debug;
 	echo Using Debuging target
-	CFLAGS="$CFLAGS -DUMSCRIPT_CONFIG=Debug"
+	CFLAGS="$CFLAGS -g -O0  -DUMSCRIPT_CONFIG=Debug"
+	LDFLAGS="$LDFLAGS -g"
 	$as_echo "#define WS_DEBUG 1" >>confdefs.h
 
 
@@ -5411,7 +5412,7 @@ if test "${enable_debug+set}" = set; then :
 else
 
 	echo Using Release target
-	CFLAGS="$CFLAGS -DUMSCRIPT_CONFIG=Release"
+	CFLAGS="$CFLAGS -Os -DUMSCRIPT_CONFIG=Release"
 
 fi
 
