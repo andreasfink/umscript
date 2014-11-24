@@ -1,0 +1,38 @@
+##
+# File: Makefile
+# Project "ulib"
+# (c) 2012 SMSRelay AG
+# Create: Andreas Fink (andreas@fink.org)
+#
+#
+
+PROJECT_NAME=umscript
+VERSION=`cat VERSION`
+PROJECT_ID=com.smsrelay.umscript
+INSTALLER_CERT="Developer ID Installer: SMSRelay AG"
+CODESIGN=CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+CC=clang
+
+all:
+	xcodebuild $(CODESIGN)
+	
+unlock:
+	security unlock-keychain ~/Library/Keychains/login.keychain
+
+clean:
+	rm -f $(BUILD_DIR)
+
+install:
+	xcodebuild $(CODESIGN) install
+
+install_for_pkg: 
+	xcodebuild DSTROOT="install_root" install
+
+pkg:
+	xcodebuild DSTROOT="install_root" install
+	pkgbuild --root install_root --install-location /  --sign "Developer ID Installer: SMSRelay AG" --version "`cat VERSION`" --identifier "com.smsrelay.umscript" "umscript_`cat VERSION`.pkg"
+
+pkg2:
+	xcodebuild DSTROOT="install_root" install
+	pkgbuild --root install_root --install-location /  --sign "Developer ID Installer: SMSRelay AG" --version "`cat VERSION`" --identifier "com.smsrelay.umscript" "umscript.pkg"
