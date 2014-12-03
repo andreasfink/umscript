@@ -6,8 +6,8 @@
 #
 
 CC=clang
-CFLAGS= -Isrc -fobjc-arc -mmacosx-version-min=10.8 -D_REENTRANT=1 -DDARWIN=1 -Iinclude -Iinclude/ulib   -arch x86_64 -g -O0  -DUMSCRIPT_CONFIG=Debug
-LDFLAGS=-F/Library/Frameworks -framework ulib -framework Foundation -framework CoreFoundation -framework Security -arch x86_64 -g
+CFLAGS= -Isrc -fobjc-arc -mmacosx-version-min=10.8 -D_REENTRANT=1 -DDARWIN=1 -Iinclude -Iinclude/ulib   -arch x86_64 -Os -DUMSCRIPT_CONFIG=Release
+LDFLAGS=-F/Library/Frameworks -framework ulib -framework Foundation -framework CoreFoundation -framework Security -arch x86_64
 
 LIB=libumscript.so
 PKGCONFIGFILE=umscript.pc
