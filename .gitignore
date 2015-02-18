@@ -1,13 +1,15 @@
 build/
 install_root/
 
+*.xccheckout
 Makefile
-autom4te.cache/
+Makefile.linux
+Makefile.osx
 config.h
 config.log
 config.status
 stamp-h1
-version.h
+
 
 #########################
 # .gitignore file for Xcode4 and Xcode5 Source projects
