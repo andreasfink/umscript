@@ -6,7 +6,7 @@
 #
 
 CC=@CC@
-CFLAGS=@CFLAGS@
+CFLAGS=@CFLAGS@ -Wno-typedef-redefinition
 LDFLAGS=@LDFLAGS@
 
 LIB=libumscript.so
