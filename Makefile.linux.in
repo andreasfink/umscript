@@ -38,13 +38,13 @@ install: ${LIB}
 language/flex_definitions.h: language/_generated_umscript.y.h
 
 language/_generated_umscript.l.m:	language/umscript.l language/_generated_umscript.y.h
-	/usr/local/bin/flex --outfile language/_generated_umscript.l.m language/umscript.l
+	flex --outfile language/_generated_umscript.l.m language/umscript.l
 
 language/_generated_umscript.y.m:	language/umscript.y
-	/usr/local/bin/bison  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
+	bison  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
 
 language/_generated_umscript.y.h:	language/umscript.y
-        /usr/local/bin/bison  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
+	bison  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
 
 clean:
 	rm -f $(LIB) $(OFILES)
