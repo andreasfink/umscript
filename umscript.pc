@@ -10,6 +10,6 @@ Cflags: -I${includedir}
 Libs: -L${libdir} -lumscript
 
 Description: universal scriptlibrary
-Version: 1.2.1
+Version: 1.5.1
 Requires: ulib 
 

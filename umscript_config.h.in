@@ -1,0 +1,12 @@
+/* ==================================================================== 
+ * umscript_config.h
+ * Project "umscript"
+ * (c) 2002-2015, SMSRelay AG, Basel, Switzerland
+ */ 
+
+#ifndef UMSCRIPT_CONFIG_H
+#define UMSCRIPT_CONFIG_H
+
+
+#endif
+

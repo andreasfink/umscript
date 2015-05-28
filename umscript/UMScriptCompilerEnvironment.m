@@ -7,6 +7,7 @@
 //
 
 #import <ulib/ulib.h>
+#include <unistd.h>
 #import "UMScriptCompilerEnvironment.h"
 #import "UMTerm.h"
 #import <string.h>
