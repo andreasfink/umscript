@@ -646,6 +646,7 @@
 				A6A3A9FF19297741007FFC7B /* Frameworks */,
 				A6A3AA0019297741007FFC7B /* Headers */,
 				A6A3AA0119297741007FFC7B /* Resources */,
+				A67598161B1C786D0090FC94 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -731,6 +732,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		A67598161B1C786D0090FC94 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/VERSION",
+			);
+			name = "Run Script";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/version.h",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -f version.h ]\nthen\nif [ VERSION -nt version.h ]\nthen\n./configure\nfi\nelse\n./configure\nfi\n";
+		};
 		A6EEDB6E1929DEF70090FC94 /* Run Script (lex) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
