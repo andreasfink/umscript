@@ -140,6 +140,7 @@ dnl Final Output
 AC_SUBST(PROJECT_NAME)
 AC_CONFIG_FILES([Makefile.osx])
 AC_CONFIG_FILES([Makefile.linux])
+AC_CONFIG_FILES([umscript.pc])
 AC_OUTPUT
 case "$host" in
   *apple-darwin*) 

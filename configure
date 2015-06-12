@@ -3093,6 +3093,8 @@ ac_config_files="$ac_config_files Makefile.osx"
 
 ac_config_files="$ac_config_files Makefile.linux"
 
+ac_config_files="$ac_config_files umscript.pc"
+
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -3786,6 +3788,7 @@ do
     "${CONFIG_HEADER}") CONFIG_HEADERS="$CONFIG_HEADERS ${CONFIG_HEADER}" ;;
     "Makefile.osx") CONFIG_FILES="$CONFIG_FILES Makefile.osx" ;;
     "Makefile.linux") CONFIG_FILES="$CONFIG_FILES Makefile.linux" ;;
+    "umscript.pc") CONFIG_FILES="$CONFIG_FILES umscript.pc" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac
