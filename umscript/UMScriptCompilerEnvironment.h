@@ -7,14 +7,12 @@
 //
 
 #import "UMEnvironment.h"
+#import "CoreFoundation/CoreFoundation.h"
 
 #ifdef LINUX
 #ifndef LINUX_GLUE
 #define LINUX_GLUE  1
 
-#ifndef CFTypeRef
-typedef void *CFTypeRef;
-#endif
 #define CF_RETURNS_RETAINED __attribute__((cf_returns_retained))
 
 #if !defined(NS_INLINE)
