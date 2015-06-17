@@ -39,14 +39,26 @@ static void comment(yyscan_t yyscanner);
 @class UMScriptCompilerEnvironment;
 extern UMScriptCompilerEnvironment *cenv;
 
+
+static inline  void * XCFBridgingRetain(id X)
+{
+    return (__bridge_retained void *)X;
+}
+
+static inline  id XCFBridgingRelease(void *X)
+{
+    return (__bridge_transfer id)X;
+}
+
+
 #define UMGET(x)          ((__bridge UMTerm *)x.value)
 #define UMSET(x,val)  \
 {                   \
     if((x).value!=NULL) \
     {                   \
-        CFBridgingRelease((x).value); \
+        XCFBridgingRelease((x).value); \
     }           \
-    (x).value=CFBridgingRetain(val); \
+    (x).value=XCFBridgingRetain(val); \
 }
 
 /* Note: we are not using UMSET here as the structure is allocated by malloc and not initialized to zero */
@@ -55,7 +67,7 @@ extern UMScriptCompilerEnvironment *cenv;
     UMScriptCompilerEnvironment *cenv = (__bridge UMScriptCompilerEnvironment *)yyextra; \
     char *text =yyget_text(yyscanner); \
     UMTerm *term = [UMTerm token:(x) text:text withEnvironment:cenv];      \
-    yylval_param->value=CFBridgingRetain(term);                                              \
+    yylval_param->value=XCFBridgingRetain(term);                                              \
     yylval_param->token = (x);                                                              \
     NSString *s = [NSString stringWithFormat:@"%d %s {%s}",x,#x,text]; \
     [cenv.lexerLog addLogEntry:s];  \
@@ -203,11 +215,11 @@ int yycompile(UMScriptCompilerEnvironment *cenv, int fdes_input, int fdes_output
     FILE *outfile = fdopen(fdes_output,"w");
     yyset_in(infile,yyscanner);
     yyset_out(outfile,yyscanner);
-    void * cenv2 = (void *)CFBridgingRetain(cenv);
+    void * cenv2 = (void *)XCFBridgingRetain(cenv);
     yyset_extra(cenv2,yyscanner);
 //    yydebug = 1;
     yyparse(yyscanner,cenv);
-    CFBridgingRelease(cenv2);
+    XCFBridgingRelease(cenv2);
     yylex_destroy(yyscanner);
     return 0;
 }

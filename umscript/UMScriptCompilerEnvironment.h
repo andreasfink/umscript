@@ -7,7 +7,6 @@
 //
 
 #import "UMEnvironment.h"
-#import "CoreFoundation/CoreFoundation.h"
 
 #ifdef LINUX
 #ifndef LINUX_GLUE
@@ -35,14 +34,7 @@
 #endif
 #endif
 
-NS_INLINE CF_RETURNS_RETAINED CFTypeRef CFBridgingRetain(id X) {
-    return (__bridge_retained CFTypeRef)X;
-}
 
-NS_INLINE id CFBridgingRelease(CFTypeRef CF_CONSUMED X)
-{
-    return (__bridge_transfer id)X;
-}
 #endif /* LINUX_GLUE */
 #endif /* LINUX */
 
