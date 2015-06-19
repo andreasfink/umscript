@@ -31,7 +31,24 @@ extern int yydebug;
 typedef void *yyscan_t;
 extern int yyparse (yyscan_t yyscanner, UMScriptCompilerEnvironment *cenv);
 
-#define XRETAIN(a)   cenv.root=a;CFBridgingRetain(a); NSLog(@"%@",a)
+
+
+static inline  void * XCFBridgingRetain(id X)
+{
+    return (__bridge_retained void *)X;
+}
+
+static inline  id XCFBridgingRelease(void *X)
+{
+    return (__bridge_transfer id)X;
+}
+
+// After using a CFBridgingRetain on an NSObject, the caller must take responsibility for calling CFRelease at an appropriate time.
+
+
+
+
+#define XRETAIN(a)   cenv.root=a;XCFBridgingRetain(a); NSLog(@"%@",a)
 #define APPLY(a)    cenv.root=a;NSLog(@"%@",a)
 
 
@@ -41,9 +58,9 @@ extern int yyparse (yyscan_t yyscanner, UMScriptCompilerEnvironment *cenv);
 {                   \
     if((x).value!=NULL) \
     {                   \
-        CFBridgingRelease((x).value); \
+        XCFBridgingRelease((x).value); \
     }           \
-    (x).value=CFBridgingRetain(val); \
+    (x).value=XCFBridgingRetain(val); \
     cenv.root=(__bridge UMTerm *)x.value; \
 }
 
@@ -53,7 +70,7 @@ extern int yyparse (yyscan_t yyscanner, UMScriptCompilerEnvironment *cenv);
         UMSET(a,t); \
     }
 
-#define SET_NULL(r) { if(r.value) CFBridgingRelease(r.value);}
+#define SET_NULL(r) { if(r.value) XCFBridgingRelease(r.value);}
 
 #define SET_LABEL(r,n) { UMTerm *t = UMGET(r); t.label = n.labelValue;}
 #define SET_DEFAULT_LABEL(r) { UMTerm *t = UMGET(r); t.label = @"default"; }
@@ -70,7 +87,7 @@ extern int yyparse (yyscan_t yyscanner, UMScriptCompilerEnvironment *cenv);
 
 %define api.pure
 %locations
-%destructor     { CFBridgingRelease($$.value); $$.value=NULL;} <>
+%destructor     { XCFBridgingRelease($$.value); $$.value=NULL;} <>
 %{
  
 extern void yyerror (YYLTYPE *llocp, yyscan_t yyscanner, UMScriptCompilerEnvironment *cenv, const char *msg);

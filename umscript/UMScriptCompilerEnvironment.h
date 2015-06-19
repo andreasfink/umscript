@@ -12,9 +12,6 @@
 #ifndef LINUX_GLUE
 #define LINUX_GLUE  1
 
-#ifndef CFTypeRef
-typedef void *CFTypeRef;
-#endif
 #define CF_RETURNS_RETAINED __attribute__((cf_returns_retained))
 
 #if !defined(NS_INLINE)
@@ -37,14 +34,7 @@ typedef void *CFTypeRef;
 #endif
 #endif
 
-NS_INLINE CF_RETURNS_RETAINED CFTypeRef CFBridgingRetain(id X) {
-    return (__bridge_retained CFTypeRef)X;
-}
 
-NS_INLINE id CFBridgingRelease(CFTypeRef CF_CONSUMED X)
-{
-    return (__bridge_transfer id)X;
-}
 #endif /* LINUX_GLUE */
 #endif /* LINUX */
 
