@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.0.  */
+/* A Bison parser, made by GNU Bison 3.0.2.  */
 
 /* Bison interface for Yacc-like parsers in C
 
@@ -40,12 +40,12 @@
 extern int yydebug;
 #endif
 /* "%code requires" blocks.  */
-#line 11 "language/umscript.y" /* yacc.c:1915  */
+#line 11 "language/umscript.y" /* yacc.c:1909  */
 
     typedef void*                 yyscan_t;
     @class UMScriptCompilerEnvironment;
 
-#line 49 "language/_generated_umscript.y.h" /* yacc.c:1915  */
+#line 49 "language/_generated_umscript.y.h" /* yacc.c:1909  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
