@@ -94,8 +94,8 @@
     {
         isCompiled = NO;
     }
-    self.parserLog = [compilerEnvironment.parserLog getLog];
-    self.lexerLog = [compilerEnvironment.lexerLog getLog];
+    self.parserLog = [compilerEnvironment.parserLog getLogForwardOrder];
+    self.lexerLog = [compilerEnvironment.lexerLog getLogForwardOrder];
     return err;
 }
 
