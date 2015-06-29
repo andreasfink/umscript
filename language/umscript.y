@@ -43,36 +43,27 @@ static inline  id XCFBridgingRelease(void *X)
     return (__bridge_transfer id)X;
 }
 
-// After using a CFBridgingRetain on an NSObject, the caller must take responsibility for calling CFRelease at an appropriate time.
-
-
-
+#define UMTERM_NULL      [UMTerm termWithNullWithEnvironment:cenv]
+#define UMGET(x)          (((__bridge UMTerm *)x.value) ? (__bridge UMTerm *)x.value : UMTERM_NULL)
+#define UMSET(x,val)                            \
+{                                               \
+    void *newval = XCFBridgingRetain((val));    \
+    if((x).value!=NULL)                         \
+    {                                           \
+        XCFBridgingRelease((x).value);          \
+        }                                       \
+        (x).value=newval;                       \
+}
 
 #define XRETAIN(a)   cenv.root=a;XCFBridgingRetain(a); NSLog(@"%@",a)
 #define APPLY(a)    cenv.root=a;NSLog(@"%@",a)
-
-
-#define UMTERM_NULL [UMTerm termWithNullWithEnvironment:cenv]
-#define UMGET(x)          ((__bridge UMTerm *)x.value ? (__bridge UMTerm *)x.value : UMTERM_NULL )
-#define UMSET(x,val)  \
-{                   \
-    void *tmp = XCFBridgingRetain(val); \
-    if((x).value!=NULL) \
-    {                   \
-        XCFBridgingRelease((x).value); \
-    }           \
-    (x).value=tmp; \
-    cenv.root=(__bridge UMTerm *)x.value; \
-}
-
 #define UMASSIGN(a,b) \
     { \
         UMTerm *t = UMGET(b); \
         UMSET(a,t); \
     }
 
-#define SET_NULL(r) { if(r.value) XCFBridgingRelease(r.value);}
-
+#define SET_NULL(r) { if((r).value) XCFBridgingRelease((r).value);}
 #define SET_LABEL(r,n) { UMTerm *t = UMGET(r); t.label = n.labelValue;}
 #define SET_DEFAULT_LABEL(r) { UMTerm *t = UMGET(r); t.label = @"default"; }
 //unused macro to silence the compiler

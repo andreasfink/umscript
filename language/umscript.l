@@ -52,14 +52,14 @@ static inline  id XCFBridgingRelease(void *X)
 
 
 #define UMGET(x)          ((__bridge UMTerm *)x.value)
-#define UMSET(x,val)  \
-{                   \
-    XCFBridgingRetain(val); \
-    if((x).value!=NULL) \
-    {                   \
-        XCFBridgingRelease((x).value); \
-    }           \
-    (x).value=(val); \
+#define UMSET(x,val)                            \
+{                                               \
+    void *newval = XCFBridgingRetain((val));    \
+    if((x).value!=NULL)                         \
+    {                                           \
+        XCFBridgingRelease((x).value);          \
+        }                                       \
+        (x).value=newval;                       \
 }
 
 /* Note: we are not using UMSET here as the structure is allocated by malloc and not initialized to zero */
