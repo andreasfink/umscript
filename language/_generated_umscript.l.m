@@ -22,7 +22,7 @@ typedef UMScriptCompilerEnvironment *YY_EXTRA_TYPE;
 #define FLEX_SCANNER
 #define YY_FLEX_MAJOR_VERSION 2
 #define YY_FLEX_MINOR_VERSION 5
-#define YY_FLEX_SUBMINOR_VERSION 39
+#define YY_FLEX_SUBMINOR_VERSION 37
 #if YY_FLEX_SUBMINOR_VERSION > 0
 #define FLEX_BETA
 #endif
@@ -172,15 +172,7 @@ typedef void* yyscan_t;
 
 /* Size of default input buffer. */
 #ifndef YY_BUF_SIZE
-#ifdef __ia64__
-/* On IA-64, the buffer size is 16k, not 8k.
- * Moreover, YY_BUF_SIZE is 2*YY_READ_BUF_SIZE in the general case.
- * Ditto for the __ia64__ case accordingly.
- */
-#define YY_BUF_SIZE 32768
-#else
 #define YY_BUF_SIZE 16384
-#endif /* __ia64__ */
 #endif
 
 /* The state buf must be large enough to hold one state per character in the main buffer.
@@ -202,7 +194,6 @@ typedef size_t yy_size_t;
 #define EOB_ACT_LAST_MATCH 2
 
     #define YY_LESS_LINENO(n)
-    #define YY_LINENO_REWIND_TO(ptr)
     
 /* Return all but the first "n" matched characters back to the input stream. */
 #define yyless(n) \
@@ -673,11 +664,12 @@ static inline  id XCFBridgingRelease(void *X)
 #define UMGET(x)          ((__bridge UMTerm *)x.value)
 #define UMSET(x,val)  \
 {                   \
+    XCFBridgingRetain(val); \
     if((x).value!=NULL) \
     {                   \
         XCFBridgingRelease((x).value); \
     }           \
-    (x).value=XCFBridgingRetain(val); \
+    (x).value=(val); \
 }
 
 /* Note: we are not using UMSET here as the structure is allocated by malloc and not initialized to zero */
@@ -693,7 +685,7 @@ static inline  id XCFBridgingRelease(void *X)
     return (x);\
 }
 
-#line 697 "language/_generated_umscript.l.m"
+#line 689 "language/_generated_umscript.l.m"
 
 #define INITIAL 0
 
@@ -834,12 +826,7 @@ static int input (yyscan_t yyscanner );
 
 /* Amount of stuff to slurp up with each read. */
 #ifndef YY_READ_BUF_SIZE
-#ifdef __ia64__
-/* On IA-64, the buffer size is 16k, not 8k */
-#define YY_READ_BUF_SIZE 16384
-#else
 #define YY_READ_BUF_SIZE 8192
-#endif /* __ia64__ */
 #endif
 
 /* Copy whatever the last rule matched to the standard output. */
@@ -943,6 +930,10 @@ YY_DECL
 	register int yy_act;
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
+#line 100 "language/umscript.l"
+
+#line 936 "language/_generated_umscript.l.m"
+
     yylval = yylval_param;
 
     yylloc = yylloc_param;
@@ -973,11 +964,6 @@ YY_DECL
 		yy_load_buffer_state(yyscanner );
 		}
 
-	{
-#line 99 "language/umscript.l"
-
-#line 980 "language/_generated_umscript.l.m"
-
 	while ( 1 )		/* loops until end-of-file is reached */
 		{
 		yy_cp = yyg->yy_c_buf_p;
@@ -994,7 +980,7 @@ YY_DECL
 yy_match:
 		do
 			{
-			register YY_CHAR yy_c = yy_ec[YY_SC_TO_UI(*yy_cp)] ;
+			register YY_CHAR yy_c = yy_ec[YY_SC_TO_UI(*yy_cp)];
 			if ( yy_accept[yy_current_state] )
 				{
 				yyg->yy_last_accepting_state = yy_current_state;
@@ -1035,392 +1021,392 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 100 "language/umscript.l"
+#line 101 "language/umscript.l"
 { comment(yyscanner);}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 101 "language/umscript.l"
+#line 102 "language/umscript.l"
 { /* consume // comment */ }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 102 "language/umscript.l"
+#line 103 "language/umscript.l"
 { result(BREAK);    }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 103 "language/umscript.l"
+#line 104 "language/umscript.l"
 { result(CASE);     }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 104 "language/umscript.l"
+#line 105 "language/umscript.l"
 { result(CONTINUE); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 105 "language/umscript.l"
+#line 106 "language/umscript.l"
 { result(DEFAULT);  }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 106 "language/umscript.l"
+#line 107 "language/umscript.l"
 { result(DO);       }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 107 "language/umscript.l"
+#line 108 "language/umscript.l"
 { result(ELSE);     }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 108 "language/umscript.l"
+#line 109 "language/umscript.l"
 { result(FOR);      }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 109 "language/umscript.l"
+#line 110 "language/umscript.l"
 { result(GOTO);     }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 110 "language/umscript.l"
+#line 111 "language/umscript.l"
 { result(IF);       }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 111 "language/umscript.l"
+#line 112 "language/umscript.l"
 { result(RETURN);   }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 112 "language/umscript.l"
+#line 113 "language/umscript.l"
 { result(SWITCH);   }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 113 "language/umscript.l"
+#line 114 "language/umscript.l"
 { result(WHILE);    }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 114 "language/umscript.l"
+#line 115 "language/umscript.l"
 { return(FUNC_NAME);  }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 115 "language/umscript.l"
+#line 116 "language/umscript.l"
 { return(FILE_NAME);  }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 116 "language/umscript.l"
+#line 117 "language/umscript.l"
 { return(LINE_NUMBER);}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 118 "language/umscript.l"
+#line 119 "language/umscript.l"
 { result(CONST_BOOLEAN);  }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 119 "language/umscript.l"
+#line 120 "language/umscript.l"
 { result(CONST_HEX);      }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 120 "language/umscript.l"
+#line 121 "language/umscript.l"
 { result(CONST_BINARY);   }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 121 "language/umscript.l"
+#line 122 "language/umscript.l"
 { result(CONST_OCTAL);    }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 122 "language/umscript.l"
+#line 123 "language/umscript.l"
 { result(CONST_INTEGER);  }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 123 "language/umscript.l"
+#line 124 "language/umscript.l"
 { result(CONST_LONGLONG); }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 124 "language/umscript.l"
+#line 125 "language/umscript.l"
 { result(CONST_DOUBLE);   }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 125 "language/umscript.l"
+#line 126 "language/umscript.l"
 { result(CONST_DOUBLE);   }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 127 "language/umscript.l"
+#line 128 "language/umscript.l"
 { result(VARIABLE);       }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 128 "language/umscript.l"
+#line 129 "language/umscript.l"
 { result(FIELD);          }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 129 "language/umscript.l"
+#line 130 "language/umscript.l"
 { result(IDENTIFIER);     }
 	YY_BREAK
 case 29:
 /* rule 29 can match eol */
 YY_RULE_SETUP
-#line 131 "language/umscript.l"
+#line 132 "language/umscript.l"
 { result(CONST_STRING); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 133 "language/umscript.l"
+#line 134 "language/umscript.l"
 { result(OPERATOR_ASSIGNMENT);   }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 134 "language/umscript.l"
+#line 135 "language/umscript.l"
 { result(OPERATOR_RIGHT_ASSIGN); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 135 "language/umscript.l"
+#line 136 "language/umscript.l"
 { result(OPERATOR_LEFT_ASSIGN);  }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 136 "language/umscript.l"
+#line 137 "language/umscript.l"
 { result(OPERATOR_ADD_ASSIGN);   }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 137 "language/umscript.l"
+#line 138 "language/umscript.l"
 { result(OPERATOR_SUB_ASSIGN);   }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 138 "language/umscript.l"
+#line 139 "language/umscript.l"
 { result(OPERATOR_MUL_ASSIGN);   }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 139 "language/umscript.l"
+#line 140 "language/umscript.l"
 { result(OPERATOR_DIV_ASSIGN);   }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 140 "language/umscript.l"
+#line 141 "language/umscript.l"
 { result(OPERATOR_MOD_ASSIGN);   }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 141 "language/umscript.l"
+#line 142 "language/umscript.l"
 { result(OPERATOR_AND_ASSIGN);   }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 142 "language/umscript.l"
+#line 143 "language/umscript.l"
 { result(OPERATOR_XOR_ASSIGN);   }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 143 "language/umscript.l"
+#line 144 "language/umscript.l"
 { result(OPERATOR_OR_ASSIGN);    }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 144 "language/umscript.l"
+#line 145 "language/umscript.l"
 { result(OPERATOR_RIGHT);        }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 145 "language/umscript.l"
+#line 146 "language/umscript.l"
 { result(OPERATOR_LEFT);         }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 146 "language/umscript.l"
+#line 147 "language/umscript.l"
 { result(OPERATOR_INCREASE);     }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 147 "language/umscript.l"
+#line 148 "language/umscript.l"
 { result(OPERATOR_DECREASE);     }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 148 "language/umscript.l"
+#line 149 "language/umscript.l"
 { result(OPERATOR_LESS);         }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 149 "language/umscript.l"
+#line 150 "language/umscript.l"
 { result(OPERATOR_GREATER);      }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 150 "language/umscript.l"
+#line 151 "language/umscript.l"
 { result(OPERATOR_AND);          }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 151 "language/umscript.l"
+#line 152 "language/umscript.l"
 { result(OPERATOR_OR);           }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 152 "language/umscript.l"
+#line 153 "language/umscript.l"
 { result(OPERATOR_LESS_OR_EQUAL);}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 153 "language/umscript.l"
+#line 154 "language/umscript.l"
 { result(OPERATOR_GREATER_OR_EQUAL); }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 154 "language/umscript.l"
+#line 155 "language/umscript.l"
 { result(OPERATOR_EQUAL);            }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 155 "language/umscript.l"
+#line 156 "language/umscript.l"
 { result(OPERATOR_NOT_EQUAL);        }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 156 "language/umscript.l"
+#line 157 "language/umscript.l"
 { result(';'); }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 157 "language/umscript.l"
+#line 158 "language/umscript.l"
 { result('{'); }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 158 "language/umscript.l"
+#line 159 "language/umscript.l"
 { result('}'); }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 159 "language/umscript.l"
+#line 160 "language/umscript.l"
 { result(','); }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 160 "language/umscript.l"
+#line 161 "language/umscript.l"
 { result(':'); }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 161 "language/umscript.l"
+#line 162 "language/umscript.l"
 { result('('); }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 162 "language/umscript.l"
+#line 163 "language/umscript.l"
 { result(')'); }
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 163 "language/umscript.l"
+#line 164 "language/umscript.l"
 { result('['); }
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 164 "language/umscript.l"
+#line 165 "language/umscript.l"
 { result(']'); }
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 165 "language/umscript.l"
+#line 166 "language/umscript.l"
 { result('.'); }
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 166 "language/umscript.l"
+#line 167 "language/umscript.l"
 { result('&'); }
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 167 "language/umscript.l"
+#line 168 "language/umscript.l"
 { result('!'); }
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 168 "language/umscript.l"
+#line 169 "language/umscript.l"
 { result('~'); }
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 169 "language/umscript.l"
+#line 170 "language/umscript.l"
 { result('-'); }
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 170 "language/umscript.l"
+#line 171 "language/umscript.l"
 { result('+'); }
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 171 "language/umscript.l"
+#line 172 "language/umscript.l"
 { result('*'); }
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 172 "language/umscript.l"
+#line 173 "language/umscript.l"
 { result('/'); }
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 173 "language/umscript.l"
+#line 174 "language/umscript.l"
 { result('%'); }
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 174 "language/umscript.l"
+#line 175 "language/umscript.l"
 { result('^'); }
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 175 "language/umscript.l"
+#line 176 "language/umscript.l"
 { result('|'); }
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 176 "language/umscript.l"
+#line 177 "language/umscript.l"
 { result('?'); }
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 177 "language/umscript.l"
+#line 178 "language/umscript.l"
 { result('$'); }
 	YY_BREAK
 case 75:
 /* rule 75 can match eol */
 YY_RULE_SETUP
-#line 179 "language/umscript.l"
+#line 180 "language/umscript.l"
 { /* whitespace separates tokens */ }
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 180 "language/umscript.l"
+#line 181 "language/umscript.l"
 { /* ignore bad characters */ }
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 182 "language/umscript.l"
+#line 183 "language/umscript.l"
 ECHO;
 	YY_BREAK
-#line 1424 "language/_generated_umscript.l.m"
+#line 1410 "language/_generated_umscript.l.m"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1551,7 +1537,6 @@ case YY_STATE_EOF(INITIAL):
 			"fatal flex scanner internal error--no action found" );
 	} /* end of action switch */
 		} /* end of scanning one token */
-	} /* end of user's declarations */
 } /* end of yylex */
 
 /* yy_get_next_buffer - try to read in a new buffer
@@ -2200,7 +2185,7 @@ YY_BUFFER_STATE yy_scan_bytes  (yyconst char * yybytes, yy_size_t  _yybytes_len 
 	YY_BUFFER_STATE b;
 	char *buf;
 	yy_size_t n;
-	yy_size_t i;
+	int i;
     
 	/* Get memory for full buffer, including space for trailing EOB's. */
 	n = _yybytes_len + 2;
@@ -2597,7 +2582,7 @@ void yyfree (void * ptr , yyscan_t yyscanner)
 
 #define YYTABLES_NAME "yytables"
 
-#line 181 "language/umscript.l"
+#line 183 "language/umscript.l"
 
 
 

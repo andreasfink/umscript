@@ -56,11 +56,12 @@ static inline  id XCFBridgingRelease(void *X)
 #define UMGET(x)          ((__bridge UMTerm *)x.value ? (__bridge UMTerm *)x.value : UMTERM_NULL )
 #define UMSET(x,val)  \
 {                   \
+    void *tmp = XCFBridgingRetain(val); \
     if((x).value!=NULL) \
     {                   \
         XCFBridgingRelease((x).value); \
     }           \
-    (x).value=XCFBridgingRetain(val); \
+    (x).value=tmp; \
     cenv.root=(__bridge UMTerm *)x.value; \
 }
 
