@@ -311,6 +311,10 @@
 		A6EEDB751929EB6D0090FC94 /* umscript.l */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.lex; name = umscript.l; path = language/umscript.l; sourceTree = "<group>"; };
 		A6EEDB761929EB6D0090FC94 /* umscript.y */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.yacc; name = umscript.y; path = language/umscript.y; sourceTree = "<group>"; };
 		A6EEDB781929F9810090FC94 /* test1.ums */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test1.ums; sourceTree = "<group>"; };
+		A6F693F11B4E83770090FC94 /* configure.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = configure.in; sourceTree = "<group>"; };
+		A6F694241B4E85B80090FC94 /* Makefile.linux */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.linux; sourceTree = "<group>"; };
+		A6F694251B4E85B80090FC94 /* Makefile.osx.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.osx.in; sourceTree = "<group>"; };
+		A6F694261B4E85B80090FC94 /* umscript.pc */ = {isa = PBXFileReference; lastKnownFileType = text; path = umscript.pc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -358,6 +362,10 @@
 			isa = PBXGroup;
 			children = (
 				A6019BB31AC1FA8600854472 /* VERSION */,
+				A6F693F11B4E83770090FC94 /* configure.in */,
+				A6F694241B4E85B80090FC94 /* Makefile.linux */,
+				A6F694251B4E85B80090FC94 /* Makefile.osx.in */,
+				A6F694261B4E85B80090FC94 /* umscript.pc */,
 				A6835C951929890B0090FC94 /* language */,
 				A6A3AA0C19297741007FFC7B /* umscript */,
 				A6A3AA2119297741007FFC7B /* umscriptTests */,
