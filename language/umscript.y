@@ -44,7 +44,7 @@ static inline  id XCFBridgingRelease(void *X)
 }
 
 #define UMTERM_NULL      [UMTerm termWithNullWithEnvironment:cenv]
-#define UMGET(x)          (((__bridge UMTerm *)x.value) ? (__bridge UMTerm *)x.value : UMTERM_NULL)
+#define UMGET(x)          ( x.value ? (__bridge UMTerm *)(x.value) : UMTERM_NULL)
 #define UMSET(x,val)                            \
 {                                               \
     void *newval = XCFBridgingRetain((val));    \
