@@ -116,7 +116,7 @@
     if(self)
     {
         
-        environmentLog = [[UMHistoryLog alloc]init];
+        environmentLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
         
         identPrefix = @"";
         functionDictionary  = [[NSMutableDictionary alloc]init];

@@ -34,8 +34,8 @@
         currentSource = @"DUMMY";
         currentSourceCString = currentSource.UTF8String;
         currentSourcePosition = 0;
-        parserLog = [[UMHistoryLog alloc]init];
-        lexerLog = [[UMHistoryLog alloc]init];
+        parserLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
+        lexerLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
     }
     return self;
 }
