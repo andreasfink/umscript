@@ -13,9 +13,9 @@
 
 @interface UMEnvironment : UMObject
 {
-    NSMutableDictionary *variables;
-    NSMutableDictionary *fields;
-    NSMutableDictionary *functionDictionary;
+    UMSynchronizedDictionary *variables;
+    UMSynchronizedDictionary *fields;
+    UMSynchronizedDictionary *functionDictionary;
     UMDiscreteValue *returnValue;
     BOOL    returnCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
     BOOL    breakCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
@@ -37,7 +37,8 @@
 
 - (void)identAdd;
 - (void)identRemove;
-
+- (UMEnvironment *)initWithMagic:(NSString *)m;
+        
 - (UMDiscreteValue *)variableForKey:(NSString *)key;
 - (void)setVariable:(UMDiscreteValue *)val forKey:(NSString *)key;
 

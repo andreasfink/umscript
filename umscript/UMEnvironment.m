@@ -90,7 +90,7 @@
     {
         if(functionDictionary == NULL)
         {
-            functionDictionary = [[NSMutableDictionary alloc]init];
+            functionDictionary = [[UMSynchronizedDictionary alloc]init];
             return nil;
         }
         else
@@ -110,18 +110,23 @@
    
 }
 
-- (id)init
+- (UMEnvironment *)init
 {
-    self = [super init];
+    return [self initWithMagic:@"UMEnvironment"];
+}
+
+- (UMEnvironment *)initWithMagic:(NSString *)m
+{
+    self = [super initWithMagic:m];
     if(self)
     {
         
         environmentLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
         
         identPrefix = @"";
-        functionDictionary  = [[NSMutableDictionary alloc]init];
-        variables = [[NSMutableDictionary alloc]init];
-        fields = [[NSMutableDictionary alloc]init];
+        functionDictionary  = [[UMSynchronizedDictionary alloc]init];
+        variables = [[UMSynchronizedDictionary alloc]init];
+        fields = [[UMSynchronizedDictionary alloc]init];
 /*
         [self addFunction:[[UMFunction_add alloc]initWithEnvironment:NULL]];
         [self addFunction:[[UMFunction_sub alloc]initWithEnvironment:NULL]];
@@ -163,21 +168,25 @@
 {
     NSMutableString *s = [[NSMutableString alloc]init];
 
-    for (NSString *varname in variables)
+    NSArray *keys = [variables allKeys];
+    for (NSString *varname in keys)
     {
         id val = variables[varname];
         [s appendFormat:@"var %@=%@\n",varname,[val description]];
     }
-    for (NSString *fieldname in fields)
+    
+    keys = [fields allKeys];
+    for (NSString *fieldname in keys)
     {
         id val = fields[fieldname];
         [s appendFormat:@"field %@=%@\n",fieldname,[val description]];
     }
-    for (NSString *fname in functionDictionary)
-    {
-  //      id func = functionDictionary[fname];
-        id func = functionDictionary[fname];
+    
+    keys = [functionDictionary allKeys];
 
+    for (NSString *fname in keys)
+    {
+        id func = functionDictionary[fname];
         [s appendFormat:@"func %@=%@\n",fname,[func description]];
     }
     return s;
