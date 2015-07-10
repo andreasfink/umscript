@@ -18,15 +18,20 @@
 @synthesize name;
 //@synthesize cenv;
 
-- (id)initWithEnvironment:(UMEnvironment *)compile_env
+- (id)initWithEnvironment:(UMEnvironment *)compile_env magic:(NSString *)m
 {
-    self = [super init];
+    self = [super initWithMagic:m];
     if(self)
     {
         self.name = @"Undefined";
         self.cenv = compile_env;
     }
     return self;
+}
+
+- (id)initWithEnvironment:(UMEnvironment *)compile_env
+{
+    return [self initWithEnvironment:compile_env magic:@"UMFunction"];
 }
 
 - (void)setCenv:(UMEnvironment *)env;
