@@ -24,7 +24,7 @@
  
 - (id)initWithFilename:(NSString *)filename
 {
-    self = [super init];
+    self = [super initWithMagic:@"UMScriptDocument"];
     if(self)
     {
         NSError *err = NULL;

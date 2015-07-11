@@ -12,8 +12,12 @@
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
-    self = [super initWithEnvironment:env];
-    if(self)
+    return [self initWithEnvironment:env magic:@"UMFunction_endswidth"];
+}
+
+- (id)initWithEnvironment:(UMEnvironment *)env magic:(NSString *)m
+{
+    self = [super initWithEnvironment:env magic:m];    if(self)
     {
         self.name = @"endswith";
         [env log:self.name];

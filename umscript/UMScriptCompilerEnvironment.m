@@ -28,7 +28,12 @@
 
 - (id)init
 {
-    self = [super init];
+    return [self initWithMagic:@"UMScriptCompilerEnvironment"];
+}
+
+- (id)initWithMagic:(NSString *)m
+{
+    self = [super initWithMagic:m];
     if(self)
     {        
         currentSource = @"DUMMY";
