@@ -230,7 +230,7 @@
     switch(type)
     {
         case UMVALUE_NULL:
-            return @"NULL";
+            return @"(null)";
         case UMVALUE_BOOL:
             if([self boolValue])
             {

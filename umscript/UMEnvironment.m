@@ -49,6 +49,10 @@
 
     @synchronized(self)
     {
+        if(variables==NULL)
+        {
+            return NULL; //[UMDiscreteValue discreteNull];
+        }
         result = variables[key];
     }
     return result;
@@ -58,8 +62,11 @@
 {
     @synchronized(self)
     {
+        if(variables==NULL)
+        {
+            variables = [[UMSynchronizedDictionary alloc]init];
+        }
         variables[key] = val;
-//        variables[key] = val;
     }
 }
 
@@ -69,6 +76,10 @@
     
     @synchronized(self)
     {
+        if(fields==NULL)
+        {
+            return NULL; //[UMDiscreteValue discreteNull];
+        }
         result = fields[key];
     }
     return result;
@@ -79,6 +90,10 @@
 {
     @synchronized(self)
     {
+        if(fields==NULL)
+        {
+            fields = [[UMSynchronizedDictionary alloc]init];
+        }
         fields[key] = val;
     }
    
@@ -90,7 +105,6 @@
     {
         if(functionDictionary == NULL)
         {
-            functionDictionary = [[UMSynchronizedDictionary alloc]init];
             return nil;
         }
         else
@@ -105,6 +119,10 @@
 {
     @synchronized(self)
     {
+        if(functionDictionary==NULL)
+        {
+            functionDictionary = [[UMSynchronizedDictionary alloc]init];
+        }
         functionDictionary[f.name] = f;
     }
    
@@ -124,9 +142,9 @@
         environmentLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
         
         identPrefix = @"";
-        functionDictionary  = [[UMSynchronizedDictionary alloc]init];
-        variables = [[UMSynchronizedDictionary alloc]init];
-        fields = [[UMSynchronizedDictionary alloc]init];
+        //functionDictionary  = [[UMSynchronizedDictionary alloc]init]; /* now done lazy */
+        variables   = [[UMSynchronizedDictionary alloc]init];
+        fields      = [[UMSynchronizedDictionary alloc]init];
 /*
         [self addFunction:[[UMFunction_add alloc]initWithEnvironment:NULL]];
         [self addFunction:[[UMFunction_sub alloc]initWithEnvironment:NULL]];
@@ -158,7 +176,7 @@
         [self addFunction:[[UMFunction_block alloc]initWithEnvironment:NULL]];
         [self addFunction:[[UMFunction_return alloc]initWithEnvironment:NULL]];
 */
-        [self addFunction:[[UMFunction_substr alloc]initWithEnvironment:NULL]];
+        //[self addFunction:[[UMFunction_substr alloc]initWithEnvironment:NULL]];
         /* we TODO: have to preload all the functions defined and add them to a dictionary */
     }
     return self;
