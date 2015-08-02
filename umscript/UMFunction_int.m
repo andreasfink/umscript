@@ -27,7 +27,7 @@
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)p environment:(UMEnvironment *)env
 {
-    id entry0 = [p objectsAtIndexes:0];
+    id entry0 = [p objectAtIndex:0];
     
     UMTerm *currentTerm =entry0;
     UMDiscreteValue *d = [currentTerm evaluateWithEnvironment:env];
