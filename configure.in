@@ -16,6 +16,9 @@ CONFIG_DEFINE="UMSCRIPT_CONFIG"
 VERSION=`head -n 1 VERSION`
 CONFIG_HEADER=umscript_config.h
 DEPENDENT_PKGCONFIGS="ulib"
+FRAMEWORKS="-framework ulib"
+PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
+export PKG_CONFIG_PATH
 
 AC_SUBST(SHELL)
 AC_CONFIG_AUX_DIR(.)
@@ -29,7 +32,7 @@ AC_SUBST(CONFIG_HEADER)
 AC_SUBST(VERSION)
 
 dnl Set user who runs ./configure
-CUSER=`id -p | head -1 | cut -f2`
+CUSER=`id -un`
 AC_SUBST(CUSER)
 
 AC_CONFIG_SECTION([Configuring for $PROJECT_NAME version $VERSION])
@@ -76,8 +79,9 @@ case "$host" in
 		CFLAGS="$CFLAGS `/usr/bin/gnustep-config --objc-flags | sed 's/-fobjc-exceptions/ /g'`"
 	    LDFLAGS="$LDFLAGS `/usr/bin/gnustep-config--base-libs --objc-libs`"
     fi
-	CFLAGS="$CFLAGS `pkg-config  --cflags $DEPENDENT_PKGCONFIGS`"
-	LDFLAGS="$LDFLAGS `pkg-config --libs $DEPENDENT_PKGCONFIGS`"
+	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
+	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
+	CFLAGS="${CFLAGS} `xml2-config --cflags`"
 	LDFLAGS="$LDFLAGS `xml2-config --libs`"
     SHARED_LIBRARY_EXTENSION=so
     SHARED_FLAGS="-shared"
