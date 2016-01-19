@@ -3,7 +3,7 @@
 //  umscriptTests
 //
 //  Created by Andreas Fink on 19.05.14.
-//  Copyright (c) 2014 SMSRelay AG. All rights reserved.
+//  Copyright (c) 2016 Andreas Fink
 //
 
 #import <XCTest/XCTest.h>

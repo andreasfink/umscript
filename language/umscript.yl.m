@@ -3,7 +3,7 @@
 //  umscript
 //
 //  Created by Andreas Fink on 20/05/14.
-//  Copyright (c) 2014 SMSRelay AG. All rights reserved.
+//  Copyright (c) 2016 Andreas Fink
 //
 
 /* functions which are used by the lexer and the parser jointly */
