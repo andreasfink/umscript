@@ -67,7 +67,7 @@
     }
     @catch(NSError *nse)
     {
-        [env print:[NSString stringWithFormat:@"Error: %@",nse]];
+        [env print: [NSString stringWithFormat:@"Error: %@",nse]];
     }
     return result;
 }
