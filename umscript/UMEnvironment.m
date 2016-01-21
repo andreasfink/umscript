@@ -16,6 +16,9 @@
 @synthesize identPrefix;
 @synthesize returnValue;
 @synthesize environmentLog;
+@synthesize stdout;
+@synthesize trace;
+
 @synthesize jumpTo;
 @synthesize returnCalled;
 @synthesize breakCalled;
@@ -214,4 +217,25 @@
 {
     [environmentLog addLogEntry:entry];
 }
+
+- (void) trace:(NSString *)entry
+{
+    [trace addLogEntry:entry];
+}
+
+- (void) print:(NSString *)entry
+{
+    [stdout addLogEntry:entry];
+}
+
+
+
+- (void)logToMessage:(NSString *)text
+{
+    long long now=mm_milisecond_clock();
+    double delay = ((double)(now - startTime)) / 1000.0;
+    NSString *s = [NSString stringWithFormat:@"%04.3lfs:  %@",delay,[text printable]];
+    [messageHistory addObject:[s printable]];
+}
+
 @end

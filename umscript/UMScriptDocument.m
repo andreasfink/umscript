@@ -53,7 +53,12 @@
 {
     if((isCompiled==NO) || (compiledCode==NULL))
     {
-        [self compileSource];
+        [env trace:@"compilingSource"];
+        NSString *e =[self compileSource];
+        if(e.length > 0)
+        {
+            [env stdout:[NSString stringWithFormat:@"Error while compiling %@",e]];
+        }
     }
     UMDiscreteValue *result = NULL;
     @try
@@ -62,7 +67,7 @@
     }
     @catch(NSError *nse)
     {
-        NSLog(@"Error: %@",nse);
+        [env stdout:[NSString stringWithFormat:@"Error: %@",nse]];
     }
     return result;
 }

@@ -27,38 +27,47 @@
 
 - (UMDiscreteValue *)evaluateWithEnvironment:(UMEnvironment *)xenv;
 {
+    UMDiscreteValue *returnvalue;
     switch(type)
     {
         case UMTermType_identifier:
         {
-            return [UMDiscreteValue discreteString:identifier];
+            returnvalue = [UMDiscreteValue discreteString:identifier];
         }
         case UMTermType_discrete:
         {
-            return discrete;
+            returnvalue = discrete;
         }
         case UMTermType_variable:
         {
-            return [xenv variableForKey:varname];
+            returnvalue = [xenv variableForKey:varname];
         }
         case UMTermType_field:
         {
-            return [xenv fieldForKey:fieldname];
+            returnvalue = [xenv fieldForKey:fieldname];
         }
         case UMTermType_function:
         {
-            return [function evaluateWithParams:param environment:xenv];
+            returnvalue = [function evaluateWithParams:param environment:xenv];
         }
         case UMTermType_nullterm:
         {
-            return [UMDiscreteValue discreteNull];
+            returnvalue = [UMDiscreteValue discreteNull];
         }
         case UMTermType_token:
         {
-            return [UMDiscreteValue discreteString:identifier];
+            returnvalue = [UMDiscreteValue discreteString:identifier];
+        }
+        default:
+        {
+            returnvalue = [UMDiscreteValue discreteNull];
         }
     }
-    return [UMDiscreteValue discreteNull];
+    if(xenv.trace)
+    {
+        [xenv trace:[NSString stringWithFormat:@"evaluating: %@ returns %@",self.description,returnvalue.description]];
+    }
+    return returnvalue;
 }
 
 - (id)initWithNullWithEnvironment:(UMEnvironment *)e
