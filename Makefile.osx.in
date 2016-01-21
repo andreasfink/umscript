@@ -1,14 +1,14 @@
 ##
 # File: Makefile
 # Project "ulib"
-# (c) 2012 SMSRelay AG
+# (c) 2016 Andreas Fink
 # Create: Andreas Fink (andreas@fink.org)
 #
 #
 
 PROJECT_NAME=@PROJECT_NAME@
 VERSION=`cat VERSION`
-PROJECT_ID=com.smsrelay.@PROJECT_NAME@
+PROJECT_ID=com.messagemover.@PROJECT_NAME@
 INSTALLER_CERT="Developer ID Installer: SMSRelay AG"
 CODESIGN=CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
@@ -31,8 +31,8 @@ install_for_pkg:
 
 pkg:
 	xcodebuild DSTROOT="install_root" install
-	pkgbuild --root install_root --install-location /  --sign "Developer ID Installer: SMSRelay AG" --version "`cat VERSION`" --identifier "com.smsrelay.@PROJECT_NAME@" "@PROJECT_NAME@_`cat VERSION`.pkg"
+	pkgbuild --root install_root --install-location /  --sign "Developer ID Installer: SMSRelay AG" --version "`cat VERSION`" --identifier "com.messagemover.@PROJECT_NAME@" "@PROJECT_NAME@_`cat VERSION`.pkg"
 
 pkg2:
 	xcodebuild DSTROOT="install_root" install
-	pkgbuild --root install_root --install-location /  --sign "Developer ID Installer: SMSRelay AG" --version "`cat VERSION`" --identifier "com.smsrelay.@PROJECT_NAME@" "@PROJECT_NAME@.pkg"
+	pkgbuild --root install_root --install-location /  --sign "Developer ID Installer: SMSRelay AG" --version "`cat VERSION`" --identifier "com.messagemover.@PROJECT_NAME@" "@PROJECT_NAME@.pkg"

@@ -633,7 +633,7 @@ static yyconst flex_int16_t yy_chk[551] =
 //  umscript
 //
 //  Created by Andreas Fink on 17.05.14.
-//  Copyright (c) 2014 SMSRelay AG. All rights reserved.
+//  Copyright (c) 2016 Andreas Fink
 //
 */
 
