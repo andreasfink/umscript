@@ -97,13 +97,16 @@
     }
     else
     {
-        NSLog(@"compiling failed for '%@'\n%@%@",name, [compilerEnvironment.parserLog getLogForwardOrder], [compilerEnvironment.parserLog getLogForwardOrder]);
+        NSLog(@"compiling failed for '%@'\n\nSource:%@\n\nParserLog:\n%@\n\nLexerLog:\n%@\n",
+              name,
+              sourceCode,
+              [compilerEnvironment.parserLog getLogForwardOrder],
+              [compilerEnvironment.lexerLog getLogForwardOrder]);
         isCompiled = NO;
     }
     self.parserLog = [compilerEnvironment.parserLog getLogForwardOrder];
-    self.lexerLog = [compilerEnvironment.lexerLog getLogForwardOrder];
+    self.lexerLog  = [compilerEnvironment.lexerLog getLogForwardOrder];
     return err;
 }
-
 
 @end

@@ -40,7 +40,7 @@
         currentSourceCString = currentSource.UTF8String;
         currentSourcePosition = 0;
         parserLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
-        lexerLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
+        lexerLog  = [[UMHistoryLog alloc]initWithMaxLines:10240];
     }
     return self;
 }
@@ -120,7 +120,9 @@
     stdout_pipe[RXPIPE] = -1;
 }
 
-- (UMTerm *)compile:(NSString *)code stdOut:(NSString **)sout  stdErr:(NSString **)serr
+- (UMTerm *)compile:(NSString *)code
+             stdOut:(NSString **)sout
+             stdErr:(NSString **)serr
 {
     @synchronized(self)
     {

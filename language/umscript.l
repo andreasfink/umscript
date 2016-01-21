@@ -58,8 +58,8 @@ static inline  id XCFBridgingRelease(void *X)
     if((x).value!=NULL)                         \
     {                                           \
         XCFBridgingRelease((x).value);          \
-        }                                       \
-        (x).value=newval;                       \
+    }                                           \
+    (x).value=newval;                           \
 }
 
 /* Note: we are not using UMSET here as the structure is allocated by malloc and not initialized to zero */
