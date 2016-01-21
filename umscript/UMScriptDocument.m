@@ -57,7 +57,7 @@
         NSString *e =[self compileSource];
         if(e.length > 0)
         {
-            [env stdout:[NSString stringWithFormat:@"Error while compiling %@",e]];
+            [env print:[NSString stringWithFormat:@"Error while compiling %@",e]];
         }
     }
     UMDiscreteValue *result = NULL;
@@ -67,7 +67,7 @@
     }
     @catch(NSError *nse)
     {
-        [env stdout:[NSString stringWithFormat:@"Error: %@",nse]];
+        [env print:[NSString stringWithFormat:@"Error: %@",nse]];
     }
     return result;
 }

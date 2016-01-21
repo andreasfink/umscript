@@ -25,19 +25,22 @@
     BOOL    traceExecutionFlag;
     BOOL    traceTreeBuildupFlag;
     UMHistoryLog    *environmentLog;
-    UMHistoryLog    *stdout;
+    UMHistoryLog    *standardOutput;
     UMHistoryLog    *trace;
 }
 
 @property (readwrite,strong) UMDiscreteValue *returnValue;
-@property (readwrite,assign) int     identValue;
+@property (readwrite,assign) int identValue;
 @property (readwrite,strong) NSString *identPrefix;
 @property (readwrite,strong) UMHistoryLog *environmentLog;
-@property (readwrite,strong) UMHistoryLog *stdout;
+@property (readwrite,strong) UMHistoryLog *standardOutput;
 @property (readwrite,strong) UMHistoryLog *trace;
 @property (readwrite,strong) NSString *jumpTo;
 @property (readwrite,assign) BOOL returnCalled;
 @property (readwrite,assign) BOOL breakCalled;
+@property (readwrite,assign) BOOL traceExecutionFlag;
+@property (readwrite,assign) BOOL traceTreeBuildupFlag;
+
 
 - (void)identAdd;
 - (void)identRemove;

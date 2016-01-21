@@ -16,12 +16,14 @@
 @synthesize identPrefix;
 @synthesize returnValue;
 @synthesize environmentLog;
-@synthesize stdout;
+@synthesize standardOutput;
 @synthesize trace;
 
 @synthesize jumpTo;
 @synthesize returnCalled;
 @synthesize breakCalled;
+@synthesize traceExecutionFlag;
+@synthesize traceTreeBuildupFlag;
 
 - (void)identAdd
 {
@@ -225,17 +227,7 @@
 
 - (void) print:(NSString *)entry
 {
-    [stdout addLogEntry:entry];
-}
-
-
-
-- (void)logToMessage:(NSString *)text
-{
-    long long now=mm_milisecond_clock();
-    double delay = ((double)(now - startTime)) / 1000.0;
-    NSString *s = [NSString stringWithFormat:@"%04.3lfs:  %@",delay,[text printable]];
-    [messageHistory addObject:[s printable]];
+    [standardOutput addLogEntry:entry];
 }
 
 @end
