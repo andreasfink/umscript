@@ -92,6 +92,7 @@
     }
     else
     {
+        NSLog(@"compiling failed for '%@'\n%@%@",name, [compilerEnvironment.parserLog getLogForwardOrder], [compilerEnvironment.parserLog getLogForwardOrder]);
         isCompiled = NO;
     }
     self.parserLog = [compilerEnvironment.parserLog getLogForwardOrder];
