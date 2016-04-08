@@ -859,13 +859,37 @@
             return [discrete labelValue];
             break;
         case UMTermType_field:
-            @throw [NSError errorWithDomain:@"umscript" code:2 userInfo:@{@"sysmsg":[NSString stringWithFormat:@"Nonstatic label %@",fieldname]}];
+            @throw([NSException exceptionWithName:@"NONSTATIC_LABEL"
+                                           reason:NULL
+                                         userInfo:@{
+                                                    @"sysmsg" : [NSString stringWithFormat:@"nonstatic label %@",[function name]],
+                                                    @"func": @(__func__),
+                                                    @"obj":self,
+                                                    @"err":e
+                                                    }
+                    ]);
             break;
         case UMTermType_variable:
-            @throw [NSError errorWithDomain:@"umscript" code:2 userInfo:@{@"sysmsg":[NSString stringWithFormat:@"Nonstatic label %@",varname]}];
+            @throw([NSException exceptionWithName:@"NONSTATIC_LABEL"
+                                           reason:NULL
+                                         userInfo:@{
+                                                    @"sysmsg" : [NSString stringWithFormat:@"nonstatic label %@",[function name]],
+                                                                 @"func": @(__func__),
+                                                                 @"obj":self,
+                                                                 @"err":e
+                                                                 }
+                    ]);
             break;
         case UMTermType_function:
-            @throw [NSError errorWithDomain:@"umscript" code:2 userInfo:@{@"sysmsg":[NSString stringWithFormat:@"Unknown label %@",[function name]]}];
+            @throw([NSException exceptionWithName:@"UNKNOWN_LABEL"
+                                           reason:NULL
+                                         userInfo:@{
+                                                    @"sysmsg" : [NSString stringWithFormat:@"invalid label %@",[function name]|,
+                                                    @"func": @(__func__),
+                                                    @"obj":self,
+                                                    @"err":e
+                                                    }
+                    ]);
             break;
         case UMTermType_identifier:
             return identifier;

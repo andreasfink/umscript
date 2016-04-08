@@ -31,7 +31,15 @@
         sourceCode = [[NSString alloc] initWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:&err];
         if(err)
         {
-            @throw err;
+            @throw([NSException exceptionWithName:@"UMScriptDocument init with file"
+                                           reason:NULL
+                                         userInfo:@{
+                                                    @"sysmsg" : @"init failed",
+                                                    @"func": @(__func__),
+                                                    @"obj":self,
+                                                    @"err":e
+                                                    }
+                    ]);
         }
         isCompiled = NO;
     }
@@ -65,7 +73,7 @@
     {
         result = [compiledCode evaluateWithEnvironment:env];
     }
-    @catch(NSError *nse)
+    @catch(NSException *nse)
     {
         [env print: [NSString stringWithFormat:@"Error: %@",nse]];
     }
