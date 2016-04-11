@@ -15,7 +15,7 @@ PROJECT_ID=me.fink.@PROJECT_NAME@
 CC=@CC@
 
 all:
-	./codesign_environment.sh.sh
+	./codesign_environment.sh
 	xcodebuild ${XCODESIGN}
 	
 unlock:
@@ -25,19 +25,19 @@ clean:
 	rm -f $(BUILD_DIR)
 
 install:
-	./codesign_environment.sh.sh
+	./codesign_environment.sh
 	xcodebuild ${XCODESIGN} install
 
 install_for_pkg: 
-	./codesign_environment.sh.sh
+	./codesign_environment.sh
 	xcodebuild DSTROOT="install_root" install
 
 pkg:
 	xcodebuild DSTROOT="install_root" install
-	./codesign_environment.sh.sh
+	./codesign_environment.sh
 	pkgbuild --root install_root --install-location /  ${PKG_SIGN} --version "`cat VERSION`" --identifier "$(PROJECT_ID)" "@PROJECT_NAME@_`cat VERSION`.pkg"
 
 pkg2:
-	./codesign_environment.sh.sh
+	./codesign_environment.sh
 	xcodebuild DSTROOT="install_root" install
 	pkgbuild --root install_root --install-location /  ${PKG_SIGN} --version "`cat VERSION`" --identifier "$(PROJECT_ID)" "@PROJECT_NAME@.pkg"
