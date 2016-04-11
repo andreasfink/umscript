@@ -865,7 +865,6 @@
                                                     @"sysmsg" : [NSString stringWithFormat:@"nonstatic label %@",[function name]],
                                                     @"func": @(__func__),
                                                     @"obj":self,
-                                                    @"err":e
                                                     }
                     ]);
             break;
@@ -876,7 +875,6 @@
                                                     @"sysmsg" : [NSString stringWithFormat:@"nonstatic label %@",[function name]],
                                                                  @"func": @(__func__),
                                                                  @"obj":self,
-                                                                 @"err":e
                                                                  }
                     ]);
             break;
@@ -884,10 +882,9 @@
             @throw([NSException exceptionWithName:@"UNKNOWN_LABEL"
                                            reason:NULL
                                          userInfo:@{
-                                                    @"sysmsg" : [NSString stringWithFormat:@"invalid label %@",[function name]|,
+                                                    @"sysmsg" : [NSString stringWithFormat:@"invalid label %@",[function name]],
                                                     @"func": @(__func__),
-                                                    @"obj":self,
-                                                    @"err":e
+                                                    @"obj":self
                                                     }
                     ]);
             break;

@@ -37,7 +37,6 @@
                                                     @"sysmsg" : @"init failed",
                                                     @"func": @(__func__),
                                                     @"obj":self,
-                                                    @"err":e
                                                     }
                     ]);
         }

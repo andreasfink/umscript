@@ -105,7 +105,14 @@
                     i =  [goTo integerValue];
                     continue;
                 }
-                @throw [NSError errorWithDomain:@"umscript" code:1 userInfo:@{@"sysmsg":[NSString stringWithFormat:@"Unknown label %@",env.jumpTo.description]}];
+                @throw([NSException exceptionWithName:@"UMSCRIPT Unknown lablel"
+                                               reason:NULL
+                                             userInfo:@{
+                                                        @"sysmsg" : [NSString stringWithFormat:@"Unknown label %@",env.jumpTo.description],
+                                                        @"func": @(__func__),
+                                                        @"err": @(1)
+                                                        }]);
+
                 break;
             }
         }

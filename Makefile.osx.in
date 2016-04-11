@@ -8,14 +8,15 @@
 
 PROJECT_NAME=@PROJECT_NAME@
 VERSION=`cat VERSION`
-PROJECT_ID=com.messagemover.@PROJECT_NAME@
-INSTALLER_CERT="Developer ID Installer: SMSRelay AG"
-CODESIGN=CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+PROJECT_ID=me.fink.@PROJECT_NAME@
+
+
 
 CC=@CC@
 
 all:
-	xcodebuild $(CODESIGN)
+	./codesign_environment.sh.sh
+	xcodebuild ${XCODESIGN}
 	
 unlock:
 	security unlock-keychain ~/Library/Keychains/login.keychain
@@ -24,15 +25,19 @@ clean:
 	rm -f $(BUILD_DIR)
 
 install:
-	xcodebuild $(CODESIGN) install
+	./codesign_environment.sh.sh
+	xcodebuild ${XCODESIGN} install
 
 install_for_pkg: 
+	./codesign_environment.sh.sh
 	xcodebuild DSTROOT="install_root" install
 
 pkg:
 	xcodebuild DSTROOT="install_root" install
-	pkgbuild --root install_root --install-location /  --sign "Developer ID Installer: SMSRelay AG" --version "`cat VERSION`" --identifier "com.messagemover.@PROJECT_NAME@" "@PROJECT_NAME@_`cat VERSION`.pkg"
+	./codesign_environment.sh.sh
+	pkgbuild --root install_root --install-location /  ${PKG_SIGN} --version "`cat VERSION`" --identifier "@PROJECT_ID@" "@PROJECT_NAME@_`cat VERSION`.pkg"
 
 pkg2:
+	./codesign_environment.sh.sh
 	xcodebuild DSTROOT="install_root" install
-	pkgbuild --root install_root --install-location /  --sign "Developer ID Installer: SMSRelay AG" --version "`cat VERSION`" --identifier "com.messagemover.@PROJECT_NAME@" "@PROJECT_NAME@.pkg"
+	pkgbuild --root install_root --install-location /  ${PKG_SIGN} --version "`cat VERSION`" --identifier "@PROJECT_ID@" "@PROJECT_NAME@.pkg"
