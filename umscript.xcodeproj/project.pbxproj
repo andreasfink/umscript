@@ -690,7 +690,6 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0600;
-				ORGANIZATIONNAME = "SMSRelay AG";
 				TargetAttributes = {
 					A6A3AA0219297741007FFC7B = {
 						DevelopmentTeam = 2GSNWPNR77;

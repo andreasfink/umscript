@@ -1813,7 +1813,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 
-COPYRIGHT="Copyright 2015 SMSRelay AG"
+COPYRIGHT="Copyright 2016 Andreas Fink"
 PROJECT_NAME="umscript"
 AUTHOR="Andreas Fink <andreas@fink.org>"
 CONFIG_DEFINE="UMSCRIPT_CONFIG"
