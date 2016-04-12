@@ -32,12 +32,11 @@ install_for_pkg:
 	./codesign_environment.sh
 	xcodebuild DSTROOT="install_root" install
 
-pkg:
+install_root_prepare:
 	xcodebuild DSTROOT="install_root" install
-	./codesign_environment.sh
-	pkgbuild --root install_root --install-location /  ${PKG_SIGN} --version "`cat VERSION`" --identifier "$(PROJECT_ID)" "@PROJECT_NAME@_`cat VERSION`.pkg"
 
-pkg2:
-	./codesign_environment.sh
-	xcodebuild DSTROOT="install_root" install
-	pkgbuild --root install_root --install-location /  ${PKG_SIGN} --version "`cat VERSION`" --identifier "$(PROJECT_ID)" "@PROJECT_NAME@.pkg"
+pkg:	install_root_prepare
+	./make_pkg.sh "$(PROJECT_NAME$)" "$(PROJECT_ID)" install_root "`cat VERSION`" "$(PROJECT_NAME)_`cat VERSION`_`date +%Y%m%d%H%M`.pkg"
+
+pkg2: install_root_prepare
+	./make_pkg.sh "$(PROJECT_NAME$)" "$(PROJECT_ID)" install_root "`cat VERSION`" "$(PROJECT_NAME).pkg"
