@@ -765,7 +765,8 @@
 			);
 			name = "Run Script (lex)";
 			outputPaths = (
-				"$(SRCROOT)/language/_generated_umscript.l.m",
+				"$(SRCROOT)/language/generated_umscript.l.m",
+				"$(SRCROOT)/language/generated_asn1_lexer.m",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
