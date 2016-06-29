@@ -648,7 +648,7 @@ static yyconst flex_int16_t yy_chk[551] =
 
 #line 31 "language/umscript.l"
 
-#import "umscript.yl.h"
+//#import "umscript.yl.h"
 #import "_generated_umscript.y.h"
 
 

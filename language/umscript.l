@@ -29,7 +29,7 @@ typedef UMScriptCompilerEnvironment *YY_EXTRA_TYPE;
 
 %{
 
-#import "umscript.yl.h"
+//#import "umscript.yl.h"
 #import "_generated_umscript.y.h"
 
 
