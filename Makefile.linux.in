@@ -20,6 +20,7 @@ OFILES = $(MOFILES)
 INCLUDEDIRS = -I umscript -I language
 DEBUG_RELEASE = -DCONFIGURATION_RELEASE=1  -DCONFIGURATION=Release
 
+
 ${LIB}: ${OFILES}
 	./make_version
 	${CC} -shared -o ${LIB}  ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}
