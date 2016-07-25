@@ -1,6 +1,11 @@
 build/
 install_root/
 
+language/_generated_umscript.l.m
+language/_generated_umscript.y.m
+language/_generated_umscript.y.h
+language/_generated_umscript.l.h
+
 *.xccheckout
 Makefile
 Makefile.linux
