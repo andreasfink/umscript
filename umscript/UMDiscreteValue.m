@@ -40,7 +40,7 @@
 
 - (UMDiscreteValue *)init
 {
-    self = [super initWithMagic:@"UMDiscreteValue"];
+    self = [super init];
     if(self)
     {
         type = UMVALUE_NULL;

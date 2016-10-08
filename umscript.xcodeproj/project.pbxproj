@@ -693,6 +693,7 @@
 				TargetAttributes = {
 					A6A3AA0219297741007FFC7B = {
 						DevelopmentTeam = 2GSNWPNR77;
+						ProvisioningStyle = Automatic;
 					};
 					A6A3AA1919297741007FFC7B = {
 						TestTargetID = A6A3AA0219297741007FFC7B;
@@ -1004,10 +1005,11 @@
 		A6A3AA2C19297741007FFC7B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1031,11 +1033,12 @@
 		A6A3AA2D19297741007FFC7B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (

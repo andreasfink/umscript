@@ -135,12 +135,7 @@
 
 - (UMEnvironment *)init
 {
-    return [self initWithMagic:@"UMEnvironment"];
-}
-
-- (UMEnvironment *)initWithMagic:(NSString *)m
-{
-    self = [super initWithMagic:m];
+    self = [super init];
     if(self)
     {
         

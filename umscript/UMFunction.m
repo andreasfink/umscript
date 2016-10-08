@@ -20,7 +20,7 @@
 
 - (id)initWithEnvironment:(UMEnvironment *)compile_env magic:(NSString *)m
 {
-    self = [super initWithMagic:m];
+    self = [super init];
     if(self)
     {
         self.name = @"Undefined";

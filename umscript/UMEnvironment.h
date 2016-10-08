@@ -44,7 +44,6 @@
 
 - (void)identAdd;
 - (void)identRemove;
-- (UMEnvironment *)initWithMagic:(NSString *)m;
         
 - (UMDiscreteValue *)variableForKey:(NSString *)key;
 - (void)setVariable:(UMDiscreteValue *)val forKey:(NSString *)key;

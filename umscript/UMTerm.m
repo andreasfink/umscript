@@ -72,7 +72,7 @@
 
 - (id)initWithNullWithEnvironment:(UMEnvironment *)e
 {
-    self = [super initWithMagic:@"UMTerm(null)"];
+    self = [super init];
     if(self)
     {
         self.type = UMTermType_nullterm;
@@ -83,7 +83,7 @@
 
 - (id)initWithDiscreteValue:(UMDiscreteValue *)d withEnvironment:(UMEnvironment *)e
 {
-    self = [super initWithMagic:@"UMTerm(discrete)"];
+    self = [super init];
     if(self)
     {
         self.type = UMTermType_discrete;
@@ -95,7 +95,7 @@
 
 - (id)initWithIdentifier:(NSString *)ident withEnvironment:(UMEnvironment *)e
 {
-    self = [super initWithMagic:@"UMTerm(identifier)"];
+    self = [super init];
     if(self)
     {
         self.type = UMTermType_identifier;
@@ -107,7 +107,7 @@
 
 - (id)initWithFieldName:(NSString *)fieldName withEnvironment:(UMEnvironment *)e
 {
-    self = [super initWithMagic:@"UMTerm(field)"];
+    self = [super init];
     if(self)
     {
         self.type = UMTermType_field;
@@ -119,7 +119,7 @@
 
 - (id)initWithVariableName:(NSString *)variableName  withEnvironment:(UMEnvironment *)e
 {
-    self = [super initWithMagic:@"UMTerm(variable)"];
+    self = [super init];
     if(self)
     {
         self.type = UMTermType_variable;
@@ -131,7 +131,7 @@
 
 - (id)initWithFunction:(UMFunction *)func andParams:(NSArray *)params  withEnvironment:(UMEnvironment *)e
 {
-    self = [super initWithMagic:@"UMTerm(function)"];
+    self = [super init];
     if(self)
     {
         self.type = UMTermType_function;
