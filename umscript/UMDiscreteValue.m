@@ -71,6 +71,18 @@
 
 }
 
+- (UMDiscreteValue *)initWithInteger:(NSInteger)i
+{
+    self = [super init];
+    if(self)
+    {
+        type = UMVALUE_INT;
+        value = @(i);
+    }
+    return self;
+
+}
+
 - (UMDiscreteValue *)initWithLongLong:(long long)ll
 {
     self = [super init];
@@ -151,6 +163,11 @@
 + (UMDiscreteValue *)discreteInt:(int)i;
 {
     return [[UMDiscreteValue alloc]initWithInt:i];
+}
+
++ (UMDiscreteValue *)discreteInteger:(NSInteger)ll;
+{
+    return [[UMDiscreteValue alloc]initWithInteger:ll];
 }
 
 + (UMDiscreteValue *)discreteLongLong:(long long)ll;

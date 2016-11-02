@@ -44,6 +44,7 @@ typedef enum UMDiscreteValueType
 
 - (UMDiscreteValue *)initWithBool:(BOOL)b;
 - (UMDiscreteValue *)initWithInt:(int)i;
+- (UMDiscreteValue *)initWithInteger:(NSInteger)i;
 - (UMDiscreteValue *)initWithLongLong:(long long)ll;
 - (UMDiscreteValue *)initWithDouble:(double)d;
 - (UMDiscreteValue *)initWithString:(NSString *)s;
@@ -52,6 +53,7 @@ typedef enum UMDiscreteValueType
 
 + (UMDiscreteValue *)discreteBool:(BOOL)b;
 + (UMDiscreteValue *)discreteInt:(int)i;
++ (UMDiscreteValue *)discreteInteger:(NSInteger)i;
 + (UMDiscreteValue *)discreteLongLong:(long long)ll;
 + (UMDiscreteValue *)discreteDouble:(double)d;
 + (UMDiscreteValue *)discreteString:(NSString *)s;
