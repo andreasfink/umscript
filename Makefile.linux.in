@@ -21,7 +21,7 @@ INCLUDEDIRS = -I umscript -I language
 DEBUG_RELEASE = -DCONFIGURATION_RELEASE=1  -DCONFIGURATION=Release
 
 
-${LIB}: ${OFILES}
+${LIB}: ${OFILES} language/_generated_umscript.y.h
 	./make_version
 	${CC} -shared -o ${LIB}  ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}
 
@@ -51,6 +51,9 @@ clean:
 	rm -f $(LIB) $(OFILES)
 
 .SUFFIXES: .m.o .o .m .c
+
+umscript/UMScriptCompilerEnvironment.m.o: umscript/UMScriptCompilerEnvironment.m language/_generated_umscript.y.h
+	${CC} -c ${CFLAGS} ${DEBUG_RELEASE} -x objective-c $<  ${DEBUG_RELEASE} ${INCLUDEDIRS} -o $@
 
 %.m.o:	%.m
 	${CC} -c ${CFLAGS} ${DEBUG_RELEASE} -x objective-c $<  ${DEBUG_RELEASE} ${INCLUDEDIRS} -o $@
