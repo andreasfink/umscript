@@ -1,0 +1,25 @@
+//
+//  UMASN1BitString.h
+//  ulibasn1
+//
+//  Created by Andreas Fink on 03.07.14.
+//
+// This source is dual licensed either under the GNU GENERAL PUBLIC LICENSE
+// Version 3 from 29 June 2007 and other commercial licenses available by
+// the author.
+
+#import <ulib/ulib.h>
+#import "UMASN1Object.h"
+
+@interface UMASN1BitString : UMASN1Object
+{
+    
+}
+
+
+- (UMASN1BitString *)initWithValue:(NSData *)d bitcount:(NSInteger)bc;
+- (NSString *)objectValue;
+
+- (void)setBit:(NSInteger)bit;
+
+@end
