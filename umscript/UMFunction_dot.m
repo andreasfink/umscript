@@ -10,6 +10,10 @@
 
 @implementation UMFunction_dot
 
++ (NSString *)functionName
+{
+    return @"dot";
+}
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {

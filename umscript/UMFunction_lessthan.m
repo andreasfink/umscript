@@ -10,6 +10,11 @@
 
 @implementation UMFunction_lessthan
 
++ (NSString *)functionName
+{
+    return @"lessthan";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_lessthan"];

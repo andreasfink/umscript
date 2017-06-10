@@ -7,6 +7,7 @@
 //
 
 #import <ulib/ulib.h>
+#import <ulibasn1/ulibasn1.h>
 
 @class UMDiscreteValue;
 @class UMFunction;

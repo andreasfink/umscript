@@ -14,6 +14,195 @@
 @synthesize type;
 @synthesize value;
 
+
+- (void) processBeforeEncode
+{
+    [super processBeforeEncode];
+
+    asn1_tag.tagClass = UMASN1Class_ContextSpecific;
+    asn1_tag.isConstructed=NO;
+
+    switch(type)
+    {
+        case UMVALUE_NULL:
+        {
+            self.asn1_tag.tagNumber = 0;
+            asn1_tag.isConstructed=YES;
+            asn1_list = [[NSMutableArray alloc]init];
+            [asn1_list addObject:[[UMASN1Null alloc]init]];
+            break;
+        }
+        case UMVALUE_BOOL:
+        {
+            self.asn1_tag.tagNumber = 1;
+            asn1_tag.isConstructed=YES;
+            asn1_list = [[NSMutableArray alloc]init];
+            UMASN1Boolean *b = [[UMASN1Boolean alloc]initWithValue:[value booleanValue]];
+            [asn1_list addObject:b];
+            break;
+        }
+        case UMVALUE_INT:
+        {
+            self.asn1_tag.tagNumber = 2;
+            asn1_tag.isConstructed=YES;
+            asn1_list = [[NSMutableArray alloc]init];
+            UMASN1Integer *i = [[UMASN1Integer alloc]initWithValue:[value integerValue]];
+            [asn1_list addObject:i];
+            break;
+        }
+        case UMVALUE_LONGLONG:
+        {
+            self.asn1_tag.tagNumber = 3;
+            asn1_tag.isConstructed=YES;
+            asn1_list = [[NSMutableArray alloc]init];
+            UMASN1Integer *i = [[UMASN1Integer alloc]initWithValue:[value longLongValue]];
+            [asn1_list addObject:i];
+            break;
+        }
+        case UMVALUE_DOUBLE:
+        {
+            self.asn1_tag.tagNumber = 4;
+            asn1_tag.isConstructed=YES;
+            asn1_list = [[NSMutableArray alloc]init];
+            UMASN1UTF8String *i = [[UMASN1UTF8String alloc]initWithValue:[value stringValue]];
+            [asn1_list addObject:i];
+            break;
+        }
+        case UMVALUE_STRING:
+        {
+            self.asn1_tag.tagNumber = 5;
+            asn1_tag.isConstructed=YES;
+            asn1_list = [[NSMutableArray alloc]init];
+            UMASN1UTF8String *s = [[UMASN1UTF8String alloc]initWithValue:[value stringValue]];
+            [asn1_list addObject:s];
+            break;
+        }
+        case UMVALUE_DATA:
+        default:
+        {
+            self.asn1_tag.tagNumber = 6;
+            asn1_tag.isConstructed=YES;
+            asn1_list = [[NSMutableArray alloc]init];
+            UMASN1OctetString *d = [[UMASN1OctetString alloc]initWithValue:(NSData *)value];
+            [asn1_list addObject:d];
+            break;
+        }
+    }
+}
+
+
+- (UMDiscreteValue *) processAfterDecodeWithContext:(id)context
+{
+    int p=0;
+    UMASN1Object *o = NULL;
+    if(self.asn1_tag.tagClass == UMASN1Class_ContextSpecific)
+    {
+        o = [self getObjectAtPosition:p++];
+        if(o)
+        {
+            switch(o.asn1_tag.tagNumber)
+            {
+                case 0:
+                {
+                    type = UMVALUE_NULL;
+                    value = NULL;
+                    return self;
+                }
+                case 1:
+                {
+                    type = UMVALUE_BOOL;
+                    UMASN1Boolean *b = [[UMASN1Boolean alloc]initWithASN1Object:o context:context];
+                    if(b.isTrue)
+                    {
+                        value = @(YES);
+                    }
+                    else
+                    {
+                        value = @(NO);
+                    }
+                    return self;
+                }
+                case 2:
+                {
+                    type = UMVALUE_INT;
+                    UMASN1Integer *i = [[UMASN1Integer alloc]initWithASN1Object:o context:context];
+                    value = @( (int)i.value);
+                    return self;
+                }
+                case 3:
+                {
+                    type = UMVALUE_LONGLONG;
+                    type = UMVALUE_INT;
+                    UMASN1Integer *i = [[UMASN1Integer alloc]initWithASN1Object:o context:context];
+                    value = @( (long long)i.value);
+                    return self;
+                }
+                case 4:
+                {
+                    type = UMVALUE_DOUBLE;
+                    UMASN1UTF8String *utf8 = [[UMASN1UTF8String alloc]initWithASN1Object:o context:context];
+                    NSString *s = utf8.stringValue;
+                    value = @(s.doubleValue);
+                    return self;
+                }
+                case 5:
+                {
+                    type = UMVALUE_STRING;
+                    UMASN1UTF8String *utf8 = [[UMASN1UTF8String alloc]initWithASN1Object:o context:context];
+                    value = utf8.stringValue;
+                    return self;
+                }
+                case 6:
+                {
+                    type = UMVALUE_DATA;
+                    UMASN1OctetString *os = [[UMASN1OctetString alloc]initWithASN1Object:o context:context];
+                    value = os.value;
+                    return self;
+                }
+            }
+        }
+    }
+    @throw([NSException exceptionWithName:@"INVALID_ASN1" reason:@"while decoding UMDiscreteValue, the type could not be decoded" userInfo:NULL]);
+}
+
+- (NSString *) objectName
+{
+    return @"UMDiscreteValue";
+}
+
+
+- (id) objectValue
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+
+    switch(type)
+    {
+        case UMVALUE_NULL:
+            dict[@"null"] = [NSNull null];
+            break;
+        case UMVALUE_BOOL:
+            dict[@"bool"] = @([value boolValue]);
+            break;
+        case UMVALUE_INT:
+            dict[@"int"] = @([value intValue]);
+            break;
+        case UMVALUE_LONGLONG:
+            dict[@"longlong"] = @([value longLongValue]);
+            break;
+        case UMVALUE_DOUBLE:
+            dict[@"double"] = @([value doubleValue]);
+            break;
+        case UMVALUE_STRING:
+            dict[@"string"] = [value stringValue];
+            break;
+        case UMVALUE_DATA:
+            dict[@"data"] = [value dataValue];
+            break;
+    }
+    return dict;
+}
+
+
 - (UMDiscreteValueType)outputType:(UMDiscreteValueType)btype
 {
     if(type == btype)

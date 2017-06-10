@@ -10,6 +10,11 @@
 
 @implementation UMFunction_endswith
 
++ (NSString *)functionName
+{
+    return @"endswith";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_endswidth"];

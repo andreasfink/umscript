@@ -10,6 +10,11 @@
 
 @implementation UMFunction_int
 
++ (NSString *)functionName
+{
+    return @"int";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_int"];

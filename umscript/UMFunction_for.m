@@ -10,6 +10,10 @@
 
 @implementation UMFunction_for
 
++ (NSString *)functionName
+{
+    return @"for";
+}
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {

@@ -10,6 +10,10 @@
 
 @implementation UMFunction_double
 
++ (NSString *)functionName
+{
+    return @"double";
+}
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {

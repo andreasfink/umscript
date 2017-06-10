@@ -1,0 +1,9 @@
+UMTerm ::=  CHOICE {
+	termDiscrete    [0] UMTermDiscrete,
+    termField       [1] UMTermField
+    termVariable    [2] UMTermVariable
+    termFunction    [3] UMTermFunction
+    termIdentifier  [4] UMTermIdentifier
+    termNullterm    [5] UMTermNullterm
+    termToken       [6] UMTermToken
+}

@@ -10,6 +10,11 @@
 
 @implementation UMFunction_dowhile
 
++ (NSString *)functionName
+{
+    return @"dowhile";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_dowhile"];

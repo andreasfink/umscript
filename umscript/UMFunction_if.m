@@ -10,6 +10,11 @@
 
 @implementation UMFunction_if
 
++ (NSString *)functionName
+{
+    return @"if";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_if"];

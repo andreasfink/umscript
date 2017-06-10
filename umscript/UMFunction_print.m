@@ -10,6 +10,10 @@
 
 @implementation UMFunction_print
 
++ (NSString *)functionName
+{
+    return @"print";
+}
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {

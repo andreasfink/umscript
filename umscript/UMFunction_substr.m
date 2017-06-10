@@ -10,6 +10,11 @@
 
 @implementation UMFunction_substr
 
++ (NSString *)functionName
+{
+    return @"substr";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_substr"];

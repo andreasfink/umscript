@@ -7,6 +7,7 @@
 //
 
 #import <ulib/ulib.h>
+#import <ulibasn1/ulibasn1.h>
 
 @class UMFunction;
 @class UMDiscreteValue;
@@ -24,7 +25,7 @@ typedef enum UMTermType
     UMTermType_token,
 } UMTermType;
 
-@interface UMTerm : UMObject
+@interface UMTerm : UMASN1Choice
 {
     UMEnvironment   *cenv;
     UMTermType      type;

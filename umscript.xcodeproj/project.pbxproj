@@ -96,8 +96,6 @@
 		A6835C2319297AE30090FC94 /* UMFunction_setvar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6835BD319297AE30090FC94 /* UMFunction_setvar.m */; };
 		A6835C2419297AE30090FC94 /* UMFunction_startswith.h in Headers */ = {isa = PBXBuildFile; fileRef = A6835BD419297AE30090FC94 /* UMFunction_startswith.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6835C2519297AE30090FC94 /* UMFunction_startswith.m in Sources */ = {isa = PBXBuildFile; fileRef = A6835BD519297AE30090FC94 /* UMFunction_startswith.m */; };
-		A6835C2619297AE30090FC94 /* UMFunction_typecast_int.h in Headers */ = {isa = PBXBuildFile; fileRef = A6835BD619297AE30090FC94 /* UMFunction_typecast_int.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A6835C2719297AE30090FC94 /* UMFunction_typecast_int.m in Sources */ = {isa = PBXBuildFile; fileRef = A6835BD719297AE30090FC94 /* UMFunction_typecast_int.m */; };
 		A6835C2819297AE30090FC94 /* UMFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = A6835BD819297AE30090FC94 /* UMFunction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6835C2919297AE30090FC94 /* UMFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = A6835BD919297AE30090FC94 /* UMFunction.m */; };
 		A6835C2A19297AE30090FC94 /* UMFunctionMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = A6835BDA19297AE30090FC94 /* UMFunctionMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -125,6 +123,9 @@
 		A6916D15192BEE6200F6BFF4 /* UMFunction_postdecrease.m in Sources */ = {isa = PBXBuildFile; fileRef = A6916D13192BEE6200F6BFF4 /* UMFunction_postdecrease.m */; };
 		A6916D19192BF61500F6BFF4 /* UMFunction_switch.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916D17192BF61500F6BFF4 /* UMFunction_switch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6916D1A192BF61500F6BFF4 /* UMFunction_switch.m in Sources */ = {isa = PBXBuildFile; fileRef = A6916D18192BF61500F6BFF4 /* UMFunction_switch.m */; };
+		A6A04AB71EE6D4EE007C203A /* ulibasn1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A04AB61EE6D4EE007C203A /* ulibasn1.framework */; };
+		A6A04AB91EE6D5B6007C203A /* UMTerm.asn in Resources */ = {isa = PBXBuildFile; fileRef = A6A04AB81EE6D5B6007C203A /* UMTerm.asn */; };
+		A6A04ABB1EE6FE5F007C203A /* UMDiscreteValue.asn in Resources */ = {isa = PBXBuildFile; fileRef = A6A04ABA1EE6FE5F007C203A /* UMDiscreteValue.asn */; };
 		A6A3AA0719297741007FFC7B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA0619297741007FFC7B /* Cocoa.framework */; };
 		A6A3AA1119297741007FFC7B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6A3AA0F19297741007FFC7B /* InfoPlist.strings */; };
 		A6A3AA1C19297741007FFC7B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA1B19297741007FFC7B /* XCTest.framework */; };
@@ -251,8 +252,6 @@
 		A6835BD319297AE30090FC94 /* UMFunction_setvar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_setvar.m; sourceTree = "<group>"; };
 		A6835BD419297AE30090FC94 /* UMFunction_startswith.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_startswith.h; sourceTree = "<group>"; };
 		A6835BD519297AE30090FC94 /* UMFunction_startswith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_startswith.m; sourceTree = "<group>"; };
-		A6835BD619297AE30090FC94 /* UMFunction_typecast_int.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_typecast_int.h; sourceTree = "<group>"; };
-		A6835BD719297AE30090FC94 /* UMFunction_typecast_int.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_typecast_int.m; sourceTree = "<group>"; };
 		A6835BD819297AE30090FC94 /* UMFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction.h; sourceTree = "<group>"; };
 		A6835BD919297AE30090FC94 /* UMFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction.m; sourceTree = "<group>"; };
 		A6835BDA19297AE30090FC94 /* UMFunctionMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunctionMacros.h; sourceTree = "<group>"; };
@@ -280,6 +279,9 @@
 		A6916D13192BEE6200F6BFF4 /* UMFunction_postdecrease.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_postdecrease.m; sourceTree = "<group>"; };
 		A6916D17192BF61500F6BFF4 /* UMFunction_switch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_switch.h; sourceTree = "<group>"; };
 		A6916D18192BF61500F6BFF4 /* UMFunction_switch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_switch.m; sourceTree = "<group>"; };
+		A6A04AB61EE6D4EE007C203A /* ulibasn1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ulibasn1.framework; path = ../../../../../Library/Frameworks/ulibasn1.framework; sourceTree = "<group>"; };
+		A6A04AB81EE6D5B6007C203A /* UMTerm.asn */ = {isa = PBXFileReference; lastKnownFileType = text; path = UMTerm.asn; sourceTree = "<group>"; };
+		A6A04ABA1EE6FE5F007C203A /* UMDiscreteValue.asn */ = {isa = PBXFileReference; lastKnownFileType = text; path = UMDiscreteValue.asn; sourceTree = "<group>"; };
 		A6A3AA0319297741007FFC7B /* umscript.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = umscript.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6A3AA0619297741007FFC7B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		A6A3AA0919297741007FFC7B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -324,6 +326,7 @@
 			files = (
 				A6C4E0EA1945237D0090FC94 /* ulib.framework in Frameworks */,
 				A6A3AA0719297741007FFC7B /* Cocoa.framework in Frameworks */,
+				A6A04AB71EE6D4EE007C203A /* ulibasn1.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +389,7 @@
 		A6A3AA0519297741007FFC7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A6A04AB61EE6D4EE007C203A /* ulibasn1.framework */,
 				A6C4E0E91945237D0090FC94 /* ulib.framework */,
 				A6A3AA0619297741007FFC7B /* Cocoa.framework */,
 				A6A3AA1B19297741007FFC7B /* XCTest.framework */,
@@ -411,6 +415,7 @@
 				A6835B9519297AE30090FC94 /* NSNumber+UMScript.h */,
 				A6835B9619297AE30090FC94 /* NSNumber+UMScript.m */,
 				A6A3AA0D19297741007FFC7B /* Supporting Files */,
+				A6A04ABA1EE6FE5F007C203A /* UMDiscreteValue.asn */,
 				A6835B9719297AE30090FC94 /* UMDiscreteValue.h */,
 				A6835B9819297AE30090FC94 /* UMDiscreteValue.m */,
 				A6835B9919297AE30090FC94 /* UMEnvironment.h */,
@@ -515,8 +520,6 @@
 				A62B98F01946A8A6005B48BC /* UMFunction_substr.m */,
 				A6916D17192BF61500F6BFF4 /* UMFunction_switch.h */,
 				A6916D18192BF61500F6BFF4 /* UMFunction_switch.m */,
-				A6835BD619297AE30090FC94 /* UMFunction_typecast_int.h */,
-				A6835BD719297AE30090FC94 /* UMFunction_typecast_int.m */,
 				A6916CEF192BE5A500F6BFF4 /* UMFunction_while.h */,
 				A6916CF0192BE5A500F6BFF4 /* UMFunction_while.m */,
 				A6835BBE19297AE30090FC94 /* UMFunction_xor.h */,
@@ -529,6 +532,7 @@
 				A6835C9F19298C110090FC94 /* UMScriptCompilerEnvironment.m */,
 				A6835C8D19297F990090FC94 /* UMScriptDocument.h */,
 				A6835C8E19297F990090FC94 /* UMScriptDocument.m */,
+				A6A04AB81EE6D5B6007C203A /* UMTerm.asn */,
 				A6835BE319297AE30090FC94 /* UMTerm.h */,
 				A6835BE419297AE30090FC94 /* UMTerm.m */,
 			);
@@ -631,7 +635,6 @@
 				A63A82F9192F46340090FC94 /* UMFunction_print.h in Headers */,
 				A6835C1019297AE30090FC94 /* UMFunction_add.h in Headers */,
 				A6B5CE9119301FEB00F02FCA /* UMFunction_break.h in Headers */,
-				A6835C2619297AE30090FC94 /* UMFunction_typecast_int.h in Headers */,
 				A6B5CE8D19301FE300F02FCA /* UMFunction_continue.h in Headers */,
 				A6835C1419297AE30090FC94 /* UMFunction_dot.h in Headers */,
 				A62B98F51946B255005B48BC /* UMFunction_list.h in Headers */,
@@ -689,7 +692,7 @@
 		A6A3A9FA19297741007FFC7B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0900;
 				TargetAttributes = {
 					A6A3AA0219297741007FFC7B = {
 						DevelopmentTeam = 2GSNWPNR77;
@@ -724,7 +727,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6A3AA1119297741007FFC7B /* InfoPlist.strings in Resources */,
+				A6A04ABB1EE6FE5F007C203A /* UMDiscreteValue.asn in Resources */,
 				A6019BB41AC1FA8600854472 /* VERSION in Resources */,
+				A6A04AB91EE6D5B6007C203A /* UMTerm.asn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -805,7 +810,6 @@
 				A6835BFD19297AE30090FC94 /* UMFunction_equal.m in Sources */,
 				A6835BEA19297AE30090FC94 /* UMEnvironment.m in Sources */,
 				A63DD837192C84E20090FC94 /* UMFunction_longlong.m in Sources */,
-				A6835C2719297AE30090FC94 /* UMFunction_typecast_int.m in Sources */,
 				A6916D06192BEE4100F6BFF4 /* UMFunction_preincrease.m in Sources */,
 				A6B5CE7A192FF0C300F02FCA /* UMFunction_goto.m in Sources */,
 				A63DD833192C84D80090FC94 /* UMFunction_string.m in Sources */,
@@ -910,13 +914,22 @@
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -925,9 +938,12 @@
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DSTROOT = /;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -963,13 +979,22 @@
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -979,8 +1004,10 @@
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DSTROOT = /;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1005,7 +1032,7 @@
 		A6A3AA2C19297741007FFC7B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -1033,7 +1060,7 @@
 		A6A3AA2D19297741007FFC7B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = YES;
@@ -1075,6 +1102,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "umscriptTests/umscriptTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.messagemover.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -1093,6 +1121,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
 				INFOPLIST_FILE = "umscriptTests/umscriptTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.messagemover.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

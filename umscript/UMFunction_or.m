@@ -10,6 +10,11 @@
 
 @implementation UMFunction_or
 
++ (NSString *)functionName
+{
+    return @"or";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_or"];

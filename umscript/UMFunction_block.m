@@ -11,6 +11,11 @@
 
 @implementation UMFunction_block
 
++ (NSString *)functionName
+{
+    return @"bit_block";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_block"];

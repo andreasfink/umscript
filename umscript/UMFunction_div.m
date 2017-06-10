@@ -10,6 +10,10 @@
 
 @implementation UMFunction_div
 
++ (NSString *)functionName
+{
+    return @"div";
+}
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
