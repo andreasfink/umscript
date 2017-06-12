@@ -1282,6 +1282,7 @@
     UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams:params withEnvironment:cenv];
     return result;
 }
+
 - (UMTerm *)dotIdentifier:(UMTerm *)list environment:(UMEnvironment *)cenv /* object.access */
 {
     /*TODO: missing implemementation */
@@ -1293,6 +1294,13 @@
     /*TODO: missing implemementation */
     return self;
 }
+
+- (UMTerm *)addressOfIdentifierWithEnvironment:(UMEnvironment *)cenv/* object->access */
+{
+    /* TODO missing implementation */
+    return self;
+}
+
 - (NSString *)constantStringValue
 {
     switch(type)

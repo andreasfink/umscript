@@ -22,6 +22,7 @@ typedef enum UMDiscreteValueType
     UMVALUE_DATA = 6,
     UMVALUE_ARRAY = 7,
     UMVALUE_STRUCT = 8, /* also known as DICT */
+    UMVALUE_POINTER = 9,
     UMVALUE_CUSTOM_TYPE = -1,
 } UMDiscreteValueType;
 
@@ -54,6 +55,7 @@ typedef enum UMDiscreteValueType
 - (UMDiscreteValue *)initWithLongLong:(long long)ll;
 - (UMDiscreteValue *)initWithDouble:(double)d;
 - (UMDiscreteValue *)initWithString:(NSString *)s;
+- (UMDiscreteValue *)initWithPointer:(NSString *)s;
 - (UMDiscreteValue *)initWithData:(NSData *)data;
 - (UMDiscreteValue *)initWithNumberString:(NSString *)numberString;
 - (UMDiscreteValue *)initWithArray:(NSArray *)array;
@@ -65,6 +67,7 @@ typedef enum UMDiscreteValueType
 + (UMDiscreteValue *)discreteLongLong:(long long)ll;
 + (UMDiscreteValue *)discreteDouble:(double)d;
 + (UMDiscreteValue *)discreteString:(NSString *)s;
++ (UMDiscreteValue *)discretePointer:(NSString *)s;
 + (UMDiscreteValue *)discreteData:(NSData *)data;
 + (UMDiscreteValue *)discreteNumberString:(NSString *)string;
 + (UMDiscreteValue *)discreteYES;

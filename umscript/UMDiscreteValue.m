@@ -281,6 +281,10 @@
         case UMVALUE_DATA:
             dict[@"data"] = [value dataValue];
             break;
+        case UMVALUE_POINTER:
+            dict[@"pointer"] = [value stringValue];
+            break;
+            
         case UMVALUE_CUSTOM_TYPE:
             /* FIXME */
             break;
@@ -392,6 +396,17 @@
     return self;
 }
 
+- (UMDiscreteValue *)initWithPointer:(NSString *)s;
+{
+    self = [super init];
+    if(self)
+    {
+        type = UMVALUE_POINTER;
+        value = s;
+    }
+    return self;
+}
+
 - (UMDiscreteValue *)initWithNumberString:(NSString *)numberString
 {
     self = [super init];
@@ -479,6 +494,11 @@
     return [[UMDiscreteValue alloc]initWithString:s];
 }
 
++ (UMDiscreteValue *)discretePointer:(NSString *)s;
+{
+    return [[UMDiscreteValue alloc]initWithPointer:s];
+}
+
 + (UMDiscreteValue *)discreteQuotedString:(NSString *)s;
 {
     NSUInteger start = 1;
@@ -530,6 +550,7 @@
         case UMVALUE_LONGLONG:
         case UMVALUE_DOUBLE:
             return [((NSNumber *)value) intValue];
+        case UMVALUE_POINTER:
         case UMVALUE_STRING:
         {
             int i;
@@ -567,6 +588,7 @@
         case UMVALUE_DOUBLE:
             return [((NSNumber *)value) stringValue];
         case UMVALUE_STRING:
+        case UMVALUE_POINTER:
             return value;
         case UMVALUE_DATA:
             return [[NSString alloc] initWithData:(NSData *)value encoding:NSUTF8StringEncoding];
@@ -590,12 +612,11 @@
             unsigned char c = [n unsignedCharValue];
             return [NSData dataWithBytes:&c length:1];
         }
+        case UMVALUE_POINTER:
         case UMVALUE_STRING:
         {
             NSString *s = value;
-            const char *c = [s UTF8String];
-            size_t len = strlen(c);
-            return [NSData dataWithBytes:c length:len];
+            return [s dataUsingEncoding:NSUTF8StringEncoding];
         }
         case UMVALUE_DATA:
             return value;
@@ -636,6 +657,15 @@
             unsigned char *c = (unsigned char *)[d bytes];
             return c[0] ? YES : NO;
         }
+        case UMVALUE_POINTER:
+        {
+            NSString *s = value;
+            if (s.length > 0)
+            {
+                return YES;
+            }
+            return NO;
+        }
         default:
             return NO;
     }
@@ -658,6 +688,7 @@
         case UMVALUE_DOUBLE:
             return [((NSNumber *)value) doubleValue];
         case UMVALUE_STRING:
+        case UMVALUE_POINTER:
         {
             double d;
             sscanf([((NSString *)value)  UTF8String],"%lf",&d);

@@ -194,18 +194,21 @@ unary_expression
         };
     | INC_OP unary_expression
         {
-            UMTerm *a = UMGET($1);
+            UMTerm *a = UMGET($2);
             UMTerm *r = [a preincrease];
             UMSET($$,r);
         };
     | DEC_OP unary_expression
         {
-            UMTerm *a = UMGET($1);
+            UMTerm *a = UMGET($2);
             UMTerm *r = [a predecrease];
             UMSET($$,r);
         };
     | '&' cast_expression
         {
+            UMTerm *a = UMGET($2);
+            UMTerm *r = [a addressOfIdentifierWithEnvironment:cenv];
+            UMSET($$,r);
             UMASSIGN($$,$1);
         };
     | '*' cast_expression
@@ -250,15 +253,6 @@ unary_expression
             UMTerm *r = [a sizeofWithEnvironment:cenv];
             UMSET($$,r);
         };
-    ;
-
-unary_operator
-    : '&'
-    | '*'
-    | '+'
-    | '-'
-    | '~'
-    | '!'
     ;
 
 cast_expression
