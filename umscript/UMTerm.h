@@ -36,6 +36,7 @@ typedef enum UMTermType
     NSString        *identifier;
     NSArray         *param;
     NSString        *label;
+    NSMutableArray  *array;
     int             token;
 }
 
@@ -94,6 +95,7 @@ typedef enum UMTermType
 - (void) setDiscreteString:(NSString *)s;
 - (NSString * )descriptionJson;
 
+- (UMTerm *)invertSign;
 - (UMTerm *)add:(UMTerm *)b;
 - (UMTerm *)sub:(UMTerm *)b;
 - (UMTerm *)mul:(UMTerm *)b;
@@ -111,12 +113,10 @@ typedef enum UMTermType
 - (UMTerm *)logical_and:(UMTerm *)b;
 - (UMTerm *)logical_or:(UMTerm *)b;
 - (UMTerm *)logical_xor:(UMTerm *)b;
-
 - (UMTerm *)bit_and:(UMTerm *)b;
 - (UMTerm *)bit_or:(UMTerm *)b;
 - (UMTerm *)bit_xor:(UMTerm *)b;
 - (UMTerm *)bit_not;
-
 - (UMTerm *)leftshift:(UMTerm *)b;
 - (UMTerm *)rightshift:(UMTerm *)b;
 + (UMTerm *)returnValue:(UMTerm *)val withEnvironment:(UMEnvironment *)cenv;
@@ -125,13 +125,10 @@ typedef enum UMTermType
 + (UMTerm *)thenDo:(UMTerm *)thendo whileCondition:(UMTerm *)condition withEnvironment:(UMEnvironment *)cenv;
 + (UMTerm *)forInitializer:(UMTerm *)initializer endCondition:(UMTerm *)condition every:(UMTerm *)every thenDo:(UMTerm *)thenDo withEnvironment:(UMEnvironment *)cenv;
 + (UMTerm *)switchCondition:(UMTerm *)condition thenDo:(UMTerm *)thenDo withEnvironment:(UMEnvironment *)cenv;
-
 - (UMTerm *)blockAppendStatement:(UMTerm *)term;
 + (UMTerm *)blockWithStatement:(UMTerm *)term withEnvironment:(UMEnvironment *)cenv;
-
 - (UMTerm *)listAppendStatement:(UMTerm *)term;
 + (UMTerm *)listWithStatement:(UMTerm *)term withEnvironment:(UMEnvironment *)cenv;
-
 + (UMTerm *)token:(int)tok text:(const char *)text withEnvironment:(UMEnvironment *)cenv;
 
 - (UMTerm *)preincrease;
@@ -140,7 +137,11 @@ typedef enum UMTermType
 - (UMTerm *)postdecrease;
 
 - (UMTerm *)functionCallWithArguments:(UMTerm *)list environment:(UMEnvironment *)cenv;
-- (UMTerm *)dotIdentifier:(UMTerm *)list; /* object.access */
+- (UMTerm *)arrayAccess:(UMTerm *)index environment:(UMEnvironment *)cenv;
+- (UMTerm *)dotIdentifier:(UMTerm *)list environment:(UMEnvironment *)cenv; /* object.access */
+- (UMTerm *)arrowIdentifier:(UMTerm *)list environment:(UMEnvironment *)cenv; /* object->access */
+- (UMTerm *)starIdentifierWithEnvironment:(UMEnvironment *)cenv; /* *object */
+- (UMTerm *)sizeofWithEnvironment:(UMEnvironment *)cenv; /* sizeof(object) */
 - (NSString *)constantStringValue;
 - (NSString *)labelValue;
 

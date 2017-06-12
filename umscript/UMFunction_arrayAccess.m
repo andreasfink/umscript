@@ -1,26 +1,24 @@
 //
-//  UMFunction_and.m
+//  UMFunction_arrayAccess.m
 //  umscript
 //
-//  Created by Andreas Fink on 17.05.14.
-//  Copyright (c) 2016 Andreas Fink
+//  Created by Andreas Fink on 12.06.17.
 //
 
-#import "UMFunction_and.h"
+#import "UMFunction_arrayAccess.h"
 
-@implementation UMFunction_and
+@implementation UMFunction_arrayAccess
 
 + (NSString *)functionName
 {
-    return @"and";
+    return @"[arrayAccess]";
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)
-    {
-        self.name=@"and";
+    if(self)    {
+        self.name = @"[arrayAccess]";
         [env log:self.name];
     }
     return self;
@@ -36,16 +34,16 @@
     for(UMTerm *entry in params)
     {
         UMDiscreteValue *d = [entry evaluateWithEnvironment:env];
-
         if(result == nil)
         {
             result = d;
         }
         else
         {
-            result = [result logicAnd:d];
+            result = [result logicXor:d];
         }
     }
     return result;
 }
+
 @end

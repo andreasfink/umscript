@@ -1,25 +1,25 @@
 //
-//  UMFunction_math_multiply.m
+//  UMFunction_sizeof.m
 //  umscript
 //
-//  Created by Andreas Fink on 18.05.14.
-//  Copyright (c) 2016 Andreas Fink
+//  Created by Andreas Fink on 12.06.17.
 //
 
-#import "UMFunction_mul.h"
+#import "UMFunction_sizeof.h"
 
-@implementation UMFunction_mul
+@implementation UMFunction_sizeof
 
 + (NSString *)functionName
 {
-    return @"mul";
+    return @"sizeof";
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"mul";
+    if(self)
+    {
+        self.name = @"sizeof";
         [env log:self.name];
     }
     return self;
@@ -36,11 +36,12 @@
         }
         else
         {
-            result = [result multiplyValue:[entry evaluateWithEnvironment:env]];
+            result = [result addValue:[entry evaluateWithEnvironment:env]];
         }
     }
     return result;
 }
+
 
 - (NSString *)codeWithEnvironmentStart:(UMEnvironment *)env
 {
@@ -55,12 +56,12 @@
 
 - (NSString *)codeWithEnvironmentNextParam:(UMTerm *)param env:(UMEnvironment *)env
 {
-    return [NSString stringWithFormat:@"*%@",[param codeWithEnvironment:env]];
+    return [NSString stringWithFormat:@"+%@",[param codeWithEnvironment:env]];
 }
 
 - (NSString *)codeWithEnvironmentLastParam:(UMTerm *)param env:(UMEnvironment *)env
 {
-    return [NSString stringWithFormat:@"*%@",[param codeWithEnvironment:env]];
+    return [NSString stringWithFormat:@"+%@",[param codeWithEnvironment:env]];
 }
 
 - (NSString *)codeWithEnvironmentStop:(UMEnvironment *)env

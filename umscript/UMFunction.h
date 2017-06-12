@@ -29,7 +29,6 @@
 +(NSString *)functionName;
 
 - (id)initWithEnvironment:(UMEnvironment *)cenv;
-- (id)initWithEnvironment:(UMEnvironment *)compile_env magic:(NSString *)m;
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env;
 - (NSString *)description;

@@ -26,6 +26,12 @@ typedef UMScriptCompilerEnvironment *YY_EXTRA_TYPE;
 %option bison-locations
 %option noyywrap
 
+D            [0-9]
+L            [a-zA-Z_\$]
+H            [a-fA-F0-9]
+E            [Ee][+-]?{D}+
+FS            (f|F|l|L)
+IS            (u|U|l|L)*
 
 %{
 
@@ -34,8 +40,11 @@ typedef UMScriptCompilerEnvironment *YY_EXTRA_TYPE;
 
 
 static void yyunput (int c, register char * yy_bp , yyscan_t yyscanner);
-
 static void comment(yyscan_t yyscanner);
+static void count(yyscan_t yyscanner);
+static int check_type(yyscan_t yyscanner);
+
+
 @class UMScriptCompilerEnvironment;
 extern UMScriptCompilerEnvironment *cenv;
 
@@ -77,110 +86,107 @@ static inline  id XCFBridgingRelease(void *X)
 
 %}
 
-OCTAL       [0-7]
-DECIMAL		[0-9]
-NONZERO     [1-9]
-LETTER		[a-zA-Z_]
-ALPHA       [a-zA-Z_0-9]
-HEXDIGIT	[a-fA-F0-9]
-HEXPREFIX   (0[xX])
-BINARYDIGIT [0,1]
-BINARYPREFIX (0[bB])
-OCTALPREFIX  (0)
-L			[a-zA-Z_]
-H			[a-fA-F0-9]
-E			[Ee][+-]?{DECIMAL}+
-FS			(f|F|l|L)
-IS			(u|U|l|L)*
-SIGN        [+-]?
-SP  (u8|u|U|L)
-ESCAPE_SEQUENCE  (\\(['"\?\\abfnrtv]|[0-7]{1,3}|x[a-fA-F0-9]+))
-WHITESPACE  [ \t\v\n\f]
+%%
+"/*"            { comment(yyscanner); }
+
+"auto"            { count(yyscanner); return(AUTO); }
+"break"            { count(yyscanner); return(BREAK); }
+"case"            { count(yyscanner); return(CASE); }
+"char"            { count(yyscanner); return(CHAR); }
+"const"            { count(yyscanner); return(CONST); }
+"continue"        { count(yyscanner); return(CONTINUE); }
+"default"        { count(yyscanner); return(DEFAULT); }
+"do"            { count(yyscanner); return(DO); }
+"double"        { count(yyscanner); return(DOUBLE); }
+"else"            { count(yyscanner); return(ELSE); }
+"enum"            { count(yyscanner); return(ENUM); }
+"extern"        { count(yyscanner); return(EXTERN); }
+"float"            { count(yyscanner); return(FLOAT); }
+"for"            { count(yyscanner); return(FOR); }
+"goto"            { count(yyscanner); return(GOTO); }
+"if"            { count(yyscanner); return(IF); }
+"int"            { count(yyscanner); return(INT); }
+"long"            { count(yyscanner); return(LONG); }
+"register"        { count(yyscanner); return(REGISTER); }
+"return"        { count(yyscanner); return(RETURN); }
+"short"            { count(yyscanner); return(SHORT); }
+"signed"        { count(yyscanner); return(SIGNED); }
+"sizeof"        { count(yyscanner); return(SIZEOF); }
+"static"        { count(yyscanner); return(STATIC); }
+"struct"        { count(yyscanner); return(STRUCT); }
+"switch"        { count(yyscanner); return(SWITCH); }
+"typedef"        { count(yyscanner); return(TYPEDEF); }
+"union"            { count(yyscanner); return(UNION); }
+"unsigned"        { count(yyscanner); return(UNSIGNED); }
+"void"            { count(yyscanner); return(VOID); }
+"volatile"        { count(yyscanner); return(VOLATILE); }
+"while"            { count(yyscanner); return(WHILE); }
+
+{L}({L}|{D})*        { count(yyscanner); return(check_type(yyscanner)); }
+
+0[xX]{H}+{IS}?        { count(yyscanner); return(CONSTANT); }
+0{D}+{IS}?        { count(yyscanner); return(CONSTANT); }
+{D}+{IS}?        { count(yyscanner); return(CONSTANT); }
+L?'(\\.|[^\\'])+'    { count(yyscanner); return(CONSTANT); }
+
+{D}+{E}{FS}?        { count(yyscanner); return(CONSTANT); }
+{D}*"."{D}+({E})?{FS}?    { count(yyscanner); return(CONSTANT); }
+{D}+"."{D}*({E})?{FS}?    { count(yyscanner); return(CONSTANT); }
+
+L?\"(\\.|[^\\"])*\"    { count(yyscanner); return(STRING_LITERAL); }
+
+"..."            { count(yyscanner); return(ELLIPSIS); }
+">>="            { count(yyscanner); return(RIGHT_ASSIGN); }
+"<<="            { count(yyscanner); return(LEFT_ASSIGN); }
+"+="            { count(yyscanner); return(ADD_ASSIGN); }
+"-="            { count(yyscanner); return(SUB_ASSIGN); }
+"*="            { count(yyscanner); return(MUL_ASSIGN); }
+"/="            { count(yyscanner); return(DIV_ASSIGN); }
+"%="            { count(yyscanner); return(MOD_ASSIGN); }
+"&="            { count(yyscanner); return(AND_ASSIGN); }
+"^="            { count(yyscanner); return(XOR_ASSIGN); }
+"|="            { count(yyscanner); return(OR_ASSIGN); }
+">>"            { count(yyscanner); return(RIGHT_OP); }
+"<<"            { count(yyscanner); return(LEFT_OP); }
+"++"            { count(yyscanner); return(INC_OP); }
+"--"            { count(yyscanner); return(DEC_OP); }
+"->"            { count(yyscanner); return(PTR_OP); }
+"&&"            { count(yyscanner); return(AND_OP); }
+"||"            { count(yyscanner); return(OR_OP); }
+"<="            { count(yyscanner); return(LE_OP); }
+">="            { count(yyscanner); return(GE_OP); }
+"=="            { count(yyscanner); return(EQ_OP); }
+"!="            { count(yyscanner); return(NE_OP); }
+";"            { count(yyscanner); return(';'); }
+("{"|"<%")        { count(yyscanner); return('{'); }
+("}"|"%>")        { count(yyscanner); return('}'); }
+","            { count(yyscanner); return(','); }
+":"            { count(yyscanner); return(':'); }
+"="            { count(yyscanner); return('='); }
+"("            { count(yyscanner); return('('); }
+")"            { count(yyscanner); return(')'); }
+("["|"<:")        { count(yyscanner); return('['); }
+("]"|":>")        { count(yyscanner); return(']'); }
+"."            { count(yyscanner); return('.'); }
+"&"            { count(yyscanner); return('&'); }
+"!"            { count(yyscanner); return('!'); }
+"~"            { count(yyscanner); return('~'); }
+"-"            { count(yyscanner); return('-'); }
+"+"            { count(yyscanner); return('+'); }
+"*"            { count(yyscanner); return('*'); }
+"/"            { count(yyscanner); return('/'); }
+"%"            { count(yyscanner); return('%'); }
+"<"            { count(yyscanner); return('<'); }
+">"            { count(yyscanner); return('>'); }
+"^"            { count(yyscanner); return('^'); }
+"|"            { count(yyscanner); return('|'); }
+"?"            { count(yyscanner); return('?'); }
+
+[ \t\v\n\f]        { count(yyscanner); }
+.            { /* ignore bad characters */ }
 
 %%
-"/*"			{ comment(yyscanner);}
-"//".*          { /* consume // comment */ }
-"break"			{ result(BREAK);    }
-"case"			{ result(CASE);     }
-"continue"		{ result(CONTINUE); }
-"default"		{ result(DEFAULT);  }
-"do"			{ result(DO);       }
-"else"			{ result(ELSE);     }
-"for"			{ result(FOR);      }
-"goto"			{ result(GOTO);     }
-"if"			{ result(IF);       }
-"return"		{ result(RETURN);   }
-"switch"		{ result(SWITCH);   }
-"while"			{ result(WHILE);    }
-"__func__"      { return(FUNC_NAME);  }
-"__FILE__"      { return(FILE_NAME);  }
-"__LINE__"      { return(LINE_NUMBER);}
 
-"YES"|"NO"                              { result(CONST_BOOLEAN);  }
-{HEXPREFIX}{HEXDIGIT}+                  { result(CONST_HEX);      }
-{BINARYPREFIX}{BINARYDIGIT}+            { result(CONST_BINARY);   }
-{OCTALPREFIX}{OCTAL}+                   { result(CONST_OCTAL);    }
-{SIGN}?{DECIMAL}+                       { result(CONST_INTEGER);  }
-{DECIMAL}+LL                            { result(CONST_LONGLONG); }
-{DECIMAL}*"."{DECIMAL}+({E})?{FS}?		{ result(CONST_DOUBLE);   }
-{DECIMAL}+"."{DECIMAL}*({E})?{FS}?		{ result(CONST_DOUBLE);   }
-
-\${LETTER}({LETTER}|{DECIMAL})*			{ result(VARIABLE);       }
-\%{LETTER}({LETTER}|{DECIMAL})*			{ result(FIELD);          }
-{LETTER}({LETTER}|{DECIMAL})*			{ result(IDENTIFIER);     }
-
-({SP}?\"([^"\\\n]|{ESCAPE_SEQUENCE})*\"{WHITESPACE}*)+       { result(CONST_STRING); }
-
-"="				{ result(OPERATOR_ASSIGNMENT);   }
-">>="			{ result(OPERATOR_RIGHT_ASSIGN); }
-"<<="			{ result(OPERATOR_LEFT_ASSIGN);  }
-"+="			{ result(OPERATOR_ADD_ASSIGN);   }
-"-="			{ result(OPERATOR_SUB_ASSIGN);   }
-"*="			{ result(OPERATOR_MUL_ASSIGN);   }
-"/="			{ result(OPERATOR_DIV_ASSIGN);   }
-"%="			{ result(OPERATOR_MOD_ASSIGN);   }
-"&="			{ result(OPERATOR_AND_ASSIGN);   }
-"^="			{ result(OPERATOR_XOR_ASSIGN);   }
-"|="			{ result(OPERATOR_OR_ASSIGN);    }
-">>"			{ result(OPERATOR_RIGHT);        }
-"<<"			{ result(OPERATOR_LEFT);         }
-"++"			{ result(OPERATOR_INCREASE);     }
-"--"			{ result(OPERATOR_DECREASE);     }
-"<"				{ result(OPERATOR_LESS);         }
-">"				{ result(OPERATOR_GREATER);      }
-"&&"			{ result(OPERATOR_AND);          }
-"||"			{ result(OPERATOR_OR);           }
-"<="			{ result(OPERATOR_LESS_OR_EQUAL);}
-">="			{ result(OPERATOR_GREATER_OR_EQUAL); }
-"=="			{ result(OPERATOR_EQUAL);            }
-"!="			{ result(OPERATOR_NOT_EQUAL);        }
-";"				{ result(';'); }
-"{"				{ result('{'); }
-"}"				{ result('}'); }
-","				{ result(','); }
-":"				{ result(':'); }
-"("				{ result('('); }
-")"				{ result(')'); }
-("[")			{ result('['); }
-("]")			{ result(']'); }
-"."				{ result('.'); }
-"&"				{ result('&'); }
-"!"				{ result('!'); }
-"~"				{ result('~'); }
-"-"				{ result('-'); }
-"+"				{ result('+'); }
-"*"				{ result('*'); }
-"/"				{ result('/'); }
-"%"				{ result('%'); }
-"^"				{ result('^'); }
-"|"				{ result('|'); }
-"?"				{ result('?'); }
-"$"				{ result('$'); }
-
-{WHITESPACE}    { /* whitespace separates tokens */ }
-.				{ /* ignore bad characters */ }
-
-%%
 
 extern int yylex (YYSTYPE * yylval_param, YYLTYPE * yylloc_param , yyscan_t bb);
 
@@ -225,3 +231,40 @@ int yycompile(UMScriptCompilerEnvironment *cenv, int fdes_input, int fdes_output
     return 0;
 }
 
+int column = 0;
+
+static void count(yyscan_t yyscanner)
+{
+    struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
+    
+    int i;
+    
+    for (i = 0; yytext[i] != '\0'; i++)
+    if (yytext[i] == '\n')
+    column = 0;
+    else if (yytext[i] == '\t')
+    column += 8 - (column % 8);
+    else
+    column++;
+    
+    ECHO;
+}
+
+
+static int check_type(yyscan_t yyscanner)
+{
+    /*
+     * pseudo code --- this is what it should check
+     *
+     *    if (yytext == type_name)
+     *        return(TYPE_NAME);
+     *
+     *    return(IDENTIFIER);
+     */
+    
+    /*
+     *    it actually will only return IDENTIFIER
+     */
+    
+    return(IDENTIFIER);
+}

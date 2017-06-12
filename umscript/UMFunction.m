@@ -28,20 +28,15 @@
 
 
 
-- (id)initWithEnvironment:(UMEnvironment *)compile_env magic:(NSString *)m
+- (id)initWithEnvironment:(UMEnvironment *)compile_env
 {
     self = [super init];
     if(self)
     {
-        self.name = @"Undefined";
+        self.name = [[self class] description];
         self.cenv = compile_env;
     }
     return self;
-}
-
-- (id)initWithEnvironment:(UMEnvironment *)compile_env
-{
-    return [self initWithEnvironment:compile_env magic:@"UMFunction"];
 }
 
 - (void)setCenv:(UMEnvironment *)env;

@@ -57,6 +57,10 @@
 #import "UMFunction_break.h"
 #import "UMFunction_substr.h"
 #import "UMFunction_list.h"
+#import "UMFunction_arrayAccess.h"
+#import "UMFunction_structAccess.h"
+#import "UMFunction_starIdentifier.h"
+#import "UMFunction_sizeof.h"
 
 @implementation UMTerm
 
@@ -892,6 +896,15 @@
     return s;
 }
 
+- (UMTerm *)invertSign
+{
+    UMFunction *func = [[UMFunction_sub alloc]initWithEnvironment:cenv];
+    
+    UMDiscreteValue *discreteZero = [[UMDiscreteValue alloc]initWithInt:0];
+    UMTerm *zero = [[UMTerm alloc]initWithDiscreteValue:discreteZero withEnvironment:NULL];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams: @[zero,self]  withEnvironment:self.env];
+    return result;
+}
 - (UMTerm *)add:(UMTerm *)b
 {
     UMFunction *func = [[UMFunction_add alloc]initWithEnvironment:cenv];
@@ -1244,12 +1257,42 @@
     return result;
 }
 
-- (UMTerm *)dotIdentifier:(UMTerm *)list /* object.access */
+- (UMTerm *)arrayAccess:(UMTerm *)index environment:(UMEnvironment *)cenv
+{
+    
+    NSArray *params = @[identifier];
+    UMFunction *func = [[UMFunction_arrayAccess alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams:params withEnvironment:cenv];
+    return result;
+}
+
+- (UMTerm *)starIdentifierWithEnvironment:(UMEnvironment *)cenv
+{
+    NSArray *params = @[identifier];
+    UMFunction *func = [[UMFunction_starIdentifier alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams:params withEnvironment:cenv];
+    return result;
+}
+
+- (UMTerm *)sizeofWithEnvironment:(UMEnvironment *)cenv
+{
+    
+    NSArray *params = @[identifier];
+    UMFunction *func = [[UMFunction_sizeof alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams:params withEnvironment:cenv];
+    return result;
+}
+- (UMTerm *)dotIdentifier:(UMTerm *)list environment:(UMEnvironment *)cenv /* object.access */
 {
     /*TODO: missing implemementation */
     return self;
 }
 
+- (UMTerm *)arrowIdentifier:(UMTerm *)list environment:(UMEnvironment *)cenv/* object->access */
+{
+    /*TODO: missing implemementation */
+    return self;
+}
 - (NSString *)constantStringValue
 {
     switch(type)

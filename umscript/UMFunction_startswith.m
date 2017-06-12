@@ -17,13 +17,8 @@
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
-    return [self initWithEnvironment:env magic:@"UMFunction_startswith"];
-}
-
-- (id)initWithEnvironment:(UMEnvironment *)env magic:(NSString *)m
-{
-    self = [super initWithEnvironment:env magic:m];    if(self)
-    {
+    self = [super initWithEnvironment:env];
+    if(self)    {
         self.name = @"startswith";
         [env log:self.name];
     }

@@ -17,12 +17,7 @@
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
-    return [self initWithEnvironment:env magic:@"UMFunction_bit_and"];
-}
-
-- (id)initWithEnvironment:(UMEnvironment *)env magic:(NSString *)m
-{
-    self = [super initWithEnvironment:env magic:m];
+    self = [super initWithEnvironment:env];
     if(self)
     {
         self.name = @"bit_and";

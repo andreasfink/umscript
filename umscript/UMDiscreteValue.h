@@ -20,15 +20,20 @@ typedef enum UMDiscreteValueType
     UMVALUE_DOUBLE = 4,
     UMVALUE_STRING = 5,
     UMVALUE_DATA = 6,
+    UMVALUE_ARRAY = 7,
+    UMVALUE_STRUCT = 8, /* also known as DICT */
+    UMVALUE_CUSTOM_TYPE = -1,
 } UMDiscreteValueType;
 
 @interface UMDiscreteValue : UMASN1Choice
 {
     UMDiscreteValueType type;
+    NSString *_customTypeName;
     id value;
 }
 
 @property (readonly)    UMDiscreteValueType type;
+@property (readonly)    NSString *customTypeName;
 @property (readonly)    id value;
 
 - (UMDiscreteValueType)outputType:(UMDiscreteValueType)btype;
@@ -51,6 +56,8 @@ typedef enum UMDiscreteValueType
 - (UMDiscreteValue *)initWithString:(NSString *)s;
 - (UMDiscreteValue *)initWithData:(NSData *)data;
 - (UMDiscreteValue *)initWithNumberString:(NSString *)numberString;
+- (UMDiscreteValue *)initWithArray:(NSArray *)array;
+- (UMDiscreteValue *)initWithDictionary:(NSDictionary *)array;
 
 + (UMDiscreteValue *)discreteBool:(BOOL)b;
 + (UMDiscreteValue *)discreteInt:(int)i;
@@ -63,6 +70,8 @@ typedef enum UMDiscreteValueType
 + (UMDiscreteValue *)discreteYES;
 + (UMDiscreteValue *)discreteNO;
 + (UMDiscreteValue *)discreteQuotedString:(NSString *)s;
++ (UMDiscreteValue *)discreteArray:(NSArray *)array;
++ (UMDiscreteValue *)discreteDictionary:(NSDictionary *)array;
 
 
 + (UMDiscreteValue *)discreteNull;
@@ -105,6 +114,8 @@ typedef enum UMDiscreteValueType
 - (UMDiscreteValue *)bitNot;
 - (UMDiscreteValue *)bitShiftLeft:(UMDiscreteValue *)bval;
 - (UMDiscreteValue *)bitShiftRight:(UMDiscreteValue *)bval;
+- (UMDiscreteValue *)arrayAccess:(UMDiscreteValue *)bval;
+- (UMDiscreteValue *)structAccess:(UMDiscreteValue *)bval;
 
 - (UMDiscreteValue *)increase;
 - (UMDiscreteValue *)decrease;

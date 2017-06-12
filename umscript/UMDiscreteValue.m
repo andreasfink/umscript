@@ -14,7 +14,6 @@
 @synthesize type;
 @synthesize value;
 
-
 - (void) processBeforeEncode
 {
     [super processBeforeEncode];
@@ -75,6 +74,39 @@
             asn1_list = [[NSMutableArray alloc]init];
             UMASN1UTF8String *s = [[UMASN1UTF8String alloc]initWithValue:[value stringValue]];
             [asn1_list addObject:s];
+            break;
+        }
+        case UMVALUE_ARRAY:
+        {
+            self.asn1_tag.tagNumber = 6;
+            asn1_tag.isConstructed=YES;
+            asn1_list = [[NSMutableArray alloc]init];
+            NSArray *a = (NSArray *)value;
+            NSInteger n = [a count];
+            for(NSInteger i=0;i<n;i++)
+            {
+                UMDiscreteValue *x = a[i];
+                [asn1_list addObject:x];
+            }
+            break;
+        }
+        case UMVALUE_STRUCT:
+        {
+            self.asn1_tag.tagNumber = 6;
+            asn1_tag.isConstructed=YES;
+            asn1_list = [[NSMutableArray alloc]init];
+            NSDictionary *dict = (NSDictionary *)value;
+            NSArray *allKeys = [dict allKeys];
+            NSInteger n = [allKeys count];
+            for(NSInteger i=0;i<n;i++)
+            {
+                NSString        *key   = allKeys[i];
+                UMDiscreteValue *value = dict[key];
+                UMASN1UTF8String *uKey = [[UMASN1UTF8String alloc]initWithValue:[value stringValue]];
+                UMASN1Sequence *seq = [[UMASN1Sequence alloc]init];
+                [seq setValues:@[uKey,value]];
+                [asn1_list addObject:seq];
+            }
             break;
         }
         case UMVALUE_DATA:
@@ -159,6 +191,51 @@
                     value = os.value;
                     return self;
                 }
+                case 7:
+                {
+                    type = UMVALUE_ARRAY;
+                    UMASN1Sequence *os = [[UMASN1Sequence alloc]initWithASN1Object:o context:context];
+                    NSArray *arr = os.values;
+                    NSMutableArray *marr = [[NSMutableArray alloc]init];
+                    NSUInteger n = [arr count];
+                    for(NSUInteger i =0;i<n;i++)
+                    {
+                        UMASN1Object *o = arr[i];
+                        UMDiscreteValue *ds = [[UMDiscreteValue alloc]initWithASN1Object:o context:context];
+                        if(ds)
+                        {
+                            [marr addObject:ds];
+                        }
+                    }
+                    value = marr;
+                    return self;
+                }
+                case 8:
+                {
+                    type = UMVALUE_STRUCT;
+                    UMASN1Sequence *os = [[UMASN1Sequence alloc]initWithASN1Object:o context:context];
+                    NSArray *arr = os.values;
+                    NSMutableDictionary *mdict = [[NSMutableDictionary alloc]init];
+                    NSUInteger n = [arr count];
+                    for(NSUInteger i =0;i<n;i++)
+                    {
+                        UMASN1Sequence *o = arr[i];
+                        NSArray *a2 = o.values;
+                        if(a2.count <2)
+                        {
+                            continue;
+                        }
+                        UMASN1UTF8String *asn1_key = [[UMASN1UTF8String alloc]initWithASN1Object:a2[0] context:context];
+                        NSString *key = asn1_key.stringValue;
+                        UMDiscreteValue *value = [[UMDiscreteValue alloc]initWithASN1Object:a2[1] context:context];
+                        if((value) && (key.length > 0))
+                        {
+                            mdict[key] = value;
+                        }
+                    }
+                    value = mdict;
+                    return self;
+                }
             }
         }
     }
@@ -195,8 +272,17 @@
         case UMVALUE_STRING:
             dict[@"string"] = [value stringValue];
             break;
+        case UMVALUE_ARRAY:
+            dict[@"array"] = [(NSArray *)value copy];
+            break;
+        case UMVALUE_STRUCT:
+            dict[@"struct"] = [(NSDictionary *)value copy];
+            break;
         case UMVALUE_DATA:
             dict[@"data"] = [value dataValue];
+            break;
+        case UMVALUE_CUSTOM_TYPE:
+            /* FIXME */
             break;
     }
     return dict;
@@ -320,6 +406,27 @@
 }
 
 
+- (UMDiscreteValue *)initWithArray:(NSArray *)array
+{
+    self = [super init];
+    if(self)
+    {
+        type    = UMVALUE_ARRAY;
+        value   = [array mutableCopy];
+    }
+    return self;
+}
+
+- (UMDiscreteValue *)initWithDictionary:(NSDictionary *)dict
+{
+    self = [super init];
+    if(self)
+    {
+        type    = UMVALUE_STRUCT;
+        value   = [dict mutableCopy];
+    }
+    return self;
+}
 
 - (UMDiscreteValue *)initWithData:(NSString *)d;
 {
@@ -395,6 +502,15 @@
     return [[UMDiscreteValue alloc]initWithNumberString:numberString];
 }
 
++ (UMDiscreteValue *)discreteArray:(NSArray *)array
+{
+    return [[UMDiscreteValue alloc]initWithArray:array];
+}
+
++ (UMDiscreteValue *)discreteDictionary:(NSDictionary *)dict
+{
+    return [[UMDiscreteValue alloc]initWithDictionary:dict];
+}
 
 - (BOOL)isNull
 {
@@ -1322,6 +1438,20 @@
         int c = a >> b;
         return [UMDiscreteValue discreteInt:c];
     }
+}
+
+- (UMDiscreteValue *)arrayAccess:(UMDiscreteValue *)bval
+{
+    NSNumber *bnum = [bval convertToInt].value;
+    NSMutableArray *arr = (NSMutableArray *)value;
+    return  arr[bnum.intValue];
+}
+                           
+- (UMDiscreteValue *)structAccess:(UMDiscreteValue *)bval
+{
+    NSString *key = [bval convertToString].value;
+    NSMutableDictionary *dict = (NSMutableDictionary *)value;
+    return  dict[key];
 }
 
 - (NSString *)codeWithEnvironment:(UMEnvironment *)env
