@@ -10,6 +10,10 @@
 
 @implementation UMFunction_data
 
++ (NSString *)functionName
+{
+    return @"data";
+}
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {

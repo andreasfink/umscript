@@ -7,21 +7,22 @@
 //
 
 #import <ulib/ulib.h>
+#import <ulibasn1/ulibasn1.h>
 
 @class UMEnvironment;
 
 typedef enum UMDiscreteValueType
 {
-    UMVALUE_NULL,
-    UMVALUE_BOOL,
-    UMVALUE_INT,
-    UMVALUE_LONGLONG,
-    UMVALUE_DOUBLE,
-    UMVALUE_STRING,
-    UMVALUE_DATA,
+    UMVALUE_NULL = 0,
+    UMVALUE_BOOL = 1,
+    UMVALUE_INT = 2,
+    UMVALUE_LONGLONG = 3,
+    UMVALUE_DOUBLE = 4,
+    UMVALUE_STRING = 5,
+    UMVALUE_DATA = 6,
 } UMDiscreteValueType;
 
-@interface UMDiscreteValue : UMObject
+@interface UMDiscreteValue : UMASN1Choice
 {
     UMDiscreteValueType type;
     id value;

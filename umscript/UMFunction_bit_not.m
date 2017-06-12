@@ -10,6 +10,11 @@
 
 @implementation UMFunction_bit_not
 
++ (NSString *)functionName
+{
+    return @"bit_not";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_bit_not"];

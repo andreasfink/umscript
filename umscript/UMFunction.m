@@ -18,6 +18,16 @@
 @synthesize name;
 //@synthesize cenv;
 
+
+- (id) objectValue
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+    dict[@"functionName"] = name;
+    return dict;
+}
+
+
+
 - (id)initWithEnvironment:(UMEnvironment *)compile_env magic:(NSString *)m
 {
     self = [super init];
@@ -67,7 +77,6 @@
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
     if(name)
     {
-    //    dict[@"function"] = name;
         dict[@"function"] = name;
     }
     return dict;
@@ -101,5 +110,9 @@
     return @")";
 }
 
++(NSString *)functionName
+{
+    return @"undefined-function";
+}
 @end
 

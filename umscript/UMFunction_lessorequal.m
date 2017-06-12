@@ -9,6 +9,12 @@
 #import "UMFunction_lessorequal.h"
 
 @implementation UMFunction_lessorequal
+
++ (NSString *)functionName
+{
+    return @"lessorequal";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_lessorequal"];

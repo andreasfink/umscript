@@ -10,6 +10,11 @@
 
 @implementation UMFunction_greaterorequal
 
++ (NSString *)functionName
+{
+    return @"greaterorequal";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_greaterorequal"];

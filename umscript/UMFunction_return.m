@@ -10,6 +10,11 @@
 #import "UMEnvironment.h"
 @implementation UMFunction_return
 
++ (NSString *)functionName
+{
+    return @"return";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_return"];

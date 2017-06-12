@@ -10,6 +10,11 @@
 
 @implementation UMFunction_bit_or
 
++ (NSString *)functionName
+{
+    return @"bit_or";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_bit_or"];

@@ -10,6 +10,10 @@
 
 @implementation UMFunction_assign
 
++ (NSString *)functionName
+{
+    return @"assign";
+}
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {

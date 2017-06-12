@@ -10,6 +10,11 @@
 
 @implementation UMFunction_longlong
 
++ (NSString *)functionName
+{
+    return @"longlong";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_longlong"];

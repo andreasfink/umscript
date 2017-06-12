@@ -10,6 +10,11 @@
 
 @implementation UMFunction_modulo
 
++ (NSString *)functionName
+{
+    return @"modulo";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_modulo"];

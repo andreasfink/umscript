@@ -10,6 +10,10 @@
 
 @implementation UMFunction_continue
 
++ (NSString *)functionName
+{
+    return @"continue";
+}
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {

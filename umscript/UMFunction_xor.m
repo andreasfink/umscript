@@ -10,6 +10,11 @@
 
 @implementation UMFunction_xor
 
++ (NSString *)functionName
+{
+    return @"xor";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_xor"];

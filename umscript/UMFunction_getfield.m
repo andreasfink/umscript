@@ -10,6 +10,11 @@
 
 @implementation UMFunction_getfield
 
++ (NSString *)functionName
+{
+    return @"getfield";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_getfield"];

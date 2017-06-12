@@ -10,6 +10,11 @@
 
 @implementation UMFunction_sub
 
++ (NSString *)functionName
+{
+    return @"sub";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_sub"];

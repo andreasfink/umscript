@@ -10,6 +10,11 @@
 
 @implementation UMFunction_postdecrease
 
++ (NSString *)functionName
+{
+    return @"postdecrease";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_postdecrease"];

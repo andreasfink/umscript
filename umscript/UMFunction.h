@@ -7,6 +7,7 @@
 //
 
 #import <ulib/ulib.h>
+#import <ulibasn1/ulibasn1.h>
 #import "UMEnvironment.h"
 #import "UMTerm.h"
 #import "UMDiscreteValue.h"
@@ -24,6 +25,8 @@
 @property(readwrite,strong) NSString *comment;
 @property(readwrite,strong) NSString *name;
 @property(readwrite,weak) UMEnvironment *cenv;
+
++(NSString *)functionName;
 
 - (id)initWithEnvironment:(UMEnvironment *)cenv;
 - (id)initWithEnvironment:(UMEnvironment *)compile_env magic:(NSString *)m;

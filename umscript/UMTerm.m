@@ -11,6 +11,52 @@
 #import "UMFunctionMacros.h"
 #import "NSNumber+UMScript.h"
 #import "UMEnvironment.h"
+#import "UMFunction_add.h"
+#import "UMFunction_sub.h"
+#import "UMFunction_mul.h"
+#import "UMFunction_div.h"
+#import "UMFunction_dot.h"
+#import "UMFunction_modulo.h"
+#import "UMFunction_if.h"
+#import "UMFunction_not.h"
+#import "UMFunction_and.h"
+#import "UMFunction_or.h"
+#import "UMFunction_xor.h"
+#import "UMFunction_bit_not.h"
+#import "UMFunction_bit_and.h"
+#import "UMFunction_bit_or.h"
+#import "UMFunction_bit_xor.h"
+#import "UMFunction_bit_shiftleft.h"
+#import "UMFunction_bit_shiftright.h"
+#import "UMFunction_equal.h"
+#import "UMFunction_notequal.h"
+#import "UMFunction_greaterthan.h"
+#import "UMFunction_greaterorequal.h"
+#import "UMFunction_lessthan.h"
+#import "UMFunction_lessorequal.h"
+#import "UMFunction_startswith.h"
+#import "UMFunction_endswith.h"
+#import "UMFunction_setvar.h"
+#import "UMFunction_setfield.h"
+#import "UMFunction_getvar.h"
+#import "UMFunction_getfield.h"
+#import "UMFunction_block.h"
+#import "UMFunction_return.h"
+#import "UMFunction_assign.h"
+#import "UMFunction_while.h"
+#import "UMFunction_dowhile.h"
+#import "UMFunction_for.h"
+#import "UMFunction_preincrease.h"
+#import "UMFunction_predecrease.h"
+#import "UMFunction_postincrease.h"
+#import "UMFunction_postdecrease.h"
+#import "UMFunction_switch.h"
+#import "UMFunction_print.h"
+#import "UMFunction_goto.h"
+#import "UMFunction_continue.h"
+#import "UMFunction_break.h"
+#import "UMFunction_substr.h"
+#import "UMFunction_list.h"
 
 @implementation UMTerm
 
@@ -24,6 +70,387 @@
 @synthesize identifier;
 @synthesize label;
 @synthesize env;
+
+- (void) processBeforeEncode
+{
+    [super processBeforeEncode];
+
+    asn1_tag.tagClass = UMASN1Class_ContextSpecific;
+    asn1_tag.isConstructed=NO;
+
+    switch(type)
+    {
+        case UMTermType_discrete:
+        {
+            self.asn1_tag.tagNumber = 0;
+            asn1_tag.isConstructed=YES;
+            asn1_list = [[NSMutableArray alloc]init];
+            [asn1_list addObject:discrete];
+            break;
+        }
+        case UMTermType_field:
+        {
+            self.asn1_tag.tagNumber = 1;
+            asn1_tag.isConstructed=YES;
+            asn1_list = [[NSMutableArray alloc]init];
+            UMASN1UTF8String *s = [[UMASN1UTF8String alloc]initWithValue:fieldname];
+            [asn1_list addObject:s];
+            break;
+        }
+        case UMTermType_variable:
+        {
+            self.asn1_tag.tagNumber = 2;
+            asn1_tag.isConstructed=YES;
+            asn1_list = [[NSMutableArray alloc]init];
+            UMASN1UTF8String *s = [[UMASN1UTF8String alloc]initWithValue:varname];
+            [asn1_list addObject:s];
+            break;
+        }
+        case UMTermType_function:
+        {
+            self.asn1_tag.tagNumber = 3;
+            asn1_tag.isConstructed=YES;
+            asn1_list = [[NSMutableArray alloc]init];
+            [asn1_list addObject:function];
+            break;
+        }
+        case UMTermType_identifier:
+        {
+            self.asn1_tag.tagNumber = 4;
+            asn1_tag.isConstructed=YES;
+            asn1_list = [[NSMutableArray alloc]init];
+            UMASN1UTF8String *s = [[UMASN1UTF8String alloc]initWithValue:identifier];
+            [asn1_list addObject:s];
+            break;
+        }
+        case UMTermType_nullterm:
+        {
+            self.asn1_tag.tagNumber = 5;
+            asn1_tag.isConstructed=YES;
+            asn1_list = [[NSMutableArray alloc]init];
+            UMASN1Null *s = [[UMASN1Null alloc]init];
+            [asn1_list addObject:s];
+            break;
+        }
+        case UMTermType_token:
+        default:
+        {
+            self.asn1_tag.tagNumber = 6;
+            asn1_tag.isConstructed=YES;
+            asn1_list = [[NSMutableArray alloc]init];
+            UMASN1Integer *s = [[UMASN1Integer alloc]initWithValue:token];
+            [asn1_list addObject:s];
+            break;
+        }
+    }
+}
+
+
+- (UMTerm *) processAfterDecodeWithContext:(id)context
+{
+    int p=0;
+    UMASN1Object *o = NULL;
+    BOOL allFine = NO;
+    if(self.asn1_tag.tagClass == UMASN1Class_ContextSpecific)
+    {
+        o = [self getObjectAtPosition:p++];
+        if(o)
+        {
+            switch(o.asn1_tag.tagNumber)
+            {
+                case 0:
+                {
+                    type = UMTermType_discrete;
+                    discrete = [[UMDiscreteValue alloc]initWithASN1Object:o context:context];
+                    if(discrete)
+                    {
+                        allFine = YES;
+                    }
+                    break;
+                }
+                case 1:
+                {
+                    type = UMTermType_field;
+                    UMASN1UTF8String *utf8 = [[UMASN1UTF8String alloc]initWithASN1Object:o context:context];
+                    fieldname = utf8.stringValue;
+                    if(fieldname.length > 0)
+                    {
+                        allFine = YES;
+                    }
+                    break;
+                }
+                case 2:
+                {
+                    type = UMTermType_variable;
+                    UMASN1UTF8String *utf8 = [[UMASN1UTF8String alloc]initWithASN1Object:o context:context];
+                    varname = utf8.stringValue;
+                    if(varname.length > 0)
+                    {
+                        allFine = YES;
+                    }
+                    break;
+                }
+                case 3:
+                {
+                    type = UMTermType_function;
+                    UMASN1UTF8String *utf8 = [[UMASN1UTF8String alloc]initWithASN1Object:o context:context];
+                    NSString *name = utf8.stringValue;
+                    UMFunction *f;
+                    if([name isEqualTo:[UMFunction_add functionName]])
+                    {
+                        f = [[UMFunction_add alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_sub functionName]])
+                    {
+                        f = [[UMFunction_sub alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_mul functionName]])
+                    {
+                        f = [[UMFunction_mul alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_div functionName]])
+                    {
+                        f = [[UMFunction_div alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_dot functionName]])
+                    {
+                        f = [[UMFunction_dot alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_modulo functionName]])
+                    {
+                        f = [[UMFunction_modulo alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_if functionName]])
+                    {
+                        f = [[UMFunction_if alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_not functionName]])
+                    {
+                        f = [[UMFunction_not alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_and functionName]])
+                    {
+                        f = [[UMFunction_and alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_or functionName]])
+                    {
+                        f = [[UMFunction_or alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_xor functionName]])
+                    {
+                        f = [[UMFunction_xor alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_bit_not functionName]])
+                    {
+                        f = [[UMFunction_bit_not alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_bit_and functionName]])
+                    {
+                        f = [[UMFunction_bit_and alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_bit_or functionName]])
+                    {
+                        f = [[UMFunction_bit_or alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_bit_xor functionName]])
+                    {
+                        f = [[UMFunction_bit_xor alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_bit_shiftleft functionName]])
+                    {
+                        f = [[UMFunction_bit_shiftleft alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_bit_shiftright functionName]])
+                    {
+                        f = [[UMFunction_bit_shiftright alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_equal functionName]])
+                    {
+                        f = [[UMFunction_equal alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_notequal functionName]])
+                    {
+                        f = [[UMFunction_notequal alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_greaterthan functionName]])
+                    {
+                        f = [[UMFunction_greaterthan alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_greaterorequal functionName]])
+                    {
+                        f = [[UMFunction_greaterorequal alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_lessthan functionName]])
+                    {
+                        f = [[UMFunction_lessthan alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_lessorequal functionName]])
+                    {
+                        f = [[UMFunction_lessorequal alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_startswith functionName]])
+                    {
+                        f = [[UMFunction_startswith alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_endswith functionName]])
+                    {
+                        f = [[UMFunction_endswith alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_setvar functionName]])
+                    {
+                        f = [[UMFunction_setvar alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_setfield functionName]])
+                    {
+                        f = [[UMFunction_setfield alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_getvar functionName]])
+                    {
+                        f = [[UMFunction_getvar alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_getfield functionName]])
+                    {
+                        f = [[UMFunction_getfield alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_block functionName]])
+                    {
+                        f = [[UMFunction_block alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_return functionName]])
+                    {
+                        f = [[UMFunction_return alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_assign functionName]])
+                    {
+                        f = [[UMFunction_assign alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_while functionName]])
+                    {
+                        f = [[UMFunction_while alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_dowhile functionName]])
+                    {
+                        f = [[UMFunction_dowhile alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_for functionName]])
+                    {
+                        f = [[UMFunction_for alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_preincrease functionName]])
+                    {
+                        f = [[UMFunction_preincrease alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_predecrease functionName]])
+                    {
+                        f = [[UMFunction_predecrease alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_postincrease functionName]])
+                    {
+                        f = [[UMFunction_postincrease alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_postdecrease functionName]])
+                    {
+                        f = [[UMFunction_postdecrease alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_switch functionName]])
+                    {
+                        f = [[UMFunction_switch alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_print functionName]])
+                    {
+                        f = [[UMFunction_print alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_goto functionName]])
+                    {
+                        f = [[UMFunction_goto alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_continue functionName]])
+                    {
+                        f = [[UMFunction_continue alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_break functionName]])
+                    {
+                        f = [[UMFunction_break alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_substr functionName]])
+                    {
+                        f = [[UMFunction_substr alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_list functionName]])
+                    {
+                        f = [[UMFunction_list alloc]initWithEnvironment:context];
+                    }
+                    function = f;
+                    if(function)
+                    {
+                        allFine = YES;
+                    }
+                    break;
+                }
+                case 4:
+                {
+                    type = UMTermType_identifier;
+                    UMASN1UTF8String *utf8 = [[UMASN1UTF8String alloc]initWithASN1Object:o context:context];
+                    identifier  = utf8.stringValue;
+                    if(identifier.length > 0)
+                    {
+                        allFine = YES;
+                    }
+                    break;
+                }
+                case 5:
+                {
+                    type = UMTermType_nullterm;
+                    allFine = YES;
+                    break;
+                }
+                case 6:
+                {
+                    type = UMTermType_token;
+                    UMASN1Integer *i = [[UMASN1Integer alloc]initWithASN1Object:o context:context];
+                    token = (int)[i value];
+                    allFine = YES;
+                    break;
+                }
+            }
+        }
+    }
+    if(allFine == NO)
+    {
+        @throw([NSException exceptionWithName:@"INVALID_ASN1" reason:@"while decoding UMTerm, the type could not be decoded" userInfo:NULL]);
+    }
+    return self;
+}
+
+- (NSString *) objectName
+{
+    return @"UMTerm";
+}
+
+
+- (id) objectValue
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+
+    switch(type)
+    {
+        case UMTermType_discrete:
+            dict[@"discrete"] = discrete.objectValue;
+        case UMTermType_field:
+            dict[@"field"] = fieldname;
+        case UMTermType_variable:
+            dict[@"variable"] = varname;
+        case UMTermType_function:
+            dict[@"function"] = function.name;
+        case UMTermType_identifier:
+            dict[@"identifier"] = identifier;
+        case UMTermType_nullterm:
+            dict[@"null"] = @"null";
+        case UMTermType_token:
+            dict[@"token"] = @(token);
+    }
+    return dict;
+}
 
 - (UMDiscreteValue *)evaluateWithEnvironment:(UMEnvironment *)xenv;
 {

@@ -10,6 +10,11 @@
 
 @implementation UMFunction_greaterthan
 
++ (NSString *)functionName
+{
+    return @"greaterthan";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_greaterthan"];

@@ -10,6 +10,11 @@
 
 @implementation UMFunction_and
 
++ (NSString *)functionName
+{
+    return @"and";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_and"];

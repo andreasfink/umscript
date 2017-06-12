@@ -10,6 +10,11 @@
 
 @implementation UMFunction_string
 
++ (NSString *)functionName
+{
+    return @"string";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_string"];

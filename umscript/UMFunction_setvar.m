@@ -10,6 +10,11 @@
 
 @implementation UMFunction_setvar
 
++ (NSString *)functionName
+{
+    return @"setvar";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_setvar"];

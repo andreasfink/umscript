@@ -10,6 +10,11 @@
 
 @implementation UMFunction_bit_shiftleft
 
++ (NSString *)functionName
+{
+    return @"bit_shiftleft";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_shiftleft"];

@@ -10,6 +10,12 @@
 
 @implementation UMFunction_bit_xor
 
+
++ (NSString *)functionName
+{
+    return @"bit_xor";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_xor"];

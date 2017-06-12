@@ -10,6 +10,10 @@
 
 @implementation UMFunction_goto
 
++ (NSString *)functionName
+{
+    return @"goto";
+}
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {

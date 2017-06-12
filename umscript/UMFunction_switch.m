@@ -10,6 +10,11 @@
 
 @implementation UMFunction_switch
 
++ (NSString *)functionName
+{
+    return @"switch";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_switch"];

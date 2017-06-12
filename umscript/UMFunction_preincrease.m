@@ -10,6 +10,11 @@
 
 @implementation UMFunction_preincrease
 
++ (NSString *)functionName
+{
+    return @"preincrease";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_preincrease"];

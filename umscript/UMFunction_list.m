@@ -10,6 +10,11 @@
 
 @implementation UMFunction_list
 
++ (NSString *)functionName
+{
+    return @"list";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_list"];

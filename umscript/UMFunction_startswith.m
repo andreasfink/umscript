@@ -10,6 +10,11 @@
 
 @implementation UMFunction_startswith
 
++ (NSString *)functionName
+{
+    return @"startswith";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_startswith"];

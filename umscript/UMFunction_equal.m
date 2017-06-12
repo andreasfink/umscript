@@ -10,6 +10,11 @@
 
 @implementation UMFunction_equal
 
++ (NSString *)functionName
+{
+    return @"equal";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_equal"];

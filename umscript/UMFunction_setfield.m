@@ -10,6 +10,11 @@
 
 @implementation UMFunction_setfield
 
++ (NSString *)functionName
+{
+    return @"setfield";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_setfield"];

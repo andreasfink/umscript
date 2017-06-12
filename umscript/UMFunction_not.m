@@ -10,6 +10,11 @@
 
 @implementation UMFunction_not
 
++ (NSString *)functionName
+{
+    return @"not";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     return [self initWithEnvironment:env magic:@"UMFunction_not"];

@@ -1,0 +1,12 @@
+
+UMDiscreteValue ::=  CHOICE {
+discreteNull        [0] NULL,
+discreteBool        [1] BOOL,
+discreteInt         [2] INTEGER,
+discreteLongLong    [3] INTEGER,
+discreteDouble      [4] UTF8STRING,
+discreteString      [5] UTF8STRING,
+discreteData        [6] OCTETSTRING,
+}
+
+

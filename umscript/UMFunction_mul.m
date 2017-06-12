@@ -10,6 +10,10 @@
 
 @implementation UMFunction_mul
 
++ (NSString *)functionName
+{
+    return @"mul";
+}
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
