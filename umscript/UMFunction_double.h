@@ -6,7 +6,7 @@
 //  Copyright (c) 2016 Andreas Fink
 //
 
-#import <umscript/umscript.h>
+#import "UMFunction.h"
 
 @interface UMFunction_double : UMFunction
 

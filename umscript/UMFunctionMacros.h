@@ -54,4 +54,12 @@
 #import "UMFunction_break.h"
 #import "UMFunction_substr.h"
 #import "UMFunction_list.h"
+#import "UMFunction_addressOf.h"
+#import "UMFunction_castTo.h"
+#import "UMFunction_structAccess.h"
+#import "UMFunction_arrayAccess.h"
+#import "UMFunction_sizeOfVar.h"
+#import "UMFunction_sizeOfType.h"
+#import "UMFunction_starIdentifier.h"
+
 

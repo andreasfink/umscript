@@ -141,7 +141,13 @@ typedef enum UMTermType
 - (UMTerm *)dotIdentifier:(UMTerm *)list environment:(UMEnvironment *)cenv; /* object.access */
 - (UMTerm *)arrowIdentifier:(UMTerm *)list environment:(UMEnvironment *)cenv; /* object->access */
 - (UMTerm *)starIdentifierWithEnvironment:(UMEnvironment *)cenv; /* *object */
-- (UMTerm *)sizeofWithEnvironment:(UMEnvironment *)cenv; /* sizeof(object) */
+- (UMTerm *)sizeofTypeWithEnvironment:(UMEnvironment *)cenv; /* sizeof(object) */
+- (UMTerm *)sizeofVarWithEnvironment:(UMEnvironment *)cenv; /* sizeof(object) */
+- (UMTerm *)addressOfIdentifierWithEnvironment:(UMEnvironment *)cenv; /* sizeof(object) */
+- (UMTerm *)castTo:(UMTerm *)newType environment:(UMEnvironment *)cenv;/* (newtype)object */
+
+
+
 - (NSString *)constantStringValue;
 - (NSString *)labelValue;
 

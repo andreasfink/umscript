@@ -15,25 +15,23 @@
 @implementation UMFunction
 
 @synthesize comment;
-@synthesize name;
 //@synthesize cenv;
 
 
 - (id) objectValue
 {
     UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
-    dict[@"functionName"] = name;
+    dict[@"functionName"] = self.name;
     return dict;
 }
-
-
 
 - (id)initWithEnvironment:(UMEnvironment *)compile_env
 {
     self = [super init];
     if(self)
     {
-        self.name = [[self class] description];
+        _name = [[self class] description];
+        _name = self.name; /* if the name accessor is overwritten, this will use it */
         self.cenv = compile_env;
     }
     return self;
@@ -41,13 +39,13 @@
 
 - (void)setCenv:(UMEnvironment *)env;
 {
-    cenv = env;
-    [cenv log:self.name];
+    _cenv = env;
+    [_cenv log:self.name];
 }
 
 - (UMEnvironment *)cenv
 {
-    return cenv;
+    return _cenv;
 }
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
@@ -70,16 +68,16 @@
 - (id)descriptionDictVal
 {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-    if(name)
+    if(_name)
     {
-        dict[@"function"] = name;
+        dict[@"function"] = _name;
     }
     return dict;
 }
 
 - (NSString *)codeWithEnvironmentStart:(UMEnvironment *)env
 {
-    return [NSString stringWithFormat:@"%@(",name];
+    return [NSString stringWithFormat:@"%@(",_name];
 }
 
 - (NSString *)codeWithEnvironmentFirstParam:(UMTerm *)param env:(UMEnvironment *)env

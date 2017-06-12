@@ -1,17 +1,17 @@
 //
-//  UMFunction_sizeof.m
+//  UMFunction_sizeOfVar.m
 //  umscript
 //
 //  Created by Andreas Fink on 12.06.17.
 //
 
-#import "UMFunction_sizeof.h"
+#import "UMFunction_sizeOfVar.h"
 
-@implementation UMFunction_sizeof
+@implementation UMFunction_sizeOfVar
 
 + (NSString *)functionName
 {
-    return @"sizeof";
+    return @"sizeOfVar";
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
@@ -19,7 +19,7 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"sizeof";
+        self.name = @"sizeOfVar";
         [env log:self.name];
     }
     return self;

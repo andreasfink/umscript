@@ -11,56 +11,6 @@
 #import "UMFunctionMacros.h"
 #import "NSNumber+UMScript.h"
 #import "UMEnvironment.h"
-#import "UMFunction_add.h"
-#import "UMFunction_sub.h"
-#import "UMFunction_mul.h"
-#import "UMFunction_div.h"
-#import "UMFunction_dot.h"
-#import "UMFunction_modulo.h"
-#import "UMFunction_if.h"
-#import "UMFunction_not.h"
-#import "UMFunction_and.h"
-#import "UMFunction_or.h"
-#import "UMFunction_xor.h"
-#import "UMFunction_bit_not.h"
-#import "UMFunction_bit_and.h"
-#import "UMFunction_bit_or.h"
-#import "UMFunction_bit_xor.h"
-#import "UMFunction_bit_shiftleft.h"
-#import "UMFunction_bit_shiftright.h"
-#import "UMFunction_equal.h"
-#import "UMFunction_notequal.h"
-#import "UMFunction_greaterthan.h"
-#import "UMFunction_greaterorequal.h"
-#import "UMFunction_lessthan.h"
-#import "UMFunction_lessorequal.h"
-#import "UMFunction_startswith.h"
-#import "UMFunction_endswith.h"
-#import "UMFunction_setvar.h"
-#import "UMFunction_setfield.h"
-#import "UMFunction_getvar.h"
-#import "UMFunction_getfield.h"
-#import "UMFunction_block.h"
-#import "UMFunction_return.h"
-#import "UMFunction_assign.h"
-#import "UMFunction_while.h"
-#import "UMFunction_dowhile.h"
-#import "UMFunction_for.h"
-#import "UMFunction_preincrease.h"
-#import "UMFunction_predecrease.h"
-#import "UMFunction_postincrease.h"
-#import "UMFunction_postdecrease.h"
-#import "UMFunction_switch.h"
-#import "UMFunction_print.h"
-#import "UMFunction_goto.h"
-#import "UMFunction_continue.h"
-#import "UMFunction_break.h"
-#import "UMFunction_substr.h"
-#import "UMFunction_list.h"
-#import "UMFunction_arrayAccess.h"
-#import "UMFunction_structAccess.h"
-#import "UMFunction_starIdentifier.h"
-#import "UMFunction_sizeof.h"
 
 @implementation UMTerm
 
@@ -1274,11 +1224,20 @@
     return result;
 }
 
-- (UMTerm *)sizeofWithEnvironment:(UMEnvironment *)cenv
+- (UMTerm *)sizeofTypeWithEnvironment:(UMEnvironment *)cenv
 {
     
     NSArray *params = @[identifier];
-    UMFunction *func = [[UMFunction_sizeof alloc]init];
+    UMFunction *func = [[UMFunction_sizeOfType alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams:params withEnvironment:cenv];
+    return result;
+}
+
+- (UMTerm *)sizeofVarWithEnvironment:(UMEnvironment *)cenv
+{
+    
+    NSArray *params = @[identifier];
+    UMFunction *func = [[UMFunction_sizeOfVar alloc]init];
     UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams:params withEnvironment:cenv];
     return result;
 }
@@ -1296,6 +1255,17 @@
 }
 
 - (UMTerm *)addressOfIdentifierWithEnvironment:(UMEnvironment *)cenv/* object->access */
+{
+    /* TODO missing implementation */
+    NSArray *params = @[identifier];
+    UMFunction *func = [[UMFunction_addressOf alloc]init];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams:params withEnvironment:cenv];
+    return result;
+    
+    return self;
+}
+
+- (UMTerm *)castTo:(UMTerm *)newType environment:(UMEnvironment *)cenv/* (newtype)object */
 {
     /* TODO missing implementation */
     return self;

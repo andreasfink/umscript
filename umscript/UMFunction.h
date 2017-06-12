@@ -15,9 +15,9 @@
 
 @interface UMFunction : UMObject
 {
-    NSString                *name;
-    NSString                *comment;
-    UMEnvironment    __weak *cenv;
+    NSString                *_name;
+    NSString                *_comment;
+    UMEnvironment    __weak *_cenv;
 }
 
 #define LOG_TO_ENVBUILDUP(env,message)

@@ -104,11 +104,12 @@ extern void yyerror (YYLTYPE *llocp, yyscan_t yyscanner, UMScriptCompilerEnviron
 
 primary_expression
     : IDENTIFIER
-        { UMASSIGN($$,$1); };
+        {
+            UMASSIGN($$,$1);
+        };
     | CONSTANT
         {
             UMASSIGN($$,$1);
-            
         };
     | STRING_LITERAL
         {
@@ -127,9 +128,9 @@ postfix_expression
         };
     | postfix_expression '[' expression ']'
         {
-            UMTerm *a       = UMGET($1);
+            UMTerm *var     = UMGET($1);
             UMTerm *index   = UMGET($3);
-            UMTerm *r       = [a arrayAccess:index environment:cenv];
+            UMTerm *r       = [var arrayAccess:index environment:cenv];
             UMSET($$,r);
         };
     | postfix_expression '(' ')'
@@ -239,18 +240,16 @@ unary_expression
         UMTerm *r = [a logical_not];
         UMSET($$,r);
     };
-
-
     | SIZEOF unary_expression
         {
-            UMTerm *a = UMGET($1);
-            UMTerm *r = [a sizeofWithEnvironment:cenv];
+            UMTerm *a = UMGET($2);
+            UMTerm *r = [a sizeofVarWithEnvironment:cenv];
             UMSET($$,r);
         };
     | SIZEOF '(' type_name ')'
         {
-            UMTerm *a = UMGET($1);
-            UMTerm *r = [a sizeofWithEnvironment:cenv];
+            UMTerm *a = UMGET($3);
+            UMTerm *r = [a sizeofTypeWithEnvironment:cenv];
             UMSET($$,r);
         };
     ;
@@ -258,7 +257,12 @@ unary_expression
 cast_expression
     : unary_expression
     | '(' type_name ')' cast_expression
-    ;
+    {
+        UMTerm *a = UMGET($4);
+        UMTerm *b = UMGET($2);
+        UMTerm *r = [a castTo:b environment:cenv];
+        UMSET($$,r);
+    };    ;
 
 multiplicative_expression
     : cast_expression
@@ -735,17 +739,32 @@ jump_statement
             UMSET($$,r);
         };
 
-    | RETURN expression ';'  { UMASSIGN($$,$2); };
+    | RETURN expression ';'
+        {
+            UMASSIGN($$,$2);
+        };
     ;
 
 translation_unit
-    : external_declaration                      { UMASSIGN($$,$1); };
-    | translation_unit external_declaration     { UMASSIGN($$,$1); };
+    : external_declaration
+        {
+            UMASSIGN($$,$1);
+        };
+    | translation_unit external_declaration
+        {
+            UMASSIGN($$,$1);
+        };
     ;
 
 external_declaration
-    : function_definition   { UMASSIGN($$,$1); };
-    | declaration           { UMASSIGN($$,$1); };
+    : function_definition
+        {
+            UMASSIGN($$,$1);
+        };
+    | declaration
+        {
+            UMASSIGN($$,$1);
+        };
     ;
 
 function_definition
