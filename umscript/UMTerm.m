@@ -1207,29 +1207,29 @@
     return result;
 }
 
-- (UMTerm *)arrayAccess:(UMTerm *)index environment:(UMEnvironment *)cenv
+- (UMTerm *)arrayAccess:(UMTerm *)index environment:(UMEnvironment *)xcenv
 {
     
     NSArray *params = @[identifier];
     UMFunction *func = [[UMFunction_arrayAccess alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams:params withEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams:params withEnvironment:xcenv];
     return result;
 }
 
-- (UMTerm *)starIdentifierWithEnvironment:(UMEnvironment *)cenv
+- (UMTerm *)starIdentifierWithEnvironment:(UMEnvironment *)xcenv
 {
     NSArray *params = @[identifier];
     UMFunction *func = [[UMFunction_starIdentifier alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams:params withEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams:params withEnvironment:xcenv];
     return result;
 }
 
-- (UMTerm *)sizeofTypeWithEnvironment:(UMEnvironment *)cenv
+- (UMTerm *)sizeofTypeWithEnvironment:(UMEnvironment *)xcenv
 {
     
     NSArray *params = @[identifier];
     UMFunction *func = [[UMFunction_sizeOfType alloc]init];
-    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams:params withEnvironment:cenv];
+    UMTerm *result =  [[UMTerm alloc] initWithFunction:func andParams:params withEnvironment:xcenv];
     return result;
 }
 

@@ -101,10 +101,10 @@
             for(NSInteger i=0;i<n;i++)
             {
                 NSString        *key   = allKeys[i];
-                UMDiscreteValue *value = dict[key];
-                UMASN1UTF8String *uKey = [[UMASN1UTF8String alloc]initWithValue:[value stringValue]];
+                UMDiscreteValue *xvalue = dict[key];
+                UMASN1UTF8String *uKey = [[UMASN1UTF8String alloc]initWithValue:[xvalue stringValue]];
                 UMASN1Sequence *seq = [[UMASN1Sequence alloc]init];
-                [seq setValues:@[uKey,value]];
+                [seq setValues:@[uKey,xvalue]];
                 [asn1_list addObject:seq];
             }
             break;
@@ -227,10 +227,10 @@
                         }
                         UMASN1UTF8String *asn1_key = [[UMASN1UTF8String alloc]initWithASN1Object:a2[0] context:context];
                         NSString *key = asn1_key.stringValue;
-                        UMDiscreteValue *value = [[UMDiscreteValue alloc]initWithASN1Object:a2[1] context:context];
-                        if((value) && (key.length > 0))
+                        UMDiscreteValue *xvalue = [[UMDiscreteValue alloc]initWithASN1Object:a2[1] context:context];
+                        if((xvalue) && (key.length > 0))
                         {
-                            mdict[key] = value;
+                            mdict[key] = xvalue;
                         }
                     }
                     value = mdict;

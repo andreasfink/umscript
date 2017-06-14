@@ -8,19 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		A6019BB41AC1FA8600854472 /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = A6019BB31AC1FA8600854472 /* VERSION */; };
-		A612C1F81EEE9B540096C70F /* UMFunction_arrayAccess.h in Headers */ = {isa = PBXBuildFile; fileRef = A612C1F61EEE9B540096C70F /* UMFunction_arrayAccess.h */; };
+		A612C1F81EEE9B540096C70F /* UMFunction_arrayAccess.h in Headers */ = {isa = PBXBuildFile; fileRef = A612C1F61EEE9B540096C70F /* UMFunction_arrayAccess.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A612C1F91EEE9B540096C70F /* UMFunction_arrayAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = A612C1F71EEE9B540096C70F /* UMFunction_arrayAccess.m */; };
-		A612C1FC1EEEA0D10096C70F /* UMFunction_structAccess.h in Headers */ = {isa = PBXBuildFile; fileRef = A612C1FA1EEEA0D10096C70F /* UMFunction_structAccess.h */; };
+		A612C1FC1EEEA0D10096C70F /* UMFunction_structAccess.h in Headers */ = {isa = PBXBuildFile; fileRef = A612C1FA1EEEA0D10096C70F /* UMFunction_structAccess.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A612C1FD1EEEA0D10096C70F /* UMFunction_structAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = A612C1FB1EEEA0D10096C70F /* UMFunction_structAccess.m */; };
-		A612C2041EEEB7100096C70F /* UMFunction_starIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = A612C2021EEEB7100096C70F /* UMFunction_starIdentifier.h */; };
+		A612C2041EEEB7100096C70F /* UMFunction_starIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = A612C2021EEEB7100096C70F /* UMFunction_starIdentifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A612C2051EEEB7100096C70F /* UMFunction_starIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A612C2031EEEB7100096C70F /* UMFunction_starIdentifier.m */; };
-		A612C2081EEED7A30096C70F /* UMFunction_castTo.h in Headers */ = {isa = PBXBuildFile; fileRef = A612C2061EEED7A30096C70F /* UMFunction_castTo.h */; };
+		A612C2081EEED7A30096C70F /* UMFunction_castTo.h in Headers */ = {isa = PBXBuildFile; fileRef = A612C2061EEED7A30096C70F /* UMFunction_castTo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A612C2091EEED7A30096C70F /* UMFunction_castTo.m in Sources */ = {isa = PBXBuildFile; fileRef = A612C2071EEED7A30096C70F /* UMFunction_castTo.m */; };
-		A612C20C1EEED8680096C70F /* UMFunction_addressOf.h in Headers */ = {isa = PBXBuildFile; fileRef = A612C20A1EEED8680096C70F /* UMFunction_addressOf.h */; };
+		A612C20C1EEED8680096C70F /* UMFunction_addressOf.h in Headers */ = {isa = PBXBuildFile; fileRef = A612C20A1EEED8680096C70F /* UMFunction_addressOf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A612C20D1EEED8680096C70F /* UMFunction_addressOf.m in Sources */ = {isa = PBXBuildFile; fileRef = A612C20B1EEED8680096C70F /* UMFunction_addressOf.m */; };
-		A612C2101EEEDA170096C70F /* UMFunction_sizeOfVar.h in Headers */ = {isa = PBXBuildFile; fileRef = A612C20E1EEEDA170096C70F /* UMFunction_sizeOfVar.h */; };
+		A612C2101EEEDA170096C70F /* UMFunction_sizeOfVar.h in Headers */ = {isa = PBXBuildFile; fileRef = A612C20E1EEEDA170096C70F /* UMFunction_sizeOfVar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A612C2111EEEDA170096C70F /* UMFunction_sizeOfVar.m in Sources */ = {isa = PBXBuildFile; fileRef = A612C20F1EEEDA170096C70F /* UMFunction_sizeOfVar.m */; };
-		A612C2141EEEDA260096C70F /* UMFunction_sizeOfType.h in Headers */ = {isa = PBXBuildFile; fileRef = A612C2121EEEDA260096C70F /* UMFunction_sizeOfType.h */; };
+		A612C2141EEEDA260096C70F /* UMFunction_sizeOfType.h in Headers */ = {isa = PBXBuildFile; fileRef = A612C2121EEEDA260096C70F /* UMFunction_sizeOfType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A612C2151EEEDA260096C70F /* UMFunction_sizeOfType.m in Sources */ = {isa = PBXBuildFile; fileRef = A612C2131EEEDA260096C70F /* UMFunction_sizeOfType.m */; };
 		A62B98F11946A8A6005B48BC /* UMFunction_substr.h in Headers */ = {isa = PBXBuildFile; fileRef = A62B98EF1946A8A6005B48BC /* UMFunction_substr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A62B98F21946A8A6005B48BC /* UMFunction_substr.m in Sources */ = {isa = PBXBuildFile; fileRef = A62B98F01946A8A6005B48BC /* UMFunction_substr.m */; };
