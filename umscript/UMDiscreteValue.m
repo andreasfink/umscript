@@ -36,7 +36,7 @@
             self.asn1_tag.tagNumber = 1;
             asn1_tag.isConstructed=YES;
             asn1_list = [[NSMutableArray alloc]init];
-            UMASN1Boolean *b = [[UMASN1Boolean alloc]initWithValue:[value booleanValue]];
+            UMASN1Boolean *b = [[UMASN1Boolean alloc]initWithValue:[value boolValue]];
             [asn1_list addObject:b];
             break;
         }
