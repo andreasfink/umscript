@@ -11,6 +11,9 @@ LDFLAGS=@LDFLAGS@
 
 LIB=lib@PROJECT_NAME@.@SHARED_LIBRARY_EXTENSION@
 PKGCONFIGFILE=umscript.pc
+MAJORVER=@MAJORVER@
+MINORVER=@MINORVER@
+REVISION=@REVISION@
 
 MFILES = $(wildcard umscript/*.m) language/_generated_umscript.l.m language/_generated_umscript.y.m language/umscript.yl.m
 HFILES = version.h $(wildcard umscript/*.h)
