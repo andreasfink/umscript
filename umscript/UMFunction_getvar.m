@@ -15,6 +15,11 @@
     return @"getvar";
 }
 
+- (NSString *)functionName
+{
+    return @"getvar";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

@@ -15,6 +15,11 @@
     return @"dowhile";
 }
 
+- (NSString *)functionName
+{
+    return @"dowhile";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

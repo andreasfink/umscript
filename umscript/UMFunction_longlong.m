@@ -15,6 +15,11 @@
     return @"longlong";
 }
 
+- (NSString *)functionName
+{
+    return @"longlong";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

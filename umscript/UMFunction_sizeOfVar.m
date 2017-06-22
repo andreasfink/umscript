@@ -9,7 +9,7 @@
 
 @implementation UMFunction_sizeOfVar
 
-+ (NSString *)functionName
+- (NSString *)functionName
 {
     return @"sizeOfVar";
 }

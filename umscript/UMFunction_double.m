@@ -15,6 +15,12 @@
     return @"double";
 }
 
+- (NSString *)functionName
+{
+    return @"double";
+}
+
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

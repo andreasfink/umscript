@@ -15,6 +15,11 @@
     return @"notequal";
 }
 
+- (NSString *)functionName
+{
+    return @"notequal";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

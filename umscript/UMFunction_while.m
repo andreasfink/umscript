@@ -15,6 +15,11 @@
     return @"while";
 }
 
+- (NSString *)functionName
+{
+    return @"while";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

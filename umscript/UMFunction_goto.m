@@ -15,6 +15,11 @@
     return @"goto";
 }
 
+- (NSString *)functionName
+{
+    return @"goto";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

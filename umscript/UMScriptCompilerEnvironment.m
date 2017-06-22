@@ -12,7 +12,6 @@
 #import "UMTerm.h"
 #import <string.h>
 
-#import "umscript_globals.h"
 #import "_generated_umscript.y.h"
 #import "flex_definitions.h"
 #import "bison_definitions.h"
@@ -131,10 +130,10 @@
             switch(errno)
             {
                 case EMFILE:
-                    NSLog(@"Too many file descriptors are in use by the process ([GWThread initInThread])");
+                    NSLog(@"Too many file descriptors are in use by the process");
                     break;
                 case ENFILE:
-                    NSLog(@"The system file table is full. ([GWThread initInThread])");
+                    NSLog(@"The system file table is full.");
                     break;
                 default:
                     NSLog(@"cannot allocate wakeup pipe for new thread");
@@ -147,10 +146,10 @@
             switch(errno)
             {
                 case EMFILE:
-                    NSLog(@"Too many file descriptors are in use by the process ([GWThread initInThread])");
+                    NSLog(@"Too many file descriptors are in use by the process");
                     break;
                 case ENFILE:
-                    NSLog(@"The system file table is full. ([GWThread initInThread])");
+                    NSLog(@"The system file table is full.");
                     break;
                 default:
                     NSLog(@"cannot allocate wakeup pipe for new thread");
@@ -222,7 +221,9 @@
     return stdOut;
 }
 
-- (size_t)readInputForLexer:(char *)buffer numBytesRead:(size_t *)numBytesRead maxBytesToRead:(size_t)maxBytesToRead
+- (size_t)readInputForLexer:(char *)buffer
+               numBytesRead:(size_t *)numBytesRead
+             maxBytesToRead:(size_t)maxBytesToRead
 {
     size_t numBytesToRead = maxBytesToRead;
     size_t bytesRemaining = strlen(currentSourceCString)-currentSourcePosition;

@@ -10,7 +10,13 @@
 
 @implementation UMFunction_bit_shiftleft
 
+
 + (NSString *)functionName
+{
+    return @"bit_shiftleft";
+}
+
+- (NSString *)functionName
 {
     return @"bit_shiftleft";
 }

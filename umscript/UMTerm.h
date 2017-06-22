@@ -19,7 +19,8 @@ typedef enum UMTermType
     UMTermType_discrete,
     UMTermType_field,
     UMTermType_variable,
-    UMTermType_function,
+    UMTermType_functionCall,
+    UMTermType_functionDefinition,
     UMTermType_identifier,
     UMTermType_nullterm,
     UMTermType_token,
@@ -30,7 +31,9 @@ typedef enum UMTermType
     UMEnvironment   *cenv;
     UMTermType      type;
     UMDiscreteValue *discrete;
-    UMFunction      *function;
+    //UMFunction      *functionCall;
+    UMTerm          *functionDefinition;
+    NSString        *functionName;
     NSString        *fieldname;
     NSString        *varname;
     NSString        *identifier;
@@ -136,6 +139,9 @@ typedef enum UMTermType
 - (UMTerm *)predecrease;
 - (UMTerm *)postdecrease;
 
++ (UMTerm *)functionDefinitionWithName:(UMTerm *)list
+                            statements:(UMTerm *)statements
+                           environment:(UMEnvironment *)env1;
 - (UMTerm *)functionCallWithArguments:(UMTerm *)list environment:(UMEnvironment *)cenv;
 - (UMTerm *)arrayAccess:(UMTerm *)index environment:(UMEnvironment *)cenv;
 - (UMTerm *)dotIdentifier:(UMTerm *)list environment:(UMEnvironment *)cenv; /* object.access */

@@ -103,9 +103,9 @@
     return @")";
 }
 
-+(NSString *)functionName
+- (NSString *)functionName
 {
-    return @"undefined-function";
+    return _name;
 }
 @end
 

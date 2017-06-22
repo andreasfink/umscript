@@ -15,6 +15,11 @@
     return @"bit_and";
 }
 
+- (NSString *)functionName
+{
+    return @"bit_and";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

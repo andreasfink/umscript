@@ -15,6 +15,11 @@
     return @"postincrease";
 }
 
+- (NSString *)functionName
+{
+    return @"postincrease";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

@@ -15,6 +15,11 @@
     return @"or";
 }
 
+- (NSString *)functionName
+{
+    return @"or";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

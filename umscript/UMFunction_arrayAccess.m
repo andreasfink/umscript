@@ -9,9 +9,16 @@
 
 @implementation UMFunction_arrayAccess
 
+
 + (NSString *)functionName
 {
-    return @"[arrayAccess]";
+    return @"arrayAccess";
+}
+
+
+- (NSString *)functionName
+{
+    return @"arrayAccess";
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env

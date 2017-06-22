@@ -15,6 +15,11 @@
     return @"predecrease";
 }
 
+- (NSString *)functionName
+{
+    return @"predecrease";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

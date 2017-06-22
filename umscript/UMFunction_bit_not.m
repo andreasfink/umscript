@@ -10,7 +10,13 @@
 
 @implementation UMFunction_bit_not
 
+
 + (NSString *)functionName
+{
+    return @"bit_not";
+}
+
+- (NSString *)functionName
 {
     return @"bit_not";
 }

@@ -15,6 +15,11 @@
     return @"equal";
 }
 
+- (NSString *)functionName
+{
+    return @"equal";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

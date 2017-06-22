@@ -60,7 +60,7 @@
             [asn1_list addObject:s];
             break;
         }
-        case UMTermType_function:
+        case UMTermType_functionCall:
         {
             self.asn1_tag.tagNumber = 3;
             asn1_tag.isConstructed=YES;
@@ -68,9 +68,17 @@
             [asn1_list addObject:function];
             break;
         }
-        case UMTermType_identifier:
+        case UMTermType_functionDefinition:
         {
             self.asn1_tag.tagNumber = 4;
+            asn1_tag.isConstructed=YES;
+            asn1_list = [[NSMutableArray alloc]init];
+            [asn1_list addObject:function];
+            break;
+        }
+      case UMTermType_identifier:
+        {
+            self.asn1_tag.tagNumber = 5;
             asn1_tag.isConstructed=YES;
             asn1_list = [[NSMutableArray alloc]init];
             UMASN1UTF8String *s = [[UMASN1UTF8String alloc]initWithValue:identifier];
@@ -79,7 +87,7 @@
         }
         case UMTermType_nullterm:
         {
-            self.asn1_tag.tagNumber = 5;
+            self.asn1_tag.tagNumber = 6;
             asn1_tag.isConstructed=YES;
             asn1_list = [[NSMutableArray alloc]init];
             UMASN1Null *s = [[UMASN1Null alloc]init];
@@ -89,13 +97,14 @@
         case UMTermType_token:
         default:
         {
-            self.asn1_tag.tagNumber = 6;
+            self.asn1_tag.tagNumber = 7;
             asn1_tag.isConstructed=YES;
             asn1_list = [[NSMutableArray alloc]init];
             UMASN1Integer *s = [[UMASN1Integer alloc]initWithValue:token];
             [asn1_list addObject:s];
             break;
         }
+
     }
 }
 
@@ -146,7 +155,7 @@
                 }
                 case 3:
                 {
-                    type = UMTermType_function;
+                    type = UMTermType_functionCall;
                     UMASN1UTF8String *utf8 = [[UMASN1UTF8String alloc]initWithASN1Object:o context:context];
                     NSString *name = utf8.stringValue;
                     UMFunction *f;
@@ -343,6 +352,12 @@
                 }
                 case 4:
                 {
+                    type = UMTermType_functionDefinition;
+                    /* FIXME: how to encode/decode a function definition ? */
+                    break;
+                }
+                case 5:
+                {
                     type = UMTermType_identifier;
                     UMASN1UTF8String *utf8 = [[UMASN1UTF8String alloc]initWithASN1Object:o context:context];
                     identifier  = utf8.stringValue;
@@ -352,13 +367,13 @@
                     }
                     break;
                 }
-                case 5:
+                case 6:
                 {
                     type = UMTermType_nullterm;
                     allFine = YES;
                     break;
                 }
-                case 6:
+                case 7:
                 {
                     type = UMTermType_token;
                     UMASN1Integer *i = [[UMASN1Integer alloc]initWithASN1Object:o context:context];
@@ -394,8 +409,10 @@
             dict[@"field"] = fieldname;
         case UMTermType_variable:
             dict[@"variable"] = varname;
-        case UMTermType_function:
-            dict[@"function"] = function.name;
+        case UMTermType_functionCall:
+            dict[@"function-call"] = function.name;
+        case UMTermType_functionDefinition:
+            dict[@"function-definition"] = function.name;
         case UMTermType_identifier:
             dict[@"identifier"] = identifier;
         case UMTermType_nullterm:
@@ -427,9 +444,16 @@
         {
             returnvalue = [xenv fieldForKey:fieldname];
         }
-        case UMTermType_function:
+        case UMTermType_functionCall:
         {
             returnvalue = [function evaluateWithParams:param environment:xenv];
+        }
+        case UMTermType_functionDefinition:
+        {
+            UMFunction *f = [[UMFunction alloc]init];
+            f.name = functionName;
+            f.statements = functionDefinition;
+            [xenv addFunction:f];
         }
         case UMTermType_nullterm:
         {
@@ -515,7 +539,7 @@
     self = [super init];
     if(self)
     {
-        self.type = UMTermType_function;
+        self.type = UMTermType_functionCall;
         self.function = func;
         self.param = params;
         self.env = e;
@@ -582,7 +606,7 @@
             return @{@"FIELD" : fieldname};
         case UMTermType_token:
             return @{@"TOKEN" : [NSString stringWithFormat:@"%d",token], @"IDENTIFIER" : identifier};
-        case UMTermType_function:
+        case UMTermType_functionCall:
         {
             NSMutableDictionary *dict =[[NSMutableDictionary alloc]init];
             dict[@"function"] = [function descriptionDictVal];
@@ -594,6 +618,19 @@
             dict[@"params"] = pdesc;
             return dict;
         }
+        case UMTermType_functionDefinition:
+        {
+            NSMutableDictionary *dict =[[NSMutableDictionary alloc]init];
+            dict[@"functionDefinition"] = [function descriptionDictVal];
+            NSMutableArray *pdesc =[[NSMutableArray alloc]init];
+            for (UMTerm *p in param)
+            {
+                [pdesc addObject:[p descriptionDictVal]];
+            }
+            dict[@"params"] = pdesc;
+            return dict;
+        }
+
     }
     return [UMDiscreteValue discreteNull];
 
@@ -638,7 +675,7 @@
     self = [super init];
     if(self)
     {
-        type = UMTermType_function;
+        type = UMTermType_functionCall;
         function = func;
         param = p;
     }
@@ -660,7 +697,7 @@
     {
         return [NSString stringWithFormat:@"%%%@",varname];
     }
-    if(type==UMTermType_function)
+    if(type==UMTermType_functionCall)
     {
         NSMutableString *s = [[NSMutableString alloc]init];
         [s appendString:[function codeWithEnvironmentStart:e]];
@@ -684,6 +721,10 @@
         }
         [s appendString:[function codeWithEnvironmentStop:env]];
         return s;
+    }
+    if(type==UMTermType_functionDefinition)
+    {
+        /* FIXME */;
     }
     return @"/*unknown UMTerm */";
 }
@@ -828,9 +869,13 @@
         case UMTermType_variable:
             [s appendFormat:@"variable: %@\r",varname];
             break;
-        case UMTermType_function:
+        case UMTermType_functionCall:
             [s appendFormat:@"function: %@\r",[function name]];
             [s appendFormat:@" parameter.count=%d\r", (int)param.count ];
+            break;
+        case UMTermType_functionDefinition:
+            [s appendFormat:@"functionDefinition: %@\r",functionName];
+            /* FIXME */
             break;
         case UMTermType_identifier:
             [s appendFormat:@"identifier: %@\r",identifier];
@@ -1098,7 +1143,7 @@
 
 - (UMTerm *)blockAppendStatement:(UMTerm *)term
 {
-    if((type == UMTermType_function) && ([function isKindOfClass:[UMFunction_block class]]))
+    if((type == UMTermType_functionCall) && ([function isKindOfClass:[UMFunction_block class]]))
     {
         param = [param arrayByAddingObject:term];
         return self;
@@ -1122,7 +1167,7 @@
 
 - (UMTerm *)listAppendStatement:(UMTerm *)term
 {
-    if((type == UMTermType_function) && ([function isKindOfClass:[UMFunction_list class]]))
+    if((type == UMTermType_functionCall) && ([function isKindOfClass:[UMFunction_list class]]))
     {
         param = [param arrayByAddingObject:term];
         return self;
@@ -1173,6 +1218,13 @@
     return result;
 }
 
+- (UMTerm *)functionDefinitionWithName:(UMTerm *)list
+                            statements:(UMTerm *)statements
+                           environment:(UMEnvironment *)env1;
+{
+    return [UMTerm termWithNullWithEnvironment:env1];
+}
+
 - (UMTerm *)functionCallWithArguments:(UMTerm *)list environment:(UMEnvironment *)env1;
 {
     if(type != UMTermType_identifier)
@@ -1184,7 +1236,7 @@
     {
         params = @[];
     }
-     else if((list.type == UMTermType_function) && ([list.function isKindOfClass:[UMFunction_list class]]))
+    else if((list.type == UMTermType_functionCall) && ([list.function isKindOfClass:[UMFunction_list class]]))
     {
         /* this is a list with multiple items */
         params = list.param;
@@ -1284,8 +1336,11 @@
         case UMTermType_variable:
             return varname;
             break;
-        case UMTermType_function:
+        case UMTermType_functionCall:
             return [function name];
+            break;
+        case UMTermType_functionDefinition:
+            return [NSString stringWithFormat:@"_%@()",functionName];
             break;
         case UMTermType_identifier:
             return identifier;
@@ -1326,7 +1381,7 @@
                                                                  }
                     ]);
             break;
-        case UMTermType_function:
+        case UMTermType_functionCall:
             @throw([NSException exceptionWithName:@"UNKNOWN_LABEL"
                                            reason:NULL
                                          userInfo:@{
@@ -1336,7 +1391,17 @@
                                                     }
                     ]);
             break;
-        case UMTermType_identifier:
+        case UMTermType_functionDefinition:
+            @throw([NSException exceptionWithName:@"UNKNOWN_LABEL"
+                                           reason:NULL
+                                         userInfo:@{
+                                                    @"sysmsg" : [NSString stringWithFormat:@"invalid label %@",[function name]],
+                                                    @"func": @(__func__),
+                                                    @"obj":self
+                                                    }
+                    ]);
+            break;
+       case UMTermType_identifier:
             return identifier;
             break;
         case UMTermType_token:

@@ -15,6 +15,11 @@
     return @"and";
 }
 
+- (NSString *)functionName
+{
+    return @"and";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

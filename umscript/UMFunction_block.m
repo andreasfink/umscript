@@ -11,6 +11,11 @@
 
 @implementation UMFunction_block
 
+- (NSString *)functionName
+{
+    return @"bit_block";
+}
+
 + (NSString *)functionName
 {
     return @"bit_block";

@@ -15,6 +15,11 @@
     return @"setfield";
 }
 
+- (NSString *)functionName
+{
+    return @"setfield";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

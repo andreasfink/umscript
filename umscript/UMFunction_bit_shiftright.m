@@ -15,6 +15,11 @@
     return @"bit_shiftright";
 }
 
+- (NSString *)functionName
+{
+    return @"bit_shiftright";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

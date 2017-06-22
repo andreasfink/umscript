@@ -10,8 +10,12 @@
 
 @implementation UMFunction_bit_xor
 
-
 + (NSString *)functionName
+{
+    return @"bit_xor";
+}
+
+- (NSString *)functionName
 {
     return @"bit_xor";
 }

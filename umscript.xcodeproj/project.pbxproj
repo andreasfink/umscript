@@ -38,8 +38,6 @@
 		A63DD83B192C84EB0090FC94 /* UMFunction_double.m in Sources */ = {isa = PBXBuildFile; fileRef = A63DD839192C84EB0090FC94 /* UMFunction_double.m */; };
 		A63DD83E192C84F60090FC94 /* UMFunction_data.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD83C192C84F60090FC94 /* UMFunction_data.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A63DD83F192C84F60090FC94 /* UMFunction_data.m in Sources */ = {isa = PBXBuildFile; fileRef = A63DD83D192C84F60090FC94 /* UMFunction_data.m */; };
-		A63DD842192C97900090FC94 /* umscript_globals.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD840192C97900090FC94 /* umscript_globals.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A63DD843192C97900090FC94 /* umscript_globals.m in Sources */ = {isa = PBXBuildFile; fileRef = A63DD841192C97900090FC94 /* umscript_globals.m */; };
 		A65D34B5192B7BE60090FC94 /* umscript.yl.m in Sources */ = {isa = PBXBuildFile; fileRef = A65D34B4192B7BE60090FC94 /* umscript.yl.m */; };
 		A65D34C0192BAA8A0090FC94 /* UMFunction_greaterorequal.m in Sources */ = {isa = PBXBuildFile; fileRef = A65D34BE192BAA8A0090FC94 /* UMFunction_greaterorequal.m */; };
 		A65D34C4192BAAA40090FC94 /* UMFunction_lessorequal.h in Headers */ = {isa = PBXBuildFile; fileRef = A65D34C2192BAAA40090FC94 /* UMFunction_lessorequal.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -207,8 +205,6 @@
 		A63DD839192C84EB0090FC94 /* UMFunction_double.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_double.m; sourceTree = "<group>"; };
 		A63DD83C192C84F60090FC94 /* UMFunction_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_data.h; sourceTree = "<group>"; };
 		A63DD83D192C84F60090FC94 /* UMFunction_data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_data.m; sourceTree = "<group>"; };
-		A63DD840192C97900090FC94 /* umscript_globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = umscript_globals.h; sourceTree = "<group>"; };
-		A63DD841192C97900090FC94 /* umscript_globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = umscript_globals.m; sourceTree = "<group>"; };
 		A65D34B4192B7BE60090FC94 /* umscript.yl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = umscript.yl.m; path = language/umscript.yl.m; sourceTree = "<group>"; };
 		A65D34BE192BAA8A0090FC94 /* UMFunction_greaterorequal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_greaterorequal.m; sourceTree = "<group>"; };
 		A65D34C2192BAAA40090FC94 /* UMFunction_lessorequal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_lessorequal.h; sourceTree = "<group>"; };
@@ -568,8 +564,6 @@
 				A612C20B1EEED8680096C70F /* UMFunction_addressOf.m */,
 				A6835BDA19297AE30090FC94 /* UMFunctionMacros.h */,
 				A6835BE119297AE30090FC94 /* umscript.h */,
-				A63DD840192C97900090FC94 /* umscript_globals.h */,
-				A63DD841192C97900090FC94 /* umscript_globals.m */,
 				A6835C9E19298C110090FC94 /* UMScriptCompilerEnvironment.h */,
 				A6835C9F19298C110090FC94 /* UMScriptCompilerEnvironment.m */,
 				A6835C8D19297F990090FC94 /* UMScriptDocument.h */,
@@ -661,7 +655,6 @@
 				A6916D14192BEE6200F6BFF4 /* UMFunction_postdecrease.h in Headers */,
 				A63DD82E192C84CE0090FC94 /* UMFunction_int.h in Headers */,
 				A6916D0F192BEE5500F6BFF4 /* UMFunction_postincrease.h in Headers */,
-				A63DD842192C97900090FC94 /* umscript_globals.h in Headers */,
 				A63DD83A192C84EB0090FC94 /* UMFunction_double.h in Headers */,
 				A6B5CE6E192D4D0500F02FCA /* bison_definitions.h in Headers */,
 				A6916CF6192BE77F00F6BFF4 /* UMFunction_dowhile.h in Headers */,
@@ -895,7 +888,6 @@
 				A6835C9019297F990090FC94 /* UMScriptDocument.m in Sources */,
 				A63DD83F192C84F60090FC94 /* UMFunction_data.m in Sources */,
 				A6916D15192BEE6200F6BFF4 /* UMFunction_postdecrease.m in Sources */,
-				A63DD843192C97900090FC94 /* umscript_globals.m in Sources */,
 				A612C1F91EEE9B540096C70F /* UMFunction_arrayAccess.m in Sources */,
 				A65D34C0192BAA8A0090FC94 /* UMFunction_greaterorequal.m in Sources */,
 				A6835BED19297AE30090FC94 /* UMFunction_bit_and.m in Sources */,

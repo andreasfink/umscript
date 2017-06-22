@@ -18,6 +18,7 @@
     NSString                *_name;
     NSString                *_comment;
     UMEnvironment    __weak *_cenv;
+    UMTerm                  *_statements;
 }
 
 #define LOG_TO_ENVBUILDUP(env,message)
@@ -25,8 +26,10 @@
 @property(readwrite,strong) NSString *comment;
 @property(readwrite,strong) NSString *name;
 @property(readwrite,weak) UMEnvironment *cenv;
+@property(readwrite,strong) UMTerm  *statements;
 
-+(NSString *)functionName;
++ (NSString *)functionName;
+- (NSString *)functionName;
 
 - (id)initWithEnvironment:(UMEnvironment *)cenv;
 

@@ -15,6 +15,11 @@
     return @"print";
 }
 
+- (NSString *)functionName
+{
+    return @"print";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

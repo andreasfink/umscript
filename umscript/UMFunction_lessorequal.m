@@ -15,6 +15,11 @@
     return @"lessorequal";
 }
 
+- (NSString *)functionName
+{
+    return @"lessorequal";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

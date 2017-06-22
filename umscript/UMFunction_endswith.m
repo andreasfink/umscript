@@ -15,6 +15,12 @@
     return @"endswith";
 }
 
+- (NSString *)functionName
+{
+    return @"endswith";
+}
+
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

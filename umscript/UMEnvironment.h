@@ -14,9 +14,9 @@
 
 @interface UMEnvironment : UMObject
 {
-    UMSynchronizedDictionary *variables;
-    UMSynchronizedDictionary *fields;
-    UMSynchronizedDictionary *functionDictionary;
+    UMSynchronizedSortedDictionary *_variables;
+    UMSynchronizedSortedDictionary *_fields;
+    UMSynchronizedSortedDictionary *_functionDictionary;
     UMDiscreteValue *returnValue;
     BOOL    returnCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
     BOOL    breakCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
@@ -57,4 +57,5 @@
 - (void) log:(NSString *)entry;
 - (void) trace:(NSString *)entry;
 - (void) print:(NSString *)entry;
+
 @end

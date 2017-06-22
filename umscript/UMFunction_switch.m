@@ -15,6 +15,11 @@
     return @"switch";
 }
 
+- (NSString *)functionName
+{
+    return @"switch";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

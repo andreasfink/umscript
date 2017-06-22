@@ -15,6 +15,11 @@
     return @"xor";
 }
 
+- (NSString *)functionName
+{
+    return @"xor";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

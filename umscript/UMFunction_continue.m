@@ -10,6 +10,11 @@
 
 @implementation UMFunction_continue
 
+- (NSString *)functionName
+{
+    return @"continue";
+}
+
 + (NSString *)functionName
 {
     return @"continue";

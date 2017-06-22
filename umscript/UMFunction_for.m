@@ -10,6 +10,11 @@
 
 @implementation UMFunction_for
 
+- (NSString *)functionName
+{
+    return @"for";
+}
+
 + (NSString *)functionName
 {
     return @"for";

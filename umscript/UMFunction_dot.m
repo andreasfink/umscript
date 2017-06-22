@@ -15,6 +15,11 @@
     return @"dot";
 }
 
+- (NSString *)functionName
+{
+    return @"dot";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

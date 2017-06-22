@@ -15,6 +15,10 @@
     return @"bit_break";
 }
 
+- (NSString *)functionName
+{
+    return @"bit_break";
+}
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
@@ -34,3 +38,4 @@
 }
 
 @end
+

@@ -15,6 +15,11 @@
     return @"not";
 }
 
+- (NSString *)functionName
+{
+    return @"not";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

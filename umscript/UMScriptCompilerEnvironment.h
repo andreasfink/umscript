@@ -54,7 +54,7 @@ extern int yycompile(UMScriptCompilerEnvironment *cenv, int fdes_input, int fdes
     BOOL outputDataComplete;
     const char *currentSourceCString;
     size_t  currentSourcePosition;
-    
+
     int linenum;
     NSString *input_name;
     int num_errors;
@@ -64,6 +64,7 @@ extern int yycompile(UMScriptCompilerEnvironment *cenv, int fdes_input, int fdes
     int errors;
     int last_syntax_error_line;
     UMTerm *root;
+    UMTerm *main;
     int column;
     
     int stdin_pipe[2];

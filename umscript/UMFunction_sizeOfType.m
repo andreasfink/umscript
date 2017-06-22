@@ -10,7 +10,7 @@
 @implementation UMFunction_sizeOfType
 
 
-+ (NSString *)functionName
+- (NSString *)functionName
 {
     return @"sizeOfType";
 }

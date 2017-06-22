@@ -15,6 +15,11 @@
     return @"startswith";
 }
 
+- (NSString *)functionName
+{
+    return @"startswith";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

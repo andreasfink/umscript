@@ -15,6 +15,11 @@
     return @"substr";
 }
 
+- (NSString *)functionName
+{
+    return @"substr";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

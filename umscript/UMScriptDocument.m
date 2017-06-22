@@ -10,6 +10,7 @@
 #import "UMTerm.h"
 #import "UMEnvironment.h"
 #import "UMScriptCompilerEnvironment.h"
+#import "UMFunction.h"
 #include <stdio.h>
 #include <unistd.h>
 
@@ -70,7 +71,8 @@
     UMDiscreteValue *result = NULL;
     @try
     {
-        result = [compiledCode evaluateWithEnvironment:env];
+        UMFunction *mainFunction = [env functionByName:@"main"];
+        result = [mainFunction evaluateWithParams:@[] environment:env];
     }
     @catch(NSException *nse)
     {

@@ -11,7 +11,12 @@
 
 + (NSString *)functionName
 {
-    return @"[structAccess]";
+    return @"structAccess";
+}
+
+- (NSString *)functionName
+{
+    return @"structAccess";
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env

@@ -15,6 +15,11 @@
     return @"mul";
 }
 
+- (NSString *)functionName
+{
+    return @"mul";
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];

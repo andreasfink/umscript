@@ -15,6 +15,12 @@
     return @"greaterorequal";
 }
 
+- (NSString *)functionName
+{
+    return @"greaterorequal";
+}
+
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
