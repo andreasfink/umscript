@@ -1011,7 +1011,7 @@
 				);
 				INSTALL_PATH = /Library/Frameworks/;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DUMSCRIPT_CONFIG=Debug";
 				SDKROOT = macosx;
@@ -1069,7 +1069,7 @@
 				);
 				INSTALL_PATH = /Library/Frameworks/;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DUMSCRIPT_CONFIG=Release";
 				SDKROOT = macosx;

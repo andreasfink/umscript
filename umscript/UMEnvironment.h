@@ -42,6 +42,7 @@
 @property (readwrite,assign) BOOL traceExecutionFlag;
 @property (readwrite,assign) BOOL traceTreeBuildupFlag;
 
+@property (readwrite,strong) UMSynchronizedSortedDictionary *functionDictionary;
 
 - (void)identAdd;
 - (void)identRemove;

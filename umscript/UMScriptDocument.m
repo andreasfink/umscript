@@ -16,20 +16,14 @@
 
 @implementation UMScriptDocument
 
-@synthesize name;
-@synthesize sourceCode;
-@synthesize compiledCode;
-@synthesize parserLog;
-@synthesize lexerLog;
-
- 
 - (id)initWithFilename:(NSString *)filename
 {
     self = [super init];
     if(self)
     {
         NSError *err = NULL;
-        sourceCode = [[NSString alloc] initWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:&err];
+        _name = filename;
+        _sourceCode = [[NSString alloc] initWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:&err];
         if(err)
         {
             @throw([NSException exceptionWithName:@"UMScriptDocument init with file"
@@ -41,7 +35,7 @@
                                                     }
                     ]);
         }
-        isCompiled = NO;
+        _isCompiled = NO;
     }
     return self;
 }
@@ -51,15 +45,16 @@
     self = [super init];
     if(self)
     {
-        sourceCode = code;
-        isCompiled = NO;
+        _name = @"Untitled";
+        _sourceCode = code;
+        _isCompiled = NO;
     }
     return self;
 }
 
 - (UMDiscreteValue *)runScriptWithEnvironment:(UMEnvironment *)env
 {
-    if((isCompiled==NO) || (compiledCode==NULL))
+    if((_isCompiled==NO) || (_compiledCode==NULL))
     {
         [env trace:@"compilingSource"];
         NSString *e =[self compileSource];
@@ -71,8 +66,8 @@
     UMDiscreteValue *result = NULL;
     @try
     {
-        UMFunction *mainFunction = [env functionByName:@"main"];
-        result = [mainFunction evaluateWithParams:@[] environment:env];
+        env.functionDictionary = _compiledFunctions;
+        result = [_compiledCode evaluateWithEnvironment:env];
     }
     @catch(NSException *nse)
     {
@@ -81,15 +76,15 @@
     return result;
 }
 
-- (NSString *)sourceCode
+- (NSString *)_sourceCode
 {
-    return sourceCode;
+    return _sourceCode;
 }
 
-- (void)setSourceCode:(NSString *)s
+- (void)set_sourceCode:(NSString *)s
 {
-    sourceCode = s;
-    isCompiled = NO;
+    _sourceCode = s;
+    _isCompiled = NO;
 }
 
 - (NSString *)compileSource
@@ -98,23 +93,24 @@
 
     NSString *out = @"";
     NSString *err = @"";
-    NSLog(@"Compiling %@",name);
-    self.compiledCode = [compilerEnvironment compile:sourceCode stdOut:&out stdErr:&err];
-    if(self.compiledCode)
+    NSLog(@"Compiling %@",_name);
+    _compiledCode = [compilerEnvironment compile:_sourceCode stdOut:&out stdErr:&err];
+    if(_compiledCode)
     {
-        isCompiled = YES;
+        _isCompiled = YES;
+        _compiledFunctions = compilerEnvironment.functionDictionary;
     }
     else
     {
         NSLog(@"compiling failed for '%@'\n\nSource:%@\n\nParserLog:\n%@\n\nLexerLog:\n%@\n",
-              name,
-              sourceCode,
+              _name,
+              _sourceCode,
               [compilerEnvironment.parserLog getLogForwardOrder],
               [compilerEnvironment.lexerLog getLogForwardOrder]);
-        isCompiled = NO;
+        _isCompiled = NO;
     }
-    self.parserLog = [compilerEnvironment.parserLog getLogForwardOrder];
-    self.lexerLog  = [compilerEnvironment.lexerLog getLogForwardOrder];
+    _parserLog = [compilerEnvironment.parserLog getLogForwardOrder];
+    _lexerLog  = [compilerEnvironment.lexerLog getLogForwardOrder];
     return err;
 }
 

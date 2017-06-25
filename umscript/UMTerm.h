@@ -28,19 +28,17 @@ typedef enum UMTermType
 
 @interface UMTerm : UMASN1Choice
 {
-    UMEnvironment   *cenv;
-    UMTermType      type;
-    UMDiscreteValue *discrete;
-    //UMFunction      *functionCall;
-    UMTerm          *functionDefinition;
-    NSString        *functionName;
-    NSString        *fieldname;
-    NSString        *varname;
-    NSString        *identifier;
-    NSArray         *param;
-    NSString        *label;
-    NSMutableArray  *array;
-    int             token;
+    UMEnvironment __weak *_cenv;    /* compilation environment */
+    UMEnvironment __weak *_env;     /* runtime environment */
+    UMTermType      _type;
+    UMDiscreteValue *_discrete;
+    UMFunction      *_function;
+    NSString        *_fieldname;
+    NSString        *_varname;
+    NSString        *_identifier;
+    NSString        *_label;
+    int             _token;
+    NSArray         *_param;
 }
 
 @property (readwrite,assign) UMTermType      type;
@@ -49,13 +47,14 @@ typedef enum UMTermType
 @property (readwrite,strong) NSString        *varname;
 @property (readwrite,strong) NSString        *identifier;
 @property (readwrite,strong) UMFunction      *function;
-@property (readwrite,strong) NSArray         *param;
+@property (readwrite,strong) NSString        *functionName;
 @property (readwrite,assign) int             token;
 @property (readwrite,strong) NSString        *label;
+//@property (readwrite,strong) NSMutableArray  *array;
+@property (readwrite,strong) NSArray          *param;
 @property (readwrite,weak)   UMEnvironment   *env;
+@property (readwrite,weak)   UMEnvironment   *cenv;
 
-
-//- (id)initWithEnvironment:(UMEnvironment *)env;
 - (id)initWithNullWithEnvironment:(UMEnvironment *)cenv;
 - (id)initWithDiscreteValue:(UMDiscreteValue *)d withEnvironment:(UMEnvironment *)cenv;
 - (id)initWithFieldName:(NSString *)fieldName withEnvironment:(UMEnvironment *)cenv;
@@ -76,6 +75,10 @@ typedef enum UMTermType
 - (id)initFunction:(UMFunction *)name parm1:(UMTerm *)parm1 parm2:(UMTerm *)parm2;
 - (id)initFunction:(UMFunction *)name parm1:(UMTerm *)parm1 parm2:(UMTerm *)parm2 parm3:(UMTerm *)parm3;
 - (id)initFunction:(UMFunction *)name params:(NSArray *)parm;
+- (UMTerm *)initWithfunctionDefinitionName:(UMTerm *)name
+                                statements:(UMTerm *)statements
+                               environment:(UMEnvironment *)env1;
+
 - (NSString *)codeWithEnvironment:(UMEnvironment *)env;
 
 + (id)termWithIdentifierFromTag:(UMTerm *)identifierName withEnvironment:(UMEnvironment *)cenv;
@@ -161,5 +164,6 @@ typedef enum UMTermType
 + (UMTerm *)letsBreakWithEnvironment:(UMEnvironment *)cenv;
 + (UMTerm *)letsContinueWithEnvironment:(UMEnvironment *)cenv;
 
+- (NSString *)logDescription;
 
 @end

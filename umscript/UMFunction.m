@@ -37,6 +37,17 @@
     return self;
 }
 
+- (UMFunction *)initWithName:(NSString *)name statements:(UMTerm *)statements
+{
+    self = [super init];
+    if(self)
+    {
+        _name = name;
+        _statements = statements;
+    }
+    return self;
+}
+
 - (void)setCenv:(UMEnvironment *)env;
 {
     _cenv = env;
@@ -101,6 +112,11 @@
 - (NSString *)codeWithEnvironmentStop:(UMEnvironment *)env
 {
     return @")";
+}
+
++ (NSString *)functionName
+{
+    return @"function";
 }
 
 - (NSString *)functionName

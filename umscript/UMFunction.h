@@ -32,6 +32,7 @@
 - (NSString *)functionName;
 
 - (id)initWithEnvironment:(UMEnvironment *)cenv;
+- (UMFunction *)initWithName:(NSString *)name statements:(UMTerm *)statements;
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env;
 - (NSString *)description;

@@ -22,7 +22,6 @@
 @synthesize currentSource;
 @synthesize parserLog;
 @synthesize lexerLog;
-@synthesize root;
 @synthesize column;
 
 - (id)init
@@ -173,8 +172,8 @@
         }
         close(stdout_pipe[RXPIPE]);
 
-        UMTerm *resultingCode = root;
-        root = NULL;
+        UMTerm *resultingCode = _root;
+        _root = NULL;
         if(stdOut.length > 0)
         {
             NSLog(@"**STDOUT: \r%@",stdOut);
@@ -240,6 +239,16 @@
     *numBytesRead = numBytesToRead;
     currentSourcePosition += numBytesToRead;
     return 0;
+}
+
+- (void)addFunctionDefinition:(UMTerm *)fdef
+{
+    UMFunction *f = fdef.function;
+    _functionDictionary[f.name] = f;
+    if([f.name isEqualToString:@"main"])
+    {
+        _root = f.statements;
+    }
 }
 
 @end

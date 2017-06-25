@@ -72,114 +72,114 @@ static inline  id XCFBridgingRelease(void *X)
 }
 
 /* Note: we are not using UMSET here as the structure is allocated by malloc and not initialized to zero */
-#define result(x)       \
-{       \
+#define UMTOKEN(x)                                                                        \
+{                                                                                        \
     UMScriptCompilerEnvironment *cenv = (__bridge UMScriptCompilerEnvironment *)yyextra; \
-    char *text =yyget_text(yyscanner); \
-    UMTerm *term = [UMTerm token:(x) text:text withEnvironment:cenv];      \
-    yylval_param->value=XCFBridgingRetain(term);                                              \
-    yylval_param->token = (x);                                                              \
-    NSString *s = [NSString stringWithFormat:@"%d %s {%s}",x,#x,text]; \
-    [cenv.lexerLog addLogEntry:s];  \
-    return (x);\
+    char *text =yyget_text(yyscanner);                                                   \
+    UMTerm *term = [UMTerm token:(x) text:text withEnvironment:cenv];                    \
+    yylval_param->value=XCFBridgingRetain(term);                                         \
+    yylval_param->token = (x);                                                           \
+    NSString *s = [NSString stringWithFormat:@"%d %s {%s}",x,#x,text];                   \
+    [cenv.lexerLog addLogEntry:s];                                                       \
+    return (x);                                                                          \
 }
 
 %}
 
 %%
-"/*"            { comment(yyscanner);                 }
-"auto"          { count(yyscanner); return(AUTO);     }
-"break"         { count(yyscanner); return(BREAK);    }
-"case"          { count(yyscanner); return(CASE);     }
-"char"          { count(yyscanner); return(CHAR);     }
-"const"         { count(yyscanner); return(CONST);    }
-"continue"      { count(yyscanner); return(CONTINUE); }
-"default"       { count(yyscanner); return(DEFAULT);  }
-"do"            { count(yyscanner); return(DO);       }
-"double"        { count(yyscanner); return(DOUBLE);   }
-"else"          { count(yyscanner); return(ELSE);     }
-"enum"          { count(yyscanner); return(ENUM);     }
-"extern"        { count(yyscanner); return(EXTERN);   }
-"float"         { count(yyscanner); return(FLOAT);    }
-"for"           { count(yyscanner); return(FOR);      }
-"goto"          { count(yyscanner); return(GOTO);     }
-"if"            { count(yyscanner); return(IF);       }
-"int"           { count(yyscanner); return(INT);      }
-"long"          { count(yyscanner); return(LONG);     }
-"register"      { count(yyscanner); return(REGISTER); }
-"return"        { count(yyscanner); return(RETURN);   }
-"short"         { count(yyscanner); return(SHORT);    }
-"signed"        { count(yyscanner); return(SIGNED);   }
-"sizeof"        { count(yyscanner); return(SIZEOF);   }
-"static"        { count(yyscanner); return(STATIC);   }
-"struct"        { count(yyscanner); return(STRUCT);   }
-"switch"        { count(yyscanner); return(SWITCH);   }
-"typedef"       { count(yyscanner); return(TYPEDEF);  }
-"union"         { count(yyscanner); return(UNION);    }
-"unsigned"      { count(yyscanner); return(UNSIGNED); }
-"void"          { count(yyscanner); return(VOID);     }
-"volatile"      { count(yyscanner); return(VOLATILE); }
-"while"         { count(yyscanner); return(WHILE);    }
+"/*"            { comment(yyscanner);                  }
+"auto"          { count(yyscanner); UMTOKEN(AUTO);     }
+"break"         { count(yyscanner); UMTOKEN(BREAK);    }
+"case"          { count(yyscanner); UMTOKEN(CASE);     }
+"char"          { count(yyscanner); UMTOKEN(CHAR);     }
+"const"         { count(yyscanner); UMTOKEN(CONST);    }
+"continue"      { count(yyscanner); UMTOKEN(CONTINUE); }
+"default"       { count(yyscanner); UMTOKEN(DEFAULT);  }
+"do"            { count(yyscanner); UMTOKEN(DO);       }
+"double"        { count(yyscanner); UMTOKEN(DOUBLE);   }
+"else"          { count(yyscanner); UMTOKEN(ELSE);     }
+"enum"          { count(yyscanner); UMTOKEN(ENUM);     }
+"extern"        { count(yyscanner); UMTOKEN(EXTERN);   }
+"float"         { count(yyscanner); UMTOKEN(FLOAT);    }
+"for"           { count(yyscanner); UMTOKEN(FOR);      }
+"goto"          { count(yyscanner); UMTOKEN(GOTO);     }
+"if"            { count(yyscanner); UMTOKEN(IF);       }
+"int"           { count(yyscanner); UMTOKEN(INT);      }
+"long"          { count(yyscanner); UMTOKEN(LONG);     }
+"register"      { count(yyscanner); UMTOKEN(REGISTER); }
+"return"        { count(yyscanner); UMTOKEN(RETURN);   }
+"short"         { count(yyscanner); UMTOKEN(SHORT);    }
+"signed"        { count(yyscanner); UMTOKEN(SIGNED);   }
+"sizeof"        { count(yyscanner); UMTOKEN(SIZEOF);   }
+"static"        { count(yyscanner); UMTOKEN(STATIC);   }
+"struct"        { count(yyscanner); UMTOKEN(STRUCT);   }
+"switch"        { count(yyscanner); UMTOKEN(SWITCH);   }
+"typedef"       { count(yyscanner); UMTOKEN(TYPEDEF);  }
+"union"         { count(yyscanner); UMTOKEN(UNION);    }
+"unsigned"      { count(yyscanner); UMTOKEN(UNSIGNED); }
+"void"          { count(yyscanner); UMTOKEN(VOID);     }
+"volatile"      { count(yyscanner); UMTOKEN(VOLATILE); }
+"while"         { count(yyscanner); UMTOKEN(WHILE);    }
 
-{L}({L}|{D})*   { count(yyscanner); return(check_type(yyscanner)); }
+{L}({L}|{D})*   { count(yyscanner); UMTOKEN(IDENTIFIER); }
 
-0[xX]{H}+{IS}?      { count(yyscanner); return(CONSTANT); }
-0{D}+{IS}?          { count(yyscanner); return(CONSTANT); }
-{D}+{IS}?                 { count(yyscanner); return(CONSTANT); }
-L?'(\\.|[^\\'])+'         { count(yyscanner); return(CONSTANT); }
+0[xX]{H}+{IS}?      { count(yyscanner); UMTOKEN(CONSTANT); }
+0{D}+{IS}?          { count(yyscanner); UMTOKEN(CONSTANT); }
+{D}+{IS}?                 { count(yyscanner); UMTOKEN(CONSTANT); }
+L?'(\\.|[^\\'])+'         { count(yyscanner); UMTOKEN(CONSTANT); }
 
-{D}+{E}{FS}?              { count(yyscanner); return(CONSTANT); }
-{D}*"."{D}+({E})?{FS}?    { count(yyscanner); return(CONSTANT); }
-{D}+"."{D}*({E})?{FS}?    { count(yyscanner); return(CONSTANT); }
+{D}+{E}{FS}?              { count(yyscanner); UMTOKEN(CONSTANT); }
+{D}*"."{D}+({E})?{FS}?    { count(yyscanner); UMTOKEN(CONSTANT); }
+{D}+"."{D}*({E})?{FS}?    { count(yyscanner); UMTOKEN(CONSTANT); }
 
-L?\"(\\.|[^\\"])*\"    { count(yyscanner); return(STRING_LITERAL); }
+L?\"(\\.|[^\\"])*\"    { count(yyscanner); UMTOKEN(STRING_LITERAL); }
 
-"..."           { count(yyscanner); return(ELLIPSIS); }
-">>="           { count(yyscanner); return(RIGHT_ASSIGN); }
-"<<="           { count(yyscanner); return(LEFT_ASSIGN); }
-"+="            { count(yyscanner); return(ADD_ASSIGN); }
-"-="            { count(yyscanner); return(SUB_ASSIGN); }
-"*="            { count(yyscanner); return(MUL_ASSIGN); }
-"/="            { count(yyscanner); return(DIV_ASSIGN); }
-"%="            { count(yyscanner); return(MOD_ASSIGN); }
-"&="            { count(yyscanner); return(AND_ASSIGN); }
-"^="            { count(yyscanner); return(XOR_ASSIGN); }
-"|="            { count(yyscanner); return(OR_ASSIGN); }
-">>"            { count(yyscanner); return(RIGHT_OP); }
-"<<"            { count(yyscanner); return(LEFT_OP); }
-"++"            { count(yyscanner); return(INC_OP); }
-"--"            { count(yyscanner); return(DEC_OP); }
-"->"            { count(yyscanner); return(PTR_OP); }
-"&&"            { count(yyscanner); return(AND_OP); }
-"||"            { count(yyscanner); return(OR_OP); }
-"<="            { count(yyscanner); return(LE_OP); }
-">="            { count(yyscanner); return(GE_OP); }
-"=="            { count(yyscanner); return(EQ_OP); }
-"!="            { count(yyscanner); return(NE_OP); }
-";"             { count(yyscanner); return(';'); }
-("{"|"<%")      { count(yyscanner); return('{'); }
-("}"|"%>")      { count(yyscanner); return('}'); }
-","             { count(yyscanner); return(','); }
-":"             { count(yyscanner); return(':'); }
-"="             { count(yyscanner); return('='); }
-"("             { count(yyscanner); return('('); }
-")"             { count(yyscanner); return(')'); }
-("["|"<:")      { count(yyscanner); return('['); }
-("]"|":>")      { count(yyscanner); return(']'); }
-"."             { count(yyscanner); return('.'); }
-"&"             { count(yyscanner); return('&'); }
-"!"             { count(yyscanner); return('!'); }
-"~"             { count(yyscanner); return('~'); }
-"-"             { count(yyscanner); return('-'); }
-"+"             { count(yyscanner); return('+'); }
-"*"             { count(yyscanner); return('*'); }
-"/"             { count(yyscanner); return('/'); }
-"%"             { count(yyscanner); return('%'); }
-"<"             { count(yyscanner); return('<'); }
-">"             { count(yyscanner); return('>'); }
-"^"             { count(yyscanner); return('^'); }
-"|"             { count(yyscanner); return('|'); }
-"?"             { count(yyscanner); return('?'); }
+"..."           { count(yyscanner); UMTOKEN(ELLIPSIS); }
+">>="           { count(yyscanner); UMTOKEN(RIGHT_ASSIGN); }
+"<<="           { count(yyscanner); UMTOKEN(LEFT_ASSIGN); }
+"+="            { count(yyscanner); UMTOKEN(ADD_ASSIGN); }
+"-="            { count(yyscanner); UMTOKEN(SUB_ASSIGN); }
+"*="            { count(yyscanner); UMTOKEN(MUL_ASSIGN); }
+"/="            { count(yyscanner); UMTOKEN(DIV_ASSIGN); }
+"%="            { count(yyscanner); UMTOKEN(MOD_ASSIGN); }
+"&="            { count(yyscanner); UMTOKEN(AND_ASSIGN); }
+"^="            { count(yyscanner); UMTOKEN(XOR_ASSIGN); }
+"|="            { count(yyscanner); UMTOKEN(OR_ASSIGN); }
+">>"            { count(yyscanner); UMTOKEN(RIGHT_OP); }
+"<<"            { count(yyscanner); UMTOKEN(LEFT_OP); }
+"++"            { count(yyscanner); UMTOKEN(INC_OP); }
+"--"            { count(yyscanner); UMTOKEN(DEC_OP); }
+"->"            { count(yyscanner); UMTOKEN(PTR_OP); }
+"&&"            { count(yyscanner); UMTOKEN(AND_OP); }
+"||"            { count(yyscanner); UMTOKEN(OR_OP); }
+"<="            { count(yyscanner); UMTOKEN(LE_OP); }
+">="            { count(yyscanner); UMTOKEN(GE_OP); }
+"=="            { count(yyscanner); UMTOKEN(EQ_OP); }
+"!="            { count(yyscanner); UMTOKEN(NE_OP); }
+";"             { count(yyscanner); UMTOKEN(';'); }
+("{"|"<%")      { count(yyscanner); UMTOKEN('{'); }
+("}"|"%>")      { count(yyscanner); UMTOKEN('}'); }
+","             { count(yyscanner); UMTOKEN(','); }
+":"             { count(yyscanner); UMTOKEN(':'); }
+"="             { count(yyscanner); UMTOKEN('='); }
+"("             { count(yyscanner); UMTOKEN('('); }
+")"             { count(yyscanner); UMTOKEN(')'); }
+("["|"<:")      { count(yyscanner); UMTOKEN('['); }
+("]"|":>")      { count(yyscanner); UMTOKEN(']'); }
+"."             { count(yyscanner); UMTOKEN('.'); }
+"&"             { count(yyscanner); UMTOKEN('&'); }
+"!"             { count(yyscanner); UMTOKEN('!'); }
+"~"             { count(yyscanner); UMTOKEN('~'); }
+"-"             { count(yyscanner); UMTOKEN('-'); }
+"+"             { count(yyscanner); UMTOKEN('+'); }
+"*"             { count(yyscanner); UMTOKEN('*'); }
+"/"             { count(yyscanner); UMTOKEN('/'); }
+"%"             { count(yyscanner); UMTOKEN('%'); }
+"<"             { count(yyscanner); UMTOKEN('<'); }
+">"             { count(yyscanner); UMTOKEN('>'); }
+"^"             { count(yyscanner); UMTOKEN('^'); }
+"|"             { count(yyscanner); UMTOKEN('|'); }
+"?"             { count(yyscanner); UMTOKEN('?'); }
 
 [ \t\v\n\f]        { count(yyscanner); }
 .            { /* ignore bad characters */ }

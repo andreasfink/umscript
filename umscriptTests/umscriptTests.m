@@ -174,6 +174,7 @@
 {
     NSString *code = @"return 1 + 2;";
     UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    s.name = @"Untitled";
     [s compileSource];
     UMDiscreteValue *result = [s runScriptWithEnvironment:env];
     XCTAssertTrue(result.intValue==3,@"1+2=3 not %d",result.intValue);
@@ -188,6 +189,7 @@
     @"if($a==1) { return $b + 100; } else { return $c + 200; }; return 222;";
     
     UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    s.name = @"Untitled";
     [s compileSource];
     UMDiscreteValue *result = [s runScriptWithEnvironment:env];
 
@@ -209,6 +211,7 @@
     @"}"
     @"return $b;";
     UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    s.name = @"Untitled";
     [s compileSource];
     UMDiscreteValue *result = [s runScriptWithEnvironment:env];
     
@@ -226,7 +229,7 @@
     @"$g=-1;";
     UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
     [s compileSource];
-    XCTAssertTrue(s.compiledCode.param.count == 7,@"value is %d",(int)s.compiledCode.param.count);
+    XCTAssertTrue(s._compiledCode.param.count == 7,@"value is %d",(int)s._compiledCode.param.count);
 }
 
 - (void)testAddingVariables

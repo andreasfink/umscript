@@ -63,8 +63,7 @@ extern int yycompile(UMScriptCompilerEnvironment *cenv, int fdes_input, int fdes
     int num_local_functions;
     int errors;
     int last_syntax_error_line;
-    UMTerm *root;
-    UMTerm *main;
+    UMTerm *_root;
     int column;
     
     int stdin_pipe[2];
@@ -79,7 +78,6 @@ extern int yycompile(UMScriptCompilerEnvironment *cenv, int fdes_input, int fdes
 @property (readwrite,strong)    UMHistoryLog *parserLog;
 @property (readwrite,strong)    UMHistoryLog *lexerLog;
 
-
 - (UMTerm *)compile:(NSString *)code stdOut:(NSString **)sout  stdErr:(NSString **)serr;
 
 - (void)zapOutput;
@@ -87,6 +85,7 @@ extern int yycompile(UMScriptCompilerEnvironment *cenv, int fdes_input, int fdes
 - (void)addStdErr:(NSString *)s;
 - (NSString *)stdErr;
 - (NSString *)stdOut;
+- (void)addFunctionDefinition:(UMTerm *)fdef;
 
 @end
 

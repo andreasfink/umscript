@@ -14,12 +14,13 @@
 
 @interface UMScriptDocument : UMObject
 {
-    NSString *name;
-    NSString *sourceCode;
-    UMTerm *compiledCode;
-    BOOL isCompiled;
-    NSString *parserLog;
-    NSString *lexerLog;
+    NSString *_name;
+    NSString *_sourceCode;
+    UMTerm *_compiledCode;
+    BOOL _isCompiled;
+    NSString *_parserLog;
+    NSString *_lexerLog;
+    UMSynchronizedSortedDictionary *_compiledFunctions;
 }
 
 @property (readwrite,strong)    NSString    *name;
