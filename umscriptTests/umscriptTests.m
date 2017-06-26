@@ -172,7 +172,7 @@
 
 - (void)testAddCompiled
 {
-    NSString *code = @"return 1 + 2;";
+    NSString *code = @"int main() { return 1 + 2; }";
     UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
     s.name = @"Untitled";
     [s compileSource];
@@ -183,10 +183,10 @@
 
 - (void)testScript1
 {
-    NSString *code = @"$a = 1;"
+    NSString *code = @"int main() { $a = 1;"
     @"$b=2;"
     @"$c=3;"
-    @"if($a==1) { return $b + 100; } else { return $c + 200; }; return 222;";
+    @"if($a==1) { return $b + 100; } else { return $c + 200; }; return 222; }";
     
     UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
     s.name = @"Untitled";
@@ -198,7 +198,7 @@
 
 - (void)testScript2
 {
-    NSString *code = @"$a = 1;"
+    NSString *code = @"int main() { $a = 1;"
     @"$b=2;"
     @"$c=3;"
     @"while($a==1)"
@@ -209,7 +209,7 @@
     @"     break;"
     @"  }"
     @"}"
-    @"return $b;";
+    @"return $b; }";
     UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
     s.name = @"Untitled";
     [s compileSource];
@@ -220,27 +220,27 @@
 
 - (void)testBlock
 {
-    NSString *code = @"$a = 1;"
+    NSString *code = @"int main() { $a = 1;"
     @"$b=-1;"
     @"$c=-1;"
     @"$d=-1;"
     @"$e=-1;"
     @"$f=-1;"
-    @"$g=-1;";
+    @"$g=-1; }";
     UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
     [s compileSource];
-    XCTAssertTrue(s._compiledCode.param.count == 7,@"value is %d",(int)s._compiledCode.param.count);
+    XCTAssertTrue(s.compiledCode.param.count == 7,@"value is %d",(int)s.compiledCode.param.count);
 }
 
 - (void)testAddingVariables
 {
         NSString *code =
-    @"$a = 1;"
+    @"int main () { $a = 1;"
     @"$b = 2;"
     @"$c = 4;"
     @"$d = $a + $b + $c;"
     @"$e = -1;"
-    @"return $d;";
+    @"return $d; }";
     UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
     [s compileSource];
     UMDiscreteValue *result = [s runScriptWithEnvironment:env];
@@ -250,7 +250,7 @@
 - (void)testAddingVariablesInBlock
 {
     NSString *code =
-    @"{"
+    @"int main() {"
     @"$a = 1;"
     @"$b = 2;"
     @"$c = 4;"
@@ -266,7 +266,7 @@
 
 - (void)testSwitchWithFallthrough
 {
-    NSString *code = @"$a = 1;"
+    NSString *code = @"int main()  { $a = 1;"
     @"$b = -1;"
     @"switch($a)"
     @"{"
@@ -282,7 +282,7 @@
     @"        $b = $b + 800;"
     @"        break;"
     @"}"
-    @"return $b;";
+    @"return $b; }";
     UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
     [s compileSource];
     UMDiscreteValue *result = [s runScriptWithEnvironment:env];
@@ -292,7 +292,7 @@
 
 - (void)testSwitchWithDefault
 {
-    NSString *code = @"$a = 99;"
+    NSString *code = @"int main() { $a = 99;"
     @"$b = -1;"
     @"switch($a)"
     @"{"
@@ -308,7 +308,7 @@
     @"        $b = $b + 800;"
     @"        break;"
     @"}"
-    @"return $b;";
+    @"return $b; }";
     UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
     [s compileSource];
     UMDiscreteValue *result = [s runScriptWithEnvironment:env];
@@ -319,11 +319,11 @@
 
 - (void)testGoto
 {
-    NSString *code = @"$a = 100;"
+    NSString *code = @"int main() { $a = 100;"
     @"goto test;"
     @"$a++;"
     @"test:"
-    @"return $a;";
+    @"return $a; }";
     UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
     [s compileSource];
     UMDiscreteValue *result = [s runScriptWithEnvironment:env];
@@ -331,11 +331,22 @@
     XCTAssertTrue(result.intValue==100,@"should be 100 but is %d",result.intValue);
 }
 
+- (void)testString
+{
+    NSString *code = @"int main() { $a = \"abc\";"
+    @"return $a; }";
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    [s compileSource];
+    UMDiscreteValue *result = [s runScriptWithEnvironment:env];
+
+    XCTAssertTrue([result.stringValue isEqualToString:@"abc"],@"should be abc but is %@",result.stringValue);
+}
+
 - (void)testSubstring1
 {
-    NSString *code = @"$a = \"0123456789ABCDEFG\";"
+    NSString *code = @"int main() { $a = \"0123456789ABCDEFG\";"
     @"$b = substr($a,0,3);"
-    @"return $b;";
+    @"return $b; }";
     UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
     [s compileSource];
     UMDiscreteValue *result = [s runScriptWithEnvironment:env];
@@ -346,9 +357,9 @@
 
 - (void)testSubstring2
 {
-    NSString *code = @"$a = \"0123456789ABCDEFG\";"
+    NSString *code = @"int main() { $a = \"0123456789ABCDEFG\";"
     @"$b = substr($a,1,2);"
-    @"return $b;";
+    @"return $b; }";
     UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
     [s compileSource];
     UMDiscreteValue *result = [s runScriptWithEnvironment:env];
@@ -358,9 +369,9 @@
 
 - (void)testSubstring3
 {
-    NSString *code = @"$a = \"0123456789ABCDEFG\";"
+    NSString *code = @"int main() { $a = \"0123456789ABCDEFG\";"
     @"$b = substr($a,3,5);"
-    @"return $b;";
+    @"return $b; }";
     UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
     [s compileSource];
     UMDiscreteValue *result = [s runScriptWithEnvironment:env];
@@ -370,9 +381,9 @@
 
 - (void)testSubstringWithoutLength
 {
-    NSString *code = @"$a = \"0123456789ABCDEFG\";"
+    NSString *code = @"int main() { $a = \"0123456789ABCDEFG\";"
     @"$b = substr($a,3);"
-    @"return $b;";
+    @"return $b;}";
     UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
     [s compileSource];
     UMDiscreteValue *result = [s runScriptWithEnvironment:env];

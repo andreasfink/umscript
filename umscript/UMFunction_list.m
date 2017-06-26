@@ -23,23 +23,24 @@
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
+    if(self)
+    {
         self.name = @"list";
         [env log:self.name];
     }
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)xparams environment:(UMEnvironment *)env
 {
     env.returnValue = nil;
     
     NSMutableDictionary *labelsDict = [[NSMutableDictionary alloc]init];
     NSUInteger i=0;
-    NSUInteger n=[params count];
+    NSUInteger n=[xparams count];
     for(i=0;i<n;i++)
     {
-        UMTerm *term  = [params objectAtIndex:i];
+        UMTerm *term  = [xparams objectAtIndex:i];
         if(term.label)
         {
             [labelsDict setObject:[NSNumber numberWithInteger:i] forKey:term.label];
@@ -48,6 +49,7 @@
     
     if(env.jumpTo != NULL) /* a block of a switch statement where we are being jumped into */
     {
+        NSString *jumpLabelString = env.jumpTo;
         NSNumber *goTo = [labelsDict objectForKey:env.jumpTo];
         if(goTo != NULL)
         {
@@ -77,7 +79,7 @@
         {
             break;
         }
-        UMTerm *term  = [params objectAtIndex:i];
+        UMTerm *term  = [xparams objectAtIndex:i];
         
         env.jumpTo = NULL;
         env.returnCalled = NO;

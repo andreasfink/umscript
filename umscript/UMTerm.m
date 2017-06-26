@@ -11,6 +11,7 @@
 #import "UMFunctionMacros.h"
 #import "NSNumber+UMScript.h"
 #import "UMEnvironment.h"
+#import "NSString+UMScript.h"
 
 @implementation UMTerm
 
@@ -440,6 +441,19 @@
         }
         case UMTermType_functionCall:
         {
+#if 1
+            NSMutableString *s = [NSMutableString stringWithFormat:@"%@(",_function.name];
+            for(NSInteger i=0;i<_param.count;i++)
+            {
+                if(i>0)
+                {
+                    [s appendString:@","];
+                }
+                [s appendString:((UMTerm *)_param[i]).logDescription];
+            }
+            [s appendString:@")"];
+            NSLog(@"Evaluating %@",s);
+#endif
             returnvalue = [_function evaluateWithParams:_param environment:xenv];
             break;
         }
@@ -454,7 +468,7 @@
         }
         case UMTermType_token:
         {
-            returnvalue = [UMDiscreteValue discreteString:_identifier];
+            returnvalue = [_identifier discreteValue];
             break;
         }
         default:
@@ -496,7 +510,16 @@
 
 - (id)initWithIdentifier:(NSString *)ident withEnvironment:(UMEnvironment *)e
 {
-    self = [super init];
+    if([ident hasPrefix:@"$"])
+    {
+        return [self initWithVariableName:ident  withEnvironment:e];
+    }
+    if([ident hasPrefix:@"%"])
+    {
+        return [self initWithFieldName:ident  withEnvironment:e];
+    }
+    
+	self = [super init];
     if(self)
     {
         _type = UMTermType_identifier;
@@ -1152,8 +1175,6 @@
     }
 }
 
-
-
 + (UMTerm *)listWithStatement:(UMTerm *)statement withEnvironment:(UMEnvironment *)cenv
 {
     UMFunction *func = [[UMFunction_list alloc]initWithEnvironment:cenv];
@@ -1217,9 +1238,9 @@
 
 + (UMTerm *)functionDefinitionWithName:(UMTerm *)name
                             statements:(UMTerm *)statements
-                           environment:(UMEnvironment *)env1
+                           environment:(UMEnvironment *)context
 {
-    return [[UMTerm alloc]initWithfunctionDefinitionName:name statements:statements environment:env1];
+    return [[UMTerm alloc]initWithfunctionDefinitionName:name statements:statements environment:context];
 }
 
 - (UMTerm *)initWithfunctionDefinitionName:(UMTerm *)name
@@ -1235,12 +1256,201 @@
     return self;
 }
 
-- (UMTerm *)functionCallWithArguments:(UMTerm *)list environment:(UMEnvironment *)env1;
+- (UMTerm *)functionCallWithArguments:(UMTerm *)list environment:(UMEnvironment *)context;
 {
+    UMFunction *f = NULL;
+    NSString *name = _identifier;
+    if([name isEqualTo:[UMFunction_add functionName]])
+    {
+        f = [[UMFunction_add alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_sub functionName]])
+    {
+        f = [[UMFunction_sub alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_mul functionName]])
+    {
+        f = [[UMFunction_mul alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_div functionName]])
+    {
+        f = [[UMFunction_div alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_dot functionName]])
+    {
+        f = [[UMFunction_dot alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_modulo functionName]])
+    {
+        f = [[UMFunction_modulo alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_if functionName]])
+    {
+        f = [[UMFunction_if alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_not functionName]])
+    {
+        f = [[UMFunction_not alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_and functionName]])
+    {
+        f = [[UMFunction_and alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_or functionName]])
+    {
+        f = [[UMFunction_or alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_xor functionName]])
+    {
+        f = [[UMFunction_xor alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_bit_not functionName]])
+    {
+        f = [[UMFunction_bit_not alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_bit_and functionName]])
+    {
+        f = [[UMFunction_bit_and alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_bit_or functionName]])
+    {
+        f = [[UMFunction_bit_or alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_bit_xor functionName]])
+    {
+        f = [[UMFunction_bit_xor alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_bit_shiftleft functionName]])
+    {
+        f = [[UMFunction_bit_shiftleft alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_bit_shiftright functionName]])
+    {
+        f = [[UMFunction_bit_shiftright alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_equal functionName]])
+    {
+        f = [[UMFunction_equal alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_notequal functionName]])
+    {
+        f = [[UMFunction_notequal alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_greaterthan functionName]])
+    {
+        f = [[UMFunction_greaterthan alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_greaterorequal functionName]])
+    {
+        f = [[UMFunction_greaterorequal alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_lessthan functionName]])
+    {
+        f = [[UMFunction_lessthan alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_lessorequal functionName]])
+    {
+        f = [[UMFunction_lessorequal alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_startswith functionName]])
+    {
+        f = [[UMFunction_startswith alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_endswith functionName]])
+    {
+        f = [[UMFunction_endswith alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_setvar functionName]])
+    {
+        f = [[UMFunction_setvar alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_setfield functionName]])
+    {
+        f = [[UMFunction_setfield alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_getvar functionName]])
+    {
+        f = [[UMFunction_getvar alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_getfield functionName]])
+    {
+        f = [[UMFunction_getfield alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_block functionName]])
+    {
+        f = [[UMFunction_block alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_return functionName]])
+    {
+        f = [[UMFunction_return alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_assign functionName]])
+    {
+        f = [[UMFunction_assign alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_while functionName]])
+    {
+        f = [[UMFunction_while alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_dowhile functionName]])
+    {
+        f = [[UMFunction_dowhile alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_for functionName]])
+    {
+        f = [[UMFunction_for alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_preincrease functionName]])
+    {
+        f = [[UMFunction_preincrease alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_predecrease functionName]])
+    {
+        f = [[UMFunction_predecrease alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_postincrease functionName]])
+    {
+        f = [[UMFunction_postincrease alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_postdecrease functionName]])
+    {
+        f = [[UMFunction_postdecrease alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_switch functionName]])
+    {
+        f = [[UMFunction_switch alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_print functionName]])
+    {
+        f = [[UMFunction_print alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_goto functionName]])
+    {
+        f = [[UMFunction_goto alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_continue functionName]])
+    {
+        f = [[UMFunction_continue alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_break functionName]])
+    {
+        f = [[UMFunction_break alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_substr functionName]])
+    {
+        f = [[UMFunction_substr alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_list functionName]])
+    {
+        f = [[UMFunction_list alloc]initWithEnvironment:context];
+    }
+
     if(_type != UMTermType_identifier)
     {
-        return [UMTerm termWithNullWithEnvironment:env1];
+        return [UMTerm termWithNullWithEnvironment:context];
     }
+    _type = UMTermType_functionCall;
+
     NSArray *params;
     if(list == NULL)
     {
@@ -1257,13 +1467,15 @@
         params = @[list];
     }
 
-    NSString *name=_identifier;
-    UMFunction *f = [env1 functionByName:name];
+    if(f==NULL)
+    {
+        f = [context functionByName:name];
+    }
     if(f == NULL)
     {
-        return [UMTerm termWithNullWithEnvironment:env1];
+        return [UMTerm termWithNullWithEnvironment:context];
     }
-    f.cenv = env1;
+    f.cenv = context;
     
     UMTerm *result =  [[UMTerm alloc] initWithFunction:f andParams:params withEnvironment:_cenv];
     return result;

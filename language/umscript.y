@@ -1436,7 +1436,7 @@ statement_list
     | statement_list statement
         {
             UMTerm *statement1 = UMGET($1);
-            UMTerm *statement2 = UMGET($1);
+            UMTerm *statement2 = UMGET($2);
             UMTerm *statement_list = [statement1 listAppendStatement:statement2];
             UMSET($$,statement_list);
             UMLog("$$",$$);

@@ -23,7 +23,8 @@
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
+    if(self)
+    {
         self.name = @"switch";
         [env log:self.name];
     }
@@ -39,8 +40,8 @@
     UMTerm *switchTerm = params[0];
     UMTerm *switchBlock = params[1];
     
-    UMDiscreteValue *switchValue = [switchTerm evaluateWithEnvironment:env];
-    env.jumpTo = switchValue.labelValue;
+    UMDiscreteValue *switchValue = [[switchTerm evaluateWithEnvironment:env]convertToString];
+    env.jumpTo = switchValue.stringValue;
     [switchBlock evaluateWithEnvironment:env];
     env.breakCalled = NO;
     return [UMDiscreteValue discreteNull];

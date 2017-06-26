@@ -156,6 +156,12 @@
 		A6B5CE9119301FEB00F02FCA /* UMFunction_break.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE8F19301FEB00F02FCA /* UMFunction_break.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6B5CE9219301FEB00F02FCA /* UMFunction_break.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B5CE9019301FEB00F02FCA /* UMFunction_break.m */; };
 		A6C4E0EA1945237D0090FC94 /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C4E0E91945237D0090FC94 /* ulib.framework */; };
+		A6E69D8F1F00DF02007C203A /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C4E0E91945237D0090FC94 /* ulib.framework */; };
+		A6E69D901F00DF0C007C203A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A672F731195C2D040090FC94 /* Foundation.framework */; };
+		A6E69D911F00DF0D007C203A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A672F731195C2D040090FC94 /* Foundation.framework */; };
+		A6E69D941F00F1C5007C203A /* NSString+UMScript.h in Headers */ = {isa = PBXBuildFile; fileRef = A6E69D921F00F1C4007C203A /* NSString+UMScript.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6E69D951F00F1C5007C203A /* NSString+UMScript.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E69D931F00F1C4007C203A /* NSString+UMScript.m */; };
+		A6E69D961F00F2E8007C203A /* NSString+UMScript.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E69D931F00F1C4007C203A /* NSString+UMScript.m */; };
 		A6ECC2F7192CE7350090FC94 /* _generated_umscript.y.h in Headers */ = {isa = PBXBuildFile; fileRef = A6ECC2F6192CE7350090FC94 /* _generated_umscript.y.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6EEDB691929DD1F0090FC94 /* umscript.yl.h in Headers */ = {isa = PBXBuildFile; fileRef = A6EEDB681929DD1F0090FC94 /* umscript.yl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6EEDB6C1929DE800090FC94 /* _generated_umscript.l.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EEDB6A1929DE800090FC94 /* _generated_umscript.l.m */; };
@@ -330,6 +336,8 @@
 		A6B5CE8F19301FEB00F02FCA /* UMFunction_break.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_break.h; sourceTree = "<group>"; };
 		A6B5CE9019301FEB00F02FCA /* UMFunction_break.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_break.m; sourceTree = "<group>"; };
 		A6C4E0E91945237D0090FC94 /* ulib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ulib.framework; path = /Library/Frameworks/ulib.framework; sourceTree = "<absolute>"; };
+		A6E69D921F00F1C4007C203A /* NSString+UMScript.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+UMScript.h"; sourceTree = "<group>"; };
+		A6E69D931F00F1C4007C203A /* NSString+UMScript.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+UMScript.m"; sourceTree = "<group>"; };
 		A6ECC2F6192CE7350090FC94 /* _generated_umscript.y.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _generated_umscript.y.h; path = language/_generated_umscript.y.h; sourceTree = "<group>"; };
 		A6EEDB681929DD1F0090FC94 /* umscript.yl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = umscript.yl.h; path = language/umscript.yl.h; sourceTree = "<group>"; };
 		A6EEDB6A1929DE800090FC94 /* _generated_umscript.l.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = _generated_umscript.l.m; path = language/_generated_umscript.l.m; sourceTree = "<group>"; };
@@ -351,6 +359,7 @@
 				A6C4E0EA1945237D0090FC94 /* ulib.framework in Frameworks */,
 				A6A3AA0719297741007FFC7B /* Cocoa.framework in Frameworks */,
 				A6A04AB71EE6D4EE007C203A /* ulibasn1.framework in Frameworks */,
+				A6E69D901F00DF0C007C203A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,8 +367,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6E69D911F00DF0D007C203A /* Foundation.framework in Frameworks */,
 				A6A3AA2019297741007FFC7B /* umscript.framework in Frameworks */,
 				A6A3AA1D19297741007FFC7B /* Cocoa.framework in Frameworks */,
+				A6E69D8F1F00DF02007C203A /* ulib.framework in Frameworks */,
 				A6A3AA1C19297741007FFC7B /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,6 +449,8 @@
 			children = (
 				A6835B9519297AE30090FC94 /* NSNumber+UMScript.h */,
 				A6835B9619297AE30090FC94 /* NSNumber+UMScript.m */,
+				A6E69D921F00F1C4007C203A /* NSString+UMScript.h */,
+				A6E69D931F00F1C4007C203A /* NSString+UMScript.m */,
 				A6A3AA0D19297741007FFC7B /* Supporting Files */,
 				A6A04ABA1EE6FE5F007C203A /* UMDiscreteValue.asn */,
 				A6835B9719297AE30090FC94 /* UMDiscreteValue.h */,
@@ -654,6 +667,7 @@
 				A63DD836192C84E20090FC94 /* UMFunction_longlong.h in Headers */,
 				A6916D14192BEE6200F6BFF4 /* UMFunction_postdecrease.h in Headers */,
 				A63DD82E192C84CE0090FC94 /* UMFunction_int.h in Headers */,
+				A6E69D941F00F1C5007C203A /* NSString+UMScript.h in Headers */,
 				A6916D0F192BEE5500F6BFF4 /* UMFunction_postincrease.h in Headers */,
 				A63DD83A192C84EB0090FC94 /* UMFunction_double.h in Headers */,
 				A6B5CE6E192D4D0500F02FCA /* bison_definitions.h in Headers */,
@@ -739,9 +753,6 @@
 					A6A3AA0219297741007FFC7B = {
 						DevelopmentTeam = 2GSNWPNR77;
 						ProvisioningStyle = Automatic;
-					};
-					A6A3AA1919297741007FFC7B = {
-						TestTargetID = A6A3AA0219297741007FFC7B;
 					};
 				};
 			};
@@ -900,6 +911,7 @@
 				A6835C2519297AE30090FC94 /* UMFunction_startswith.m in Sources */,
 				A6835BFB19297AE30090FC94 /* UMFunction_endswith.m in Sources */,
 				A6835C0719297AE30090FC94 /* UMFunction_lessthan.m in Sources */,
+				A6E69D951F00F1C5007C203A /* NSString+UMScript.m in Sources */,
 				A6835C0D19297AE30090FC94 /* UMFunction_or.m in Sources */,
 				A62B98F21946A8A6005B48BC /* UMFunction_substr.m in Sources */,
 				A612C2151EEEDA260096C70F /* UMFunction_sizeOfType.m in Sources */,
@@ -920,6 +932,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6E69D961F00F2E8007C203A /* NSString+UMScript.m in Sources */,
 				A6A3AA2819297741007FFC7B /* umscriptTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1137,11 +1150,11 @@
 		A6A3AA2F19297741007FFC7B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/umscript.framework/Versions/A/umscript";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
@@ -1152,7 +1165,6 @@
 				INFOPLIST_FILE = "umscriptTests/umscriptTests-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.messagemover.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -1160,18 +1172,17 @@
 		A6A3AA3019297741007FFC7B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/umscript.framework/Versions/A/umscript";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
 				INFOPLIST_FILE = "umscriptTests/umscriptTests-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.messagemover.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
@@ -1186,7 +1197,7 @@
 				A6A3AA2A19297741007FFC7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		A6A3AA2B19297741007FFC7B /* Build configuration list for PBXNativeTarget "umscript" */ = {
 			isa = XCConfigurationList;
@@ -1195,7 +1206,7 @@
 				A6A3AA2D19297741007FFC7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		A6A3AA2E19297741007FFC7B /* Build configuration list for PBXNativeTarget "umscriptTests" */ = {
 			isa = XCConfigurationList;
@@ -1204,7 +1215,7 @@
 				A6A3AA3019297741007FFC7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

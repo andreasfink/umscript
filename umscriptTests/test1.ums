@@ -1,8 +1,13 @@
 /* some comment */
 
-do_math($a a)
+int main()
 {
-  $x = $a * 5 + 3;
+    return do_math(10);
 }
 
-do_math(10);
+int do_math(int a)
+{
+    int x = a * 5 + 3;
+    return x;
+}
+

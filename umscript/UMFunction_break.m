@@ -12,12 +12,12 @@
 
 + (NSString *)functionName
 {
-    return @"bit_break";
+    return @"break";
 }
 
 - (NSString *)functionName
 {
-    return @"bit_break";
+    return @"break";
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
