@@ -47,7 +47,6 @@ typedef enum UMTermType
 @property (readwrite,strong) NSString        *varname;
 @property (readwrite,strong) NSString        *identifier;
 @property (readwrite,strong) UMFunction      *function;
-@property (readwrite,strong) NSString        *functionName;
 @property (readwrite,assign) int             token;
 @property (readwrite,strong) NSString        *label;
 //@property (readwrite,strong) NSMutableArray  *array;

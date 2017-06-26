@@ -402,7 +402,7 @@
         case UMTermType_functionCall:
             dict[@"function-call"] = _function.name;
         case UMTermType_functionDefinition:
-            dict[@"function-definition"] = _functionName;
+            dict[@"function-definition"] = _function.name;
         case UMTermType_identifier:
             dict[@"identifier"] = _identifier;
         case UMTermType_nullterm:
@@ -866,11 +866,11 @@
             [s appendFormat:@"variable: %@\r",_varname];
             break;
         case UMTermType_functionCall:
-            [s appendFormat:@"function: %@\r",[_function name]];
+            [s appendFormat:@"function: %@\r",_function.name];
             [s appendFormat:@" parameter.count=%d\r", (int)_param.count ];
             break;
         case UMTermType_functionDefinition:
-            [s appendFormat:@"functionDefinition: %@\r",_functionName];
+            [s appendFormat:@"functionDefinition: %@\r",_function.name];
             /* FIXME */
             break;
         case UMTermType_identifier:
@@ -1350,7 +1350,7 @@
             return [_function name];
             break;
         case UMTermType_functionDefinition:
-            return [NSString stringWithFormat:@"_%@()",_functionName];
+            return [NSString stringWithFormat:@"_%@()",_function.name];
             break;
         case UMTermType_identifier:
             return _identifier;
@@ -1436,7 +1436,7 @@
         case UMTermType_functionCall:
             return [NSString stringWithFormat:@"(functionCall)%@",_function.name];
         case UMTermType_functionDefinition:
-            return [NSString stringWithFormat:@"(functionDefinition)%@",_functionName];
+            return [NSString stringWithFormat:@"(functionDefinition)%@",_function.name];
         case UMTermType_identifier:
             return [NSString stringWithFormat:@"(identifier)%@",_identifier];
         case UMTermType_nullterm:
