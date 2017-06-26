@@ -44,6 +44,8 @@
 
 @property (readwrite,strong) UMSynchronizedSortedDictionary *functionDictionary;
 
+- (UMEnvironment *)initWithTemplate:(UMEnvironment *)template;
+
 - (void)identAdd;
 - (void)identRemove;
         

@@ -96,6 +96,21 @@
     return self;
 }
 
+- (UMEnvironment *)initWithTemplate:(UMEnvironment *)template
+{
+    self = [super init];
+    if(self)
+    {
+
+        environmentLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
+        identPrefix = @"";
+        _functionDictionary  = [template.functionDictionary copy];
+        _variables           = [[UMSynchronizedSortedDictionary alloc]init];
+        _fields              = [[UMSynchronizedSortedDictionary alloc]init];
+    }
+    return self;
+}
+
 -(NSString *)description
 {
     NSMutableString *s = [[NSMutableString alloc]init];

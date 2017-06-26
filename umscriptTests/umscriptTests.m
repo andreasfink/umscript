@@ -409,6 +409,36 @@
 }
 
 
+- (void)testHexa1
+{
+    NSString *code = @"int main() { return 0x1C; }";
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    [s compileSource];
+    UMDiscreteValue *result = [s runScriptWithEnvironment:env];
+    int i = result.intValue;
 
+    XCTAssertTrue(i== 0x1C,@"0x1C comes back as 0x%02X",i);
+}
 
+- (void)testOcta1
+{
+    NSString *code = @"int main() { return 0127; }";
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    [s compileSource];
+    UMDiscreteValue *result = [s runScriptWithEnvironment:env];
+    int i = result.intValue;
+
+    XCTAssertTrue(i== 87,@"0127 comes back as %d instead of 87",i);
+}
+
+- (void)testQuotedString
+{
+    NSString *code = @"int main() { return \"abc\"; }";
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    [s compileSource];
+    UMDiscreteValue *result = [s runScriptWithEnvironment:env];
+    NSString *str = result.stringValue;
+
+    XCTAssertTrue([str isEqualToString:@"abc"],@"\"abc\" comes back as %@",str);
+}
 @end
