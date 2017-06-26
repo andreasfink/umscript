@@ -70,6 +70,7 @@ static inline  id XCFBridgingRelease(void *X)
 
 static void UMLog(const char *name, glueterm x)
 {
+    #if 0
     if(x.value)
     {
         UMTerm *t = (__bridge UMTerm *)(x.value);
@@ -79,6 +80,7 @@ static void UMLog(const char *name, glueterm x)
     {
         NSLog(@"%s: undefined",name);
     }
+    #endif
 }
 
 #define UMLOG1(a)       { UMLog("$1",a); }

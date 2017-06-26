@@ -49,7 +49,6 @@
     
     if(env.jumpTo != NULL) /* a block of a switch statement where we are being jumped into */
     {
-        NSString *jumpLabelString = env.jumpTo;
         NSNumber *goTo = [labelsDict objectForKey:env.jumpTo];
         if(goTo != NULL)
         {

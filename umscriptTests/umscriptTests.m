@@ -16,6 +16,7 @@
 @interface umscriptTests : XCTestCase
 {
     UMEnvironment *env;
+    BOOL filePathSet;
 }
 @end
 
@@ -25,7 +26,17 @@
 {
     [super setUp];
     env = [[UMEnvironment alloc]init];
-    
+
+    NSString* path = [[[NSProcessInfo processInfo]environment]objectForKey:@"SRCROOT"];
+    //NSLog(@"SRCROOT=%@",path);
+    if(path)
+    {
+        if(0==chdir(path.UTF8String))
+        {
+            filePathSet = YES;
+        }
+    }
+
 }
 
 - (void)tearDown
@@ -165,9 +176,15 @@
 
 - (void)testCompileScript1
 {
+    if(filePathSet)
+    {
+    char buffer[256];
+    NSLog(@"PWD=%s",getcwd(buffer, sizeof(buffer)));
+
     UMScriptDocument *s = [[UMScriptDocument alloc]initWithFilename:@"umscriptTests/test1.ums"];
     [s compileSource];
     [s runScriptWithEnvironment:env];
+    }
 }
 
 - (void)testAddCompiled

@@ -42,8 +42,6 @@ IS            (u|U|l|L)*
 static void yyunput (int c, register char * yy_bp , yyscan_t yyscanner);
 static void comment(yyscan_t yyscanner);
 static void count(yyscan_t yyscanner);
-static int check_type(yyscan_t yyscanner);
-
 
 @class UMScriptCompilerEnvironment;
 extern UMScriptCompilerEnvironment *cenv;
@@ -249,21 +247,3 @@ static void count(yyscan_t yyscanner)
     ECHO;
 }
 
-
-static int check_type(yyscan_t yyscanner)
-{
-    /*
-     * pseudo code --- this is what it should check
-     *
-     *    if (yytext == type_name)
-     *        return(TYPE_NAME);
-     *
-     *    return(IDENTIFIER);
-     */
-    
-    /*
-     *    it actually will only return IDENTIFIER
-     */
-    
-    return(IDENTIFIER);
-}

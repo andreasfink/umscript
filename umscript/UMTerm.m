@@ -441,7 +441,7 @@
         }
         case UMTermType_functionCall:
         {
-#if 1
+#if 0
             NSMutableString *s = [NSMutableString stringWithFormat:@"%@(",_function.name];
             for(NSInteger i=0;i<_param.count;i++)
             {
