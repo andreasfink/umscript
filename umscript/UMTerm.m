@@ -421,22 +421,27 @@
         case UMTermType_identifier:
         {
             returnvalue = [UMDiscreteValue discreteString:_identifier];
+            break;
         }
         case UMTermType_discrete:
         {
             returnvalue = _discrete;
+            break;
         }
         case UMTermType_variable:
         {
             returnvalue = [xenv variableForKey:_varname];
+            break;
         }
         case UMTermType_field:
         {
             returnvalue = [xenv fieldForKey:_fieldname];
+            break;
         }
         case UMTermType_functionCall:
         {
             returnvalue = [_function evaluateWithParams:_param environment:xenv];
+            break;
         }
         case UMTermType_functionDefinition:
         {
@@ -445,14 +450,17 @@
         case UMTermType_nullterm:
         {
             returnvalue = [UMDiscreteValue discreteNull];
+            break;
         }
         case UMTermType_token:
         {
             returnvalue = [UMDiscreteValue discreteString:_identifier];
+            break;
         }
         default:
         {
             returnvalue = [UMDiscreteValue discreteNull];
+            break;
         }
     }
     if(xenv.trace)
