@@ -28,7 +28,7 @@
 @property (readwrite, strong)   UMTerm      *compiledCode;
 @property (readwrite,strong)    NSString    *parserLog;
 @property (readwrite,strong)    NSString    *lexerLog;
-
+@property (readonly, assign,atomic) BOOL    isCompiled;
 
 - (UMDiscreteValue *)runScriptWithEnvironment:(UMEnvironment *)env;
 - (NSString *)compileSource;
