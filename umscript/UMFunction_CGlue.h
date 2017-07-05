@@ -38,7 +38,7 @@ CFDiscreteValueType discrete_get_type(CFDiscreteValueRef d);
 
 /* get a specific type. Note: it does automatically typeconvert for you */
 int discrete_value_get_integer(CFDiscreteValueRef d);
-BOOL discrete_value_get_bool(CFDiscreteValueRef d);
+int discrete_value_get_bool(CFDiscreteValueRef d);
 long long discrete_value_get_longlong(CFDiscreteValueRef d);
 void discrete_value_get_string(CFDiscreteValueRef d, char *s, size_t maxlen);
 

@@ -99,7 +99,7 @@ int discrete_get_integer(CFDiscreteValueRef d)
     return dv.intValue;
 }
 
-BOOL discrete_get_bool(CFDiscreteValueRef d)
+int discrete_get_bool(CFDiscreteValueRef d)
 {
     UMDiscreteValue *dv = (__bridge UMDiscreteValue *)d;
     return dv.boolValue;
