@@ -121,7 +121,7 @@
         len = len - 2;
     }
 
-    if((onlyDigits==YES) && (hasLeadingZero==NO) && (endsWithLL==NO))
+    if((onlyDigits==YES) && (hasLeadingZero==NO) && (hasDot = NO) && (endsWithLL==NO))
     {
         if(endsWithLL)
         {
@@ -132,7 +132,7 @@
             return [UMDiscreteValue discreteInt:atoi((const char *)digits)];
         }
     }
-    if((onlyOcto==YES) && (hasLeadingZero == YES))
+    if((onlyOcto==YES) && (hasLeadingZero == YES) && (hasDot = NO))
     {
         long long value = 0;
         for(size_t i=1;i<len;i++)
@@ -175,6 +175,12 @@
         {
             return [UMDiscreteValue discreteInt:(int)value];
         }
+    }
+    if(onlyDouble && hasDot)
+    {
+        double d = atof((const char *)digits);
+        return [UMDiscreteValue discreteDouble:d];
+
     }
     return [UMDiscreteValue discreteNull];
 }

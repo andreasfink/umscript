@@ -460,6 +460,7 @@
         case UMTermType_functionDefinition:
         {
             returnvalue = [UMDiscreteValue discreteNull];
+            break;
         }
         case UMTermType_nullterm:
         {

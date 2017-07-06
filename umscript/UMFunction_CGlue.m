@@ -12,28 +12,28 @@
 #import "UMEnvironment.h"
 #include <string.h>
 
-CFDiscreteValueRef discrete_value_null(void)
+CFDiscreteValueRef create_discrete_value_null(void)
 {
     return (__bridge_retained CFDiscreteValueRef)[UMDiscreteValue discreteNull];
 }
 
-CFDiscreteValueRef discrete_value_bool(int b)
+CFDiscreteValueRef create_discrete_value_bool(int b)
 {
     return (__bridge_retained CFDiscreteValueRef)[UMDiscreteValue discreteBool:b];
 }
 
-CFDiscreteValueRef discrete_value_int(int i)
+CFDiscreteValueRef create_discrete_value_int(int i)
 {
     return (__bridge_retained CFDiscreteValueRef)[UMDiscreteValue discreteInt:i];
 }
 
 
-CFDiscreteValueRef discrete_value_longlong(long long ll)
+CFDiscreteValueRef create_discrete_value_longlong(long long ll)
 {
     return (__bridge_retained CFDiscreteValueRef)[UMDiscreteValue discreteLongLong:ll];
 }
 
-CFDiscreteValueRef discrete_value_cstring(const char *s)
+CFDiscreteValueRef create_discrete_value_cstring(const char *s)
 {
     return (__bridge_retained CFDiscreteValueRef)[UMDiscreteValue discreteString:@(s)];
 }
@@ -44,7 +44,7 @@ void discrete_value_release(CFDiscreteValueRef discreteVal)
 #pragma unused(d)
 }
 
-CFDiscreteValueRef term_evaluate_with_environment(CFTermRef xterm, CFEnvironmentRef xenv)
+CFDiscreteValueRef create_term_evaluate_with_environment(CFTermRef xterm, CFEnvironmentRef xenv)
 {
     UMTerm *term = (__bridge UMTerm *)xterm;
     UMEnvironment *env = (__bridge UMEnvironment *)xenv;
@@ -52,7 +52,7 @@ CFDiscreteValueRef term_evaluate_with_environment(CFTermRef xterm, CFEnvironment
     return (__bridge_retained CFDiscreteValueRef)d;
 }
 
-CFTermRef term_get(CFArrayRef params,int pos)
+CFTermRef create_term_get(CFArrayRef params,int pos)
 {
     NSArray *a = (__bridge NSArray *)params;
     if((pos <0) || (pos >= a.count))
