@@ -54,7 +54,7 @@ CFDiscreteValueRef create_term_evaluate_with_environment(CFTermRef xterm, CFEnvi
 
 CFTermRef create_term_get(CFArrayRef params,int pos)
 {
-    NSArray *a = (__bridge NSArray *)params;
+    NSArray *a = (NSArray *)params;
     if((pos <0) || (pos >= a.count))
     {
         return NULL;
