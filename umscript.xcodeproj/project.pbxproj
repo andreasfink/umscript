@@ -41,7 +41,6 @@
 		A655CB6C1F0A46B0007C0B5C /* UMFunction_external.h in Headers */ = {isa = PBXBuildFile; fileRef = A655CB6A1F0A46B0007C0B5C /* UMFunction_external.h */; };
 		A655CB6D1F0A46B0007C0B5C /* UMFunction_external.m in Sources */ = {isa = PBXBuildFile; fileRef = A655CB6B1F0A46B0007C0B5C /* UMFunction_external.m */; };
 		A655CB701F0A49E7007C0B5C /* UMFunction_CGlue.h in Headers */ = {isa = PBXBuildFile; fileRef = A655CB6E1F0A49E7007C0B5C /* UMFunction_CGlue.h */; };
-		A655CB711F0A49E7007C0B5C /* UMFunction_CGlue.m in Sources */ = {isa = PBXBuildFile; fileRef = A655CB6F1F0A49E7007C0B5C /* UMFunction_CGlue.m */; };
 		A65D34B5192B7BE60090FC94 /* umscript.yl.m in Sources */ = {isa = PBXBuildFile; fileRef = A65D34B4192B7BE60090FC94 /* umscript.yl.m */; };
 		A65D34C0192BAA8A0090FC94 /* UMFunction_greaterorequal.m in Sources */ = {isa = PBXBuildFile; fileRef = A65D34BE192BAA8A0090FC94 /* UMFunction_greaterorequal.m */; };
 		A65D34C4192BAAA40090FC94 /* UMFunction_lessorequal.h in Headers */ = {isa = PBXBuildFile; fileRef = A65D34C2192BAAA40090FC94 /* UMFunction_lessorequal.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -218,7 +217,6 @@
 		A655CB6A1F0A46B0007C0B5C /* UMFunction_external.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_external.h; sourceTree = "<group>"; };
 		A655CB6B1F0A46B0007C0B5C /* UMFunction_external.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_external.m; sourceTree = "<group>"; };
 		A655CB6E1F0A49E7007C0B5C /* UMFunction_CGlue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_CGlue.h; sourceTree = "<group>"; };
-		A655CB6F1F0A49E7007C0B5C /* UMFunction_CGlue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_CGlue.m; sourceTree = "<group>"; };
 		A65D34B4192B7BE60090FC94 /* umscript.yl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = umscript.yl.m; path = language/umscript.yl.m; sourceTree = "<group>"; };
 		A65D34BE192BAA8A0090FC94 /* UMFunction_greaterorequal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_greaterorequal.m; sourceTree = "<group>"; };
 		A65D34C2192BAAA40090FC94 /* UMFunction_lessorequal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_lessorequal.h; sourceTree = "<group>"; };
@@ -470,7 +468,6 @@
 				A655CB6A1F0A46B0007C0B5C /* UMFunction_external.h */,
 				A655CB6B1F0A46B0007C0B5C /* UMFunction_external.m */,
 				A655CB6E1F0A49E7007C0B5C /* UMFunction_CGlue.h */,
-				A655CB6F1F0A49E7007C0B5C /* UMFunction_CGlue.m */,
 				A612C20E1EEEDA170096C70F /* UMFunction_sizeOfVar.h */,
 				A612C20F1EEEDA170096C70F /* UMFunction_sizeOfVar.m */,
 				A612C2121EEEDA260096C70F /* UMFunction_sizeOfType.h */,
@@ -905,7 +902,6 @@
 				A6835C1919297AE30090FC94 /* UMFunction_modulo.m in Sources */,
 				A6835CA119298C110090FC94 /* UMScriptCompilerEnvironment.m in Sources */,
 				A612C2111EEEDA170096C70F /* UMFunction_sizeOfVar.m in Sources */,
-				A655CB711F0A49E7007C0B5C /* UMFunction_CGlue.m in Sources */,
 				A6835C0B19297AE30090FC94 /* UMFunction_not.m in Sources */,
 				A6835BE619297AE30090FC94 /* NSNumber+UMScript.m in Sources */,
 				A6835C3419297AE30090FC94 /* UMTerm.m in Sources */,

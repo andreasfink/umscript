@@ -27,7 +27,8 @@ typedef UMScriptCompilerEnvironment *YY_EXTRA_TYPE;
 %option noyywrap
 
 D            [0-9]
-L            [a-zA-Z_\$]
+FIRST        [a-zA-Z_\$]
+L            [a-zA-Z_]
 H            [a-fA-F0-9]
 E            [Ee][+-]?{D}+
 FS            (f|F|l|L)
@@ -119,7 +120,7 @@ static inline  id XCFBridgingRelease(void *X)
 "volatile"      { count(yyscanner); UMTOKEN(VOLATILE); }
 "while"         { count(yyscanner); UMTOKEN(WHILE);    }
 
-{L}({L}|{D})*   { count(yyscanner); UMTOKEN(IDENTIFIER); }
+{FIRST}({L}|{D})*   { count(yyscanner); UMTOKEN(IDENTIFIER); }
 
 0[xX]{H}+{IS}?      { count(yyscanner); UMTOKEN(CONSTANT); }
 0{D}+{IS}?          { count(yyscanner); UMTOKEN(CONSTANT); }
