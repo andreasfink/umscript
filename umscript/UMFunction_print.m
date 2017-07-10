@@ -34,16 +34,11 @@
 {
     for (UMTerm *param in params)
     {
-        NSLog(@"%@",param);
+        UMDiscreteValue *d = [param evaluateWithEnvironment:env];
+        NSString *s = d.stringValue;
+        fprintf(stdout,"%s",s.UTF8String);
     }
-    UMTerm *currentTerm = params[0];
-    UMDiscreteValue *d = [currentTerm evaluateWithEnvironment:env];
-    
-    if(d.type == UMVALUE_DOUBLE)
-    {
-        return d;
-    }
-    return [UMDiscreteValue discreteDouble:d.doubleValue];
+    return [UMDiscreteValue discreteNull];
 }
 
 @end

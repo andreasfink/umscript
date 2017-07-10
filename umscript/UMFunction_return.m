@@ -36,7 +36,7 @@
     {
         return [UMDiscreteValue discreteNull];
     }
-    UMDiscreteValue *returnValue =[params[0] evaluateWithEnvironment:env];
+    UMDiscreteValue *returnValue = [params[0] evaluateWithEnvironment:env];
     env.returnValue =  returnValue;
     env.returnCalled = YES;
     return returnValue;

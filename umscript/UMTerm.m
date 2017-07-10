@@ -441,19 +441,6 @@
         }
         case UMTermType_functionCall:
         {
-#if 0
-            NSMutableString *s = [NSMutableString stringWithFormat:@"%@(",_function.name];
-            for(NSInteger i=0;i<_param.count;i++)
-            {
-                if(i>0)
-                {
-                    [s appendString:@","];
-                }
-                [s appendString:((UMTerm *)_param[i]).logDescription];
-            }
-            [s appendString:@")"];
-            NSLog(@"Evaluating %@",s);
-#endif
             returnvalue = [_function evaluateWithParams:_param environment:xenv];
             break;
         }
@@ -519,8 +506,13 @@
     {
         return [self initWithFieldName:ident  withEnvironment:e];
     }
-    
-	self = [super init];
+
+    UMDiscreteValue *d = [ident discreteValue];
+    if(d)
+    {
+        return [self initWithDiscreteValue:d withEnvironment:e];
+    }
+    self = [super init];
     if(self)
     {
         _type = UMTermType_identifier;
@@ -774,6 +766,14 @@
     UMTerm *term = [[UMTerm alloc]initWithFieldName:fieldNameTerm.identifier withEnvironment:e];
     return term;
 }
+
++ (id)termWithConstantFromTag:(UMTerm *)stringTagTerm  withEnvironment:(UMEnvironment *)e
+{
+    UMDiscreteValue *d = [stringTagTerm.identifier discreteValue];
+    UMTerm *term = [[UMTerm alloc]initWithDiscreteValue:d withEnvironment:e];
+    return term;
+}
+
 
 + (id)termWithStringFromTag:(UMTerm *)stringTagTerm  withEnvironment:(UMEnvironment *)e
 {

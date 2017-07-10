@@ -28,7 +28,6 @@
     env = [[UMEnvironment alloc]init];
 
     NSString* path = [[[NSProcessInfo processInfo]environment]objectForKey:@"SRCROOT"];
-    //NSLog(@"SRCROOT=%@",path);
     if(path)
     {
         if(0==chdir(path.UTF8String))
@@ -179,7 +178,7 @@
     if(filePathSet)
     {
     char buffer[256];
-    NSLog(@"PWD=%s",getcwd(buffer, sizeof(buffer)));
+    //NSLog(@"PWD=%s",getcwd(buffer, sizeof(buffer)));
 
     UMScriptDocument *s = [[UMScriptDocument alloc]initWithFilename:@"umscriptTests/test1.ums"];
     [s compileSource];
@@ -329,7 +328,6 @@
     UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
     [s compileSource];
     UMDiscreteValue *result = [s runScriptWithEnvironment:env];
-    
     XCTAssertTrue(result.intValue==799,@"should be 799 but is %d",result.intValue);
 }
 

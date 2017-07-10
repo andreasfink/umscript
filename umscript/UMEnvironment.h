@@ -45,6 +45,7 @@
 @property (readwrite,strong) UMSynchronizedSortedDictionary *functionDictionary;
 
 - (UMEnvironment *)initWithTemplate:(UMEnvironment *)template;
+- (UMEnvironment *)initWithVarFile:(NSString *)varfile;
 
 - (void)identAdd;
 - (void)identRemove;

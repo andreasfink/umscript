@@ -111,6 +111,41 @@
     return self;
 }
 
+
+- (UMEnvironment *)initWithVarFile:(NSString *)varfile
+{
+    self = [super init];
+    if(self)
+    {
+
+        environmentLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
+
+        identPrefix = @"";
+        _functionDictionary  = [[UMSynchronizedSortedDictionary alloc]init];
+        _variables           = [[UMSynchronizedSortedDictionary alloc]init];
+        _fields              = [[UMSynchronizedSortedDictionary alloc]init];
+
+        NSError *error = NULL;
+        NSString *fileContent = [NSString stringWithContentsOfFile:varfile encoding:NSUTF8StringEncoding error:&error];
+        if(fileContent)
+        {
+            NSArray *lines = [fileContent componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+            for(NSString *line in lines)
+            {
+                NSArray *parts = [line componentsSeparatedByString:@"="];
+                if(parts.count == 2)
+                {
+                    NSString *var = [parts[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                    NSString *val = [parts[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                    _variables[var]=val;
+                }
+            }
+        }
+    }
+    return self;
+}
+
+
 -(NSString *)description
 {
     NSMutableString *s = [[NSMutableString alloc]init];

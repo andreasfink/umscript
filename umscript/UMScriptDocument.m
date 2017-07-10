@@ -32,6 +32,7 @@
                                                     @"sysmsg" : @"init failed",
                                                     @"func": @(__func__),
                                                     @"obj":self,
+                                                    @"err" : err
                                                     }
                     ]);
         }
@@ -93,7 +94,7 @@
 
     NSString *out = @"";
     NSString *err = @"";
-    NSLog(@"Compiling %@",_name);
+    //NSLog(@"Compiling %@",_name);
     _compiledCode = [compilerEnvironment compile:_sourceCode stdOut:&out stdErr:&err];
     if(_compiledCode)
     {

@@ -134,12 +134,16 @@ primary_expression
         };
     | CONSTANT
         {
-            UMASSIGN($$,$1);
+            UMTerm *tag = UMGET($1);
+            UMTerm *r = [UMTerm termWithConstantFromTag:tag withEnvironment:cenv];
+            UMSET($$,r);
             UMLog("$$",$$);
         };
     | STRING_LITERAL
         {
-            UMASSIGN($$,$1);
+            UMTerm *tag = UMGET($1);
+            UMTerm *r = [UMTerm termWithStringFromTag:tag withEnvironment:cenv];
+            UMSET($$,r);
             UMLog("$$",$$);
         };
     | '(' expression ')'

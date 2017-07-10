@@ -28,6 +28,8 @@ fprintf(stderr,"------------------------\n"); \
 fflush(stderr); \
 }
 
+void help(void);
+
 #ifdef USE_STARTER
 int umain(int argc,  const char * argv[]);
 #else
@@ -38,6 +40,14 @@ int main(int argc,  const char * argv[]);
 NSString *input_data_file_name = NULL;
 NSString *script_file_name = NULL;
 BOOL g_debug = NO;
+
+void help(void)
+{
+    fprintf(stderr,"umscriptexe syntax:\n");
+    fprintf(stderr," --input <filename>        the input variables (containing lines like $var=val)\n");
+    fprintf(stderr," --script <filename>       the script to execute\n");
+    fprintf(stderr," --debug                   be verbose on what the script is doing\n");
+}
 
 #ifdef USE_STARTER
 int umain(int argc,  const char * argv[])
@@ -87,30 +97,57 @@ int main(int argc, const char * argv[])
         }
         else if((0==strcmp(argv[i],"--help")) || (0==strcmp(argv[i],"-?")))
         {
-            fprintf(stderr,"umscriptexe syntax:\n");
-            fprintf(stderr," --input <filename>        the input variables (containing lines like $var=val)\n");
-            fprintf(stderr," --script <filename>       the script to execute\n");
-            fprintf(stderr," --debug                   be verbose on what the script is doing\n");
+            help();
             exit(0);
         }
     }
 
 
     NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+#pragma unused(runLoop)
 
+    if(script_file_name==NULL)
+    {
+        help();
+        exit(0);
+    }
     @autoreleasepool
     {
-        UMEnvironment *env = [[UMEnvironment alloc]init];
-        UMScriptDocument *doc = [[UMScriptDocument alloc]initWithFilename:script_file_name];
+        UMScriptDocument *doc;
+        UMEnvironment *env;
+        if(input_data_file_name)
+        {
+            env = [[UMEnvironment alloc]initWithVarFile:input_data_file_name];
+        }
+        else
+        {
+            env = [[UMEnvironment alloc]init];
+        }
+        if(g_debug)
+        {
+            env.traceExecutionFlag = YES;
+            env.traceTreeBuildupFlag = YES;
+        }
+        @try
+        {
+            doc = [[UMScriptDocument alloc]initWithFilename:script_file_name];
+        }
+        @catch(NSException *ex)
+        {
+            NSError *err = ex.userInfo[@"err"];
+            fprintf(stderr,"Error while opening script document'%s': %s",script_file_name.UTF8String,err.description.UTF8String);
+            exit(-1);
+        }
         NSString *r =  [doc compileSource];
         if(r)
         {
             fprintf(stdout,"%s",r.UTF8String);
         }
+
         UMDiscreteValue *result = [doc runScriptWithEnvironment:env];
 
         NSString *s = [NSString stringWithFormat:@"ReturnValue: %@",result.description];
-        fprintf(stdout,"%s",s.UTF8String);
+        fprintf(stdout,"%s\n",s.UTF8String);
     }
     return 0;
 }

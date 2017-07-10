@@ -81,6 +81,7 @@ typedef enum UMTermType
 - (NSString *)codeWithEnvironment:(UMEnvironment *)env;
 
 + (id)termWithIdentifierFromTag:(UMTerm *)identifierName withEnvironment:(UMEnvironment *)cenv;
++ (id)termWithConstantFromTag:(UMTerm *)identifierName withEnvironment:(UMEnvironment *)cenv;
 + (id)termWithVariableFromTag:(UMTerm *)varNameTerm withEnvironment:(UMEnvironment *)cenv;
 + (id)termWithFieldFromTag:(UMTerm *)fieldNameTerm withEnvironment:(UMEnvironment *)cenv;
 + (id)termWithStringFromTag:(UMTerm *)stringTerm withEnvironment:(UMEnvironment *)cenv;

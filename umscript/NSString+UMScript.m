@@ -44,7 +44,10 @@
     {
         return [UMDiscreteValue discreteNO];
     }
-
+    if([self isEqualToString:@"nil"] || [self isEqualToString:@"NULL"])
+    {
+        return [UMDiscreteValue discreteNull];
+    }
     for(size_t i=0;i<len;i++)
     {
         char c = digits[i];
@@ -121,7 +124,7 @@
         len = len - 2;
     }
 
-    if((onlyDigits==YES) && (hasLeadingZero==NO) && (hasDot = NO) && (endsWithLL==NO))
+    if((onlyDigits==YES) && (hasLeadingZero==NO) && (hasDot == NO))
     {
         if(endsWithLL)
         {
@@ -132,7 +135,7 @@
             return [UMDiscreteValue discreteInt:atoi((const char *)digits)];
         }
     }
-    if((onlyOcto==YES) && (hasLeadingZero == YES) && (hasDot = NO))
+    if((onlyOcto==YES) && (hasLeadingZero == YES) && (hasDot == NO))
     {
         long long value = 0;
         for(size_t i=1;i<len;i++)
@@ -182,7 +185,7 @@
         return [UMDiscreteValue discreteDouble:d];
 
     }
-    return [UMDiscreteValue discreteNull];
+    return NULL;
 }
 
 @end

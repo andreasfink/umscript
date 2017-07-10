@@ -501,11 +501,153 @@
 
 + (UMDiscreteValue *)discreteQuotedString:(NSString *)s;
 {
-    NSUInteger start = 1;
-    NSUInteger len = s.length - 2;
-    /* TODO: we should not only remove quotes at beginning and end, we should also take care of escape sequences */
-    
-    return [[UMDiscreteValue alloc]initWithString:[s substringWithRange:NSMakeRange(start,len)]];
+    NSUInteger n = [s length];
+    NSUInteger i;
+    BOOL inEscape = NO;
+    BOOL inOctalEscape = NO;
+    BOOL inHexEscape = NO;
+    NSMutableString *s2 = [[NSMutableString alloc]init];
+    long value = 0;
+    unichar c;
+    for(i=1;i<(n-1);i++) /* we skip the starting and ending quote */
+    {
+        c = [s characterAtIndex:i];
+
+        if(inEscape)
+        {
+            if(inOctalEscape)
+            {
+                if((c >= '0') && (c<='7'))
+                {
+                    value = value * 8 + c-'0';
+                    continue;
+                }
+                else
+                {
+                    c = value;
+                    NSString *s3 = [NSString stringWithCharacters:&c length:1];
+                    [s2 appendString:s3];
+                    inOctalEscape = NO;
+                    inEscape = NO;
+                    i--; /* we need to process the characer which is not 0...7, so lets reloop */
+                    continue;
+                }
+            }
+            else if(inHexEscape)
+            {
+                if((c >= '0') && (c<='9'))
+                {
+                    value = value * 16 + c-'0';
+                    continue;
+                }
+                else if((c >= 'a') && (c<='f'))
+                {
+                    value = value * 16 + c-'a' + 10;
+                    continue;
+                }
+                else if((c >= 'A') && (c<='F'))
+                {
+                    value = value * 16 + c-'A' + 10;
+                    continue;
+                }
+                else
+                {
+                    c = value;
+                    NSString *s3 = [NSString stringWithCharacters:&c length:1];
+                    [s2 appendString:s3];
+                    inHexEscape = NO;
+                    inEscape = NO;
+                    i--; /* we need to process the characer which is not 0...F, so lets reloop */
+                    continue;
+                }
+            }
+            else
+            {
+                switch(c)
+                {
+                    case 'a':
+                        [s2 appendString:@"\a"];
+                        break;
+                    case 'b':
+                        [s2 appendString:@"\b"];
+                        break;
+                    case 'f':
+                        [s2 appendString:@"\f"];
+                        break;
+                    case 'n':
+                        [s2 appendString:@"\n"];
+                        break;
+                    case 'r':
+                        [s2 appendString:@"\r"];
+                        break;
+                    case 't':
+                        [s2 appendString:@"\t"];
+                        break;
+                    case 'v':
+                        [s2 appendString:@"\v"];
+                        break;
+                    case '\\':
+                        [s2 appendString:@"\\"];
+                        break;
+                    case '\'':
+                        [s2 appendString:@"'"];
+                        break;
+                    case '"':
+                        [s2 appendString:@"\""];
+                        break;
+                    case '?':
+                        [s2 appendString:@"?"];
+                        break;
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
+                        inOctalEscape = YES;
+                        break;
+                    case 'x':
+                        inHexEscape = YES;
+                        break;
+                    default:
+                    {
+                        NSString *s3 = [NSString stringWithCharacters:&c length:1];
+                        [s2 appendString:s3];
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            if(c=='\\')
+            {
+                inEscape=YES;
+                inOctalEscape = NO;
+                inHexEscape = NO;
+            }
+            else
+            {
+                inEscape=NO;
+                inOctalEscape = NO;
+                inHexEscape = NO;
+                NSString *s3 = [NSString stringWithCharacters:&c length:1];
+                [s2 appendString:s3];
+            }
+        }
+    }
+    /* we have an escape at the end of the string which we have not yet appended */
+    if((inHexEscape) || (inOctalEscape))
+    {
+        c = value;
+        NSString *s3 = [NSString stringWithCharacters:&c length:1];
+        [s2 appendString:s3];
+    }
+    return [[UMDiscreteValue alloc]initWithString:s2];
 }
 
 + (UMDiscreteValue *)discreteData:(NSData *)data;
@@ -988,25 +1130,7 @@
 
 - (NSString *)labelValue
 {
-    switch(type)
-    {
-        case UMVALUE_NULL:
-            return @"(null)";
-        case UMVALUE_BOOL:
-            return [NSString stringWithFormat:@"(bool)%@",self.boolValue ? @"YES" : @"NO"];
-        case UMVALUE_INT:
-            return [NSString stringWithFormat:@"(number)%d",self.intValue];
-        case UMVALUE_LONGLONG:
-            return [NSString stringWithFormat:@"(number)%lld",self.longLongValue];
-        case UMVALUE_DOUBLE:
-            return [NSString stringWithFormat:@"(number)%lf",self.doubleValue];
-        case UMVALUE_STRING:
-            return [NSString stringWithFormat:@"(string)%@",self.stringValue];
-        case UMVALUE_DATA:
-            return [NSString stringWithFormat:@"(data)%@",self.dataValue.hexString];
-        default:
-            return @"(unknown)";
-    }
+    return [self stringValue];
 }
 
 - (UMDiscreteValue *)addValue:(UMDiscreteValue *)bval
