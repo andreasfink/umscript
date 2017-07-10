@@ -28,6 +28,12 @@ ${LIB}: ${OFILES} language/_generated_umscript.y.h
 	./make_version
 	${CC} -shared -o ${LIB}  ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}
 
+build/uexe:	build/uexe.o
+	${CC} ${LDFLAGS} -o build/uexe.o -o build/uexe
+
+build/uexe.o:	uexe/main.m
+	${CC} -c ${CFLAGS} ${DEBUG_RELEASE}  ${INCLUDEDIRS} -x objective-c uexe/main.m -o build/uexe.o
+
 install: ${LIB}
 	-mkdir -p ${DESTDIR}/usr/local/lib/pkgconfig
 	-mkdir -p ${DESTDIR}/usr/local/include/umscript

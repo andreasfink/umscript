@@ -47,6 +47,11 @@
 		A65D34C5192BAAA40090FC94 /* UMFunction_lessorequal.m in Sources */ = {isa = PBXBuildFile; fileRef = A65D34C3192BAAA40090FC94 /* UMFunction_lessorequal.m */; };
 		A65D34C9192BAE130090FC94 /* UMFunction_assign.h in Headers */ = {isa = PBXBuildFile; fileRef = A65D34C7192BAE130090FC94 /* UMFunction_assign.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A65D34CA192BAE130090FC94 /* UMFunction_assign.m in Sources */ = {isa = PBXBuildFile; fileRef = A65D34C8192BAE130090FC94 /* UMFunction_assign.m */; };
+		A673BEBC1F1360E70026A4CF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A673BEBB1F1360E70026A4CF /* main.m */; };
+		A673BEC01F13610B0026A4CF /* umscript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A63C39811F10BDE7003637B3 /* umscript.framework */; };
+		A673BEC11F13610F0026A4CF /* ulibasn1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A04AB61EE6D4EE007C203A /* ulibasn1.framework */; };
+		A673BEC21F1361120026A4CF /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C4E0E91945237D0090FC94 /* ulib.framework */; };
+		A673BEC31F1361180026A4CF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A672F731195C2D040090FC94 /* Foundation.framework */; };
 		A6835BE519297AE30090FC94 /* NSNumber+UMScript.h in Headers */ = {isa = PBXBuildFile; fileRef = A6835B9519297AE30090FC94 /* NSNumber+UMScript.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6835BE619297AE30090FC94 /* NSNumber+UMScript.m in Sources */ = {isa = PBXBuildFile; fileRef = A6835B9619297AE30090FC94 /* NSNumber+UMScript.m */; };
 		A6835BE719297AE30090FC94 /* UMDiscreteValue.h in Headers */ = {isa = PBXBuildFile; fileRef = A6835B9719297AE30090FC94 /* UMDiscreteValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -182,6 +187,18 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A673BEB71F1360E70026A4CF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		A6019BB31AC1FA8600854472 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
 		A612C1F61EEE9B540096C70F /* UMFunction_arrayAccess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMFunction_arrayAccess.h; sourceTree = "<group>"; };
@@ -204,6 +221,7 @@
 		A62B98F41946B255005B48BC /* UMFunction_list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_list.m; sourceTree = "<group>"; };
 		A63A82F7192F46340090FC94 /* UMFunction_print.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_print.h; sourceTree = "<group>"; };
 		A63A82F8192F46340090FC94 /* UMFunction_print.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_print.m; sourceTree = "<group>"; };
+		A63C39811F10BDE7003637B3 /* umscript.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = umscript.framework; path = ../../../../../Library/Frameworks/umscript.framework; sourceTree = "<group>"; };
 		A63DD82C192C84CE0090FC94 /* UMFunction_int.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_int.h; sourceTree = "<group>"; };
 		A63DD82D192C84CE0090FC94 /* UMFunction_int.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_int.m; sourceTree = "<group>"; };
 		A63DD830192C84D80090FC94 /* UMFunction_string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_string.h; sourceTree = "<group>"; };
@@ -224,6 +242,8 @@
 		A65D34C7192BAE130090FC94 /* UMFunction_assign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_assign.h; sourceTree = "<group>"; };
 		A65D34C8192BAE130090FC94 /* UMFunction_assign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_assign.m; sourceTree = "<group>"; };
 		A672F731195C2D040090FC94 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A673BEB91F1360E70026A4CF /* uexe */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = uexe; sourceTree = BUILT_PRODUCTS_DIR; };
+		A673BEBB1F1360E70026A4CF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A6835B9519297AE30090FC94 /* NSNumber+UMScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+UMScript.h"; sourceTree = "<group>"; };
 		A6835B9619297AE30090FC94 /* NSNumber+UMScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+UMScript.m"; sourceTree = "<group>"; };
 		A6835B9719297AE30090FC94 /* UMDiscreteValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMDiscreteValue.h; sourceTree = "<group>"; };
@@ -358,6 +378,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A673BEB61F1360E70026A4CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A673BEC01F13610B0026A4CF /* umscript.framework in Frameworks */,
+				A673BEC21F1361120026A4CF /* ulib.framework in Frameworks */,
+				A673BEC11F13610F0026A4CF /* ulibasn1.framework in Frameworks */,
+				A673BEC31F1361180026A4CF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A6A3A9FF19297741007FFC7B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -384,6 +415,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A673BEBA1F1360E70026A4CF /* uexe */ = {
+			isa = PBXGroup;
+			children = (
+				A673BEBB1F1360E70026A4CF /* main.m */,
+			);
+			path = uexe;
+			sourceTree = "<group>";
+		};
 		A6835C951929890B0090FC94 /* language */ = {
 			isa = PBXGroup;
 			children = (
@@ -413,6 +452,7 @@
 				A6835C951929890B0090FC94 /* language */,
 				A6A3AA0C19297741007FFC7B /* umscript */,
 				A6A3AA2119297741007FFC7B /* umscriptTests */,
+				A673BEBA1F1360E70026A4CF /* uexe */,
 				A6A3AA0519297741007FFC7B /* Frameworks */,
 				A6A3AA0419297741007FFC7B /* Products */,
 			);
@@ -423,6 +463,7 @@
 			children = (
 				A6A3AA0319297741007FFC7B /* umscript.framework */,
 				A6A3AA1A19297741007FFC7B /* umscriptTests.xctest */,
+				A673BEB91F1360E70026A4CF /* uexe */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -430,6 +471,7 @@
 		A6A3AA0519297741007FFC7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A63C39811F10BDE7003637B3 /* umscript.framework */,
 				A6A04AB61EE6D4EE007C203A /* ulibasn1.framework */,
 				A6C4E0E91945237D0090FC94 /* ulib.framework */,
 				A6A3AA0619297741007FFC7B /* Cocoa.framework */,
@@ -714,6 +756,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		A673BEB81F1360E70026A4CF /* uexe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A673BEBF1F1360E70026A4CF /* Build configuration list for PBXNativeTarget "uexe" */;
+			buildPhases = (
+				A673BEB51F1360E70026A4CF /* Sources */,
+				A673BEB61F1360E70026A4CF /* Frameworks */,
+				A673BEB71F1360E70026A4CF /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = uexe;
+			productName = uexe;
+			productReference = A673BEB91F1360E70026A4CF /* uexe */;
+			productType = "com.apple.product-type.tool";
+		};
 		A6A3AA0219297741007FFC7B /* umscript */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A6A3AA2B19297741007FFC7B /* Build configuration list for PBXNativeTarget "umscript" */;
@@ -761,6 +820,11 @@
 			attributes = {
 				LastUpgradeCheck = 0900;
 				TargetAttributes = {
+					A673BEB81F1360E70026A4CF = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 2GSNWPNR77;
+						ProvisioningStyle = Automatic;
+					};
 					A6A3AA0219297741007FFC7B = {
 						DevelopmentTeam = 2GSNWPNR77;
 						ProvisioningStyle = Automatic;
@@ -781,6 +845,7 @@
 			targets = (
 				A6A3AA0219297741007FFC7B /* umscript */,
 				A6A3AA1919297741007FFC7B /* umscriptTests */,
+				A673BEB81F1360E70026A4CF /* uexe */,
 			);
 		};
 /* End PBXProject section */
@@ -862,6 +927,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A673BEB51F1360E70026A4CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A673BEBC1F1360E70026A4CF /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A6A3A9FE19297741007FFC7B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -979,10 +1052,54 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A673BEBD1F1360E70026A4CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = NO;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A673BEBE1F1360E70026A4CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = NO;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		A6A3AA2919297741007FFC7B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = NO;
@@ -1008,9 +1125,9 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEPLOYMENT_LOCATION = YES;
-				DEPLOYMENT_POSTPROCESSING = YES;
-				DSTROOT = /;
+				DEPLOYMENT_LOCATION = NO;
+				DEPLOYMENT_POSTPROCESSING = NO;
+				DSTROOT = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c11;
@@ -1034,9 +1151,9 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
 				);
-				INSTALL_PATH = /Library/Frameworks/;
+				INSTALL_PATH = "";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DUMSCRIPT_CONFIG=Debug";
 				SDKROOT = macosx;
@@ -1048,6 +1165,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = NO;
@@ -1073,9 +1191,9 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEPLOYMENT_LOCATION = YES;
-				DEPLOYMENT_POSTPROCESSING = YES;
-				DSTROOT = /;
+				DEPLOYMENT_LOCATION = NO;
+				DEPLOYMENT_POSTPROCESSING = NO;
+				DSTROOT = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c11;
@@ -1092,9 +1210,9 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
 				);
-				INSTALL_PATH = /Library/Frameworks/;
+				INSTALL_PATH = "";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DUMSCRIPT_CONFIG=Release";
 				SDKROOT = macosx;
@@ -1110,6 +1228,7 @@
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				DSTROOT = /;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1120,6 +1239,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
 				INFOPLIST_FILE = "umscript/umscript-Info.plist";
+				INSTALL_PATH = /Library/Frameworks;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.umscript;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1139,6 +1259,7 @@
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				DSTROOT = /;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1149,6 +1270,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
 				INFOPLIST_FILE = "umscript/umscript-Info.plist";
+				INSTALL_PATH = /Library/Frameworks;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.umscript;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1202,6 +1324,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A673BEBF1F1360E70026A4CF /* Build configuration list for PBXNativeTarget "uexe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A673BEBD1F1360E70026A4CF /* Debug */,
+				A673BEBE1F1360E70026A4CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		A6A3A9FD19297741007FFC7B /* Build configuration list for PBXProject "umscript" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

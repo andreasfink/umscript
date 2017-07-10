@@ -6,7 +6,6 @@
 //  Copyright (c) 2016 Andreas Fink
 //
 
-#import <Foundation/Foundation.h>
 #import <ulib/ulib.h>
 
 #import "UMDiscreteValue.h"
