@@ -9,6 +9,7 @@
 #import "UMDiscreteValue.h"
 #import "UMEnvironment.h"
 #import "UMFunctionMacros.h"
+#import "NSString+UMScript.h"
 
 @implementation UMEnvironment
 
@@ -137,7 +138,7 @@
                 {
                     NSString *var = [parts[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                     NSString *val = [parts[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                    _variables[var]=val;
+                    _variables[var]=[val  discreteValue];
                 }
             }
         }
