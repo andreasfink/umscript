@@ -24,18 +24,23 @@ INCLUDEDIRS = -I umscript -I language
 DEBUG_RELEASE = -DCONFIGURATION_RELEASE=1  -DCONFIGURATION=Release
 
 
+all: ${LIB} build/uexe
+
 ${LIB}: ${OFILES} language/_generated_umscript.y.h
 	./make_version
 	${CC} -shared -o ${LIB}  ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}
 
 build/uexe:	build/uexe.o
-	${CC} ${LDFLAGS} -o build/uexe.o -o build/uexe
+	mkdir -p build
+	${CC} ${LDFLAGS} -l:libumscript.so.1.8 -l:libulibasn1.so.1.8  ${LIBS} -o build/uexe build/uexe.o
 
 build/uexe.o:	uexe/main.m
+	mkdir -p build
 	${CC} -c ${CFLAGS} ${DEBUG_RELEASE}  ${INCLUDEDIRS} -x objective-c uexe/main.m -o build/uexe.o
 
-install: ${LIB}
+install: ${LIB} build/uexe
 	-mkdir -p ${DESTDIR}/usr/local/lib/pkgconfig
+	-mkdir -p ${DESTDIR}/usr/local/bin/
 	-mkdir -p ${DESTDIR}/usr/local/include/umscript
 	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}.${REVISION}"
 	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}"
@@ -46,6 +51,7 @@ install: ${LIB}
 	ln -s "${LIB}.${MAJORVER}.${MINORVER}"             "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}"
 	ln -s "${LIB}.${MAJORVER}"                         "${DESTDIR}/usr/local/lib/${LIB}"
 	-install -b -g root -o root -m 644 ${PKGCONFIGFILE} ${DESTDIR}/usr/local/lib/pkgconfig/
+	-install -b -g root -o root -m 755 build/uexe ${DESTDIR}/usr/local/bin/uexe
 	-mkdir -p ${DESTDIR}/usr/local/include/umscript
 	cp $(HFILES) ${DESTDIR}/usr/local/include/umscript
 	ldconfig
