@@ -7,7 +7,7 @@
 //
 
 #import <ulib/ulib.h>
-
+#import "UMScriptResume.h"
 /*
     UMTerm_Interrupt is a object to store the exact location of
     a function chain so it can be paused and continued at this 
@@ -19,11 +19,18 @@
  */
 
 @class UMTerm_CallStackEntry;
+@class UMScriptDocument;
 
 @interface UMTerm_Interrupt : UMObject
 {
     UMQueue *callStackEntries;
+    UMScriptDocument *_currentScript;
+    UMObject<UMScriptResume> *_delegate;
 }
+
+@property(readwrite,strong,atomic)  UMScriptDocument *currentScript;
+@property(readwrite,strong,atomic)  UMObject<UMScriptResume> *delegate;
+
 
 - (UMTerm_CallStackEntry *)pullEntry;
 - (void)recordEntry:(UMTerm_CallStackEntry *)entry;

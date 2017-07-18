@@ -22,10 +22,11 @@
 		A612C2111EEEDA170096C70F /* UMFunction_sizeOfVar.m in Sources */ = {isa = PBXBuildFile; fileRef = A612C20F1EEEDA170096C70F /* UMFunction_sizeOfVar.m */; };
 		A612C2141EEEDA260096C70F /* UMFunction_sizeOfType.h in Headers */ = {isa = PBXBuildFile; fileRef = A612C2121EEEDA260096C70F /* UMFunction_sizeOfType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A612C2151EEEDA260096C70F /* UMFunction_sizeOfType.m in Sources */ = {isa = PBXBuildFile; fileRef = A612C2131EEEDA260096C70F /* UMFunction_sizeOfType.m */; };
-		A61A24F01F1D7F19004F3972 /* UMTerm_Interrupt.h in Headers */ = {isa = PBXBuildFile; fileRef = A61A24EE1F1D7F19004F3972 /* UMTerm_Interrupt.h */; };
+		A61A24F01F1D7F19004F3972 /* UMTerm_Interrupt.h in Headers */ = {isa = PBXBuildFile; fileRef = A61A24EE1F1D7F19004F3972 /* UMTerm_Interrupt.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A61A24F11F1D7F19004F3972 /* UMTerm_Interrupt.m in Sources */ = {isa = PBXBuildFile; fileRef = A61A24EF1F1D7F19004F3972 /* UMTerm_Interrupt.m */; };
-		A61A24F41F1D84C0004F3972 /* UMTerm_CallStackEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A61A24F21F1D84C0004F3972 /* UMTerm_CallStackEntry.h */; };
+		A61A24F41F1D84C0004F3972 /* UMTerm_CallStackEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A61A24F21F1D84C0004F3972 /* UMTerm_CallStackEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A61A24F51F1D84C0004F3972 /* UMTerm_CallStackEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A61A24F31F1D84C0004F3972 /* UMTerm_CallStackEntry.m */; };
+		A61A24F81F1DE127004F3972 /* UMScriptResume.h in Headers */ = {isa = PBXBuildFile; fileRef = A61A24F61F1DE127004F3972 /* UMScriptResume.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A62B98F11946A8A6005B48BC /* UMFunction_substr.h in Headers */ = {isa = PBXBuildFile; fileRef = A62B98EF1946A8A6005B48BC /* UMFunction_substr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A62B98F21946A8A6005B48BC /* UMFunction_substr.m in Sources */ = {isa = PBXBuildFile; fileRef = A62B98F01946A8A6005B48BC /* UMFunction_substr.m */; };
 		A62B98F51946B255005B48BC /* UMFunction_list.h in Headers */ = {isa = PBXBuildFile; fileRef = A62B98F31946B255005B48BC /* UMFunction_list.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -223,6 +224,7 @@
 		A61A24EF1F1D7F19004F3972 /* UMTerm_Interrupt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTerm_Interrupt.m; sourceTree = "<group>"; };
 		A61A24F21F1D84C0004F3972 /* UMTerm_CallStackEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMTerm_CallStackEntry.h; sourceTree = "<group>"; };
 		A61A24F31F1D84C0004F3972 /* UMTerm_CallStackEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTerm_CallStackEntry.m; sourceTree = "<group>"; };
+		A61A24F61F1DE127004F3972 /* UMScriptResume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMScriptResume.h; sourceTree = "<group>"; };
 		A62B98EF1946A8A6005B48BC /* UMFunction_substr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_substr.h; sourceTree = "<group>"; };
 		A62B98F01946A8A6005B48BC /* UMFunction_substr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_substr.m; sourceTree = "<group>"; };
 		A62B98F31946B255005B48BC /* UMFunction_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_list.h; sourceTree = "<group>"; };
@@ -647,6 +649,7 @@
 				A61A24F31F1D84C0004F3972 /* UMTerm_CallStackEntry.m */,
 				A61A24EE1F1D7F19004F3972 /* UMTerm_Interrupt.h */,
 				A61A24EF1F1D7F19004F3972 /* UMTerm_Interrupt.m */,
+				A61A24F61F1DE127004F3972 /* UMScriptResume.h */,
 			);
 			path = umscript;
 			sourceTree = "<group>";
@@ -741,6 +744,7 @@
 				A6916D05192BEE4100F6BFF4 /* UMFunction_preincrease.h in Headers */,
 				A63DD832192C84D80090FC94 /* UMFunction_string.h in Headers */,
 				A6835BF219297AE30090FC94 /* UMFunction_bit_shiftleft.h in Headers */,
+				A61A24F81F1DE127004F3972 /* UMScriptResume.h in Headers */,
 				A6835C3119297AE30090FC94 /* umscript.h in Headers */,
 				A6EEDB691929DD1F0090FC94 /* umscript.yl.h in Headers */,
 				A612C2101EEEDA170096C70F /* UMFunction_sizeOfVar.h in Headers */,

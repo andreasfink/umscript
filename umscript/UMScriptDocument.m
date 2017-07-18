@@ -13,6 +13,7 @@
 #import "UMFunction.h"
 #include <stdio.h>
 #include <unistd.h>
+#import "UMTerm_Interrupt.h"
 
 @implementation UMScriptDocument
 
@@ -53,7 +54,7 @@
     return self;
 }
 
-- (UMDiscreteValue *)runScriptWithEnvironment:(UMEnvironment *)env
+- (UMDiscreteValue *)runScriptWithEnvironment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedFrom
 {
     if((_isCompiled==NO) || (_compiledCode==NULL))
     {
@@ -68,13 +69,17 @@
     @try
     {
         env.functionDictionary = _compiledFunctions;
-        result = [_compiledCode evaluateWithEnvironment:env con
-        - (UMDiscreteValue *)evaluateWithEnvironment:(UMEnvironment *)xenv continueFrom:(UMTerm_Interrupt *)interruptedFrom;
+        result = [_compiledCode evaluateWithEnvironment:env continueFrom:interruptedFrom];
 
     }
     @catch(NSException *nse)
     {
         [env print: [NSString stringWithFormat:@"Error: %@",nse]];
+    }
+    @catch(UMTerm_Interrupt *interrupt)
+    {
+        interrupt.currentScript = self;
+        @throw(interrupt);
     }
     return result;
 }

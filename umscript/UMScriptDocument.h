@@ -11,7 +11,7 @@
 @class UMTerm;
 @class UMEnvironment;
 @class UMDiscreteValue;
-
+@class UMTerm_Interrupt;
 @interface UMScriptDocument : UMObject
 {
     NSString *_name;
@@ -30,7 +30,7 @@
 @property (readwrite,strong)    NSString    *lexerLog;
 @property (readonly, assign,atomic) BOOL    isCompiled;
 
-- (UMDiscreteValue *)runScriptWithEnvironment:(UMEnvironment *)env;
+- (UMDiscreteValue *)runScriptWithEnvironment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedFrom;
 - (NSString *)compileSource;
 - (id)initWithFilename:(NSString *)filename;
 - (id)initWithCode:(NSString *)code;
