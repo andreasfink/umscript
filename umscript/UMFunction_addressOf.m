@@ -6,6 +6,8 @@
 //
 
 #import "UMFunction_addressOf.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_addressOf
 
@@ -31,7 +33,7 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(id)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(id)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
     /* FIXME */
     return [UMDiscreteValue discreteNull];

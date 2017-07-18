@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_getvar.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_getvar
 
@@ -31,8 +33,19 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
+    NSInteger start;
+    if(interruptedAt)
+    {
+        UMTerm_CallStackEntry *entry = [interruptedAt pullEntry];
+        start = entry.position;
+    }
+    else
+    {
+        start = 0;
+    }
+
     if([params count] != 1)
     {
         return [UMDiscreteValue discreteNull];
@@ -42,6 +55,43 @@
     NSString *variableName = [variableNameValue stringValue];
     
     return [env variableForKey:variableName ];
+
+    {
+        NSInteger start;
+        if(interruptedAt)
+        {
+            UMTerm_CallStackEntry *entry = [interruptedAt pullEntry];
+            start = entry.position;
+        }
+        else
+        {
+            start = 0;
+        }
+        
+        if([params count] != 1)
+        {
+            return [UMDiscreteValue discreteNull];
+        }
+        UMTerm *varNameTerm = params[0];
+        UMDiscreteValue *varNameValue;
+        
+        
+        @try
+        {
+            varNameValue = [varNameTerm evaluateWithEnvironment:env continueFrom:interruptedAt];
+        }
+        @catch(UMTerm_Interrupt *interrupt)
+        {
+            UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+            e.name = [self functionName];
+            e.position = 0;
+            [interrupt recordEntry:e];
+            @throw(interrupt);
+        }
+        
+        NSString *varName = [varNameValue stringValue];
+        return [env variableForKey:varName ];
+    }
 }
 
 

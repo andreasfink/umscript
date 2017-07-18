@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_while.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_while
 
@@ -30,25 +32,79 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
+    UMTerm *conditionTerm = params[0];
+    UMTerm *thenDoTerm = params[1];
+    UMDiscreteValue *condition;
+
+    NSInteger start;
+    if(interruptedAt)
+    {
+        UMTerm_CallStackEntry *entry = [interruptedAt pullEntry];
+        start = entry.position;
+        condition = entry.temporaryResult;
+    }
+    else
+    {
+        start = 0;
+    }
+
     if(params.count !=2)
     {
         return [UMDiscreteValue discreteNull];
     }
-    UMTerm *conditionTerm = params[0];
-    UMTerm *thenDoTerm = params[1];
     
-    UMDiscreteValue *condition = [conditionTerm evaluateWithEnvironment:env];
     env.breakCalled=NO;
+    if(start==0)
+    {
+        @try
+        {
+           condition = [conditionTerm evaluateWithEnvironment:env continueFrom:interruptedAt];
+        }
+        @catch(UMTerm_Interrupt *interrupt)
+        {
+            UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+            e.name = [self functionName];
+            e.position = 0;
+            [interrupt recordEntry:e];
+            @throw(interrupt);
+        }
+    }
+    
     while(condition.boolValue)
     {
-        [thenDoTerm evaluateWithEnvironment:env];
+        @try
+        {
+            [thenDoTerm evaluateWithEnvironment:env continueFrom:interruptedAt];
+        }
+        @catch(UMTerm_Interrupt *interrupt)
+        {
+            UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+            e.name = [self functionName];
+            e.position = 1;
+            e.temporaryResult = condition;
+            [interrupt recordEntry:e];
+            @throw(interrupt);
+        }
+
         if(env.breakCalled==YES)
         {
             break;
         }
-        condition = [conditionTerm evaluateWithEnvironment:env];
+
+        @try
+        {
+            condition = [conditionTerm evaluateWithEnvironment:env continueFrom:interruptedAt];
+        }
+        @catch(UMTerm_Interrupt *interrupt)
+        {
+            UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+            e.name = [self functionName];
+            e.position = 0;
+            [interrupt recordEntry:e];
+            @throw(interrupt);
+        }
     }
     env.breakCalled=NO;
     return condition;

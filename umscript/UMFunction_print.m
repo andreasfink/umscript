@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_print.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_print
 
@@ -30,13 +32,38 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
-    for (UMTerm *param in params)
+    NSInteger start;
+    NSInteger end = params.count;
+    
+    if(interruptedAt)
     {
-        UMDiscreteValue *d = [param evaluateWithEnvironment:env];
-        NSString *s = d.stringValue;
-        fprintf(stdout,"%s",s.UTF8String);
+        UMTerm_CallStackEntry *entry = [interruptedAt pullEntry];
+        start = entry.position;
+    }
+    else
+    {
+        start = 0;
+    }
+    
+    for(NSInteger i=start;i<end;i++)
+    {
+        @try
+        {
+            UMTerm *entry = params[i];
+            UMDiscreteValue *d = [entry evaluateWithEnvironment:env];
+            NSString *s = d.stringValue;
+            fprintf(stdout,"%s",s.UTF8String);
+        }
+        @catch(UMTerm_Interrupt *interrupt)
+        {
+            UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+            e.position = i;
+            e.name = [self functionName];
+            [interrupt recordEntry:e];
+            @throw(interrupt);
+        }
     }
     return [UMDiscreteValue discreteNull];
 }

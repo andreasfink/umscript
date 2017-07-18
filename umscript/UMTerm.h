@@ -13,6 +13,7 @@
 @class UMDiscreteValue;
 @class UMEnvironment;
 @class UMDiscreteValue;
+@class UMTerm_Interrupt;
 
 typedef enum UMTermType
 {
@@ -62,6 +63,7 @@ typedef enum UMTermType
 - (id)initWithFunction:(UMFunction *)func andParams:(NSArray *)params withEnvironment:(UMEnvironment *)cenv;
 
 - (UMDiscreteValue *)evaluateWithEnvironment:(UMEnvironment *)env;
+- (UMDiscreteValue *)evaluateWithEnvironment:(UMEnvironment *)xenv continueFrom:(UMTerm_Interrupt *)interruptedFrom;
 - (BOOL)boolValue:(UMEnvironment *)env;
 - (NSString *)stringValue:(UMEnvironment *)env;
 - (NSData *)dataValue:(UMEnvironment *)env;

@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_bit_or.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_bit_or
 
@@ -31,7 +33,7 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
     if(params.count !=2)
     {
@@ -39,8 +41,57 @@
     }
     UMTerm *entry1 = params[0];
     UMTerm *entry2 = params[1];
-    UMDiscreteValue *d1 = [entry1 evaluateWithEnvironment:env];
-    UMDiscreteValue *d2 = [entry2 evaluateWithEnvironment:env];
+    
+    UMDiscreteValue *d1;
+    UMDiscreteValue *d2;
+
+    NSInteger start;
+    if(interruptedAt)
+    {
+        UMTerm_CallStackEntry *entry = [interruptedAt pullEntry];
+        start = entry.position;
+        if(start == 1)
+        {
+            d1 = entry.temporaryResult;
+        }
+    }
+    else
+    {
+        d1 = NULL;
+        start = 0;
+    }
+
+    if(start == 0)
+    {
+        @try
+        {
+            d1 = [entry1 evaluateWithEnvironment:env continueFrom:interruptedAt];
+        }
+        @catch(UMTerm_Interrupt *interrupt)
+        {
+            UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+            e.name = [self functionName];
+            e.temporaryResult = NULL;
+            e.position = 0;
+            [interrupt recordEntry:e];
+            @throw(interrupt);
+        }
+    }
+    
+    @try
+    {
+        d2 = [entry2 evaluateWithEnvironment:env continueFrom:interruptedAt];
+    }
+    @catch(UMTerm_Interrupt *interrupt)
+    {
+        UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+        e.name = [self functionName];
+        e.temporaryResult = d1;
+        e.position = 1;
+        [interrupt recordEntry:e];
+        @throw(interrupt);
+    }
+
     return [d1 bitOr:d2];
 }
 

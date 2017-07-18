@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_assign.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_assign
 
@@ -31,17 +33,30 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
     if(params.count !=2)
     {
         return [UMDiscreteValue discreteNull];
     }
+    
+    
     UMTerm *entry1 = params[0];
     UMTerm *entry2 = params[1];
 
-    UMDiscreteValue *d2 = [entry2 evaluateWithEnvironment:env];
-
+    UMDiscreteValue *d2;
+    @try
+    {
+        d2 = [entry2 evaluateWithEnvironment:env continueFrom:interruptedAt];
+    }
+    @catch(UMTerm_Interrupt *interrupt)
+    {
+        UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+        e.name = [self functionName];
+        [interrupt recordEntry:e];
+        @throw(interrupt);
+    }
+    
     if(entry1.type == UMTermType_variable)
     {
         [env setVariable:d2 forKey:entry1.varname];

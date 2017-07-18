@@ -64,7 +64,7 @@
     _globals = NULL;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
     CFArrayRef param_ref = (__bridge CFArrayRef)params;
     CFEnvironmentRef env_ref = (__bridge CFEnvironmentRef)env;

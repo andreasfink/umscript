@@ -34,7 +34,7 @@
 - (id)initWithEnvironment:(UMEnvironment *)cenv;
 - (UMFunction *)initWithName:(NSString *)name statements:(UMTerm *)statements;
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env;
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt;
 - (NSString *)description;
 - (id)descriptionDictVal;
 

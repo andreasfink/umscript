@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_bit_not.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_bit_not
 
@@ -32,14 +34,32 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
+    if(interruptedAt)
+    {
+        [interruptedAt pullEntry];
+    }
     if(params.count !=1)
     {
         return [UMDiscreteValue discreteNull];
     }
     UMTerm *entry = params[0];
-    UMDiscreteValue *d = [entry evaluateWithEnvironment:env];
+    
+    UMDiscreteValue *d;
+    @try
+    {
+        d = [entry evaluateWithEnvironment:env continueFrom:interruptedAt];
+    }
+    @catch(UMTerm_Interrupt *interrupt)
+    {
+        UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+        e.name = [self functionName];
+        e.temporaryResult = NULL;
+        e.position = 0;
+        [interrupt recordEntry:e];
+        @throw(interrupt);
+    }
     return [d bitNot];
  }
 

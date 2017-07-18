@@ -68,7 +68,9 @@
     @try
     {
         env.functionDictionary = _compiledFunctions;
-        result = [_compiledCode evaluateWithEnvironment:env];
+        result = [_compiledCode evaluateWithEnvironment:env con
+        - (UMDiscreteValue *)evaluateWithEnvironment:(UMEnvironment *)xenv continueFrom:(UMTerm_Interrupt *)interruptedFrom;
+
     }
     @catch(NSException *nse)
     {

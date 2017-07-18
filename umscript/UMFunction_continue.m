@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_continue.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_continue
 
@@ -31,7 +33,9 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params
+                            environment:(UMEnvironment *)env
+                           continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
     return NULL;
 }

@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_int.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_int
 
@@ -31,12 +33,34 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)p environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)p environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
-    id entry0 = [p objectAtIndex:0];
+    NSInteger start;
+    if(interruptedAt)
+    {
+        UMTerm_CallStackEntry *entry = [interruptedAt pullEntry];
+        start = entry.position;
+    }
+    else
+    {
+        start = 0;
+    }
+
+    UMTerm *entry0 = p[0];
+    UMDiscreteValue *d;
     
-    UMTerm *currentTerm =entry0;
-    UMDiscreteValue *d = [currentTerm evaluateWithEnvironment:env];
+    @try
+    {
+        d = [entry0 evaluateWithEnvironment:env continueFrom:interruptedAt];
+    }
+    @catch(UMTerm_Interrupt *interrupt)
+    {
+        UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+        e.name = [self functionName];
+        e.position = 0;
+        [interrupt recordEntry:e];
+        @throw(interrupt);
+    }
     
     if(d.type == UMVALUE_INT)
     {

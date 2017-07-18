@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_preincrease.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_preincrease
 
@@ -31,13 +33,13 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
     if(params.count !=1)
     {
         return [UMDiscreteValue discreteNull];
     }
-    
+
     UMTerm *currentTerm = params[0];
     UMDiscreteValue *currentValue;
     UMDiscreteValue *newValue;

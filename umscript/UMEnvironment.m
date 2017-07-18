@@ -190,4 +190,13 @@
     [standardOutput addLogEntry:entry];
 }
 
+- (void)pushStack
+{
+    
+}
+
+- (void)popStack
+{
+    
+}
 @end

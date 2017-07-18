@@ -28,6 +28,7 @@
     UMHistoryLog    *environmentLog;
     UMHistoryLog    *standardOutput;
     UMHistoryLog    *trace;
+    NSMutableArray  *stack;
 }
 
 @property (readwrite,strong) UMDiscreteValue *returnValue;
@@ -61,5 +62,7 @@
 - (void) log:(NSString *)entry;
 - (void) trace:(NSString *)entry;
 - (void) print:(NSString *)entry;
+- (void)pushStack;
+- (void)popStack;
 
 @end

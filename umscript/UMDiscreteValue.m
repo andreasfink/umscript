@@ -8,6 +8,7 @@
 
 #import "UMDiscreteValue.h"
 #import "UMEnvironment.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMDiscreteValue
 
@@ -875,7 +876,7 @@
     }
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
     return self;
 }

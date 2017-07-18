@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_goto.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_goto
 
@@ -30,8 +32,9 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
+    
     UMTerm *label = params[0];
     env.jumpTo = label.labelValue;
     return NULL;

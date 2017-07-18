@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_break.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_break
 
@@ -31,7 +33,9 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params
+                            environment:(UMEnvironment *)env
+                           continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
     env.breakCalled = YES;
     return [UMDiscreteValue discreteNull];

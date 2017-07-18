@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_greaterorequal.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_greaterorequal
 
@@ -31,18 +33,61 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(id)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(id)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
     if(params.count != 2)
     {
         return [UMDiscreteValue discreteNull];
     }
-    
+
     UMTerm *param0 = params[0];
-    UMDiscreteValue *value0 = [param0 evaluateWithEnvironment:env];
-    
     UMTerm *param1 = params[1];
-    UMDiscreteValue *value1 = [param1 evaluateWithEnvironment:env];
+
+    UMDiscreteValue *value0;
+    UMDiscreteValue *value1;
+    
+    NSInteger start;
+    if(interruptedAt)
+    {
+        UMTerm_CallStackEntry *entry = [interruptedAt pullEntry];
+        start = entry.position;
+        value0 = entry.temporaryResult;
+    }
+
+    else
+    {
+        start = 0;
+    }
+
+    if(start==0)
+    {
+        @try
+        {
+            value0 = [param0 evaluateWithEnvironment:env continueFrom:interruptedAt];
+        }
+        @catch(UMTerm_Interrupt *interrupt)
+        {
+            UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+            e.name = [self functionName];
+            e.position = 0;
+            [interrupt recordEntry:e];
+            @throw(interrupt);
+        }
+    }
+    
+    @try
+    {
+        value1 = [param1 evaluateWithEnvironment:env continueFrom:interruptedAt];
+    }
+    @catch(UMTerm_Interrupt *interrupt)
+    {
+        UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+        e.name = [self functionName];
+        e.position = 1;
+        e.temporaryResult = value0;
+        [interrupt recordEntry:e];
+        @throw(interrupt);
+    }
     
     UMDiscreteValue *r = [value0 discreteIsGreaterThanOrEqualTo:value1];
     return r;

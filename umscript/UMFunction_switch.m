@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_switch.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_switch
 
@@ -31,18 +33,57 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
+    UMDiscreteValue *switchValue;
+    NSInteger start;
+    if(interruptedAt)
+    {
+        UMTerm_CallStackEntry *entry = [interruptedAt pullEntry];
+        start = entry.position;
+        switchValue = entry.temporaryResult;
+    }
+    else
+    {
+        start = 0;
+    }
+
     if(params.count !=2)
     {
         return [UMDiscreteValue discreteNull];
     }
     UMTerm *switchTerm = params[0];
     UMTerm *switchBlock = params[1];
-    
-    UMDiscreteValue *switchValue = [[switchTerm evaluateWithEnvironment:env]convertToString];
+    if(start==0)
+    {
+        @try
+        {
+            switchValue = [switchTerm evaluateWithEnvironment:env continueFrom:interruptedAt];
+        }
+        @catch(UMTerm_Interrupt *interrupt)
+        {
+            UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+            e.name = [self functionName];
+            e.position = 0;
+            [interrupt recordEntry:e];
+            @throw(interrupt);
+        }
+    }
+
     env.jumpTo = switchValue.stringValue;
-    [switchBlock evaluateWithEnvironment:env];
+    @try
+    {
+        [switchBlock evaluateWithEnvironment:env continueFrom:interruptedAt];
+    }
+    @catch(UMTerm_Interrupt *interrupt)
+    {
+        UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+        e.name = [self functionName];
+        e.position = 1;
+        e.temporaryResult = switchValue;
+        [interrupt recordEntry:e];
+        @throw(interrupt);
+    }
     env.breakCalled = NO;
     return [UMDiscreteValue discreteNull];
 }

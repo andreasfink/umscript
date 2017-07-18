@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_or.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_or
 
@@ -30,23 +32,45 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(id)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
-    if(params.count < 2)
+    NSInteger start;
+    UMDiscreteValue *result = NULL;
+    
+    if(interruptedAt)
     {
-        return [UMDiscreteValue discreteNull];
+        UMTerm_CallStackEntry *entry = [interruptedAt pullEntry];
+        start = entry.position;
+        result = entry.temporaryResult;
     }
-    UMDiscreteValue *result = nil;
-    for(UMTerm *entry in params)
+    else
     {
-        UMDiscreteValue *d = [entry evaluateWithEnvironment:env];
-        if(result == nil)
+        start = 0;
+        result = NULL;
+    }
+    
+    NSInteger n = params.count;
+    for(NSInteger i=start;i<n;i++)
+    {
+        UMTerm *entry = params[i];
+        @try
         {
-            result = d;
+            if(result == NULL)
+            {
+                result = [entry evaluateWithEnvironment:env  continueFrom:interruptedAt];
+            }
+            else
+            {
+                result = [result logicOr:[entry evaluateWithEnvironment:env  continueFrom:interruptedAt]];
+            }
         }
-        else
+        @catch(UMTerm_Interrupt *interrupt)
         {
-            result = [result logicOr:d];
+            UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+            e.name = [self functionName];
+            e.position = i;
+            [interrupt recordEntry:e];
+            @throw(interrupt);
         }
     }
     return result;

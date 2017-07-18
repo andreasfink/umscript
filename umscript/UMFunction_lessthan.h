@@ -10,6 +10,6 @@
 
 @interface UMFunction_lessthan : UMFunction
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(id)env;
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt;
 
 @end

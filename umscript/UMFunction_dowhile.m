@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_dowhile.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_dowhile
 
@@ -30,27 +32,66 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
     if(params.count !=2)
     {
         return [UMDiscreteValue discreteNull];
     }
+
+    NSInteger start;
+    if(interruptedAt)
+    {
+        UMTerm_CallStackEntry *entry = [interruptedAt pullEntry];
+        start = entry.position;
+    }
+    else
+    {
+        start = 0;
+    }
+
     UMTerm *thenDoTerm = params[0];
     UMTerm *conditionTerm = params[1];
-    
+
     UMDiscreteValue *condition;
+    UMDiscreteValue *doValue;
+    
     env.breakCalled=NO;
     do
     {
-        [thenDoTerm evaluateWithEnvironment:env];
-        if(    env.breakCalled==YES)
+        if(start==0)
         {
-            break;
+            @try
+            {
+                doValue = [thenDoTerm evaluateWithEnvironment:env  continueFrom:interruptedAt];
+            }
+            @catch(UMTerm_Interrupt *interrupt)
+            {
+                UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+                e.name = [self functionName];
+                e.position = 0;
+                [interrupt recordEntry:e];
+                @throw(interrupt);
+            }
+            if(env.breakCalled==YES)
+            {
+                break;
+            }
         }
-        condition = [conditionTerm evaluateWithEnvironment:env];
+        @try
+        {
+            condition = [conditionTerm evaluateWithEnvironment:env  continueFrom:interruptedAt];
+        }
+        @catch(UMTerm_Interrupt *interrupt)
+        {
+            UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+            e.name = [self functionName];
+            e.position = 1;
+            [interrupt recordEntry:e];
+            @throw(interrupt);
+        }
+        start = 0;
     } while(condition.boolValue);
-    env.breakCalled=NO;
     return condition;
 }
 

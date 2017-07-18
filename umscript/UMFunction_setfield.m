@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_setfield.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_setfield
 
@@ -30,7 +32,7 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(id)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
     if([params count] != 2)
     {
@@ -39,11 +41,54 @@
     
     UMTerm *leftTerm  = params[0];
     UMTerm *rightTerm = params[1];
-    UMDiscreteValue *leftValue  = [leftTerm evaluateWithEnvironment:env];
-    UMDiscreteValue *rightValue = [rightTerm evaluateWithEnvironment:env];
+    UMDiscreteValue *leftValue;
+    UMDiscreteValue *rightValue;
+
+    NSInteger start;
+    if(interruptedAt)
+    {
+        UMTerm_CallStackEntry *entry = [interruptedAt pullEntry];
+        start = entry.position;
+        leftValue = entry.temporaryResult;
+    }
+    else
+    {
+        start = 0;
+    }
+
+    if(start==0)
+    {
+        @try
+        {
+            leftValue = [leftTerm evaluateWithEnvironment:env  continueFrom:interruptedAt];
+        }
+        @catch(UMTerm_Interrupt *interrupt)
+        {
+            UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+            e.name = [self functionName];
+            e.position = 0;
+            [interrupt recordEntry:e];
+            @throw(interrupt);
+        }
+    }
+    
+    @try
+    {
+        rightValue = [rightTerm evaluateWithEnvironment:env  continueFrom:interruptedAt];
+    }
+    @catch(UMTerm_Interrupt *interrupt)
+    {
+        UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+        e.name = [self functionName];
+        e.position = 1;
+        e.temporaryResult = leftValue;
+        [interrupt recordEntry:e];
+        @throw(interrupt);
+    }
+    
     NSString *variableName = [leftValue stringValue];
 
-    [env setVariable:rightValue forKey:variableName];
+    [env setField:rightValue forKey:variableName];
     return rightValue;
 }
 

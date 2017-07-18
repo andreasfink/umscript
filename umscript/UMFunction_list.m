@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_list.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_list
 
@@ -31,8 +33,19 @@
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)xparams environment:(UMEnvironment *)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)xparams environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
+    NSInteger start;
+    if(interruptedAt)
+    {
+        UMTerm_CallStackEntry *entry = [interruptedAt pullEntry];
+        start = entry.position;
+    }
+    else
+    {
+        start = 0;
+    }
+
     env.returnValue = nil;
     
     NSMutableDictionary *labelsDict = [[NSMutableDictionary alloc]init];
@@ -70,7 +83,7 @@
     }
     else
     {
-        i=0;
+        i=start;
     }
     do
     {
@@ -84,7 +97,20 @@
         env.returnCalled = NO;
         env.breakCalled = NO;
         
-        UMDiscreteValue *r = [term evaluateWithEnvironment:env];
+        UMDiscreteValue *r;
+        @try
+        {
+            r = [term evaluateWithEnvironment:env continueFrom:interruptedAt];
+        }
+        @catch(UMTerm_Interrupt *interrupt)
+        {
+            UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+            e.name = [self functionName];
+            e.position = i;
+            [interrupt recordEntry:e];
+            @throw(interrupt);
+        }
+        
         if(env.returnCalled)
         {
             env.returnValue = r;

@@ -10,6 +10,7 @@
 #import <ulibasn1/ulibasn1.h>
 
 @class UMEnvironment;
+@class UMTerm_Interrupt;
 
 typedef enum UMDiscreteValueType
 {
@@ -87,7 +88,7 @@ typedef enum UMDiscreteValueType
 - (UMDiscreteValue *)convertToString;
 - (UMDiscreteValue *)convertToData;
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env;
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt;
 
 - (NSString *)description;
 - (id)descriptionDictVal;

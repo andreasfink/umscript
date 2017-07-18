@@ -22,6 +22,10 @@
 		A612C2111EEEDA170096C70F /* UMFunction_sizeOfVar.m in Sources */ = {isa = PBXBuildFile; fileRef = A612C20F1EEEDA170096C70F /* UMFunction_sizeOfVar.m */; };
 		A612C2141EEEDA260096C70F /* UMFunction_sizeOfType.h in Headers */ = {isa = PBXBuildFile; fileRef = A612C2121EEEDA260096C70F /* UMFunction_sizeOfType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A612C2151EEEDA260096C70F /* UMFunction_sizeOfType.m in Sources */ = {isa = PBXBuildFile; fileRef = A612C2131EEEDA260096C70F /* UMFunction_sizeOfType.m */; };
+		A61A24F01F1D7F19004F3972 /* UMTerm_Interrupt.h in Headers */ = {isa = PBXBuildFile; fileRef = A61A24EE1F1D7F19004F3972 /* UMTerm_Interrupt.h */; };
+		A61A24F11F1D7F19004F3972 /* UMTerm_Interrupt.m in Sources */ = {isa = PBXBuildFile; fileRef = A61A24EF1F1D7F19004F3972 /* UMTerm_Interrupt.m */; };
+		A61A24F41F1D84C0004F3972 /* UMTerm_CallStackEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A61A24F21F1D84C0004F3972 /* UMTerm_CallStackEntry.h */; };
+		A61A24F51F1D84C0004F3972 /* UMTerm_CallStackEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A61A24F31F1D84C0004F3972 /* UMTerm_CallStackEntry.m */; };
 		A62B98F11946A8A6005B48BC /* UMFunction_substr.h in Headers */ = {isa = PBXBuildFile; fileRef = A62B98EF1946A8A6005B48BC /* UMFunction_substr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A62B98F21946A8A6005B48BC /* UMFunction_substr.m in Sources */ = {isa = PBXBuildFile; fileRef = A62B98F01946A8A6005B48BC /* UMFunction_substr.m */; };
 		A62B98F51946B255005B48BC /* UMFunction_list.h in Headers */ = {isa = PBXBuildFile; fileRef = A62B98F31946B255005B48BC /* UMFunction_list.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -215,6 +219,10 @@
 		A612C20F1EEEDA170096C70F /* UMFunction_sizeOfVar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMFunction_sizeOfVar.m; sourceTree = "<group>"; };
 		A612C2121EEEDA260096C70F /* UMFunction_sizeOfType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMFunction_sizeOfType.h; sourceTree = "<group>"; };
 		A612C2131EEEDA260096C70F /* UMFunction_sizeOfType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMFunction_sizeOfType.m; sourceTree = "<group>"; };
+		A61A24EE1F1D7F19004F3972 /* UMTerm_Interrupt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMTerm_Interrupt.h; sourceTree = "<group>"; };
+		A61A24EF1F1D7F19004F3972 /* UMTerm_Interrupt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTerm_Interrupt.m; sourceTree = "<group>"; };
+		A61A24F21F1D84C0004F3972 /* UMTerm_CallStackEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMTerm_CallStackEntry.h; sourceTree = "<group>"; };
+		A61A24F31F1D84C0004F3972 /* UMTerm_CallStackEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTerm_CallStackEntry.m; sourceTree = "<group>"; };
 		A62B98EF1946A8A6005B48BC /* UMFunction_substr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_substr.h; sourceTree = "<group>"; };
 		A62B98F01946A8A6005B48BC /* UMFunction_substr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_substr.m; sourceTree = "<group>"; };
 		A62B98F31946B255005B48BC /* UMFunction_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_list.h; sourceTree = "<group>"; };
@@ -635,6 +643,10 @@
 				A6A04AB81EE6D5B6007C203A /* UMTerm.asn */,
 				A6835BE319297AE30090FC94 /* UMTerm.h */,
 				A6835BE419297AE30090FC94 /* UMTerm.m */,
+				A61A24F21F1D84C0004F3972 /* UMTerm_CallStackEntry.h */,
+				A61A24F31F1D84C0004F3972 /* UMTerm_CallStackEntry.m */,
+				A61A24EE1F1D7F19004F3972 /* UMTerm_Interrupt.h */,
+				A61A24EF1F1D7F19004F3972 /* UMTerm_Interrupt.m */,
 			);
 			path = umscript;
 			sourceTree = "<group>";
@@ -709,6 +721,7 @@
 				A6835C2019297AE30090FC94 /* UMFunction_setfield.h in Headers */,
 				A6916D19192BF61500F6BFF4 /* UMFunction_switch.h in Headers */,
 				A6B5CE71192D626B00F02FCA /* glueterm.h in Headers */,
+				A61A24F01F1D7F19004F3972 /* UMTerm_Interrupt.h in Headers */,
 				A6916CFB192BE7BE00F6BFF4 /* UMFunction_for.h in Headers */,
 				A612C1F81EEE9B540096C70F /* UMFunction_arrayAccess.h in Headers */,
 				A6916D0A192BEE4B00F6BFF4 /* UMFunction_predecrease.h in Headers */,
@@ -732,6 +745,7 @@
 				A6EEDB691929DD1F0090FC94 /* umscript.yl.h in Headers */,
 				A612C2101EEEDA170096C70F /* UMFunction_sizeOfVar.h in Headers */,
 				A6835C8F19297F990090FC94 /* UMScriptDocument.h in Headers */,
+				A61A24F41F1D84C0004F3972 /* UMTerm_CallStackEntry.h in Headers */,
 				A6835BE719297AE30090FC94 /* UMDiscreteValue.h in Headers */,
 				A6835C1819297AE30090FC94 /* UMFunction_modulo.h in Headers */,
 				A65D34C9192BAE130090FC94 /* UMFunction_assign.h in Headers */,
@@ -963,6 +977,7 @@
 				A6835BF119297AE30090FC94 /* UMFunction_bit_or.m in Sources */,
 				A6835C0319297AE30090FC94 /* UMFunction_greaterthan.m in Sources */,
 				A6835C1D19297AE30090FC94 /* UMFunction_notequal.m in Sources */,
+				A61A24F51F1D84C0004F3972 /* UMTerm_CallStackEntry.m in Sources */,
 				A6835C1B19297AE30090FC94 /* UMFunction_sub.m in Sources */,
 				A6835BF919297AE30090FC94 /* UMFunction_block.m in Sources */,
 				A6835C2119297AE30090FC94 /* UMFunction_setfield.m in Sources */,
@@ -998,6 +1013,7 @@
 				A6835C0719297AE30090FC94 /* UMFunction_lessthan.m in Sources */,
 				A6E69D951F00F1C5007C203A /* NSString+UMScript.m in Sources */,
 				A6835C0D19297AE30090FC94 /* UMFunction_or.m in Sources */,
+				A61A24F11F1D7F19004F3972 /* UMTerm_Interrupt.m in Sources */,
 				A62B98F21946A8A6005B48BC /* UMFunction_substr.m in Sources */,
 				A612C2151EEEDA260096C70F /* UMFunction_sizeOfType.m in Sources */,
 				A6835C2319297AE30090FC94 /* UMFunction_setvar.m in Sources */,
@@ -1331,6 +1347,7 @@
 				A673BEBE1F1360E70026A4CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 		A6A3A9FD19297741007FFC7B /* Build configuration list for PBXProject "umscript" */ = {
 			isa = XCConfigurationList;

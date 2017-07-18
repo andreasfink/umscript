@@ -7,6 +7,8 @@
 //
 
 #import "UMFunction_modulo.h"
+#import "UMTerm_CallStackEntry.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMFunction_modulo
 
@@ -23,29 +25,58 @@
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
+    if(self)
+    {
         self.name = @"modulo";
         [env log:self.name];
     }
     return self;
 }
 
-- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(id)env
+- (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
+    NSInteger start;
     UMDiscreteValue *result = NULL;
-    for(UMTerm *entry in params)
+    
+    if(interruptedAt)
     {
-        if(result == NULL)
+        UMTerm_CallStackEntry *entry = [interruptedAt pullEntry];
+        start = entry.position;
+        result = entry.temporaryResult;
+    }
+    else
+    {
+        start = 0;
+        result = NULL;
+    }
+    
+    NSInteger n = params.count;
+    for(NSInteger i=start;i<n;i++)
+    {
+        UMTerm *entry = params[i];
+        @try
         {
-            result = [entry evaluateWithEnvironment:env];
+            if(result == NULL)
+            {
+                result = [entry evaluateWithEnvironment:env  continueFrom:interruptedAt];
+            }
+            else
+            {
+                result = [result percentValue:[entry evaluateWithEnvironment:env  continueFrom:interruptedAt]];
+            }
         }
-        else
+        @catch(UMTerm_Interrupt *interrupt)
         {
-            result = [result percentValue:[entry evaluateWithEnvironment:env]];
+            UMTerm_CallStackEntry *e = [[UMTerm_CallStackEntry alloc]init];
+            e.name = [self functionName];
+            e.position = i;
+            [interrupt recordEntry:e];
+            @throw(interrupt);
         }
     }
     return result;
 }
+
 - (NSString *)codeWithEnvironmentStart:(UMEnvironment *)env
 {
     NSString *s=[NSString stringWithFormat:@"("];

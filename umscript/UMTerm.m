@@ -12,6 +12,7 @@
 #import "NSNumber+UMScript.h"
 #import "UMEnvironment.h"
 #import "NSString+UMScript.h"
+#import "UMTerm_Interrupt.h"
 
 @implementation UMTerm
 
@@ -414,7 +415,12 @@
     return dict;
 }
 
-- (UMDiscreteValue *)evaluateWithEnvironment:(UMEnvironment *)xenv;
+- (UMDiscreteValue *)evaluateWithEnvironment:(UMEnvironment *)xenv
+{
+    return [self evaluateWithEnvironment:xenv continueFrom:NULL];
+}
+
+- (UMDiscreteValue *)evaluateWithEnvironment:(UMEnvironment *)xenv continueFrom:(UMTerm_Interrupt *)interruptedFrom;
 {
     UMDiscreteValue *returnvalue;
     switch(_type)
@@ -441,7 +447,16 @@
         }
         case UMTermType_functionCall:
         {
-            returnvalue = [_function evaluateWithParams:_param environment:xenv];
+            @try
+            {
+                [xenv pushStack];
+                returnvalue = [_function evaluateWithParams:_param environment:xenv continueFrom:interruptedFrom];
+                [xenv popStack];
+            }
+            @catch(UMTerm_Interrupt *interruption)
+            {
+                @throw(interruption);
+            }
             break;
         }
         case UMTermType_functionDefinition:
