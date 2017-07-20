@@ -54,6 +54,11 @@
     return self;
 }
 
+- (UMDiscreteValue *)runScriptWithEnvironment:(UMEnvironment *)env
+{
+    return [self runScriptWithEnvironment:env continueFrom:NULL];
+}
+
 - (UMDiscreteValue *)runScriptWithEnvironment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedFrom
 {
     if((_isCompiled==NO) || (_compiledCode==NULL))

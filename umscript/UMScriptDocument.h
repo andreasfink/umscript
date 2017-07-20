@@ -30,6 +30,7 @@
 @property (readwrite,strong)    NSString    *lexerLog;
 @property (readonly, assign,atomic) BOOL    isCompiled;
 
+- (UMDiscreteValue *)runScriptWithEnvironment:(UMEnvironment *)env;
 - (UMDiscreteValue *)runScriptWithEnvironment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedFrom;
 - (NSString *)compileSource;
 - (id)initWithFilename:(NSString *)filename;
