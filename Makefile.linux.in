@@ -8,7 +8,8 @@
 CC=@CC@
 CFLAGS=@CFLAGS@ -Wno-typedef-redefinition
 LDFLAGS=@LDFLAGS@
-
+BISON=@BISON@
+FLEX=@FLEX@
 LIB=lib@PROJECT_NAME@.@SHARED_LIBRARY_EXTENSION@
 PKGCONFIGFILE=umscript.pc
 MAJORVER=@MAJORVER@
@@ -30,9 +31,9 @@ ${LIB}: ${OFILES} language/_generated_umscript.y.h
 	./make_version
 	${CC} -shared -o ${LIB}  ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}
 
-build/uexe:	build/uexe.o
+build/uexe:	build/uexe.o ${LIB}
 	mkdir -p build
-	${CC} ${LDFLAGS} -l:libumscript.so.1.8 -l:libulibasn1.so.1.8  ${LIBS} -o build/uexe build/uexe.o
+	${CC} ${LDFLAGS} ${LIB} ${LIBS} -o build/uexe build/uexe.o
 
 build/uexe.o:	uexe/main.m
 	mkdir -p build
@@ -56,19 +57,16 @@ install: ${LIB} build/uexe
 	cp $(HFILES) ${DESTDIR}/usr/local/include/umscript
 	ldconfig
 
-#/usr/local/bin/flex --outfile language/_generated_umscript.l.m language/umscript.l
-#/usr/local/bin/bison  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
-
 language/flex_definitions.h: language/_generated_umscript.y.h
 
 language/_generated_umscript.l.m:	language/umscript.l language/_generated_umscript.y.h
-	/usr/local/bin/flex --outfile language/_generated_umscript.l.m language/umscript.l
+	$(FLEX) --outfile language/_generated_umscript.l.m language/umscript.l
 
 language/_generated_umscript.y.m:	language/umscript.y
-	/usr/local/bin/bison  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
+	$(BISON)  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
 
 language/_generated_umscript.y.h:	language/umscript.y
-	/usr/local/bin/bison  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
+	$(BISON) --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
 
 clean:
 	rm -f $(LIB) $(OFILES)

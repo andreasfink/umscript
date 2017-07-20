@@ -144,7 +144,7 @@ int main(int argc, const char * argv[])
             fprintf(stdout,"%s",r.UTF8String);
         }
 
-        UMDiscreteValue *result = [doc runScriptWithEnvironment:env];
+		UMDiscreteValue *result = [doc runScriptWithEnvironment:env continueFrom:NULL];
 
         NSString *s = [NSString stringWithFormat:@"ReturnValue: %@",result.description];
         fprintf(stdout,"%s\n",s.UTF8String);

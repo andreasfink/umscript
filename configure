@@ -601,6 +601,8 @@ CPPFLAGS
 LDFLAGS
 CFLAGS
 CC
+FLEX
+BISON
 RANLIB
 LIBTOOL
 EXE_EXT
@@ -1838,7 +1840,7 @@ MAJORVER=`echo $VERSION | cut -f1 -d.`
 MINORVER=`echo $VERSION | cut -f2 -d.`
 REVISION=`echo $VERSION | cut -f3 -d.`
 CONFIG_HEADER=umscript_config.h
-DEPENDENT_PKGCONFIGS="ulib"
+DEPENDENT_PKGCONFIGS="ulib ulibasn1"
 FRAMEWORKS="-framework ulib"
 PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 export PKG_CONFIG_PATH
@@ -1995,11 +1997,15 @@ case "$host" in
 	LIBTOOL="libtool -static -o"
 	LIBS="$LIBS -Lsrc"
 	SHARED_LIBRARY_EXTENSION=dylib
+	BISON=/usr/local/bin/bison
+	FLEX=/usr/local/bin/flex
     ;;
 
   *-linux-*)
 	CC=clang
 	CXX=clang++
+	BISON=bison
+	FLEX=flex
 	CFLAGS="$CFLAGS -std=c99 -fPIC -DLINUX -D_XOPEN_SOURCE=700 -D_POSIX_SOURCE"
 	DEBIAN_VERSION=`cat /etc/debian_version | cut -f1 -d.`
 	if [ "$DEBIAN_VERSION" == "8" ]
@@ -2033,6 +2039,9 @@ case "$host" in
     SHARED_FLAGS="-shared"
     ;;
 esac
+
+
+
 
 
 
