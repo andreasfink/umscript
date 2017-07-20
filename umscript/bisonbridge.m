@@ -11,7 +11,7 @@
 #include "UMScriptCompilerEnvironment.h"
 #include "umscript.yl.h"
 
-#include "_generated_umscript.y.h"
+#include "../language/_generated_umscript.y.h"
 
 
 
