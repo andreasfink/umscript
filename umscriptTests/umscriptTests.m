@@ -234,6 +234,24 @@
     XCTAssertTrue(result.intValue==101,@"should be 102 but is %d",result.intValue);
 }
 
+
+- (void)testScript3
+{
+    NSString *code = @"int main() { "
+    @"$b = 7;"
+    @"for($a=1;$a<5;$a++)"
+    @"{"
+    @"  $b++;"
+    @"}"
+    @"return $b; }";
+    UMScriptDocument *s =  [[UMScriptDocument alloc]initWithCode:code];
+    s.name = @"Untitled";
+    [s compileSource];
+    UMDiscreteValue *result = [s runScriptWithEnvironment:env];
+
+    XCTAssertTrue(result.intValue==11,@"should be  but is %d",result.intValue);
+}
+
 - (void)testBlock
 {
     NSString *code = @"int main() { $a = 1;"

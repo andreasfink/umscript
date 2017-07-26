@@ -34,7 +34,7 @@
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
-    if(params.count !=2)
+    if(params.count !=4)
     {
         return [UMDiscreteValue discreteNull];
     }
