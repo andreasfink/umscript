@@ -335,6 +335,14 @@
                     {
                         f = [[UMFunction_list alloc]initWithEnvironment:context];
                     }
+                    else if([name isEqualTo:[UMFunction_equalCaseInsensitive functionName]])
+                    {
+                        f = [[UMFunction_equalCaseInsensitive alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_stringCompare functionName]])
+                    {
+                        f = [[UMFunction_stringCompare alloc]initWithEnvironment:context];
+                    }
                     _function = f;
                     if(_function)
                     {
@@ -1457,6 +1465,10 @@
         f = [[UMFunction_substr alloc]initWithEnvironment:context];
     }
     else if([name isEqualTo:[UMFunction_list functionName]])
+    {
+        f = [[UMFunction_list alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_equalCaseInsensitive functionName]])
     {
         f = [[UMFunction_list alloc]initWithEnvironment:context];
     }

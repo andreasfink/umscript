@@ -93,6 +93,7 @@ typedef enum UMDiscreteValueType
 - (NSString *)description;
 - (id)descriptionDictVal;
 
+- (UMDiscreteValue *)discreteIsCaseInsensitiveEqualTo:(UMDiscreteValue *)bval;
 - (UMDiscreteValue *)discreteIsEqualTo:(UMDiscreteValue *)bval;
 - (UMDiscreteValue *)discreteIsNotEqualTo:(UMDiscreteValue *)bval;
 - (UMDiscreteValue *)discreteIsGreaterThan:(UMDiscreteValue *)bval;

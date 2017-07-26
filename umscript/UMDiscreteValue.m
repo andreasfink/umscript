@@ -891,6 +891,35 @@
 
 }
 
+- (UMDiscreteValue *)discreteIsCaseInsensitiveEqualTo:(UMDiscreteValue *)bval
+{
+    BOOL r;
+    if((type==UMVALUE_NULL) || (bval.type==UMVALUE_NULL))
+    {
+        r = (type == bval.type);
+    }
+    else if((self.isNumberType) && (bval.isNumberType))
+    {
+        r = [value isEqualToValue:bval.value];
+    }
+    else if((type==UMVALUE_STRING) && (bval.type==UMVALUE_STRING))
+    {
+        r = [[value lowercaseString] isEqualToString:[bval.value lowercaseString]];
+    }
+    else if((type==UMVALUE_DATA) || (bval.type==UMVALUE_DATA))
+    {
+        r = [value isEqualToData:bval.value];
+    }
+    else
+    {
+        NSString *a = [[self stringValue] lowercaseString];
+        NSString *b = [[bval stringValue] lowercaseString];
+        r = [a isEqualToString:b];
+    }
+    UMDiscreteValue *result = [UMDiscreteValue discreteBool:r];
+    return result;
+}
+
 - (UMDiscreteValue *)discreteIsEqualTo:(UMDiscreteValue *)bval
 {
     BOOL r;

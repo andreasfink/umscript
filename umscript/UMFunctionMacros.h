@@ -61,5 +61,7 @@
 #import "UMFunction_sizeOfVar.h"
 #import "UMFunction_sizeOfType.h"
 #import "UMFunction_starIdentifier.h"
+#import "UMFunction_stringCompare.h"
+#import "UMFunction_equalCaseInsensitive.h"
 
 
