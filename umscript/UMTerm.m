@@ -343,6 +343,10 @@
                     {
                         f = [[UMFunction_stringCompare alloc]initWithEnvironment:context];
                     }
+                    else if([name isEqualTo:[UMFunction_datetime functionName]])
+                    {
+                        f = [[UMFunction_datetime alloc]initWithEnvironment:context];
+                    }
                     _function = f;
                     if(_function)
                     {

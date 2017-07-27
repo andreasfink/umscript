@@ -184,6 +184,8 @@
 		A6EEDB6C1929DE800090FC94 /* _generated_umscript.l.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EEDB6A1929DE800090FC94 /* _generated_umscript.l.m */; };
 		A6EEDB6D1929DE800090FC94 /* _generated_umscript.y.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EEDB6B1929DE800090FC94 /* _generated_umscript.y.m */; };
 		A6EEDB791929F9810090FC94 /* test1.ums in Resources */ = {isa = PBXBuildFile; fileRef = A6EEDB781929F9810090FC94 /* test1.ums */; };
+		A6F8AE031F2A191C00B9512E /* UMFunction_datetime.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F8AE011F2A191C00B9512E /* UMFunction_datetime.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6F8AE041F2A191C00B9512E /* UMFunction_datetime.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F8AE021F2A191C00B9512E /* UMFunction_datetime.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -393,6 +395,8 @@
 		A6F694241B4E85B80090FC94 /* Makefile.linux */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.linux; sourceTree = "<group>"; };
 		A6F694251B4E85B80090FC94 /* Makefile.osx.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.osx.in; sourceTree = "<group>"; };
 		A6F694261B4E85B80090FC94 /* umscript.pc */ = {isa = PBXFileReference; lastKnownFileType = text; path = umscript.pc; sourceTree = "<group>"; };
+		A6F8AE011F2A191C00B9512E /* UMFunction_datetime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_datetime.h; sourceTree = "<group>"; };
+		A6F8AE021F2A191C00B9512E /* UMFunction_datetime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_datetime.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -648,6 +652,8 @@
 				A612C2071EEED7A30096C70F /* UMFunction_castTo.m */,
 				A612C20A1EEED8680096C70F /* UMFunction_addressOf.h */,
 				A612C20B1EEED8680096C70F /* UMFunction_addressOf.m */,
+				A6F8AE011F2A191C00B9512E /* UMFunction_datetime.h */,
+				A6F8AE021F2A191C00B9512E /* UMFunction_datetime.m */,
 				A6835BDA19297AE30090FC94 /* UMFunctionMacros.h */,
 				A6835BE119297AE30090FC94 /* umscript.h */,
 				A6835C9E19298C110090FC94 /* UMScriptCompilerEnvironment.h */,
@@ -766,6 +772,7 @@
 				A61A24F41F1D84C0004F3972 /* UMTerm_CallStackEntry.h in Headers */,
 				A6835BE719297AE30090FC94 /* UMDiscreteValue.h in Headers */,
 				A6835C1819297AE30090FC94 /* UMFunction_modulo.h in Headers */,
+				A6F8AE031F2A191C00B9512E /* UMFunction_datetime.h in Headers */,
 				A65D34C9192BAE130090FC94 /* UMFunction_assign.h in Headers */,
 				A655CB6C1F0A46B0007C0B5C /* UMFunction_external.h in Headers */,
 				A6835CA019298C110090FC94 /* UMScriptCompilerEnvironment.h in Headers */,
@@ -1001,6 +1008,7 @@
 				A607CDF21F291339006A832B /* UMFunction_equalCaseInsensitive.m in Sources */,
 				A6835BF919297AE30090FC94 /* UMFunction_block.m in Sources */,
 				A6835C2119297AE30090FC94 /* UMFunction_setfield.m in Sources */,
+				A6F8AE041F2A191C00B9512E /* UMFunction_datetime.m in Sources */,
 				A6835C2919297AE30090FC94 /* UMFunction.m in Sources */,
 				A6835BF319297AE30090FC94 /* UMFunction_bit_shiftleft.m in Sources */,
 				A6B5CE9219301FEB00F02FCA /* UMFunction_break.m in Sources */,
