@@ -20,7 +20,7 @@
 
 - (NSString *)functionName
 {
-    return @"stringcompare";
+    return [UMFunction_stringCompare functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
@@ -28,8 +28,7 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"stringcompare";
-        [env log:self.name];
+        [env log:self.functionName];
     }
     return self;
 }

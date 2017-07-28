@@ -19,15 +19,14 @@
 
 - (NSString *)functionName
 {
-    return @"setvar";
+    return [UMFunction_setvar functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
     if(self)    {
-        self.name = @"setvar";
-        [env log:self.name];
+        [env log:self.functionName];
     }
     return self;
 }

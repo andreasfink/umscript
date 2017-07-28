@@ -14,21 +14,21 @@
 
 + (NSString *)functionName
 {
-    return @"preincrease";
+    return @"__preincrease";
 }
 
 - (NSString *)functionName
 {
-    return @"preincrease";
+    return [UMFunction_preincrease functionName];
 }
 
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"preincrease";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
     }
     return self;
 }

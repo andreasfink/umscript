@@ -13,20 +13,20 @@
 
 + (NSString *)functionName
 {
-    return @"structAccess";
+    return @"__structAccess";
 }
 
 - (NSString *)functionName
 {
-    return @"structAccess";
+    return [UMFunction_structAccess functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"[structAccess]";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
     }
     return self;
 }

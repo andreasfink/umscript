@@ -14,21 +14,21 @@
 
 + (NSString *)functionName
 {
-    return @"greaterorequal";
+    return @"__greaterorequal";
 }
 
 - (NSString *)functionName
 {
-    return @"greaterorequal";
+    return [UMFunction_greaterorequal functionName];
 }
 
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"greaterorequal";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
     }
     return self;
 }

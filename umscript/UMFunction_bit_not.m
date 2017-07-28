@@ -15,12 +15,12 @@
 
 + (NSString *)functionName
 {
-    return @"bit_not";
+    return @"__bit_not";
 }
 
 - (NSString *)functionName
 {
-    return @"bit_not";
+    return [UMFunction_bit_not functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
@@ -28,8 +28,7 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"bit_not";
-        [env log:self.name];
+        [env log:self.functionName];
     }
     return self;
 }

@@ -14,20 +14,20 @@
 
 + (NSString *)functionName
 {
-    return @"longlong";
+    return @"__longlong";
 }
 
 - (NSString *)functionName
 {
-    return @"longlong";
+    return [UMFunction_longlong functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"longlong";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
     }
     return self;
 }

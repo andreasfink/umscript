@@ -13,22 +13,23 @@
 
 @implementation UMFunction_block
 
-- (NSString *)functionName
-{
-    return @"bit_block";
-}
-
 + (NSString *)functionName
 {
-    return @"bit_block";
+    return @"__bit_block";
 }
+
+- (NSString *)functionName
+{
+    return [UMFunction_block functionName];
+}
+
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"block";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
    }
     return self;
 }

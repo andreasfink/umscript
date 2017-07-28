@@ -14,12 +14,12 @@
 
 + (NSString *)functionName
 {
-    return @"bit_shiftright";
+    return @"__bit_shiftright";
 }
 
 - (NSString *)functionName
 {
-    return @"bit_shiftright";
+    return [UMFunction_bit_shiftright functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
@@ -27,8 +27,7 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"bit_shiftright";
-        [env log:self.name];
+        [env log:self.functionName];
     }
     return self;
 }

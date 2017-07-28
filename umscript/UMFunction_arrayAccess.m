@@ -14,21 +14,21 @@
 
 + (NSString *)functionName
 {
-    return @"arrayAccess";
+    return @"__arrayAccess";
 }
 
 
 - (NSString *)functionName
 {
-    return @"arrayAccess";
+    return [UMFunction_arrayAccess functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"[arrayAccess]";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
     }
     return self;
 }

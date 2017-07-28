@@ -14,20 +14,20 @@
 
 + (NSString *)functionName
 {
-    return @"lessorequal";
+    return @"__lessorequal";
 }
 
 - (NSString *)functionName
 {
-    return @"lessorequal";
+    return [UMFunction_lessorequal functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"lessorequal";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
     }
     return self;
 }

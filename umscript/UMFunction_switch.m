@@ -19,7 +19,7 @@
 
 - (NSString *)functionName
 {
-    return @"switch";
+    return [UMFunction_switch functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env

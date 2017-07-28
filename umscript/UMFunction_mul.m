@@ -14,20 +14,20 @@
 
 + (NSString *)functionName
 {
-    return @"mul";
+    return @"__mul";
 }
 
 - (NSString *)functionName
 {
-    return @"mul";
+    return [UMFunction_mul functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"mul";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
     }
     return self;
 }

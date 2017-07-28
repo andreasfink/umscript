@@ -14,12 +14,12 @@
 
 + (NSString *)functionName
 {
-    return @"bit_or";
+    return @"__bit_or";
 }
 
 - (NSString *)functionName
 {
-    return @"bit_or";
+    return [UMFunction_bit_or functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
@@ -27,8 +27,7 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"bit_or";
-        [env log:self.name];
+        [env log:self.functionName];
     }
     return self;
 }

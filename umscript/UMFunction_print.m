@@ -19,15 +19,15 @@
 
 - (NSString *)functionName
 {
-    return @"print";
+    return [UMFunction_print functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"print";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
    }
     return self;
 }

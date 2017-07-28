@@ -14,19 +14,19 @@
 
 + (NSString *)functionName
 {
-    return @"or";
+    return @"__or";
 }
 
 - (NSString *)functionName
 {
-    return @"or";
+    return [UMFunction_or functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"or";
+    if(self)
+    {
         [env log:self.name];
     }
     return self;

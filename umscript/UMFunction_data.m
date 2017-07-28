@@ -14,20 +14,20 @@
 
 + (NSString *)functionName
 {
-    return @"data";
+    return @"__data";
 }
 
 - (NSString *)functionName
 {
-    return @"data";
+    return @"__data";
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"data";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
    }
     return self;
 }

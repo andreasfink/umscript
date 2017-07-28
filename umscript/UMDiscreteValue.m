@@ -1756,4 +1756,78 @@
     }
 }
 
+
+- (UMDiscreteValue *)hashWithOptions:(UMDiscreteValue *)hashOptions
+{
+    int hashMethod = 1; // SHA1
+    int outputFormat = 1; // 1 = data, 2 = hex string
+
+    if ([hashOptions isNull])
+    {
+        hashMethod = 1;
+        outputFormat = 1;
+    }
+    NSString *optionString = [hashOptions stringValue];
+    NSArray *options = [optionString componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    for(NSString *option in options)
+    {
+        if([option isEqualToString:@"SHA1"])
+        {
+            hashMethod = 1;
+        }
+        else if([option isEqualToString:@"SHA224"])
+        {
+            hashMethod = 224;
+        }
+        else if([option isEqualToString:@"SHA256"])
+        {
+            hashMethod = 256;
+        }
+        else if([option isEqualToString:@"SHA384"])
+        {
+            hashMethod = 384;
+        }
+        else if([option isEqualToString:@"SHA512"])
+        {
+            hashMethod = 512;
+        }
+        else if([option isEqualToString:@"string"])
+        {
+            outputFormat = 1;
+        }
+        else if([option isEqualToString:@"data"])
+        {
+            outputFormat = 2;
+        }
+    }
+    NSData *input = [self dataValue];
+    NSData *output;
+    switch(hashMethod)
+    {
+        case 224:
+            output = [input sha224];
+            break;
+        case 256:
+            output = [input sha256];
+            break;
+        case 384:
+            output = [input sha384];
+            break;
+        case 512:
+            output = [input sha512];
+            break;
+        case 1:
+        default:
+            output = [input sha1];
+            break;
+    }
+    if(outputFormat==2)
+    {
+        return [UMDiscreteValue discreteData:output];
+    }
+    return [UMDiscreteValue discreteString:[output hexString]];
+}
+
+
 @end

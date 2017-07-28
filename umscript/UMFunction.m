@@ -117,7 +117,7 @@
 
 + (NSString *)functionName
 {
-    return @"function";
+    return @"__function";
 }
 
 - (NSString *)functionName

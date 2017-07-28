@@ -10,9 +10,14 @@
 @implementation UMFunction_sizeOfType
 
 
++ (NSString *)functionName
+{
+    return @"__sizeOfType";
+}
+
 - (NSString *)functionName
 {
-    return @"sizeOfType";
+    return [UMFunction_sizeOfType functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
@@ -20,8 +25,7 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"sizeOfType";
-        [env log:self.name];
+        [env log:self.functionName];
     }
     return self;
 }

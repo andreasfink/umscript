@@ -12,14 +12,14 @@
 
 @implementation UMFunction_continue
 
-- (NSString *)functionName
++ (NSString *)functionName
 {
     return @"continue";
 }
 
-+ (NSString *)functionName
+- (NSString *)functionName
 {
-    return @"continue";
+    return [UMFunction_continue functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
@@ -27,8 +27,7 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"continue";
-        [env log:self.name];
+        [env log:self.functionName];
    }
     return self;
 }

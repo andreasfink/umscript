@@ -14,20 +14,20 @@
 
 + (NSString *)functionName
 {
-    return @"greaterthan";
+    return @"__greaterthan";
 }
 
 - (NSString *)functionName
 {
-    return @"greaterthan";
+    return [UMFunction_greaterthan functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"greaterthan";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
     }
     return self;
 }

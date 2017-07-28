@@ -347,6 +347,10 @@
                     {
                         f = [[UMFunction_datetime alloc]initWithEnvironment:context];
                     }
+                    else if([name isEqualTo:[UMFunction_hash functionName]])
+                    {
+                        f = [[UMFunction_hash alloc]initWithEnvironment:context];
+                    }
                     _function = f;
                     if(_function)
                     {

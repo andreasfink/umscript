@@ -21,7 +21,7 @@
 
 - (NSString *)functionName
 {
-    return @"datetime";
+    return [UMFunction_datetime functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
@@ -29,8 +29,7 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"datetime";
-        [env log:self.name];
+        [env log:self.functionName];
     }
     return self;
 }

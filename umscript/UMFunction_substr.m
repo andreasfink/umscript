@@ -19,15 +19,15 @@
 
 - (NSString *)functionName
 {
-    return @"substr";
+    return [UMFunction_substr functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"substr";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
     }
     return self;
 }

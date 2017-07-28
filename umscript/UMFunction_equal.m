@@ -14,12 +14,12 @@
 
 + (NSString *)functionName
 {
-    return @"equal";
+    return @"__equal";
 }
 
 - (NSString *)functionName
 {
-    return @"equal";
+    return [UMFunction_equal functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
@@ -27,8 +27,7 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"equal";
-        [env log:self.name];
+        [env log:self.functionName];
     }
     return self;
 }

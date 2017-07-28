@@ -12,22 +12,22 @@
 
 @implementation UMFunction_for
 
-- (NSString *)functionName
-{
-    return @"for";
-}
-
 + (NSString *)functionName
 {
     return @"for";
 }
 
+- (NSString *)functionName
+{
+    return [UMFunction_for functionName];
+}
+
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"for";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
    }
     return self;
 }

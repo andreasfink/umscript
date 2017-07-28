@@ -14,12 +14,12 @@
 
 + (NSString *)functionName
 {
-    return @"equalCaseInsensitive";
+    return @"__equalCaseInsensitive";
 }
 
 - (NSString *)functionName
 {
-    return @"equalCaseInsensitive";
+    return [UMFunction_equalCaseInsensitive functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
@@ -27,8 +27,7 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"equalCaseInsensitive";
-        [env log:self.name];
+        [env log:self.functionName];
     }
     return self;
 }

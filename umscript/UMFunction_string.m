@@ -14,21 +14,21 @@
 
 + (NSString *)functionName
 {
-    return @"string";
+    return @"__string";
 }
 
 - (NSString *)functionName
 {
-    return @"string";
+    return [UMFunction_string functionName];
 }
 
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"string";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
     }
     return self;
 }

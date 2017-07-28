@@ -14,20 +14,20 @@
 
 + (NSString *)functionName
 {
-    return @"bit_xor";
+    return @"__bit_xor";
 }
 
 - (NSString *)functionName
 {
-    return @"bit_xor";
+    return [UMFunction_bit_xor functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"bit_xor";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
     }
     return self;
 }

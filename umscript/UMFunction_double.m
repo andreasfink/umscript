@@ -14,21 +14,21 @@
 
 + (NSString *)functionName
 {
-    return @"double";
+    return @"__double";
 }
 
 - (NSString *)functionName
 {
-    return @"double";
+    return [UMFunction_double functionName];
 }
 
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"double";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
    }
     return self;
 }

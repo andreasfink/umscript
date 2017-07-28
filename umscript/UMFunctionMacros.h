@@ -64,5 +64,6 @@
 #import "UMFunction_stringCompare.h"
 #import "UMFunction_equalCaseInsensitive.h"
 #import "UMFunction_datetime.h"
+#import "UMFunction_hash.h"
 
 

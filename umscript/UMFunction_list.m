@@ -12,14 +12,15 @@
 
 @implementation UMFunction_list
 
+
 + (NSString *)functionName
 {
-    return @"list";
+    return @"__list";
 }
 
 - (NSString *)functionName
 {
-    return @"list";
+    return [UMFunction_list functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
@@ -27,8 +28,7 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"list";
-        [env log:self.name];
+        [env log:self.functionName];
     }
     return self;
 }

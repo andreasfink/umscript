@@ -19,16 +19,16 @@
 
 - (NSString *)functionName
 {
-    return @"endswith";
+    return [UMFunction_endswith functionName];
 }
 
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"endswith";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
     }
     return self;
 }

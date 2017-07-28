@@ -15,12 +15,12 @@
 
 + (NSString *)functionName
 {
-    return @"addressOf";
+    return @"__addressOf";
 }
 
 - (NSString *)functionName
 {
-    return @"addressOf";
+    return [UMFunction_addressOf functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env

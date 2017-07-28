@@ -19,15 +19,15 @@
 
 - (NSString *)functionName
 {
-    return @"goto";
+    return [UMFunction_goto functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"goto";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
    }
     return self;
 }

@@ -9,9 +9,15 @@
 
 @implementation UMFunction_sizeOfVar
 
+
++ (NSString *)functionName
+{
+    return @"__sizeofVar";
+}
+
 - (NSString *)functionName
 {
-    return @"sizeOfVar";
+    return [UMFunction_sizeOfVar functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
@@ -19,8 +25,7 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"sizeOfVar";
-        [env log:self.name];
+        [env log:self.functionName];
     }
     return self;
 }

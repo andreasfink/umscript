@@ -124,6 +124,7 @@ typedef enum UMDiscreteValueType
 
 - (UMDiscreteValue *)increase;
 - (UMDiscreteValue *)decrease;
+- (UMDiscreteValue *)hashWithOptions:(UMDiscreteValue *)hashOptions;
 
 - (BOOL)isNumberType;
 - (NSString *)codeWithEnvironment:(UMEnvironment *)env;

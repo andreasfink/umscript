@@ -14,12 +14,12 @@
 
 + (NSString *)functionName
 {
-    return @"and";
+    return @"__and";
 }
 
 - (NSString *)functionName
 {
-    return @"and";
+    return [UMFunction_and functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
@@ -27,8 +27,7 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name=@"and";
-        [env log:self.name];
+        [env log:self.functionName];
     }
     return self;
 }

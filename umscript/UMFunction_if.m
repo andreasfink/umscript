@@ -19,7 +19,7 @@
 
 - (NSString *)functionName
 {
-    return @"if";
+    return [UMFunction_if functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
@@ -27,8 +27,7 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"if";
-        [env log:self.name];
+        [env log:self.functionName];
     }
     return self;
 }

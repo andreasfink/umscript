@@ -19,7 +19,7 @@
 
 - (NSString *)functionName
 {
-    return @"while";
+    return [UMFunction_while functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env

@@ -14,12 +14,12 @@
 
 + (NSString *)functionName
 {
-    return @"assign";
+    return @"__assign";
 }
 
 - (NSString *)functionName
 {
-    return @"assign";
+    return [UMFunction_assign functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
@@ -27,8 +27,7 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"assign";
-        [env log:self.name];
+        [env log:self.functionName];
     }
     return self;
 }

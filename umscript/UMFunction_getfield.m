@@ -19,15 +19,15 @@
 
 - (NSString *)functionName
 {
-    return @"getfield";
+    return [UMFunction_getfield functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"getfield";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
     }
     return self;
 }

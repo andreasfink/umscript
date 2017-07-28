@@ -15,12 +15,12 @@
 
 + (NSString *)functionName
 {
-    return @"castTo";
+    return @"__castTo";
 }
 
 - (NSString *)functionName
 {
-    return @"castTo";
+    return [UMFunction_castTo functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env

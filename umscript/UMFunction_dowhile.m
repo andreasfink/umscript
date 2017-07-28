@@ -14,20 +14,20 @@
 
 + (NSString *)functionName
 {
-    return @"dowhile";
+    return @"do";
 }
 
 - (NSString *)functionName
 {
-    return @"dowhile";
+    return [UMFunction_dowhile functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"dowhile";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
     }
     return self;
 }

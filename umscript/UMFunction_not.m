@@ -14,12 +14,12 @@
 
 + (NSString *)functionName
 {
-    return @"not";
+    return @"__not";
 }
 
 - (NSString *)functionName
 {
-    return @"not";
+    return [UMFunction_not functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
@@ -27,8 +27,7 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name=@"not";
-        [env log:self.name];
+        [env log:self.functionName];
     }
     return self;
 }

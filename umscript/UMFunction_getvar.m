@@ -19,7 +19,7 @@
 
 - (NSString *)functionName
 {
-    return @"getvar";
+    return [UMFunction_getvar functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
@@ -27,8 +27,7 @@
     self = [super initWithEnvironment:env];
     if(self)
     {
-        self.name = @"getvar";
-        [env log:self.name];
+        [env log:self.functionName];
     }
     return self;
 }

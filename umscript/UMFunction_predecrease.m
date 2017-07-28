@@ -14,20 +14,20 @@
 
 + (NSString *)functionName
 {
-    return @"predecrease";
+    return @"__predecrease";
 }
 
 - (NSString *)functionName
 {
-    return @"predecrease";
+    return [UMFunction_predecrease functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"predecrease";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
    }
     return self;
 }

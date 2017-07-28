@@ -14,20 +14,20 @@
 
 + (NSString *)functionName
 {
-    return @"postdecrease";
+    return @"__postdecrease";
 }
 
 - (NSString *)functionName
 {
-    return @"postdecrease";
+    return [UMFunction_postdecrease functionName];
 }
 
 - (id)initWithEnvironment:(UMEnvironment *)env
 {
     self = [super initWithEnvironment:env];
-    if(self)    {
-        self.name = @"postdecrease";
-        [env log:self.name];
+    if(self)
+    {
+        [env log:self.functionName];
    }
     return self;
 }
