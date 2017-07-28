@@ -15,7 +15,7 @@
 
 + (NSString *)functionName
 {
-    return @"__bit_block";
+    return @"__block";
 }
 
 - (NSString *)functionName
