@@ -65,5 +65,9 @@
 #import "UMFunction_equalCaseInsensitive.h"
 #import "UMFunction_datetime.h"
 #import "UMFunction_hash.h"
+#import "UMFunction_namedlist_add.h"
+#import "UMFunction_namedlist_remove.h"
+#import "UMFunction_namedlist_contains.h"
+
 
 

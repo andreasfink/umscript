@@ -93,6 +93,7 @@
         _functionDictionary  = [[UMSynchronizedSortedDictionary alloc]init];
         _variables           = [[UMSynchronizedSortedDictionary alloc]init];
         _fields              = [[UMSynchronizedSortedDictionary alloc]init];
+        _namedLists          = [[UMSynchronizedDictionary alloc]init];
     }
     return self;
 }
@@ -108,6 +109,7 @@
         _functionDictionary  = [template.functionDictionary copy];
         _variables           = [[UMSynchronizedSortedDictionary alloc]init];
         _fields              = [[UMSynchronizedSortedDictionary alloc]init];
+        _namedLists          = template.namedLists;
     }
     return self;
 }
@@ -199,4 +201,54 @@
 {
     
 }
+
+- (void)namedlist_add:(NSString *)listName value:(NSString *)value
+{
+    if((value) && (listName))
+    {
+        @synchronized (self)
+        {
+            UMSynchronizedDictionary *list = _namedLists[listName];
+            if(list == NULL)
+            {
+                list = [[UMSynchronizedDictionary alloc]init];
+                _namedLists[listName] = list;
+            }
+            list[value] = value;
+        }
+    }
+}
+
+- (void)namedlist_remove:(NSString *)listName value:(NSString *)value
+{
+    if((value) && (listName))
+    {
+        @synchronized (self)
+        {
+            UMSynchronizedDictionary *list = _namedLists[listName];
+            if(list == NULL)
+            {
+                return;
+            }
+            [list removeObjectForKey:value];
+        }
+    }
+}
+
+- (BOOL)namedlist_contains:(NSString *)listName value:(NSString *)value
+{
+    if((value) && (listName))
+    {
+        @synchronized (self)
+        {
+            UMSynchronizedDictionary *list = _namedLists[listName];
+            if((list) && (list[value]))
+            {
+                return YES;
+            }
+       }
+    }
+    return NO;
+}
+
 @end

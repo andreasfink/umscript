@@ -17,6 +17,7 @@
     UMSynchronizedSortedDictionary *_variables;
     UMSynchronizedSortedDictionary *_fields;
     UMSynchronizedSortedDictionary *_functionDictionary;
+    UMSynchronizedDictionary *_namedLists;
     UMDiscreteValue *returnValue;
     BOOL    returnCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
     BOOL    breakCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
@@ -44,6 +45,8 @@
 @property (readwrite,assign) BOOL traceTreeBuildupFlag;
 
 @property (readwrite,strong) UMSynchronizedSortedDictionary *functionDictionary;
+@property (readwrite,strong) UMSynchronizedDictionary *namedLists;
+
 
 - (UMEnvironment *)initWithTemplate:(UMEnvironment *)template;
 - (UMEnvironment *)initWithVarFile:(NSString *)varfile;
@@ -64,5 +67,9 @@
 - (void) print:(NSString *)entry;
 - (void)pushStack;
 - (void)popStack;
+
+- (void)namedlist_add:(NSString *)listName value:(NSString *)value;
+- (void)namedlist_remove:(NSString *)listName value:(NSString *)value;
+- (BOOL)namedlist_contains:(NSString *)listName value:(NSString *)value;
 
 @end

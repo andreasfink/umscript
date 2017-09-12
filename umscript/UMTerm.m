@@ -351,6 +351,19 @@
                     {
                         f = [[UMFunction_hash alloc]initWithEnvironment:context];
                     }
+                    else if([name isEqualTo:[UMFunction_namedlist_add functionName]])
+                    {
+                        f = [[UMFunction_namedlist_add alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_namedlist_remove functionName]])
+                    {
+                        f = [[UMFunction_namedlist_remove alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_namedlist_contains functionName]])
+                    {
+                        f = [[UMFunction_namedlist_contains alloc]initWithEnvironment:context];
+                    }
+
                     _function = f;
                     if(_function)
                     {
@@ -1479,6 +1492,19 @@
     else if([name isEqualTo:[UMFunction_equalCaseInsensitive functionName]])
     {
         f = [[UMFunction_list alloc]initWithEnvironment:context];
+    }
+
+    else if([name isEqualTo:[UMFunction_namedlist_add functionName]])
+    {
+        f = [[UMFunction_namedlist_add alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_namedlist_remove functionName]])
+    {
+        f = [[UMFunction_namedlist_remove alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_namedlist_contains functionName]])
+    {
+        f = [[UMFunction_namedlist_contains alloc]initWithEnvironment:context];
     }
 
     if(_type != UMTermType_identifier)
