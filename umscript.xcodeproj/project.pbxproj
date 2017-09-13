@@ -50,11 +50,11 @@
 		A655CB6C1F0A46B0007C0B5C /* UMFunction_external.h in Headers */ = {isa = PBXBuildFile; fileRef = A655CB6A1F0A46B0007C0B5C /* UMFunction_external.h */; };
 		A655CB6D1F0A46B0007C0B5C /* UMFunction_external.m in Sources */ = {isa = PBXBuildFile; fileRef = A655CB6B1F0A46B0007C0B5C /* UMFunction_external.m */; };
 		A655CB701F0A49E7007C0B5C /* UMFunction_CGlue.h in Headers */ = {isa = PBXBuildFile; fileRef = A655CB6E1F0A49E7007C0B5C /* UMFunction_CGlue.h */; };
-		A657939C1F67E55700F417E8 /* UMFunction_namedlist_add.h in Headers */ = {isa = PBXBuildFile; fileRef = A657939A1F67E55700F417E8 /* UMFunction_namedlist_add.h */; };
+		A657939C1F67E55700F417E8 /* UMFunction_namedlist_add.h in Headers */ = {isa = PBXBuildFile; fileRef = A657939A1F67E55700F417E8 /* UMFunction_namedlist_add.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A657939D1F67E55700F417E8 /* UMFunction_namedlist_add.m in Sources */ = {isa = PBXBuildFile; fileRef = A657939B1F67E55700F417E8 /* UMFunction_namedlist_add.m */; };
-		A65793A01F67E56700F417E8 /* UMFunction_namedlist_remove.h in Headers */ = {isa = PBXBuildFile; fileRef = A657939E1F67E56700F417E8 /* UMFunction_namedlist_remove.h */; };
+		A65793A01F67E56700F417E8 /* UMFunction_namedlist_remove.h in Headers */ = {isa = PBXBuildFile; fileRef = A657939E1F67E56700F417E8 /* UMFunction_namedlist_remove.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A65793A11F67E56700F417E8 /* UMFunction_namedlist_remove.m in Sources */ = {isa = PBXBuildFile; fileRef = A657939F1F67E56700F417E8 /* UMFunction_namedlist_remove.m */; };
-		A65793A41F67E57500F417E8 /* UMFunction_namedlist_contains.h in Headers */ = {isa = PBXBuildFile; fileRef = A65793A21F67E57500F417E8 /* UMFunction_namedlist_contains.h */; };
+		A65793A41F67E57500F417E8 /* UMFunction_namedlist_contains.h in Headers */ = {isa = PBXBuildFile; fileRef = A65793A21F67E57500F417E8 /* UMFunction_namedlist_contains.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A65793A51F67E57500F417E8 /* UMFunction_namedlist_contains.m in Sources */ = {isa = PBXBuildFile; fileRef = A65793A31F67E57500F417E8 /* UMFunction_namedlist_contains.m */; };
 		A65D34B5192B7BE60090FC94 /* umscript.yl.m in Sources */ = {isa = PBXBuildFile; fileRef = A65D34B4192B7BE60090FC94 /* umscript.yl.m */; };
 		A65D34C0192BAA8A0090FC94 /* UMFunction_greaterorequal.m in Sources */ = {isa = PBXBuildFile; fileRef = A65D34BE192BAA8A0090FC94 /* UMFunction_greaterorequal.m */; };
