@@ -68,6 +68,7 @@
 #import "UMFunction_namedlist_add.h"
 #import "UMFunction_namedlist_remove.h"
 #import "UMFunction_namedlist_contains.h"
+#import "UMFunction_regex.h"
 
 
 

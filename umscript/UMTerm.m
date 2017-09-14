@@ -363,6 +363,10 @@
                     {
                         f = [[UMFunction_namedlist_contains alloc]initWithEnvironment:context];
                     }
+                    else if([name isEqualTo:[UMFunction_regex functionName]])
+                    {
+                        f = [[UMFunction_regex alloc]initWithEnvironment:context];
+                    }
 
                     _function = f;
                     if(_function)
@@ -1506,6 +1510,11 @@
     {
         f = [[UMFunction_namedlist_contains alloc]initWithEnvironment:context];
     }
+    else if([name isEqualTo:[UMFunction_regex functionName]])
+    {
+        f = [[UMFunction_regex alloc]initWithEnvironment:context];
+    }
+    
 
     if(_type != UMTermType_identifier)
     {
