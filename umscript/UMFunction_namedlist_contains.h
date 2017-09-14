@@ -6,7 +6,7 @@
 //
 //
 
-#import <umscript/umscript.h>
+#import "UMFunction.h"
 
 @interface UMFunction_namedlist_contains : UMFunction
 

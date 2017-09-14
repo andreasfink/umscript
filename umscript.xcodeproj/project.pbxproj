@@ -62,6 +62,13 @@
 		A65D34C5192BAAA40090FC94 /* UMFunction_lessorequal.m in Sources */ = {isa = PBXBuildFile; fileRef = A65D34C3192BAAA40090FC94 /* UMFunction_lessorequal.m */; };
 		A65D34C9192BAE130090FC94 /* UMFunction_assign.h in Headers */ = {isa = PBXBuildFile; fileRef = A65D34C7192BAE130090FC94 /* UMFunction_assign.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A65D34CA192BAE130090FC94 /* UMFunction_assign.m in Sources */ = {isa = PBXBuildFile; fileRef = A65D34C8192BAE130090FC94 /* UMFunction_assign.m */; };
+		A664D5911F6A65EF00BD455E /* UMFunction_regex.h in Headers */ = {isa = PBXBuildFile; fileRef = A664D58F1F6A65EF00BD455E /* UMFunction_regex.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A664D5921F6A65EF00BD455E /* UMFunction_regex.m in Sources */ = {isa = PBXBuildFile; fileRef = A664D5901F6A65EF00BD455E /* UMFunction_regex.m */; };
+		A664D5931F6A65F600BD455E /* UMFunction_regex.m in Sources */ = {isa = PBXBuildFile; fileRef = A664D5901F6A65EF00BD455E /* UMFunction_regex.m */; };
+		A664D5941F6A65FC00BD455E /* UMFunction_namedlist_contains.m in Sources */ = {isa = PBXBuildFile; fileRef = A65793A31F67E57500F417E8 /* UMFunction_namedlist_contains.m */; };
+		A664D5951F6A660000BD455E /* UMFunction_namedlist_remove.m in Sources */ = {isa = PBXBuildFile; fileRef = A657939F1F67E56700F417E8 /* UMFunction_namedlist_remove.m */; };
+		A664D5971F6A8ABA00BD455E /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A664D5961F6A8ABA00BD455E /* libicucore.tbd */; };
+		A664D5981F6A8ABA00BD455E /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A664D5961F6A8ABA00BD455E /* libicucore.tbd */; };
 		A669B2761F2B12EA002C9259 /* UMFunction_hash.h in Headers */ = {isa = PBXBuildFile; fileRef = A669B2741F2B12EA002C9259 /* UMFunction_hash.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A669B2771F2B12EA002C9259 /* UMFunction_hash.m in Sources */ = {isa = PBXBuildFile; fileRef = A669B2751F2B12EA002C9259 /* UMFunction_hash.m */; };
 		A673BEBC1F1360E70026A4CF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A673BEBB1F1360E70026A4CF /* main.m */; };
@@ -275,6 +282,9 @@
 		A65D34C3192BAAA40090FC94 /* UMFunction_lessorequal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_lessorequal.m; sourceTree = "<group>"; };
 		A65D34C7192BAE130090FC94 /* UMFunction_assign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_assign.h; sourceTree = "<group>"; };
 		A65D34C8192BAE130090FC94 /* UMFunction_assign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_assign.m; sourceTree = "<group>"; };
+		A664D58F1F6A65EF00BD455E /* UMFunction_regex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_regex.h; sourceTree = "<group>"; };
+		A664D5901F6A65EF00BD455E /* UMFunction_regex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_regex.m; sourceTree = "<group>"; };
+		A664D5961F6A8ABA00BD455E /* libicucore.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/libicucore.tbd; sourceTree = DEVELOPER_DIR; };
 		A669B2741F2B12EA002C9259 /* UMFunction_hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_hash.h; sourceTree = "<group>"; };
 		A669B2751F2B12EA002C9259 /* UMFunction_hash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_hash.m; sourceTree = "<group>"; };
 		A672F731195C2D040090FC94 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -432,6 +442,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6C4E0EA1945237D0090FC94 /* ulib.framework in Frameworks */,
+				A664D5971F6A8ABA00BD455E /* libicucore.tbd in Frameworks */,
 				A6A3AA0719297741007FFC7B /* Cocoa.framework in Frameworks */,
 				A6A04AB71EE6D4EE007C203A /* ulibasn1.framework in Frameworks */,
 				A6E69D901F00DF0C007C203A /* Foundation.framework in Frameworks */,
@@ -443,6 +454,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6E69D911F00DF0D007C203A /* Foundation.framework in Frameworks */,
+				A664D5981F6A8ABA00BD455E /* libicucore.tbd in Frameworks */,
 				A6A3AA2019297741007FFC7B /* umscript.framework in Frameworks */,
 				A6A3AA1D19297741007FFC7B /* Cocoa.framework in Frameworks */,
 				A6E69D8F1F00DF02007C203A /* ulib.framework in Frameworks */,
@@ -509,6 +521,7 @@
 		A6A3AA0519297741007FFC7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A664D5961F6A8ABA00BD455E /* libicucore.tbd */,
 				A63C39811F10BDE7003637B3 /* umscript.framework */,
 				A6A04AB61EE6D4EE007C203A /* ulibasn1.framework */,
 				A6C4E0E91945237D0090FC94 /* ulib.framework */,
@@ -622,6 +635,8 @@
 				A657939F1F67E56700F417E8 /* UMFunction_namedlist_remove.m */,
 				A65793A21F67E57500F417E8 /* UMFunction_namedlist_contains.h */,
 				A65793A31F67E57500F417E8 /* UMFunction_namedlist_contains.m */,
+				A664D58F1F6A65EF00BD455E /* UMFunction_regex.h */,
+				A664D5901F6A65EF00BD455E /* UMFunction_regex.m */,
 				A63DD834192C84E20090FC94 /* UMFunction_longlong.h */,
 				A63DD835192C84E20090FC94 /* UMFunction_longlong.m */,
 				A6835BC819297AE30090FC94 /* UMFunction_modulo.h */,
@@ -732,6 +747,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A664D5911F6A65EF00BD455E /* UMFunction_regex.h in Headers */,
 				A6835C1E19297AE30090FC94 /* UMFunction_return.h in Headers */,
 				A6835C2A19297AE30090FC94 /* UMFunctionMacros.h in Headers */,
 				A6835C2819297AE30090FC94 /* UMFunction.h in Headers */,
@@ -1057,6 +1073,7 @@
 				A63DD83F192C84F60090FC94 /* UMFunction_data.m in Sources */,
 				A6916D15192BEE6200F6BFF4 /* UMFunction_postdecrease.m in Sources */,
 				A612C1F91EEE9B540096C70F /* UMFunction_arrayAccess.m in Sources */,
+				A664D5921F6A65EF00BD455E /* UMFunction_regex.m in Sources */,
 				A65D34C0192BAA8A0090FC94 /* UMFunction_greaterorequal.m in Sources */,
 				A6835BED19297AE30090FC94 /* UMFunction_bit_and.m in Sources */,
 				A6B5CE72192D626B00F02FCA /* glueterm.m in Sources */,
@@ -1093,6 +1110,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A664D5941F6A65FC00BD455E /* UMFunction_namedlist_contains.m in Sources */,
+				A664D5931F6A65F600BD455E /* UMFunction_regex.m in Sources */,
+				A664D5951F6A660000BD455E /* UMFunction_namedlist_remove.m in Sources */,
 				A6E69D961F00F2E8007C203A /* NSString+UMScript.m in Sources */,
 				A6A3AA2819297741007FFC7B /* umscriptTests.m in Sources */,
 			);
