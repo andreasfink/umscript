@@ -1514,7 +1514,6 @@
     {
         f = [[UMFunction_regex alloc]initWithEnvironment:context];
     }
-    
 
     if(_type != UMTermType_identifier)
     {
