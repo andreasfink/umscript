@@ -1,0 +1,82 @@
+int main()
+{
+	$errorcode_FlagAsSuspicious = -5;
+	$errorcode_Reject = -4;
+	$errorcode_Abort = -3;
+	$errorcode_PassthroughPacketUnmodified = -2;
+	$errorcode_SilentlyDropPacket = -1;
+	$errorcode_OK = 0;
+	$errorcode_unknownSubscriber = 1;
+	$errorcode_unknownBaseStation = 2;
+	$errorcode_unknownMSC = 3;
+	$errorcode_secureTransportError =4;
+	$errorcode_unidentifiedSubscriber = 5;
+	$errorcode_absentSubscriberSM = 6;
+	$errorcode_unknownEquipment = 7;
+	$errorcode_roamingNotAllowed = 8;
+	$errorcode_illegalSubscriber = 9;
+	$errorcode_bearerServiceNotProvisioned = 10;
+	$errorcode_teleserviceNotProvisioned = 11;
+	$errorcode_illegalEquipment = 12;
+	$errorcode_callBarred = 13;
+	$errorcode_forwardingViolation = 14;
+	$errorcode_cug_Reject = 15;
+	$errorcode_illegalSS_Operation = 16;
+	$errorcode_ss_ErrorStatus = 17;
+	$errorcode_ss_NotAvailable = 18;
+	$errorcode_ss_SubscriptionViolation = 19;
+	$errorcode_ss_Incompatibility = 20;
+	$errorcode_facilityNotSupported = 21;
+	$errorcode_ongoingGroupCall = 22;
+	$errorcode_invalidTargetBaseStation = 23;
+	$errorcode_noRadioResourceAvailable = 24;
+	$errorcode_noHandoverNumberAvailable = 25;
+	$errorcode_subsequentHandoverFailure = 26;
+	$errorcode_absentSubscriber = 27;
+	$errorcode_incompatibleTerminal = 28;
+	$errorcode_shortTermDenial = 29;
+	$errorcode_longTermDenial = 30;
+	$errorcode_subscriberBusyForMT_SMS = 31;
+	$errorcode_sm_DeliveryFailure = 32;
+	$errorcode_messageWaitingListFull = 33;
+	$errorcode_systemFailure = 34;
+	$errorcode_dataMissing = 35;
+	$errorcode_unexpectedDataValue = 36;
+	$errorcode_pw_RegistrationFailure = 37;
+	$errorcode_negativePW_Check = 38;
+	$errorcode_noRoamingNumberAvailable = 39;
+	$errorcode_tracingBufferFull = 40;
+	$errorcode_targetCellOutsideGroupCallArea = 42;
+	$errorcode_numberOfPW_AttemptsViolation = 43;
+	$errorcode_numberChanged = 44;
+	$errorcode_busySubscriber = 45;
+	$errorcode_noSubscriberReply = 46;
+	$errorcode_forwardingFailed = 47;
+	$errorcode_or_NotAllowed = 48;
+	$errorcode_ati_NotAllowed = 49;
+	$errorcode_noGroupCallNumberAvailable = 50;
+	$errorcode_resourceLimitation = 51;
+	$errorcode_unauthorizedRequestingNetwork = 52;
+	$errorcode_unauthorizedLCSClient = 53;
+	$errorcode_positionMethodFailure = 54;
+	$errorcode_unknownOrUnreachableLCSClient = 58;
+	$errorcode_mm_EventNotSupported = 59;
+	$errorcode_atsi_NotAllowed = 60;
+	$errorcode_atm_NotAllowed = 61;
+	$errorcode_informationNotAvailable = 62;
+	$errorcode_unknownAlphabet = 71;
+	$errorcode_ussd_Busy = 72;
+
+	/* if alphanumeric sender ID we silently block */
+	if($tp_oa_ton==5)
+	{
+		$reason ="Blocked due to Alphanumeric Sender ID";
+		return $errorcode_SilentlyDropPacket;
+	}
+	if(regex("^Please enter ([0-9]*) into LINE within the next 30 mins.",$text))
+	{
+		$reason ="Blocked due to content";
+		return $errorcode_forwardingViolation;
+	}
+	return 0;
+}
