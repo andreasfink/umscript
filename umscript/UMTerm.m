@@ -367,7 +367,10 @@
                     {
                         f = [[UMFunction_regex alloc]initWithEnvironment:context];
                     }
-
+                    else if([name isEqualTo:[UMFunction_country_of functionName]])
+                    {
+                        f = [[UMFunction_country_of alloc]initWithEnvironment:context];
+                    }
                     _function = f;
                     if(_function)
                     {
@@ -1514,7 +1517,10 @@
     {
         f = [[UMFunction_regex alloc]initWithEnvironment:context];
     }
-
+    else if([name isEqualTo:[UMFunction_country_of functionName]])
+    {
+        f = [[UMFunction_country_of alloc]initWithEnvironment:context];
+    }
     if(_type != UMTermType_identifier)
     {
         return [UMTerm termWithNullWithEnvironment:context];

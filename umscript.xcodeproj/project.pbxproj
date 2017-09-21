@@ -31,7 +31,7 @@
 		A61A24F41F1D84C0004F3972 /* UMTerm_CallStackEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A61A24F21F1D84C0004F3972 /* UMTerm_CallStackEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A61A24F51F1D84C0004F3972 /* UMTerm_CallStackEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A61A24F31F1D84C0004F3972 /* UMTerm_CallStackEntry.m */; };
 		A61A24F81F1DE127004F3972 /* UMScriptResume.h in Headers */ = {isa = PBXBuildFile; fileRef = A61A24F61F1DE127004F3972 /* UMScriptResume.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A62098F21F73EE0200C501E7 /* UMFunction_country_of.h in Headers */ = {isa = PBXBuildFile; fileRef = A62098F01F73EE0200C501E7 /* UMFunction_country_of.h */; };
+		A62098F21F73EE0200C501E7 /* UMFunction_country_of.h in Headers */ = {isa = PBXBuildFile; fileRef = A62098F01F73EE0200C501E7 /* UMFunction_country_of.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A62098F31F73EE0200C501E7 /* UMFunction_country_of.m in Sources */ = {isa = PBXBuildFile; fileRef = A62098F11F73EE0200C501E7 /* UMFunction_country_of.m */; };
 		A62B98F11946A8A6005B48BC /* UMFunction_substr.h in Headers */ = {isa = PBXBuildFile; fileRef = A62B98EF1946A8A6005B48BC /* UMFunction_substr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A62B98F21946A8A6005B48BC /* UMFunction_substr.m in Sources */ = {isa = PBXBuildFile; fileRef = A62B98F01946A8A6005B48BC /* UMFunction_substr.m */; };
