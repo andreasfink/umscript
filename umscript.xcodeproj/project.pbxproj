@@ -31,6 +31,8 @@
 		A61A24F41F1D84C0004F3972 /* UMTerm_CallStackEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A61A24F21F1D84C0004F3972 /* UMTerm_CallStackEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A61A24F51F1D84C0004F3972 /* UMTerm_CallStackEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A61A24F31F1D84C0004F3972 /* UMTerm_CallStackEntry.m */; };
 		A61A24F81F1DE127004F3972 /* UMScriptResume.h in Headers */ = {isa = PBXBuildFile; fileRef = A61A24F61F1DE127004F3972 /* UMScriptResume.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A62098F21F73EE0200C501E7 /* UMFunction_country_of.h in Headers */ = {isa = PBXBuildFile; fileRef = A62098F01F73EE0200C501E7 /* UMFunction_country_of.h */; };
+		A62098F31F73EE0200C501E7 /* UMFunction_country_of.m in Sources */ = {isa = PBXBuildFile; fileRef = A62098F11F73EE0200C501E7 /* UMFunction_country_of.m */; };
 		A62B98F11946A8A6005B48BC /* UMFunction_substr.h in Headers */ = {isa = PBXBuildFile; fileRef = A62B98EF1946A8A6005B48BC /* UMFunction_substr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A62B98F21946A8A6005B48BC /* UMFunction_substr.m in Sources */ = {isa = PBXBuildFile; fileRef = A62B98F01946A8A6005B48BC /* UMFunction_substr.m */; };
 		A62B98F51946B255005B48BC /* UMFunction_list.h in Headers */ = {isa = PBXBuildFile; fileRef = A62B98F31946B255005B48BC /* UMFunction_list.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -250,6 +252,8 @@
 		A61A24F21F1D84C0004F3972 /* UMTerm_CallStackEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMTerm_CallStackEntry.h; sourceTree = "<group>"; };
 		A61A24F31F1D84C0004F3972 /* UMTerm_CallStackEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTerm_CallStackEntry.m; sourceTree = "<group>"; };
 		A61A24F61F1DE127004F3972 /* UMScriptResume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMScriptResume.h; sourceTree = "<group>"; };
+		A62098F01F73EE0200C501E7 /* UMFunction_country_of.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMFunction_country_of.h; sourceTree = "<group>"; };
+		A62098F11F73EE0200C501E7 /* UMFunction_country_of.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMFunction_country_of.m; sourceTree = "<group>"; };
 		A62B98EF1946A8A6005B48BC /* UMFunction_substr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_substr.h; sourceTree = "<group>"; };
 		A62B98F01946A8A6005B48BC /* UMFunction_substr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_substr.m; sourceTree = "<group>"; };
 		A62B98F31946B255005B48BC /* UMFunction_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_list.h; sourceTree = "<group>"; };
@@ -635,6 +639,8 @@
 				A657939F1F67E56700F417E8 /* UMFunction_namedlist_remove.m */,
 				A65793A21F67E57500F417E8 /* UMFunction_namedlist_contains.h */,
 				A65793A31F67E57500F417E8 /* UMFunction_namedlist_contains.m */,
+				A62098F01F73EE0200C501E7 /* UMFunction_country_of.h */,
+				A62098F11F73EE0200C501E7 /* UMFunction_country_of.m */,
 				A664D58F1F6A65EF00BD455E /* UMFunction_regex.h */,
 				A664D5901F6A65EF00BD455E /* UMFunction_regex.m */,
 				A63DD834192C84E20090FC94 /* UMFunction_longlong.h */,
@@ -812,6 +818,7 @@
 				A607CDF11F291339006A832B /* UMFunction_equalCaseInsensitive.h in Headers */,
 				A6EEDB691929DD1F0090FC94 /* umscript.yl.h in Headers */,
 				A612C2101EEEDA170096C70F /* UMFunction_sizeOfVar.h in Headers */,
+				A62098F21F73EE0200C501E7 /* UMFunction_country_of.h in Headers */,
 				A6835C8F19297F990090FC94 /* UMScriptDocument.h in Headers */,
 				A61A24F41F1D84C0004F3972 /* UMTerm_CallStackEntry.h in Headers */,
 				A6835BE719297AE30090FC94 /* UMDiscreteValue.h in Headers */,
@@ -1049,6 +1056,7 @@
 				A6835C0319297AE30090FC94 /* UMFunction_greaterthan.m in Sources */,
 				A6835C1D19297AE30090FC94 /* UMFunction_notequal.m in Sources */,
 				A607CDEE1F29130D006A832B /* UMFunction_stringCompare.m in Sources */,
+				A62098F31F73EE0200C501E7 /* UMFunction_country_of.m in Sources */,
 				A61A24F51F1D84C0004F3972 /* UMTerm_CallStackEntry.m in Sources */,
 				A6835C1B19297AE30090FC94 /* UMFunction_sub.m in Sources */,
 				A607CDF21F291339006A832B /* UMFunction_equalCaseInsensitive.m in Sources */,
