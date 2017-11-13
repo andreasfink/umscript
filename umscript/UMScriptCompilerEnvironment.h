@@ -70,6 +70,7 @@ extern int yycompile(UMScriptCompilerEnvironment *cenv, int fdes_input, int fdes
     int stdout_pipe[2];
     UMHistoryLog *parserLog;
     UMHistoryLog *lexerLog;
+    UMMutex *_compileLock;
 }
 
 @property (readwrite,assign) int column;

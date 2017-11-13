@@ -34,6 +34,7 @@
         currentSourcePosition = 0;
         parserLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
         lexerLog  = [[UMHistoryLog alloc]initWithMaxLines:10240];
+        _compileLock = [[UMMutex alloc]init];
     }
     return self;
 }
@@ -117,7 +118,8 @@
              stdOut:(NSString **)sout
              stdErr:(NSString **)serr
 {
-    @synchronized(self)
+    [_compileLock lock];
+    @try
     {
         [self zapOutput];
         
@@ -185,6 +187,10 @@
         *serr = stdErr;
         *sout = stdOut;
         return resultingCode;
+    }
+    @finally
+    {
+        [_compileLock unlock];
     }
 }
 
