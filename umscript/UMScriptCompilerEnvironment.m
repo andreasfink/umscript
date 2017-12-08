@@ -73,7 +73,10 @@
             }
         }
     }
-    close(stdin_pipe[TXPIPE]);
+    if(stdin_pipe[TXPIPE]>=0)
+    {
+        close(stdin_pipe[TXPIPE]);
+    }
     stdin_pipe[TXPIPE] = -1;
 }
 
@@ -110,7 +113,10 @@
     NSString *out = [[NSString alloc]initWithBytes:[outputData bytes] length:[outputData length] encoding:NSUTF8StringEncoding];
     [self addStdOut:out];
     outputDataComplete=YES;
-    close(stdout_pipe[RXPIPE]);
+    if(stdout_pipe[RXPIPE]>=0)
+    {
+        close(stdout_pipe[RXPIPE]);
+    }
     stdout_pipe[RXPIPE] = -1;
 }
 
@@ -164,16 +170,24 @@
     
         yycompile(self, stdin_pipe[RXPIPE], stdout_pipe[TXPIPE]);
         /* close the pipes from the yycompile side. this should terminate the helper threads if they are not already gone */
-        close(stdout_pipe[TXPIPE]);
+        if(stdout_pipe[TXPIPE] >=0)
+        {
+            close(stdout_pipe[TXPIPE]);
+        }
         stdout_pipe[TXPIPE] = -1;
-        close(stdin_pipe[RXPIPE]);
+        if(close(stdin_pipe[RXPIPE])>=0)
+        {
+            close(stdin_pipe[RXPIPE]);
+        }
         stdin_pipe[RXPIPE] = -1;
         while(outputDataComplete==NO)
         {
             sleep(1);
         }
-        close(stdout_pipe[RXPIPE]);
-
+        if(stdout_pipe[TXPIPE] >=0)
+        {
+            close(stdout_pipe[RXPIPE]);
+        }
         UMTerm *resultingCode = _root;
         _root = NULL;
         if(stdOut.length > 0)
