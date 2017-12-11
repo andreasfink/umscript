@@ -29,8 +29,8 @@ typedef enum UMTermType
 
 @interface UMTerm : UMASN1Choice
 {
-    UMEnvironment __weak *_cenv;    /* compilation environment */
-    UMEnvironment __weak *_env;     /* runtime environment */
+    UMEnvironment   *_cenv;    /* compilation environment */
+    UMEnvironment   *_env;     /* runtime environment */
     UMTermType      _type;
     UMDiscreteValue *_discrete;
     UMFunction      *_function;
@@ -52,8 +52,8 @@ typedef enum UMTermType
 @property (readwrite,strong) NSString        *label;
 //@property (readwrite,strong) NSMutableArray  *array;
 @property (readwrite,strong) NSArray          *param;
-@property (readwrite,weak)   UMEnvironment   *env;
-@property (readwrite,weak)   UMEnvironment   *cenv;
+@property (readwrite,strong)   UMEnvironment   *env;
+@property (readwrite,strong)   UMEnvironment   *cenv;
 
 - (id)initWithNullWithEnvironment:(UMEnvironment *)cenv;
 - (id)initWithDiscreteValue:(UMDiscreteValue *)d withEnvironment:(UMEnvironment *)cenv;
