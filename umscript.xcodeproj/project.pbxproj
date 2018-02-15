@@ -190,6 +190,8 @@
 		A6B5CE9119301FEB00F02FCA /* UMFunction_break.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE8F19301FEB00F02FCA /* UMFunction_break.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6B5CE9219301FEB00F02FCA /* UMFunction_break.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B5CE9019301FEB00F02FCA /* UMFunction_break.m */; };
 		A6C4E0EA1945237D0090FC94 /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C4E0E91945237D0090FC94 /* ulib.framework */; };
+		A6E1CE6C2035AF71009AE954 /* UMFunction_countryNameOf.h in Headers */ = {isa = PBXBuildFile; fileRef = A6E1CE6A2035AF71009AE954 /* UMFunction_countryNameOf.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6E1CE6D2035AF71009AE954 /* UMFunction_countryNameOf.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1CE6B2035AF71009AE954 /* UMFunction_countryNameOf.m */; };
 		A6E69D8F1F00DF02007C203A /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C4E0E91945237D0090FC94 /* ulib.framework */; };
 		A6E69D901F00DF0C007C203A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A672F731195C2D040090FC94 /* Foundation.framework */; };
 		A6E69D911F00DF0D007C203A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A672F731195C2D040090FC94 /* Foundation.framework */; };
@@ -412,6 +414,8 @@
 		A6B5CE8F19301FEB00F02FCA /* UMFunction_break.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_break.h; sourceTree = "<group>"; };
 		A6B5CE9019301FEB00F02FCA /* UMFunction_break.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_break.m; sourceTree = "<group>"; };
 		A6C4E0E91945237D0090FC94 /* ulib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ulib.framework; path = /Library/Frameworks/ulib.framework; sourceTree = "<absolute>"; };
+		A6E1CE6A2035AF71009AE954 /* UMFunction_countryNameOf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMFunction_countryNameOf.h; sourceTree = "<group>"; };
+		A6E1CE6B2035AF71009AE954 /* UMFunction_countryNameOf.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMFunction_countryNameOf.m; sourceTree = "<group>"; };
 		A6E69D921F00F1C4007C203A /* NSString+UMScript.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+UMScript.h"; sourceTree = "<group>"; };
 		A6E69D931F00F1C4007C203A /* NSString+UMScript.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+UMScript.m"; sourceTree = "<group>"; };
 		A6ECC2F6192CE7350090FC94 /* _generated_umscript.y.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _generated_umscript.y.h; path = language/_generated_umscript.y.h; sourceTree = "<group>"; };
@@ -699,6 +703,8 @@
 				A6F8AE021F2A191C00B9512E /* UMFunction_datetime.m */,
 				A669B2741F2B12EA002C9259 /* UMFunction_hash.h */,
 				A669B2751F2B12EA002C9259 /* UMFunction_hash.m */,
+				A6E1CE6A2035AF71009AE954 /* UMFunction_countryNameOf.h */,
+				A6E1CE6B2035AF71009AE954 /* UMFunction_countryNameOf.m */,
 				A6835BDA19297AE30090FC94 /* UMFunctionMacros.h */,
 				A6835BE119297AE30090FC94 /* umscript.h */,
 				A6835C9E19298C110090FC94 /* UMScriptCompilerEnvironment.h */,
@@ -765,6 +771,7 @@
 				A6835C2219297AE30090FC94 /* UMFunction_setvar.h in Headers */,
 				A6835C0E19297AE30090FC94 /* UMFunction_xor.h in Headers */,
 				A6835BE519297AE30090FC94 /* NSNumber+UMScript.h in Headers */,
+				A6E1CE6C2035AF71009AE954 /* UMFunction_countryNameOf.h in Headers */,
 				A6835C1219297AE30090FC94 /* UMFunction_div.h in Headers */,
 				A6835BFE19297AE30090FC94 /* UMFunction_getfield.h in Headers */,
 				A6835C0A19297AE30090FC94 /* UMFunction_not.h in Headers */,
@@ -1110,6 +1117,7 @@
 				A6835BF519297AE30090FC94 /* UMFunction_bit_shiftright.m in Sources */,
 				A6916D0B192BEE4B00F6BFF4 /* UMFunction_predecrease.m in Sources */,
 				A6835C1519297AE30090FC94 /* UMFunction_dot.m in Sources */,
+				A6E1CE6D2035AF71009AE954 /* UMFunction_countryNameOf.m in Sources */,
 				A6835C1719297AE30090FC94 /* UMFunction_mul.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

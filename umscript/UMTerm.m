@@ -351,6 +351,10 @@
                     {
                         f = [[UMFunction_hash alloc]initWithEnvironment:context];
                     }
+                    else if([name isEqualTo:[UMFunction_countryNameOf functionName]])
+                    {
+                        f = [[UMFunction_countryNameOf alloc]initWithEnvironment:context];
+                    }
                     else if([name isEqualTo:[UMFunction_namedlist_add functionName]])
                     {
                         f = [[UMFunction_namedlist_add alloc]initWithEnvironment:context];
