@@ -33,14 +33,14 @@
     return self;
 }
 
-
-
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params
                             environment:(id)env
                            continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
+    NSLog(@"Hashing called");
+
     UMTerm *param0 = params[0] ? params[0] : NULL;
-    UMTerm *param1 = params[1] ? params[1] : NULL;
+    UMTerm *param1 = params[1] ? params[1] : [UMDiscreteValue discreteNull];
 
     UMDiscreteValue *hashData;
     UMDiscreteValue *hashOptions;
@@ -90,7 +90,10 @@
         {
             if(param1)
             {
-                hashOptions = [param1 evaluateWithEnvironment:env  continueFrom:interruptedAt];
+                if(param1)
+                {
+                    hashOptions = [param1 evaluateWithEnvironment:env  continueFrom:interruptedAt];
+                }
             }
         }
         @catch(UMTerm_Interrupt *interrupt)
@@ -103,7 +106,9 @@
             @throw(interrupt);
         }
     }
-    
+
+
+    NSLog(@"Hashing %@ %@",hashData,hashOptions);
     UMDiscreteValue *r = [hashData hashWithOptions:hashOptions];
     return r;
 }

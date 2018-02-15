@@ -78,11 +78,15 @@
 
 - (NSString *)countryFromMSISDN:(NSString *)number
 {
+    if(number==NULL)
+    {
+        return @"unknown";
+    }
     static NSString *usa = @"United States";
     static NSString *canada = @"Canada";
     char msisdn[32];
-
-    strncpy(msisdn,number.UTF8String,31);
+    memset(msisdn,0x00,sizeof(msisdn));
+    strncpy(msisdn,number.UTF8String,sizeof(msisdn)-1);
     switch(msisdn[0])
     {
         case '1':
@@ -2651,7 +2655,7 @@
             break;
         }
     }
-    return @"";
+    return @"unknown";
 }
 
 @end

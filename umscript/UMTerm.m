@@ -347,14 +347,6 @@
                     {
                         f = [[UMFunction_datetime alloc]initWithEnvironment:context];
                     }
-                    else if([name isEqualTo:[UMFunction_hash functionName]])
-                    {
-                        f = [[UMFunction_hash alloc]initWithEnvironment:context];
-                    }
-                    else if([name isEqualTo:[UMFunction_countryNameOf functionName]])
-                    {
-                        f = [[UMFunction_countryNameOf alloc]initWithEnvironment:context];
-                    }
                     else if([name isEqualTo:[UMFunction_namedlist_add functionName]])
                     {
                         f = [[UMFunction_namedlist_add alloc]initWithEnvironment:context];
@@ -370,6 +362,10 @@
                     else if([name isEqualTo:[UMFunction_regex functionName]])
                     {
                         f = [[UMFunction_regex alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_hash functionName]])
+                    {
+                        f = [[UMFunction_hash alloc]initWithEnvironment:context];
                     }
                     else if([name isEqualTo:[UMFunction_country_of functionName]])
                     {
@@ -1520,6 +1516,10 @@
     else if([name isEqualTo:[UMFunction_regex functionName]])
     {
         f = [[UMFunction_regex alloc]initWithEnvironment:context];
+    }
+    else if([name isEqualTo:[UMFunction_hash functionName]])
+    {
+        f = [[UMFunction_hash alloc]initWithEnvironment:context];
     }
     else if([name isEqualTo:[UMFunction_country_of functionName]])
     {
