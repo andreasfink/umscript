@@ -10,6 +10,7 @@
 #import "UMEnvironment.h"
 #import "UMFunctionMacros.h"
 #import "NSString+UMScript.h"
+#import "UMStack.h"
 
 @implementation UMEnvironment
 
@@ -45,16 +46,32 @@
     {
         identPrefix = [identPrefix substringToIndex:n];
     }
-    
 }
-
 
 - (UMDiscreteValue *)variableForKey:(NSString *)key
 {
     return  _variables[key];
 }
 
-- (void)setVariable:(UMDiscreteValue *)val forKey:(NSString *)key;
+
+- (void)defineLocalVariable:(NSString *)name
+{
+    [_stack defineLocalVariable:name];
+
+}
+
+- (void)setLocalVariable:(NSString *)name value:(UMDiscreteValue *)val
+{
+    [_stack setLocalVariable:name value:val];
+}
+
+- (UMDiscreteValue *)localVariable:(NSString *)name
+{
+    return     [_stack localVariable:name];
+}
+
+
+- (void)setVariable:(UMDiscreteValue *)val forKey:(NSString *)key
 {
     _variables[key] = val;
 }
@@ -62,7 +79,6 @@
 - (UMDiscreteValue *)fieldForKey:(NSString *)key
 {
     return _fields[key];
-   
 }
 
 - (void)setField:(UMDiscreteValue *)val forKey:(NSString *)key
@@ -94,6 +110,7 @@
         _variables           = [[UMSynchronizedSortedDictionary alloc]init];
         _fields              = [[UMSynchronizedSortedDictionary alloc]init];
         _namedLists          = [[UMSynchronizedDictionary alloc]init];
+        _stack              = [[UMStack alloc]init];
     }
     return self;
 }
@@ -192,16 +209,6 @@
     [standardOutput addLogEntry:entry];
 }
 
-- (void)pushStack
-{
-    
-}
-
-- (void)popStack
-{
-    
-}
-
 - (void)namedlist_add:(NSString *)listName value:(NSString *)value
 {
     if((value) && (listName))
@@ -250,5 +257,16 @@
     }
     return NO;
 }
+
+- (void)pushFrame:(UMStackFrame *)frame
+{
+    [_stack pushFrame:frame];
+}
+
+- (void)popFrame
+{
+    [_stack popFrame];
+}
+
 
 @end

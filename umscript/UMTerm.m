@@ -13,6 +13,7 @@
 #import "UMEnvironment.h"
 #import "NSString+UMScript.h"
 #import "UMTerm_Interrupt.h"
+#import "UMStackFrame.h"
 
 @implementation UMTerm
 
@@ -485,9 +486,11 @@
         {
             @try
             {
-                [xenv pushStack];
+                UMStackFrame *newFrame = [[UMStackFrame alloc]init];
+                [newFrame setParameters:_param];
+                [xenv pushFrame:newFrame];
                 returnvalue = [_function evaluateWithParams:_param environment:xenv continueFrom:interruptedFrom];
-                [xenv popStack];
+                [xenv popFrame];
             }
             @catch(UMTerm_Interrupt *interruption)
             {

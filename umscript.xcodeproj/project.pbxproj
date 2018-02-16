@@ -190,6 +190,10 @@
 		A6B5CE9119301FEB00F02FCA /* UMFunction_break.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE8F19301FEB00F02FCA /* UMFunction_break.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6B5CE9219301FEB00F02FCA /* UMFunction_break.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B5CE9019301FEB00F02FCA /* UMFunction_break.m */; };
 		A6C4E0EA1945237D0090FC94 /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C4E0E91945237D0090FC94 /* ulib.framework */; };
+		A6E1CE702036A132009AE954 /* UMStack.h in Headers */ = {isa = PBXBuildFile; fileRef = A6E1CE6E2036A132009AE954 /* UMStack.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6E1CE712036A132009AE954 /* UMStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1CE6F2036A132009AE954 /* UMStack.m */; };
+		A6E1CE782036A1BE009AE954 /* UMStackFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = A6E1CE762036A1BE009AE954 /* UMStackFrame.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6E1CE792036A1BE009AE954 /* UMStackFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1CE772036A1BE009AE954 /* UMStackFrame.m */; };
 		A6E69D8F1F00DF02007C203A /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C4E0E91945237D0090FC94 /* ulib.framework */; };
 		A6E69D901F00DF0C007C203A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A672F731195C2D040090FC94 /* Foundation.framework */; };
 		A6E69D911F00DF0D007C203A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A672F731195C2D040090FC94 /* Foundation.framework */; };
@@ -412,6 +416,10 @@
 		A6B5CE8F19301FEB00F02FCA /* UMFunction_break.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_break.h; sourceTree = "<group>"; };
 		A6B5CE9019301FEB00F02FCA /* UMFunction_break.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_break.m; sourceTree = "<group>"; };
 		A6C4E0E91945237D0090FC94 /* ulib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ulib.framework; path = /Library/Frameworks/ulib.framework; sourceTree = "<absolute>"; };
+		A6E1CE6E2036A132009AE954 /* UMStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMStack.h; sourceTree = "<group>"; };
+		A6E1CE6F2036A132009AE954 /* UMStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMStack.m; sourceTree = "<group>"; };
+		A6E1CE762036A1BE009AE954 /* UMStackFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMStackFrame.h; sourceTree = "<group>"; };
+		A6E1CE772036A1BE009AE954 /* UMStackFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMStackFrame.m; sourceTree = "<group>"; };
 		A6E69D921F00F1C4007C203A /* NSString+UMScript.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+UMScript.h"; sourceTree = "<group>"; };
 		A6E69D931F00F1C4007C203A /* NSString+UMScript.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+UMScript.m"; sourceTree = "<group>"; };
 		A6ECC2F6192CE7350090FC94 /* _generated_umscript.y.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _generated_umscript.y.h; path = language/_generated_umscript.y.h; sourceTree = "<group>"; };
@@ -713,6 +721,10 @@
 				A61A24EE1F1D7F19004F3972 /* UMTerm_Interrupt.h */,
 				A61A24EF1F1D7F19004F3972 /* UMTerm_Interrupt.m */,
 				A61A24F61F1DE127004F3972 /* UMScriptResume.h */,
+				A6E1CE6E2036A132009AE954 /* UMStack.h */,
+				A6E1CE6F2036A132009AE954 /* UMStack.m */,
+				A6E1CE762036A1BE009AE954 /* UMStackFrame.h */,
+				A6E1CE772036A1BE009AE954 /* UMStackFrame.m */,
 			);
 			path = umscript;
 			sourceTree = "<group>";
@@ -799,6 +811,7 @@
 				A612C20C1EEED8680096C70F /* UMFunction_addressOf.h in Headers */,
 				A657939C1F67E55700F417E8 /* UMFunction_namedlist_add.h in Headers */,
 				A6ECC2F7192CE7350090FC94 /* _generated_umscript.y.h in Headers */,
+				A6E1CE782036A1BE009AE954 /* UMStackFrame.h in Headers */,
 				A6916CF1192BE5A500F6BFF4 /* UMFunction_while.h in Headers */,
 				A63DD836192C84E20090FC94 /* UMFunction_longlong.h in Headers */,
 				A607CDED1F29130D006A832B /* UMFunction_stringCompare.h in Headers */,
@@ -816,6 +829,7 @@
 				A61A24F81F1DE127004F3972 /* UMScriptResume.h in Headers */,
 				A6835C3119297AE30090FC94 /* umscript.h in Headers */,
 				A607CDF11F291339006A832B /* UMFunction_equalCaseInsensitive.h in Headers */,
+				A6E1CE702036A132009AE954 /* UMStack.h in Headers */,
 				A6EEDB691929DD1F0090FC94 /* umscript.yl.h in Headers */,
 				A612C2101EEEDA170096C70F /* UMFunction_sizeOfVar.h in Headers */,
 				A62098F21F73EE0200C501E7 /* UMFunction_country_of.h in Headers */,
@@ -1029,6 +1043,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6E1CE712036A132009AE954 /* UMStack.m in Sources */,
 				A6EEDB6C1929DE800090FC94 /* _generated_umscript.l.m in Sources */,
 				A63DD82F192C84CE0090FC94 /* UMFunction_int.m in Sources */,
 				A6EEDB6D1929DE800090FC94 /* _generated_umscript.y.m in Sources */,
@@ -1104,6 +1119,7 @@
 				A6835C2319297AE30090FC94 /* UMFunction_setvar.m in Sources */,
 				A6835C0F19297AE30090FC94 /* UMFunction_xor.m in Sources */,
 				A65D34CA192BAE130090FC94 /* UMFunction_assign.m in Sources */,
+				A6E1CE792036A1BE009AE954 /* UMStackFrame.m in Sources */,
 				A6916D1A192BF61500F6BFF4 /* UMFunction_switch.m in Sources */,
 				A6835C0119297AE30090FC94 /* UMFunction_getvar.m in Sources */,
 				A612C2091EEED7A30096C70F /* UMFunction_castTo.m in Sources */,

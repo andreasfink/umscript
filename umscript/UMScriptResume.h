@@ -12,4 +12,5 @@
 
 @protocol UMScriptResume <NSObject>
 - (void)  resumeScript:(UMTerm_Interrupt *)irq;
+
 @end

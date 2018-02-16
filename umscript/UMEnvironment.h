@@ -11,6 +11,8 @@
 
 @class UMDiscreteValue;
 @class UMFunction;
+@class UMStack;
+@class UMStackFrame;
 
 @interface UMEnvironment : UMObject
 {
@@ -29,7 +31,8 @@
     UMHistoryLog    *environmentLog;
     UMHistoryLog    *standardOutput;
     UMHistoryLog    *trace;
-    NSMutableArray  *stack;
+
+    UMStack *_stack;
 }
 
 @property (readwrite,strong) UMDiscreteValue *returnValue;
@@ -65,11 +68,16 @@
 - (void) log:(NSString *)entry;
 - (void) trace:(NSString *)entry;
 - (void) print:(NSString *)entry;
-- (void)pushStack;
-- (void)popStack;
+- (void)pushFrame:(UMStackFrame *)frame;
+- (void)popFrame;
 
 - (void)namedlist_add:(NSString *)listName value:(NSString *)value;
 - (void)namedlist_remove:(NSString *)listName value:(NSString *)value;
 - (BOOL)namedlist_contains:(NSString *)listName value:(NSString *)value;
+
+
+- (void)defineLocalVariable:(NSString *)name;
+- (void)setLocalVariable:(NSString *)name value:(UMDiscreteValue *)val;
+- (UMDiscreteValue *)localVariable:(NSString *)name;
 
 @end
