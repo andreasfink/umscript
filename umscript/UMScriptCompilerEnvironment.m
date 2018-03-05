@@ -34,7 +34,7 @@
         currentSourcePosition = 0;
         parserLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
         lexerLog  = [[UMHistoryLog alloc]initWithMaxLines:10240];
-        _compileLock = [[UMMutex alloc]init];
+        _compileLock = [[UMMutex alloc]initWithName:@"umscript-compile-lock"];
     }
     return self;
 }
