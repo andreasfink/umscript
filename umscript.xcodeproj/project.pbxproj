@@ -203,7 +203,7 @@
 		A6ECC2F7192CE7350090FC94 /* _generated_umscript.y.h in Headers */ = {isa = PBXBuildFile; fileRef = A6ECC2F6192CE7350090FC94 /* _generated_umscript.y.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6EEDB691929DD1F0090FC94 /* umscript.yl.h in Headers */ = {isa = PBXBuildFile; fileRef = A6EEDB681929DD1F0090FC94 /* umscript.yl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6EEDB6C1929DE800090FC94 /* _generated_umscript.l.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EEDB6A1929DE800090FC94 /* _generated_umscript.l.m */; };
-		A6EEDB6D1929DE800090FC94 /* _generated_umscript.y.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EEDB6B1929DE800090FC94 /* _generated_umscript.y.m */; };
+		A6EEDB6D1929DE800090FC94 /* _generated_umscript.y.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EEDB6B1929DE800090FC94 /* _generated_umscript.y.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
 		A6EEDB791929F9810090FC94 /* test1.ums in Resources */ = {isa = PBXBuildFile; fileRef = A6EEDB781929F9810090FC94 /* test1.ums */; };
 		A6F8AE031F2A191C00B9512E /* UMFunction_datetime.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F8AE011F2A191C00B9512E /* UMFunction_datetime.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6F8AE041F2A191C00B9512E /* UMFunction_datetime.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F8AE021F2A191C00B9512E /* UMFunction_datetime.m */; };
