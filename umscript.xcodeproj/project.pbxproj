@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A6019BB41AC1FA8600854472 /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = A6019BB31AC1FA8600854472 /* VERSION */; };
 		A607CDED1F29130D006A832B /* UMFunction_stringCompare.h in Headers */ = {isa = PBXBuildFile; fileRef = A607CDEB1F29130D006A832B /* UMFunction_stringCompare.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A607CDEE1F29130D006A832B /* UMFunction_stringCompare.m in Sources */ = {isa = PBXBuildFile; fileRef = A607CDEC1F29130D006A832B /* UMFunction_stringCompare.m */; };
 		A607CDF11F291339006A832B /* UMFunction_equalCaseInsensitive.h in Headers */ = {isa = PBXBuildFile; fileRef = A607CDEF1F291339006A832B /* UMFunction_equalCaseInsensitive.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -170,10 +169,7 @@
 		A6916D19192BF61500F6BFF4 /* UMFunction_switch.h in Headers */ = {isa = PBXBuildFile; fileRef = A6916D17192BF61500F6BFF4 /* UMFunction_switch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6916D1A192BF61500F6BFF4 /* UMFunction_switch.m in Sources */ = {isa = PBXBuildFile; fileRef = A6916D18192BF61500F6BFF4 /* UMFunction_switch.m */; };
 		A6A04AB71EE6D4EE007C203A /* ulibasn1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A04AB61EE6D4EE007C203A /* ulibasn1.framework */; };
-		A6A04AB91EE6D5B6007C203A /* UMTerm.asn in Resources */ = {isa = PBXBuildFile; fileRef = A6A04AB81EE6D5B6007C203A /* UMTerm.asn */; };
-		A6A04ABB1EE6FE5F007C203A /* UMDiscreteValue.asn in Resources */ = {isa = PBXBuildFile; fileRef = A6A04ABA1EE6FE5F007C203A /* UMDiscreteValue.asn */; };
 		A6A3AA0719297741007FFC7B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA0619297741007FFC7B /* Cocoa.framework */; };
-		A6A3AA1119297741007FFC7B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6A3AA0F19297741007FFC7B /* InfoPlist.strings */; };
 		A6A3AA1C19297741007FFC7B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA1B19297741007FFC7B /* XCTest.framework */; };
 		A6A3AA1D19297741007FFC7B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA0619297741007FFC7B /* Cocoa.framework */; };
 		A6A3AA2019297741007FFC7B /* umscript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA0319297741007FFC7B /* umscript.framework */; };
@@ -922,7 +918,7 @@
 		A6A3A9FA19297741007FFC7B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				TargetAttributes = {
 					A673BEB81F1360E70026A4CF = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -959,10 +955,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6A3AA1119297741007FFC7B /* InfoPlist.strings in Resources */,
-				A6A04ABB1EE6FE5F007C203A /* UMDiscreteValue.asn in Resources */,
-				A6019BB41AC1FA8600854472 /* VERSION in Resources */,
-				A6A04AB91EE6D5B6007C203A /* UMTerm.asn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1228,12 +1220,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1294,12 +1288,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1360,7 +1356,7 @@
 				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
 				INFOPLIST_FILE = "umscript/umscript-Info.plist";
 				INSTALL_PATH = /Library/Frameworks;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.umscript;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1391,7 +1387,7 @@
 				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
 				INFOPLIST_FILE = "umscript/umscript-Info.plist";
 				INSTALL_PATH = /Library/Frameworks;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.umscript;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
