@@ -1,0 +1,15 @@
+int main()
+{
+	
+	$text ="Код подтверждения аккаунта Instagram: 965 802. #ig";
+	if(regex("^Код подтверждения аккаунта Instagram:(.*)$",$text))
+	{
+		$reason ="YES, we have a match.";
+	}
+	else
+	{
+		$reason ="NO, we don't match!";
+	}
+
+	return $reason;
+}
