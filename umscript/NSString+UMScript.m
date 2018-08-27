@@ -52,21 +52,22 @@
     }
     unichar previous='\0';
     unichar c='\0';
-    unichar last='\0';
+    /*unichar last='\0';
     unichar preLast='\0';
     unichar first='\0';
-    unichar second='\0';
+    unichar second='\0';*/
+    /*
     if(len >= 1)
     {
-        last = [self characterAtIndex:len-1];
-        first = [self characterAtIndex:0];
+        //last = [self characterAtIndex:len-1];
+        //first = [self characterAtIndex:0];
     }
     if(len >= 2)
     {
-        preLast = [self characterAtIndex:len-2];
-        second = [self characterAtIndex:1];
+        //preLast = [self characterAtIndex:len-2];
+        //second = [self characterAtIndex:1];
     }
-
+*/
     for(size_t i=0;i<len;i++)
     {
         previous = c;
