@@ -21,80 +21,80 @@
 {
     [super processBeforeEncode];
 
-    asn1_tag.tagClass = UMASN1Class_ContextSpecific;
-    asn1_tag.isConstructed=NO;
+    _asn1_tag.tagClass = UMASN1Class_ContextSpecific;
+    _asn1_tag.isConstructed=NO;
 
     switch(_type)
     {
         case UMTermType_discrete:
         {
-            self.asn1_tag.tagNumber = 0;
-            asn1_tag.isConstructed=YES;
-            asn1_list = [[NSMutableArray alloc]init];
-            [asn1_list addObject:_discrete];
+            _asn1_tag.tagNumber = 0;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
+            [_asn1_list addObject:_discrete];
             break;
         }
         case UMTermType_field:
         {
-            self.asn1_tag.tagNumber = 1;
-            asn1_tag.isConstructed=YES;
-            asn1_list = [[NSMutableArray alloc]init];
+            _asn1_tag.tagNumber = 1;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
             UMASN1UTF8String *s = [[UMASN1UTF8String alloc]initWithValue:_fieldname];
-            [asn1_list addObject:s];
+            [_asn1_list addObject:s];
             break;
         }
         case UMTermType_variable:
         {
-            self.asn1_tag.tagNumber = 2;
-            asn1_tag.isConstructed=YES;
-            asn1_list = [[NSMutableArray alloc]init];
+            _asn1_tag.tagNumber = 2;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
             UMASN1UTF8String *s = [[UMASN1UTF8String alloc]initWithValue:_varname];
-            [asn1_list addObject:s];
+            [_asn1_list addObject:s];
             break;
         }
         case UMTermType_functionCall:
         {
-            self.asn1_tag.tagNumber = 3;
-            asn1_tag.isConstructed=YES;
-            asn1_list = [[NSMutableArray alloc]init];
-            [asn1_list addObject:_function];
+            _asn1_tag.tagNumber = 3;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
+            [_asn1_list addObject:_function];
             break;
         }
         case UMTermType_functionDefinition:
         {
             /* CHECK THIS */
-            self.asn1_tag.tagNumber = 4;
-            asn1_tag.isConstructed=YES;
-            asn1_list = [[NSMutableArray alloc]init];
-            [asn1_list addObject:_function];
+            _asn1_tag.tagNumber = 4;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
+            [_asn1_list addObject:_function];
             break;
         }
       case UMTermType_identifier:
         {
-            self.asn1_tag.tagNumber = 5;
-            asn1_tag.isConstructed=YES;
-            asn1_list = [[NSMutableArray alloc]init];
+            _asn1_tag.tagNumber = 5;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
             UMASN1UTF8String *s = [[UMASN1UTF8String alloc]initWithValue:_identifier];
-            [asn1_list addObject:s];
+            [_asn1_list addObject:s];
             break;
         }
         case UMTermType_nullterm:
         {
-            self.asn1_tag.tagNumber = 6;
-            asn1_tag.isConstructed=YES;
-            asn1_list = [[NSMutableArray alloc]init];
+            _asn1_tag.tagNumber = 6;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
             UMASN1Null *s = [[UMASN1Null alloc]init];
-            [asn1_list addObject:s];
+            [_asn1_list addObject:s];
             break;
         }
         case UMTermType_token:
         default:
         {
-            self.asn1_tag.tagNumber = 7;
-            asn1_tag.isConstructed=YES;
-            asn1_list = [[NSMutableArray alloc]init];
+            _asn1_tag.tagNumber = 7;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
             UMASN1Integer *s = [[UMASN1Integer alloc]initWithValue:_token];
-            [asn1_list addObject:s];
+            [_asn1_list addObject:s];
             break;
         }
 

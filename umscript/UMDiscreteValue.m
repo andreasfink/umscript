@@ -19,83 +19,83 @@
 {
     [super processBeforeEncode];
 
-    asn1_tag.tagClass = UMASN1Class_ContextSpecific;
-    asn1_tag.isConstructed=NO;
+    _asn1_tag.tagClass = UMASN1Class_ContextSpecific;
+    _asn1_tag.isConstructed=NO;
 
     switch(type)
     {
         case UMVALUE_NULL:
         {
-            self.asn1_tag.tagNumber = 0;
-            asn1_tag.isConstructed=YES;
-            asn1_list = [[NSMutableArray alloc]init];
-            [asn1_list addObject:[[UMASN1Null alloc]init]];
+            _asn1_tag.tagNumber = 0;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
+            [_asn1_list addObject:[[UMASN1Null alloc]init]];
             break;
         }
         case UMVALUE_BOOL:
         {
-            self.asn1_tag.tagNumber = 1;
-            asn1_tag.isConstructed=YES;
-            asn1_list = [[NSMutableArray alloc]init];
+            _asn1_tag.tagNumber = 1;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
             UMASN1Boolean *b = [[UMASN1Boolean alloc]initWithValue:[value boolValue]];
-            [asn1_list addObject:b];
+            [_asn1_list addObject:b];
             break;
         }
         case UMVALUE_INT:
         {
-            self.asn1_tag.tagNumber = 2;
-            asn1_tag.isConstructed=YES;
-            asn1_list = [[NSMutableArray alloc]init];
+            _asn1_tag.tagNumber = 2;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
             UMASN1Integer *i = [[UMASN1Integer alloc]initWithValue:[value integerValue]];
-            [asn1_list addObject:i];
+            [_asn1_list addObject:i];
             break;
         }
         case UMVALUE_LONGLONG:
         {
-            self.asn1_tag.tagNumber = 3;
-            asn1_tag.isConstructed=YES;
-            asn1_list = [[NSMutableArray alloc]init];
+            _asn1_tag.tagNumber = 3;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
             UMASN1Integer *i = [[UMASN1Integer alloc]initWithValue:[value longLongValue]];
-            [asn1_list addObject:i];
+            [_asn1_list addObject:i];
             break;
         }
         case UMVALUE_DOUBLE:
         {
-            self.asn1_tag.tagNumber = 4;
-            asn1_tag.isConstructed=YES;
-            asn1_list = [[NSMutableArray alloc]init];
+            _asn1_tag.tagNumber = 4;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
             UMASN1UTF8String *i = [[UMASN1UTF8String alloc]initWithValue:[value stringValue]];
-            [asn1_list addObject:i];
+            [_asn1_list addObject:i];
             break;
         }
         case UMVALUE_STRING:
         {
-            self.asn1_tag.tagNumber = 5;
-            asn1_tag.isConstructed=YES;
-            asn1_list = [[NSMutableArray alloc]init];
+            _asn1_tag.tagNumber = 5;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
             UMASN1UTF8String *s = [[UMASN1UTF8String alloc]initWithValue:[value stringValue]];
-            [asn1_list addObject:s];
+            [_asn1_list addObject:s];
             break;
         }
         case UMVALUE_ARRAY:
         {
-            self.asn1_tag.tagNumber = 6;
-            asn1_tag.isConstructed=YES;
-            asn1_list = [[NSMutableArray alloc]init];
+            _asn1_tag.tagNumber = 6;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
             NSArray *a = (NSArray *)value;
             NSInteger n = [a count];
             for(NSInteger i=0;i<n;i++)
             {
                 UMDiscreteValue *x = a[i];
-                [asn1_list addObject:x];
+                [_asn1_list addObject:x];
             }
             break;
         }
         case UMVALUE_STRUCT:
         {
-            self.asn1_tag.tagNumber = 6;
-            asn1_tag.isConstructed=YES;
-            asn1_list = [[NSMutableArray alloc]init];
+            _asn1_tag.tagNumber = 6;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
             NSDictionary *dict = (NSDictionary *)value;
             NSArray *allKeys = [dict allKeys];
             NSInteger n = [allKeys count];
@@ -106,18 +106,18 @@
                 UMASN1UTF8String *uKey = [[UMASN1UTF8String alloc]initWithValue:[xvalue stringValue]];
                 UMASN1Sequence *seq = [[UMASN1Sequence alloc]init];
                 [seq setValues:@[uKey,xvalue]];
-                [asn1_list addObject:seq];
+                [_asn1_list addObject:seq];
             }
             break;
         }
         case UMVALUE_DATA:
         default:
         {
-            self.asn1_tag.tagNumber = 6;
-            asn1_tag.isConstructed=YES;
-            asn1_list = [[NSMutableArray alloc]init];
+            _asn1_tag.tagNumber = 6;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
             UMASN1OctetString *d = [[UMASN1OctetString alloc]initWithValue:(NSData *)value];
-            [asn1_list addObject:d];
+            [_asn1_list addObject:d];
             break;
         }
     }
@@ -128,7 +128,7 @@
 {
     int p=0;
     UMASN1Object *o = NULL;
-    if(self.asn1_tag.tagClass == UMASN1Class_ContextSpecific)
+    if(_asn1_tag.tagClass == UMASN1Class_ContextSpecific)
     {
         o = [self getObjectAtPosition:p++];
         if(o)
