@@ -70,7 +70,7 @@
 #import "UMFunction_namedlist_contains.h"
 #import "UMFunction_regex.h"
 #import "UMFunction_country_of.h"
-
-
+#import "UMFunction_has_prefix.h"
+#import "UMFunction_has_suffix.h"
 
 

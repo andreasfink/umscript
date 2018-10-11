@@ -372,7 +372,15 @@
                     {
                         f = [[UMFunction_country_of alloc]initWithEnvironment:context];
                     }
-                    _function = f;
+                    else if([name isEqualTo:[UMFunction_has_prefix functionName]])
+                    {
+                        f = [[UMFunction_has_prefix alloc]initWithEnvironment:context];
+                    }
+                    else if([name isEqualTo:[UMFunction_has_suffix functionName]])
+                    {
+                        f = [[UMFunction_has_suffix alloc]initWithEnvironment:context];
+                    }
+                   _function = f;
                     if(_function)
                     {
                         allFine = YES;

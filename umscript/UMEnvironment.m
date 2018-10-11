@@ -149,7 +149,7 @@
         NSString *fileContent = [NSString stringWithContentsOfFile:varfile encoding:NSUTF8StringEncoding error:&error];
         if(fileContent)
         {
-            NSArray *lines = [fileContent componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+            NSArray *lines = [fileContent componentsSeparatedByCharactersInSet:[UMObject newlineCharacterSet]];
             for(NSString *line in lines)
             {
                 NSArray *parts = [line componentsSeparatedByString:@"="];

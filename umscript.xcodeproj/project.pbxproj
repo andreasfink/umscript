@@ -68,8 +68,6 @@
 		A664D5931F6A65F600BD455E /* UMFunction_regex.m in Sources */ = {isa = PBXBuildFile; fileRef = A664D5901F6A65EF00BD455E /* UMFunction_regex.m */; };
 		A664D5941F6A65FC00BD455E /* UMFunction_namedlist_contains.m in Sources */ = {isa = PBXBuildFile; fileRef = A65793A31F67E57500F417E8 /* UMFunction_namedlist_contains.m */; };
 		A664D5951F6A660000BD455E /* UMFunction_namedlist_remove.m in Sources */ = {isa = PBXBuildFile; fileRef = A657939F1F67E56700F417E8 /* UMFunction_namedlist_remove.m */; };
-		A664D5971F6A8ABA00BD455E /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A664D5961F6A8ABA00BD455E /* libicucore.tbd */; };
-		A664D5981F6A8ABA00BD455E /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A664D5961F6A8ABA00BD455E /* libicucore.tbd */; };
 		A669B2761F2B12EA002C9259 /* UMFunction_hash.h in Headers */ = {isa = PBXBuildFile; fileRef = A669B2741F2B12EA002C9259 /* UMFunction_hash.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A669B2771F2B12EA002C9259 /* UMFunction_hash.m in Sources */ = {isa = PBXBuildFile; fileRef = A669B2751F2B12EA002C9259 /* UMFunction_hash.m */; };
 		A673BEBC1F1360E70026A4CF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A673BEBB1F1360E70026A4CF /* main.m */; };
@@ -185,6 +183,10 @@
 		A6B5CE8E19301FE300F02FCA /* UMFunction_continue.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B5CE8C19301FE300F02FCA /* UMFunction_continue.m */; };
 		A6B5CE9119301FEB00F02FCA /* UMFunction_break.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B5CE8F19301FEB00F02FCA /* UMFunction_break.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6B5CE9219301FEB00F02FCA /* UMFunction_break.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B5CE9019301FEB00F02FCA /* UMFunction_break.m */; };
+		A6B962E3216DE769004D7FE4 /* UMFunction_has_prefix.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B962E1216DE769004D7FE4 /* UMFunction_has_prefix.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6B962E4216DE769004D7FE4 /* UMFunction_has_prefix.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B962E2216DE769004D7FE4 /* UMFunction_has_prefix.m */; };
+		A6B962E7216DE8F4004D7FE4 /* UMFunction_has_suffix.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B962E5216DE8F4004D7FE4 /* UMFunction_has_suffix.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6B962E8216DE8F4004D7FE4 /* UMFunction_has_suffix.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B962E6216DE8F4004D7FE4 /* UMFunction_has_suffix.m */; };
 		A6C4E0EA1945237D0090FC94 /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C4E0E91945237D0090FC94 /* ulib.framework */; };
 		A6E1CE702036A132009AE954 /* UMStack.h in Headers */ = {isa = PBXBuildFile; fileRef = A6E1CE6E2036A132009AE954 /* UMStack.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6E1CE712036A132009AE954 /* UMStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1CE6F2036A132009AE954 /* UMStack.m */; };
@@ -411,6 +413,10 @@
 		A6B5CE8C19301FE300F02FCA /* UMFunction_continue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_continue.m; sourceTree = "<group>"; };
 		A6B5CE8F19301FEB00F02FCA /* UMFunction_break.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_break.h; sourceTree = "<group>"; };
 		A6B5CE9019301FEB00F02FCA /* UMFunction_break.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_break.m; sourceTree = "<group>"; };
+		A6B962E1216DE769004D7FE4 /* UMFunction_has_prefix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMFunction_has_prefix.h; sourceTree = "<group>"; };
+		A6B962E2216DE769004D7FE4 /* UMFunction_has_prefix.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMFunction_has_prefix.m; sourceTree = "<group>"; };
+		A6B962E5216DE8F4004D7FE4 /* UMFunction_has_suffix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMFunction_has_suffix.h; sourceTree = "<group>"; };
+		A6B962E6216DE8F4004D7FE4 /* UMFunction_has_suffix.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMFunction_has_suffix.m; sourceTree = "<group>"; };
 		A6C4E0E91945237D0090FC94 /* ulib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ulib.framework; path = /Library/Frameworks/ulib.framework; sourceTree = "<absolute>"; };
 		A6E1CE6E2036A132009AE954 /* UMStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMStack.h; sourceTree = "<group>"; };
 		A6E1CE6F2036A132009AE954 /* UMStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMStack.m; sourceTree = "<group>"; };
@@ -450,7 +456,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6C4E0EA1945237D0090FC94 /* ulib.framework in Frameworks */,
-				A664D5971F6A8ABA00BD455E /* libicucore.tbd in Frameworks */,
 				A6A3AA0719297741007FFC7B /* Cocoa.framework in Frameworks */,
 				A6A04AB71EE6D4EE007C203A /* ulibasn1.framework in Frameworks */,
 				A6E69D901F00DF0C007C203A /* Foundation.framework in Frameworks */,
@@ -462,7 +467,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6E69D911F00DF0D007C203A /* Foundation.framework in Frameworks */,
-				A664D5981F6A8ABA00BD455E /* libicucore.tbd in Frameworks */,
 				A6A3AA2019297741007FFC7B /* umscript.framework in Frameworks */,
 				A6A3AA1D19297741007FFC7B /* Cocoa.framework in Frameworks */,
 				A6E69D8F1F00DF02007C203A /* ulib.framework in Frameworks */,
@@ -575,6 +579,10 @@
 				A612C2131EEEDA260096C70F /* UMFunction_sizeOfType.m */,
 				A612C2021EEEB7100096C70F /* UMFunction_starIdentifier.h */,
 				A612C2031EEEB7100096C70F /* UMFunction_starIdentifier.m */,
+				A6B962E1216DE769004D7FE4 /* UMFunction_has_prefix.h */,
+				A6B962E2216DE769004D7FE4 /* UMFunction_has_prefix.m */,
+				A6B962E5216DE8F4004D7FE4 /* UMFunction_has_suffix.h */,
+				A6B962E6216DE8F4004D7FE4 /* UMFunction_has_suffix.m */,
 				A6835BC019297AE30090FC94 /* UMFunction_add.h */,
 				A6835BC119297AE30090FC94 /* UMFunction_add.m */,
 				A6835BB819297AE30090FC94 /* UMFunction_and.h */,
@@ -776,6 +784,7 @@
 				A6835C1219297AE30090FC94 /* UMFunction_div.h in Headers */,
 				A6835BFE19297AE30090FC94 /* UMFunction_getfield.h in Headers */,
 				A6835C0A19297AE30090FC94 /* UMFunction_not.h in Headers */,
+				A6B962E3216DE769004D7FE4 /* UMFunction_has_prefix.h in Headers */,
 				A6835C2419297AE30090FC94 /* UMFunction_startswith.h in Headers */,
 				A6835BFA19297AE30090FC94 /* UMFunction_endswith.h in Headers */,
 				A6835BF019297AE30090FC94 /* UMFunction_bit_or.h in Headers */,
@@ -793,6 +802,7 @@
 				A655CB701F0A49E7007C0B5C /* UMFunction_CGlue.h in Headers */,
 				A65793A41F67E57500F417E8 /* UMFunction_namedlist_contains.h in Headers */,
 				A6835C0219297AE30090FC94 /* UMFunction_greaterthan.h in Headers */,
+				A6B962E7216DE8F4004D7FE4 /* UMFunction_has_suffix.h in Headers */,
 				A6835BF619297AE30090FC94 /* UMFunction_bit_xor.h in Headers */,
 				A6835BEC19297AE30090FC94 /* UMFunction_bit_and.h in Headers */,
 				A6835C1C19297AE30090FC94 /* UMFunction_notequal.h in Headers */,
@@ -1088,6 +1098,7 @@
 				A63DD83F192C84F60090FC94 /* UMFunction_data.m in Sources */,
 				A6916D15192BEE6200F6BFF4 /* UMFunction_postdecrease.m in Sources */,
 				A612C1F91EEE9B540096C70F /* UMFunction_arrayAccess.m in Sources */,
+				A6B962E8216DE8F4004D7FE4 /* UMFunction_has_suffix.m in Sources */,
 				A664D5921F6A65EF00BD455E /* UMFunction_regex.m in Sources */,
 				A65D34C0192BAA8A0090FC94 /* UMFunction_greaterorequal.m in Sources */,
 				A6835BED19297AE30090FC94 /* UMFunction_bit_and.m in Sources */,
@@ -1110,6 +1121,7 @@
 				A612C2151EEEDA260096C70F /* UMFunction_sizeOfType.m in Sources */,
 				A6835C2319297AE30090FC94 /* UMFunction_setvar.m in Sources */,
 				A6835C0F19297AE30090FC94 /* UMFunction_xor.m in Sources */,
+				A6B962E4216DE769004D7FE4 /* UMFunction_has_prefix.m in Sources */,
 				A65D34CA192BAE130090FC94 /* UMFunction_assign.m in Sources */,
 				A6E1CE792036A1BE009AE954 /* UMStackFrame.m in Sources */,
 				A6916D1A192BF61500F6BFF4 /* UMFunction_switch.m in Sources */,

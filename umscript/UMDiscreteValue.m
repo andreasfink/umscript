@@ -1768,7 +1768,7 @@
         outputFormat = 1;
     }
     NSString *optionString = [hashOptions stringValue];
-    NSArray *options = [optionString componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSArray *options = [optionString componentsSeparatedByCharactersInSet:[UMObject whitespaceAndNewlineCharacterSet]];
     
     for(NSString *option in options)
     {

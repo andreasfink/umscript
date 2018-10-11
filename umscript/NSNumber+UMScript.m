@@ -29,9 +29,6 @@
     {
         return @0;
     }
-    const char *c = [s UTF8String];
-    size_t i;
-    size_t n = strlen(c);
     int digitSeen = 0;
     int dotSeen = 0;
     int hexDigitSeen = 0;
@@ -40,9 +37,12 @@
     int quotesSeen = 0;
     int whitespaceSeen = 0;
     int alphaSeen = 0;
-    for(i=0;i<n;i++)
+    NSUInteger n = [s length];
+    for(NSUInteger i=0;i<n;i++)
     {
-        switch(c[i])
+        unichar c = [s characterAtIndex:i];
+
+        switch(c)
         {
             case '0':
             case '1':
@@ -103,8 +103,7 @@
     {
         if(minusOrPlusSeen)
         {
-            long long v;
-            sscanf(c,"%lld",&v);
+            long long v = [s longLongValue];
             if(v < 0x7F)
             {
                 return @((char)v);
@@ -121,8 +120,7 @@
         }
         else
         {
-            unsigned long long v;
-            sscanf(c,"%llu",&v);
+            long long v = [s longLongValue];
             if(v <= 0xFF)
             {
                 return @((unsigned char)v);
@@ -140,12 +138,10 @@
     }
     if(digitSeen && dotSeen)
     {
-        double d;
-        sscanf(c,"%lf",&d);
+        double d = [s doubleValue];
         return @(d);
     }
-    int iv;
-    sscanf(c,"%d",&iv);
+    int iv = [s intValue];
     return @(iv);
 }
 
