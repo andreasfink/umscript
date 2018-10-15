@@ -293,6 +293,7 @@
 		A664D5961F6A8ABA00BD455E /* libicucore.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/libicucore.tbd; sourceTree = DEVELOPER_DIR; };
 		A669B2741F2B12EA002C9259 /* UMFunction_hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_hash.h; sourceTree = "<group>"; };
 		A669B2751F2B12EA002C9259 /* UMFunction_hash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_hash.m; sourceTree = "<group>"; };
+		A66A4244217479AC0083526C /* Makefile.linux.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.linux.in; sourceTree = "<group>"; };
 		A672F731195C2D040090FC94 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A673BEB91F1360E70026A4CF /* uexe */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = uexe; sourceTree = BUILT_PRODUCTS_DIR; };
 		A673BEBB1F1360E70026A4CF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -432,7 +433,6 @@
 		A6EEDB761929EB6D0090FC94 /* umscript.y */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.yacc; name = umscript.y; path = language/umscript.y; sourceTree = "<group>"; };
 		A6EEDB781929F9810090FC94 /* test1.ums */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test1.ums; sourceTree = "<group>"; };
 		A6F693F11B4E83770090FC94 /* configure.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = configure.in; sourceTree = "<group>"; };
-		A6F694241B4E85B80090FC94 /* Makefile.linux */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.linux; sourceTree = "<group>"; };
 		A6F694251B4E85B80090FC94 /* Makefile.osx.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.osx.in; sourceTree = "<group>"; };
 		A6F694261B4E85B80090FC94 /* umscript.pc */ = {isa = PBXFileReference; lastKnownFileType = text; path = umscript.pc; sourceTree = "<group>"; };
 		A6F8AE011F2A191C00B9512E /* UMFunction_datetime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_datetime.h; sourceTree = "<group>"; };
@@ -508,7 +508,7 @@
 			children = (
 				A6019BB31AC1FA8600854472 /* VERSION */,
 				A6F693F11B4E83770090FC94 /* configure.in */,
-				A6F694241B4E85B80090FC94 /* Makefile.linux */,
+				A66A4244217479AC0083526C /* Makefile.linux.in */,
 				A6F694251B4E85B80090FC94 /* Makefile.osx.in */,
 				A6F694261B4E85B80090FC94 /* umscript.pc */,
 				A6835C951929890B0090FC94 /* language */,

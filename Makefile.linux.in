@@ -11,6 +11,8 @@ LDFLAGS=@LDFLAGS@
 BISON=@BISON@
 FLEX=@FLEX@
 LIB=lib@PROJECT_NAME@.@SHARED_LIBRARY_EXTENSION@
+SLIB=lib@PROJECT_NAME@.a
+
 PKGCONFIGFILE=umscript.pc
 MAJORVER=@MAJORVER@
 MINORVER=@MINORVER@
@@ -31,6 +33,10 @@ ${LIB}: ${OFILES} language/_generated_umscript.y.h
 	./make_version
 	${CC} -shared -o ${LIB}  ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}
 
+${SLIB}: ${OFILES}
+	ar rcs ${SLIB} ${OFILES}
+	ranlib ${SLIB}
+
 build/uexe:	build/uexe.o ${LIB}
 	mkdir -p build
 	${CC} ${LDFLAGS} ${LIB} ${LIBS} -o build/uexe build/uexe.o
@@ -39,7 +45,7 @@ build/uexe.o:	uexe/main.m
 	mkdir -p build
 	${CC} -c ${CFLAGS} ${DEBUG_RELEASE}  ${INCLUDEDIRS} -x objective-c uexe/main.m -o build/uexe.o
 
-install: ${LIB} build/uexe
+install: ${LIB} ${SLIB} build/uexe
 	-mkdir -p ${DESTDIR}/usr/local/lib/pkgconfig
 	-mkdir -p ${DESTDIR}/usr/local/bin/
 	-mkdir -p ${DESTDIR}/usr/local/include/umscript
@@ -48,6 +54,7 @@ install: ${LIB} build/uexe
 	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}"
 	rm -f "${DESTDIR}/usr/local/lib/${LIB}"
 	install -b -g root -o root -m 644 "${LIB}" "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}.${REVISION}"	
+	install -b -g root -o root -m 644 "${SLIB}" "${DESTDIR}/usr/local/lib/${SLIB}"
 	ln -s "${LIB}.${MAJORVER}.${MINORVER}.${REVISION}" "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}"
 	ln -s "${LIB}.${MAJORVER}.${MINORVER}"             "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}"
 	ln -s "${LIB}.${MAJORVER}"                         "${DESTDIR}/usr/local/lib/${LIB}"
@@ -69,7 +76,7 @@ language/_generated_umscript.y.h:	language/umscript.y
 	$(BISON) --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
 
 clean:
-	rm -f $(LIB) $(OFILES)
+	rm -f $(LIB) $(OFILES) ${SLIB}
 
 .SUFFIXES: .m.o .o .m .c
 
