@@ -50,6 +50,14 @@
 
 - (UMDiscreteValue *)variableForKey:(NSString *)key
 {
+    if(key.length<1)
+    {
+        return [UMDiscreteValue discreteNull];
+    }
+    if([key hasPrefix:@"$"])
+    {
+        key = [key substringFromIndex:1]; /* skip the $ */
+    }
     return  _variables[key];
 }
 
@@ -57,11 +65,18 @@
 - (void)defineLocalVariable:(NSString *)name
 {
     [_stack defineLocalVariable:name];
-
 }
 
 - (void)setLocalVariable:(NSString *)name value:(UMDiscreteValue *)val
 {
+    if(name.length<1)
+    {
+        return;
+    }
+    if([name hasPrefix:@"$"])
+    {
+        name = [name substringFromIndex:1]; /* skip the $ */
+    }
     [_stack setLocalVariable:name value:val];
 }
 
@@ -73,16 +88,42 @@
 
 - (void)setVariable:(UMDiscreteValue *)val forKey:(NSString *)key
 {
+    if(key.length<1)
+    {
+        return;
+    }
+    if([key hasPrefix:@"$"])
+    {
+        key = [key substringFromIndex:1]; /* skip the $ */
+    }
+
     _variables[key] = val;
 }
 
 - (UMDiscreteValue *)fieldForKey:(NSString *)key
 {
+    if(key.length<1)
+    {
+        return [UMDiscreteValue discreteNull];
+    }
+    if([key hasPrefix:@"%"])
+    {
+        key = [key substringFromIndex:1]; /* skip the % */
+    }
+
     return _fields[key];
 }
 
 - (void)setField:(UMDiscreteValue *)val forKey:(NSString *)key
 {
+    if(key.length<1)
+    {
+        return;
+    }
+    if([key hasPrefix:@"%"])
+    {
+        key = [key substringFromIndex:1]; /* skip the % */
+    }
     _fields[key] = val;
 }
 
