@@ -42,7 +42,6 @@
     
     UMTerm *entry1 = params[0];
     UMTerm *entry2 = params[1];
-
     UMDiscreteValue *d2;
     @try
     {
@@ -55,7 +54,10 @@
         [interrupt recordEntry:e];
         @throw(interrupt);
     }
-    
+
+//#if defined(PDU_DEBUG)
+    NSLog(@"%@=%@",entry1,entry2);
+//#endif
     if(entry1.type == UMTermType_variable)
     {
         [env setVariable:d2 forKey:entry1.varname];
