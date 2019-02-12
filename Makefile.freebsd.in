@@ -1,0 +1,89 @@
+# File: Makefile
+# Project "umscript"
+# (c) 2002 -2014 Andreas Fink
+# Create: Andreas Fink (andreas@fink.org)
+#
+#
+
+CC=@CC@
+CFLAGS=@CFLAGS@ -Wno-typedef-redefinition
+LDFLAGS=@LDFLAGS@
+BISON=@BISON@
+FLEX=@FLEX@
+LIB=lib@PROJECT_NAME@.@SHARED_LIBRARY_EXTENSION@
+SLIB=lib@PROJECT_NAME@.a
+
+PKGCONFIGFILE=umscript.pc
+MAJORVER=@MAJORVER@
+MINORVER=@MINORVER@
+REVISION=@REVISION@
+
+MFILES = $(wildcard umscript/*.m) language/_generated_umscript.l.m language/_generated_umscript.y.m language/umscript.yl.m
+HFILES = version.h $(wildcard umscript/*.h)
+MOFILES  = $(MFILES:.m=.m.o)
+OFILES = $(MOFILES)
+
+INCLUDEDIRS = -I umscript -I language
+DEBUG_RELEASE = -DCONFIGURATION_RELEASE=1  -DCONFIGURATION=Release
+
+
+all: ${LIB} build/uexe
+
+${LIB}: ${OFILES} language/_generated_umscript.y.h
+	./make_version
+	${CC} -shared -o ${LIB}  ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}
+
+${SLIB}: ${OFILES}
+	ar rcs ${SLIB} ${OFILES}
+	ranlib ${SLIB}
+
+build/uexe:	build/uexe.o ${LIB}
+	mkdir -p build
+	${CC} ${LDFLAGS} ${LIB} ${LIBS} -o build/uexe build/uexe.o
+
+build/uexe.o:	uexe/main.m
+	mkdir -p build
+	${CC} -c ${CFLAGS} ${DEBUG_RELEASE}  ${INCLUDEDIRS} -x objective-c uexe/main.m -o build/uexe.o
+
+install: ${LIB} ${SLIB} build/uexe
+	-mkdir -p ${DESTDIR}/usr/local/lib/pkgconfig
+	-mkdir -p ${DESTDIR}/usr/local/bin/
+	-mkdir -p ${DESTDIR}/usr/local/include/umscript
+	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}.${REVISION}"
+	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}"
+	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}"
+	rm -f "${DESTDIR}/usr/local/lib/${LIB}"
+	install -b -g wheel -o root -m 644 "${LIB}" "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}.${REVISION}"	
+	install -b -g wheel -o root -m 644 "${SLIB}" "${DESTDIR}/usr/local/lib/${SLIB}"
+	ln -s "${LIB}.${MAJORVER}.${MINORVER}.${REVISION}" "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}"
+	ln -s "${LIB}.${MAJORVER}.${MINORVER}"             "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}"
+	ln -s "${LIB}.${MAJORVER}"                         "${DESTDIR}/usr/local/lib/${LIB}"
+	-install -b -g wheel -o root -m 644 ${PKGCONFIGFILE} ${DESTDIR}/usr/local/lib/pkgconfig/
+	-install -b -g wheel -o root -m 755 build/uexe ${DESTDIR}/usr/local/bin/uexe
+	-mkdir -p ${DESTDIR}/usr/local/include/umscript
+	cp $(HFILES) ${DESTDIR}/usr/local/include/umscript
+	ldconfig
+
+language/flex_definitions.h: language/_generated_umscript.y.h
+
+language/_generated_umscript.l.m:	language/umscript.l language/_generated_umscript.y.h
+	$(FLEX) --outfile language/_generated_umscript.l.m language/umscript.l
+
+language/_generated_umscript.y.m:	language/umscript.y
+	$(BISON)  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
+
+language/_generated_umscript.y.h:	language/umscript.y
+	$(BISON) --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
+
+clean:
+	rm -f $(LIB) $(OFILES) ${SLIB}
+
+.SUFFIXES: .m.o .o .m .c
+
+umscript/UMScriptCompilerEnvironment.m.o: umscript/UMScriptCompilerEnvironment.m language/_generated_umscript.y.h
+	${CC} -c ${CFLAGS} ${DEBUG_RELEASE} -x objective-c $<  ${DEBUG_RELEASE} ${INCLUDEDIRS} -o $@
+
+%.m.o:	%.m
+	${CC} -c ${CFLAGS} ${DEBUG_RELEASE} -x objective-c $<  ${DEBUG_RELEASE} ${INCLUDEDIRS} -o $@
+
+
