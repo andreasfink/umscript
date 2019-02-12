@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#ifdef LINUX
+#if defined(LINUX) || defined(FREEBSD)
 #ifndef LINUX_GLUE
 #define LINUX_GLUE  1
 
