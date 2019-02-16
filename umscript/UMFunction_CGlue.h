@@ -5,7 +5,6 @@
 //  Created by Andreas Fink on 03.07.17.
 //
 //
-
 /* this is some glue code provided that C functions can deal with ObjectiveC objects used by umscript */
 #include <CoreFoundation/CoreFoundation.h>
 
@@ -48,3 +47,5 @@ void discrete_value_release(CFDiscreteValueRef discreteVal);
 CFTermRef term_get(CFArrayRef params,int pos);
 void term_release(CFTermRef t);
 CFDiscreteValueRef term_evaluate_with_environment(CFTermRef xterm, CFEnvironmentRef xenv);
+
+
