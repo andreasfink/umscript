@@ -39,11 +39,11 @@ ${SLIB}: ${OFILES}
 
 build/uexe:	build/uexe.o ${LIB}
 	mkdir -p build
-	${CC} ${LDFLAGS} ${LIB} ${LIBS} -o build/uexe build/uexe.o
+	${CC}  ${LDFLAGS} ${LIB} ${LIBS} -o build/uexe build/uexe.o ${LDFLAGS}
 
 build/uexe.o:	uexe/main.m
 	mkdir -p build
-	${CC} -c ${CFLAGS} ${DEBUG_RELEASE}  ${INCLUDEDIRS} -x objective-c uexe/main.m -o build/uexe.o
+	${CC} -c ${CFLAGS} ${DEBUG_RELEASE}  ${INCLUDEDIRS} -x objective-c uexe/main.m -o build/uexe.o 
 
 install: ${LIB} ${SLIB} build/uexe
 	-mkdir -p ${DESTDIR}/usr/local/lib/pkgconfig
@@ -77,6 +77,7 @@ language/_generated_umscript.y.h:	language/umscript.y
 
 clean:
 	rm -f $(LIB) $(OFILES) ${SLIB}
+	rm -f build/uexe.o
 
 .SUFFIXES: .m.o .o .m .c
 
