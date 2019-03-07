@@ -66,7 +66,7 @@
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
-    CFArrayRef param_ref = params;
+    CFArrayRef param_ref = (__bridge CFArrayRef)params;
     CFEnvironmentRef env_ref = (__bridge CFEnvironmentRef)env;
     CFDiscreteValueRef disc = (*evaluate_func)(_globals,param_ref,env_ref);
     UMDiscreteValue *r = (__bridge_transfer UMDiscreteValue *)disc;
