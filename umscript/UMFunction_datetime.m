@@ -37,7 +37,7 @@
 
 //datetime(format,timezone=UTC,locale=US)
 
-#define STANDARD_DATE_STRING_FORMAT     @"yyyy-MM-dd HH:mm:ss.SSSS"
+#define STANDARD_DATE_STRING_FORMAT     @"yyyy-MM-dd HH:mm:ss.SSSSSS"
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params
                             environment:(id)env
@@ -46,7 +46,7 @@
     UMTerm *param0 = params[0] ? params[0] : NULL;
     UMTerm *param1 = params[1] ? params[1] : NULL;
     UMTerm *param2 = params[2] ? params[2] : NULL;
-    NSString *dateFormatString = @"yyyy-MM-dd HH:mm:ss.SSSS";
+    NSString *dateFormatString = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
     NSString *timezoneString = @"UTC";
     NSString *localeString = @"en_US";
     
@@ -80,7 +80,7 @@
             }
             else
             {
-                dateFormatString = @"yyyy-MM-dd HH:mm:ss.SSSS";
+                dateFormatString = @"yyyy-MM-dd HH:mm:ss.SSSSSS";
             }
         }
         @catch(UMTerm_Interrupt *interrupt)
