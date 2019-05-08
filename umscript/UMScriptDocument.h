@@ -16,8 +16,8 @@
 {
     NSString *_name;
     NSString *_sourceCode;
-    UMTerm *_compiledCode;
-    BOOL _isCompiled;
+    UMTerm 	 *_compiledCode;
+    BOOL 	 _isCompiled;
     NSString *_parserLog;
     NSString *_lexerLog;
     UMSynchronizedSortedDictionary *_compiledFunctions;
