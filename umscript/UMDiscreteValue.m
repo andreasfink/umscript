@@ -110,6 +110,25 @@
             }
             break;
         }
+        case UMVALUE_ASN1_OBJECT:
+        {
+            _asn1_tag.tagNumber = 7;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
+            NSDictionary *dict = (NSDictionary *)value;
+            NSArray *allKeys = [dict allKeys];
+            NSInteger n = [allKeys count];
+            for(NSInteger i=0;i<n;i++)
+            {
+                NSString        *key   = allKeys[i];
+                UMDiscreteValue *xvalue = dict[key];
+                UMASN1UTF8String *uKey = [[UMASN1UTF8String alloc]initWithValue:[xvalue stringValue]];
+                UMASN1Sequence *seq = [[UMASN1Sequence alloc]init];
+                [seq setValues:@[uKey,xvalue]];
+                [_asn1_list addObject:seq];
+            }
+            break;
+        }
         case UMVALUE_DATA:
         default:
         {
