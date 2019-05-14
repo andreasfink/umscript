@@ -26,7 +26,7 @@
     {
         case UMVALUE_NULL:
         {
-            _asn1_tag.tagNumber = 0;
+            _asn1_tag.tagNumber = UMVALUE_NULL;
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
             [_asn1_list addObject:[[UMASN1Null alloc]init]];
@@ -34,7 +34,7 @@
         }
         case UMVALUE_BOOL:
         {
-            _asn1_tag.tagNumber = 1;
+            _asn1_tag.tagNumber = UMVALUE_BOOL;
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
             UMASN1Boolean *b = [[UMASN1Boolean alloc]initWithValue:[value boolValue]];
@@ -43,7 +43,7 @@
         }
         case UMVALUE_INT:
         {
-            _asn1_tag.tagNumber = 2;
+            _asn1_tag.tagNumber = UMVALUE_INT;
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
             UMASN1Integer *i = [[UMASN1Integer alloc]initWithValue:[value integerValue]];
@@ -52,7 +52,7 @@
         }
         case UMVALUE_LONGLONG:
         {
-            _asn1_tag.tagNumber = 3;
+            _asn1_tag.tagNumber = UMVALUE_LONGLONG;
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
             UMASN1Integer *i = [[UMASN1Integer alloc]initWithValue:[value longLongValue]];
@@ -61,7 +61,7 @@
         }
         case UMVALUE_DOUBLE:
         {
-            _asn1_tag.tagNumber = 4;
+            _asn1_tag.tagNumber = UMVALUE_DOUBLE;
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
             UMASN1UTF8String *i = [[UMASN1UTF8String alloc]initWithValue:[value stringValue]];
@@ -70,7 +70,7 @@
         }
         case UMVALUE_STRING:
         {
-            _asn1_tag.tagNumber = 5;
+            _asn1_tag.tagNumber = UMVALUE_STRING;
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
             UMASN1UTF8String *s = [[UMASN1UTF8String alloc]initWithValue:[value stringValue]];
@@ -79,7 +79,7 @@
         }
         case UMVALUE_ARRAY:
         {
-            _asn1_tag.tagNumber = 6;
+            _asn1_tag.tagNumber = UMVALUE_ARRAY;
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
             NSArray *a = (NSArray *)value;
@@ -93,26 +93,7 @@
         }
         case UMVALUE_STRUCT:
         {
-            _asn1_tag.tagNumber = 6;
-            _asn1_tag.isConstructed=YES;
-            _asn1_list = [[NSMutableArray alloc]init];
-            NSDictionary *dict = (NSDictionary *)value;
-            NSArray *allKeys = [dict allKeys];
-            NSInteger n = [allKeys count];
-            for(NSInteger i=0;i<n;i++)
-            {
-                NSString        *key   = allKeys[i];
-                UMDiscreteValue *xvalue = dict[key];
-                UMASN1UTF8String *uKey = [[UMASN1UTF8String alloc]initWithValue:[xvalue stringValue]];
-                UMASN1Sequence *seq = [[UMASN1Sequence alloc]init];
-                [seq setValues:@[uKey,xvalue]];
-                [_asn1_list addObject:seq];
-            }
-            break;
-        }
-        case UMVALUE_ASN1_OBJECT:
-        {
-            _asn1_tag.tagNumber = 7;
+            _asn1_tag.tagNumber = UMVALUE_STRUCT;
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
             NSDictionary *dict = (NSDictionary *)value;
@@ -130,9 +111,34 @@
             break;
         }
         case UMVALUE_DATA:
+        {
+            _asn1_tag.tagNumber = UMVALUE_DATA;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
+            UMASN1OctetString *d = [[UMASN1OctetString alloc]initWithValue:(NSData *)value];
+            [_asn1_list addObject:d];
+            break;
+        }
+        case UMVALUE_ASN1_OBJECT:
+        {
+            _asn1_tag.tagNumber = UMVALUE_ASN1_OBJECT;
+            _asn1_tag.isConstructed=YES;
+            _asn1_list = [[NSMutableArray alloc]init];
+            UMASN1Object *asn1 = (UMASN1Object *)value;
+            NSData *d = [asn1 berEncoded];
+            UMASN1OctetString *o = [[UMASN1OctetString alloc]initWithValue:d];
+            [_asn1_list addObject:o];
+        }
         default:
         {
-            _asn1_tag.tagNumber = 6;
+            if(type==UMVALUE_ASN1_OBJECT)
+            {
+                _asn1_tag.tagNumber = UMVALUE_ASN1_OBJECT; /* An ANS1 object is simply transported as BER encoded */
+            }
+            else
+            {
+                _asn1_tag.tagNumber = UMVALUE_DATA;
+            }
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
             UMASN1OctetString *d = [[UMASN1OctetString alloc]initWithValue:(NSData *)value];
@@ -154,13 +160,13 @@
         {
             switch(o.asn1_tag.tagNumber)
             {
-                case 0:
+                case UMVALUE_NULL:
                 {
                     type = UMVALUE_NULL;
                     value = NULL;
                     return self;
                 }
-                case 1:
+                case UMVALUE_BOOL:
                 {
                     type = UMVALUE_BOOL;
                     UMASN1Boolean *b = [[UMASN1Boolean alloc]initWithASN1Object:o context:context];
@@ -174,22 +180,21 @@
                     }
                     return self;
                 }
-                case 2:
+                case UMVALUE_INT:
                 {
                     type = UMVALUE_INT;
                     UMASN1Integer *i = [[UMASN1Integer alloc]initWithASN1Object:o context:context];
                     value = @( (int)i.value);
                     return self;
                 }
-                case 3:
+                case UMVALUE_LONGLONG:
                 {
                     type = UMVALUE_LONGLONG;
-                    type = UMVALUE_INT;
                     UMASN1Integer *i = [[UMASN1Integer alloc]initWithASN1Object:o context:context];
                     value = @( (long long)i.value);
                     return self;
                 }
-                case 4:
+                case UMVALUE_DOUBLE:
                 {
                     type = UMVALUE_DOUBLE;
                     UMASN1UTF8String *utf8 = [[UMASN1UTF8String alloc]initWithASN1Object:o context:context];
@@ -197,21 +202,21 @@
                     value = @(s.doubleValue);
                     return self;
                 }
-                case 5:
+                case UMVALUE_STRING:
                 {
                     type = UMVALUE_STRING;
                     UMASN1UTF8String *utf8 = [[UMASN1UTF8String alloc]initWithASN1Object:o context:context];
                     value = utf8.stringValue;
                     return self;
                 }
-                case 6:
+                case UMVALUE_DATA:
                 {
                     type = UMVALUE_DATA;
                     UMASN1OctetString *os = [[UMASN1OctetString alloc]initWithASN1Object:o context:context];
                     value = os.value;
                     return self;
                 }
-                case 7:
+                case UMVALUE_ARRAY:
                 {
                     type = UMVALUE_ARRAY;
                     UMASN1Sequence *os = [[UMASN1Sequence alloc]initWithASN1Object:o context:context];
@@ -230,7 +235,7 @@
                     value = marr;
                     return self;
                 }
-                case 8:
+                case UMVALUE_STRUCT:
                 {
                     type = UMVALUE_STRUCT;
                     UMASN1Sequence *os = [[UMASN1Sequence alloc]initWithASN1Object:o context:context];
@@ -254,6 +259,15 @@
                         }
                     }
                     value = mdict;
+                    return self;
+                }
+                case UMVALUE_ASN1_OBJECT:
+                {
+                    type = UMVALUE_ASN1_OBJECT;
+                    UMASN1OctetString *os = [[UMASN1OctetString alloc]initWithASN1Object:o context:context];
+                    NSData *d = os.value;
+                    UMASN1Object *asn1 = [[UMASN1Object alloc]initWithBerData:d];
+                    value = asn1;
                     return self;
                 }
             }
@@ -304,7 +318,10 @@
         case UMVALUE_POINTER:
             dict[@"pointer"] = [value stringValue];
             break;
-            
+        case UMVALUE_ASN1_OBJECT:
+            dict[@"asn1"] = [value objectValue];
+            break;
+
         case UMVALUE_CUSTOM_TYPE:
             /* FIXME */
             break;
