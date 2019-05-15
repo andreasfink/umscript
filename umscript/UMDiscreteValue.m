@@ -491,6 +491,18 @@
     return self;
 }
 
+- (UMDiscreteValue *)initWithASN1Object:(UMASN1Object *)asn1;
+{
+	self = [super init];
+	if(self)
+	{
+		type = UMVALUE_ASN1_OBJECT;
+		value = asn1;
+	}
+	return self;
+}
+
+
 
 + (UMDiscreteValue *)discreteYES
 {
@@ -711,10 +723,19 @@
     return [[UMDiscreteValue alloc]initWithDictionary:dict];
 }
 
++ (UMDiscreteValue *)discreteASN1Object:(UMASN1Object *)asn1
+{
+	return [[UMDiscreteValue alloc]initWithASN1Object:asn1];
+}
+
+
+
 - (BOOL)isNull
 {
     if(type==UMVALUE_NULL)
+	{
         return YES;
+	}
     return NO;
 }
 
@@ -742,6 +763,34 @@
             unsigned char *c = (unsigned char *)[d bytes];
             return (int)c[0];
         }
+		case UMVALUE_ASN1_OBJECT:
+		{
+			UMASN1Object *asn1 = (UMASN1Object *)value;
+			if([asn1 isKindOfClass:[UMASN1Integer class]])
+			{
+				return (int) [((UMASN1Integer *)asn1) value];
+			}
+			else if([asn1 isKindOfClass:[UMASN1OctetString class]])
+			{
+				NSData *data = [((UMASN1OctetString *)asn1) value];
+				if(data==NULL)
+				{
+					return 0;
+				}
+				const char *bytes = data.bytes;
+				return (int) bytes[0];
+			}
+			else if([asn1 isKindOfClass:[UMASN1UTF8String class]])
+			{
+				NSString  *str = [((UMASN1UTF8String *)asn1) value];
+				if(str==NULL)
+				{
+					return 0;
+				}
+				return atoi(str.UTF8String);
+			}
+			return 0;
+		}
         default:
             return 0;
     }
@@ -771,6 +820,34 @@
             return value;
         case UMVALUE_DATA:
             return [[NSString alloc] initWithData:(NSData *)value encoding:NSUTF8StringEncoding];
+		case UMVALUE_ASN1_OBJECT:
+		{
+			UMASN1Object *asn1 = (UMASN1Object *)value;
+			if([asn1 isKindOfClass:[UMASN1Integer class]])
+			{
+				return [NSString stringWithFormat:@"%lld", [((UMASN1Integer *)asn1) value]];
+			}
+			else if([asn1 isKindOfClass:[UMASN1OctetString class]])
+			{
+				NSData *data = [((UMASN1OctetString *)asn1) value];
+				if(data==NULL)
+				{
+					return @"";
+				}
+				return [data hexString];
+			}
+			else if([asn1 isKindOfClass:[UMASN1UTF8String class]])
+			{
+				NSString  *str = [((UMASN1UTF8String *)asn1) value];
+				if(str==NULL)
+				{
+					return @"";
+				}
+				return str;
+			}
+			return @"";
+		}
+
         default:
             return @"";
     }
@@ -799,6 +876,11 @@
         }
         case UMVALUE_DATA:
             return value;
+		case UMVALUE_ASN1_OBJECT:
+		{
+			UMASN1Object *asn1 = (UMASN1Object *)value;
+			return [asn1 berEncoded];
+		}
         default:
             return [NSData data];
     }
@@ -845,6 +927,68 @@
             }
             return NO;
         }
+		case UMVALUE_ASN1_OBJECT:
+		{
+			UMASN1Object *asn1 = (UMASN1Object *)value;
+			if([asn1 isKindOfClass:[UMASN1Integer class]])
+			{
+				int64_t i = [((UMASN1Integer *)asn1) value];
+				if(i)
+				{
+					return YES;
+				}
+				return NO;
+			}
+			else if([asn1 isKindOfClass:[UMASN1OctetString class]])
+			{
+				NSData *data = [((UMASN1OctetString *)asn1) value];
+				if(data==NULL)
+				{
+					return 0;
+				}
+				const uint8_t *bytes = data.bytes;
+				if(bytes[0])
+				{
+					return YES;
+				}
+				return NO;			}
+			else if([asn1 isKindOfClass:[UMASN1UTF8String class]])
+			{
+				NSString  *str = [((UMASN1UTF8String *)asn1) value];
+				if(str==NULL)
+				{
+					return NO;
+				}
+				if([str caseInsensitiveCompare:@"YES"]==NSOrderedSame)
+				{
+					return YES;
+				}
+				if([str caseInsensitiveCompare:@"NO"]==NSOrderedSame)
+				{
+					return NO;
+				}
+				if([str caseInsensitiveCompare:@"true"]==NSOrderedSame)
+				{
+					return YES;
+				}
+				if([str caseInsensitiveCompare:@"false"]==NSOrderedSame)
+				{
+					return NO;
+				}
+
+				if([str caseInsensitiveCompare:@"1"]==NSOrderedSame)
+				{
+					return YES;
+				}
+				if([str caseInsensitiveCompare:@"0"]==NSOrderedSame)
+				{
+					return NO;
+				}
+				return NO;
+			}
+			return NO;
+		}
+
         default:
             return NO;
     }
@@ -911,6 +1055,55 @@
             return 0LL;
     }
 }
+
+- (UMASN1Object *)asn1Value
+{
+	switch(type)
+	{
+		case UMVALUE_NULL:
+			return [[UMASN1Null alloc]init];
+		case UMVALUE_BOOL:
+			if( [((NSNumber *)value) boolValue])
+			{
+				return [[UMASN1Boolean alloc]initAsYes];
+			}
+			else
+			{
+				return [[UMASN1Boolean alloc]initAsNo];
+			}
+
+		case UMVALUE_INT:
+		case UMVALUE_LONGLONG:
+		{
+			int64_t i = [(NSNumber *)value longLongValue];
+			return [[UMASN1Integer alloc]initWithValue:i];
+			break;
+		}
+		case UMVALUE_DOUBLE:
+		{
+			double d = [(NSNumber *)value doubleValue];
+			return [[UMASN1Real alloc]initWithValue:d];
+		}
+			break;
+		case UMVALUE_STRING:
+		{
+			NSString *str = (NSString *)value;
+			return [[UMASN1UTF8String alloc]initWithValue:str];
+		}
+		case UMVALUE_DATA:
+		{
+			NSData *d = (NSData *)value;
+			return [[UMASN1OctetString alloc]initWithValue:d];
+		}
+		case UMVALUE_ASN1_OBJECT:
+		{
+			return (UMASN1Object *)value;
+		}
+		default:
+			return 0LL;
+	}
+}
+
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {

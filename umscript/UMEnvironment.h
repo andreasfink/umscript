@@ -16,11 +16,11 @@
 
 @interface UMEnvironment : UMObject
 {
-    UMSynchronizedSortedDictionary *_variables;
-    UMSynchronizedSortedDictionary *_fields;
-    UMSynchronizedSortedDictionary *_functionDictionary;
-    UMSynchronizedDictionary *_namedLists;
-    UMDiscreteValue *returnValue;
+    UMSynchronizedSortedDictionary 	*_variables;
+    UMSynchronizedSortedDictionary 	*_fields;
+    UMSynchronizedSortedDictionary 	*_functionDictionary;
+    UMSynchronizedDictionary 		*_namedLists;
+    UMDiscreteValue 				*returnValue;
     BOOL    returnCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
     BOOL    breakCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
     NSString *jumpTo; /* if this is set, a block should jump to that label like in a goto or continue statement */
