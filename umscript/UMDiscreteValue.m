@@ -1023,6 +1023,33 @@
             unsigned char *c = (unsigned char *)[d bytes];
             return (double)c[0];
         }
+		case UMVALUE_ASN1_OBJECT:
+		{
+			UMASN1Object *asn1 = (UMASN1Object *)value;
+			if([asn1 isKindOfClass:[UMASN1Integer class]])
+			{
+				return (double) [((UMASN1Integer *)asn1) value];
+			}
+			else if([asn1 isKindOfClass:[UMASN1OctetString class]])
+			{
+				UMASN1OctetString *o = (UMASN1OctetString *)asn1;
+				NSData *data = o.value;
+				NSString *string = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+				double d;
+				sscanf(string.UTF8String,"%lf",&d);
+				return d;
+
+			}
+			else if([asn1 isKindOfClass:[UMASN1UTF8String class]])
+			{
+				UMASN1UTF8String *utf8 = (UMASN1UTF8String *)asn1;
+				NSString *string = utf8.value;
+				double d;
+				sscanf(string.UTF8String,"%lf",&d);
+				return d;
+			}
+			return 0.0;
+		}
         default:
             return 0.0;
     }
@@ -1051,6 +1078,13 @@
             unsigned char *c = (unsigned char *)[d bytes];
             return (long long)c[0];
         }
+		case UMVALUE_ASN1_OBJECT:
+		{
+			NSData *d = (NSData *)value;
+			unsigned char *c = (unsigned char *)[d bytes];
+			return (long long)c[0];
+		}
+
         default:
             return 0LL;
     }
