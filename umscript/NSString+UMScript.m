@@ -9,7 +9,6 @@
 
 #include <ctype.h>
 #include <string.h>
-#include <xlocale.h>
 
 @implementation NSString(UMScript)
 
