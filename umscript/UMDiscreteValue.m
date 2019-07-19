@@ -825,7 +825,7 @@
 			UMASN1Object *asn1 = (UMASN1Object *)value;
 			if([asn1 isKindOfClass:[UMASN1Integer class]])
 			{
-				return [NSString stringWithFormat:@"%lld", [((UMASN1Integer *)asn1) value]];
+				return [NSString stringWithFormat:@"%lld",(long long) [((UMASN1Integer *)asn1) value]];
 			}
 			else if([asn1 isKindOfClass:[UMASN1OctetString class]])
 			{
