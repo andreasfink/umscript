@@ -192,11 +192,11 @@
         _root = NULL;
         if(stdOut.length > 0)
         {
-            NSLog(@"**STDOUT: \r%@",stdOut);
+            //NSLog(@"**STDOUT: \r%@",stdOut);
         }
         if(stdErr.length> 0)
         {
-            NSLog(@"**STDERR: \r%@",stdErr);
+            //NSLog(@"**STDERR: \r%@",stdErr);
         }
         *serr = stdErr;
         *sout = stdOut;

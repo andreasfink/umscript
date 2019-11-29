@@ -55,9 +55,9 @@
         @throw(interrupt);
     }
 
-//#if defined(PDU_DEBUG)
+#if defined(PDU_DEBUG)
     NSLog(@"%@=%@",entry1,entry2);
-//#endif
+#endif
     if(entry1.type == UMTermType_variable)
     {
         [env setVariable:d2 forKey:entry1.varname];
