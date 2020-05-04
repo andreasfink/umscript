@@ -21,3 +21,4 @@
 #import "UMTerm_CallStackEntry.h"
 #import "UMTerm_Interrupt.h"
 #import "UMScriptResume.h"
+#import "UMEnvironmentNamedListProviderProtocol.h"

@@ -8,6 +8,7 @@
 
 #import <ulib/ulib.h>
 #import <ulibasn1/ulibasn1.h>
+#import "UMEnvironmentNamedListProviderProtocol.h"
 
 @class UMDiscreteValue;
 @class UMFunction;
@@ -19,18 +20,19 @@
     UMSynchronizedSortedDictionary 	*_variables;
     UMSynchronizedSortedDictionary 	*_fields;
     UMSynchronizedSortedDictionary 	*_functionDictionary;
+    id                              _namedListsProvider;
     UMSynchronizedDictionary 		*_namedLists;
     UMDiscreteValue 				*returnValue;
-    BOOL    returnCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
-    BOOL    breakCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
-    NSString *jumpTo; /* if this is set, a block should jump to that label like in a goto or continue statement */
-    int     identValue;
-    NSString *identPrefix;
-    BOOL    traceExecutionFlag;
-    BOOL    traceTreeBuildupFlag;
-    UMHistoryLog    *environmentLog;
-    UMHistoryLog    *standardOutput;
-    UMHistoryLog    *trace;
+    BOOL                            returnCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
+    BOOL                            breakCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
+    NSString                        *jumpTo; /* if this is set, a block should jump to that label like in a goto or continue statement */
+    int                             identValue;
+    NSString                        *identPrefix;
+    BOOL                            traceExecutionFlag;
+    BOOL                            traceTreeBuildupFlag;
+    UMHistoryLog                    *environmentLog;
+    UMHistoryLog                    *standardOutput;
+    UMHistoryLog                    *trace;
 
     UMStack *_stack;
 }
@@ -46,10 +48,9 @@
 @property (readwrite,assign) BOOL breakCalled;
 @property (readwrite,assign) BOOL traceExecutionFlag;
 @property (readwrite,assign) BOOL traceTreeBuildupFlag;
-
+@property (readwrite,strong) id<UMEnvironmentNamedListProviderProtocol> namedListsProvider;
 @property (readwrite,strong) UMSynchronizedSortedDictionary *functionDictionary;
 @property (readwrite,strong) UMSynchronizedDictionary *namedLists;
-
 
 - (UMEnvironment *)initWithTemplate:(UMEnvironment *)template;
 - (UMEnvironment *)initWithVarFile:(NSString *)varfile;
@@ -71,9 +72,9 @@
 - (void)pushFrame:(UMStackFrame *)frame;
 - (void)popFrame;
 
-- (void)namedlist_add:(NSString *)listName value:(NSString *)value;
-- (void)namedlist_remove:(NSString *)listName value:(NSString *)value;
-- (BOOL)namedlist_contains:(NSString *)listName value:(NSString *)value;
+- (void)namedlistAdd:(NSString *)listName value:(NSString *)value;
+- (void)namedlistRemove:(NSString *)listName value:(NSString *)value;
+- (BOOL)namedlistContains:(NSString *)listName value:(NSString *)value;
 
 
 - (void)defineLocalVariable:(NSString *)name;

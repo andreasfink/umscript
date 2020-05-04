@@ -90,7 +90,7 @@
     }
     NSString *list_name = [value0 stringValue];
     NSString *entry_string = [value1 stringValue];
-    if([env namedlist_contains:list_name value:entry_string])
+    if([env namedlistContains:list_name value:entry_string])
     {
         return [UMDiscreteValue discreteYES];
     }

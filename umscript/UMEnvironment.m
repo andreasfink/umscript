@@ -146,12 +146,12 @@
         
         environmentLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
         
-        identPrefix = @"";
+        identPrefix          = @"";
         _functionDictionary  = [[UMSynchronizedSortedDictionary alloc]init];
         _variables           = [[UMSynchronizedSortedDictionary alloc]init];
         _fields              = [[UMSynchronizedSortedDictionary alloc]init];
-        _namedLists          = [[UMSynchronizedDictionary alloc]init];
-        _stack              = [[UMStack alloc]init];
+        _namedLists          = NULL;
+        _stack               = [[UMStack alloc]init];
     }
     return self;
 }
@@ -162,8 +162,8 @@
     if(self)
     {
 
-        environmentLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
-        identPrefix = @"";
+        environmentLog       = [[UMHistoryLog alloc]initWithMaxLines:10240];
+        identPrefix          = @"";
         _functionDictionary  = [template.functionDictionary copy];
         _variables           = [[UMSynchronizedSortedDictionary alloc]init];
         _fields              = [[UMSynchronizedSortedDictionary alloc]init];
@@ -181,7 +181,7 @@
 
         environmentLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
 
-        identPrefix = @"";
+        identPrefix          = @"";
         _functionDictionary  = [[UMSynchronizedSortedDictionary alloc]init];
         _variables           = [[UMSynchronizedSortedDictionary alloc]init];
         _fields              = [[UMSynchronizedSortedDictionary alloc]init];
@@ -250,51 +250,72 @@
     [standardOutput addLogEntry:entry];
 }
 
-- (void)namedlist_add:(NSString *)listName value:(NSString *)value
+- (void)namedlistAdd:(NSString *)listName value:(NSString *)value
 {
     if((value) && (listName))
     {
         @synchronized (self)
         {
-            UMSynchronizedDictionary *list = _namedLists[listName];
-            if(list == NULL)
+            if(_namedListsProvider)
             {
-                list = [[UMSynchronizedDictionary alloc]init];
-                _namedLists[listName] = list;
+                [_namedListsProvider namedlistAdd:listName value:value];
             }
-            list[value] = value;
+            else
+            {
+                UMSynchronizedDictionary *list = _namedLists[listName];
+                if(list == NULL)
+                {
+                    list = [[UMSynchronizedDictionary alloc]init];
+                    _namedLists[listName] = list;
+                }
+                list[value] = value;
+            }
         }
     }
 }
 
-- (void)namedlist_remove:(NSString *)listName value:(NSString *)value
+- (void)namedlistRemove:(NSString *)listName value:(NSString *)value
 {
     if((value) && (listName))
     {
         @synchronized (self)
         {
-            UMSynchronizedDictionary *list = _namedLists[listName];
-            if(list == NULL)
+            if(_namedListsProvider)
             {
-                return;
+                [_namedListsProvider namedlistRemove:listName value:value];
             }
-            [list removeObjectForKey:value];
+            else
+            {
+                UMSynchronizedDictionary *list = _namedLists[listName];
+                if(list == NULL)
+                {
+                    return;
+                }
+                [list removeObjectForKey:value];
+            }
         }
     }
 }
 
-- (BOOL)namedlist_contains:(NSString *)listName value:(NSString *)value
+- (BOOL)namedlistContains:(NSString *)listName value:(NSString *)value
 {
     if((value) && (listName))
     {
         @synchronized (self)
         {
-            UMSynchronizedDictionary *list = _namedLists[listName];
-            if((list) && (list[value]))
+            if(_namedListsProvider)
             {
-                return YES;
+                return [_namedListsProvider namedlistContains:listName value:value];
             }
-       }
+            else
+            {
+                UMSynchronizedDictionary *list = _namedLists[listName];
+                if((list) && (list[value]))
+                {
+                    return YES;
+                }
+            }
+        }
     }
     return NO;
 }
@@ -308,6 +329,5 @@
 {
     [_stack popFrame];
 }
-
 
 @end

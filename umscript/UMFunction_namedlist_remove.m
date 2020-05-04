@@ -89,7 +89,7 @@
     }
     NSString *list_name = [value0 stringValue];
     NSString *entry_string = [value1 stringValue];
-    [env namedlist_remove:list_name value:entry_string];
+    [env namedlistRemove:list_name value:entry_string];
     
     return [UMDiscreteValue discreteNull];
 }
