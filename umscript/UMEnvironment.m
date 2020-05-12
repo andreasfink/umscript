@@ -161,17 +161,16 @@
     self = [super init];
     if(self)
     {
-
         environmentLog       = [[UMHistoryLog alloc]initWithMaxLines:10240];
         identPrefix          = @"";
         _functionDictionary  = [template.functionDictionary copy];
         _variables           = [[UMSynchronizedSortedDictionary alloc]init];
         _fields              = [[UMSynchronizedSortedDictionary alloc]init];
+        _namedListsProvider  = template.namedListsProvider;
         _namedLists          = template.namedLists;
     }
     return self;
 }
-
 
 - (UMEnvironment *)initWithVarFile:(NSString *)varfile
 {
