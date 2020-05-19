@@ -43,7 +43,7 @@ BOOL g_debug = NO;
 
 void help(void)
 {
-    fprintf(stderr,"umscriptexe syntax:\n");
+    fprintf(stderr,"uexe syntax:\n");
     fprintf(stderr," --input <filename>        the input variables (containing lines like $var=val)\n");
     fprintf(stderr," --script <filename>       the script to execute\n");
     fprintf(stderr," --debug                   be verbose on what the script is doing\n");
