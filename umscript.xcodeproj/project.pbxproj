@@ -48,6 +48,7 @@
 		A63DD83B192C84EB0090FC94 /* UMFunction_double.m in Sources */ = {isa = PBXBuildFile; fileRef = A63DD839192C84EB0090FC94 /* UMFunction_double.m */; };
 		A63DD83E192C84F60090FC94 /* UMFunction_data.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD83C192C84F60090FC94 /* UMFunction_data.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A63DD83F192C84F60090FC94 /* UMFunction_data.m in Sources */ = {isa = PBXBuildFile; fileRef = A63DD83D192C84F60090FC94 /* UMFunction_data.m */; };
+		A652D36724FAA91F009D5E6A /* umscript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA0319297741007FFC7B /* umscript.framework */; };
 		A655CB6C1F0A46B0007C0B5C /* UMFunction_external.h in Headers */ = {isa = PBXBuildFile; fileRef = A655CB6A1F0A46B0007C0B5C /* UMFunction_external.h */; };
 		A655CB6D1F0A46B0007C0B5C /* UMFunction_external.m in Sources */ = {isa = PBXBuildFile; fileRef = A655CB6B1F0A46B0007C0B5C /* UMFunction_external.m */; };
 		A655CB701F0A49E7007C0B5C /* UMFunction_CGlue.h in Headers */ = {isa = PBXBuildFile; fileRef = A655CB6E1F0A49E7007C0B5C /* UMFunction_CGlue.h */; };
@@ -203,6 +204,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A652D36924FAA920009D5E6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A6A3A9FA19297741007FFC7B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A6A3AA0219297741007FFC7B;
+			remoteInfo = umscript;
+		};
 		A6A3AA1E19297741007FFC7B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A6A3A9FA19297741007FFC7B /* Project object */;
@@ -432,6 +440,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A652D36724FAA91F009D5E6A /* umscript.framework in Frameworks */,
 				A6798A0B22BB705D0019806C /* ulib.framework in Frameworks */,
 				A6798A0F22BB70690019806C /* ulibasn1.framework in Frameworks */,
 			);
@@ -845,6 +854,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A652D36A24FAA920009D5E6A /* PBXTargetDependency */,
 			);
 			name = uexe;
 			productName = uexe;
@@ -1122,6 +1132,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A652D36A24FAA920009D5E6A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A6A3AA0219297741007FFC7B /* umscript */;
+			targetProxy = A652D36924FAA920009D5E6A /* PBXContainerItemProxy */;
+		};
 		A6A3AA1F19297741007FFC7B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A6A3AA0219297741007FFC7B /* umscript */;
