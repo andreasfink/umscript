@@ -103,7 +103,11 @@
 - (NSString *)compileSource
 {
     UMScriptCompilerEnvironment *compilerEnvironment = [[UMScriptCompilerEnvironment alloc]init];
+    return [self compileSourceWithCompilerEnvironment:compilerEnvironment];
+}
 
+- (NSString *)compileSourceWithCompilerEnvironment:(UMScriptCompilerEnvironment *)compilerEnvironment
+{
     NSString *out = @"";
     NSString *err = @"";
     //NSLog(@"Compiling %@",_name);

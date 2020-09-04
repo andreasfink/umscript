@@ -1544,8 +1544,16 @@
     {
         f = [[UMFunction_has_suffix alloc]initWithEnvironment:context];
     }
-
-    if(_type != UMTermType_identifier)
+    else
+    {
+        f = context.functionDictionary[name];
+        if(f)
+        {
+            _function = f;
+            _type = UMTermType_functionCall;
+        }
+    }
+    if((_type != UMTermType_identifier) && (_type != UMTermType_functionCall))
     {
         return [UMTerm termWithNullWithEnvironment:context];
     }

@@ -12,6 +12,8 @@
 @class UMEnvironment;
 @class UMDiscreteValue;
 @class UMTerm_Interrupt;
+@class UMScriptCompilerEnvironment;
+
 @interface UMScriptDocument : UMObject
 {
     NSString *_name;
@@ -33,6 +35,7 @@
 - (UMDiscreteValue *)runScriptWithEnvironment:(UMEnvironment *)env;
 - (UMDiscreteValue *)runScriptWithEnvironment:(UMEnvironment *)env continueFrom:(UMTerm_Interrupt *)interruptedFrom;
 - (NSString *)compileSource;
+- (NSString *)compileSourceWithCompilerEnvironment:(UMScriptCompilerEnvironment *)compilerEnvironment;
 - (id)initWithFilename:(NSString *)filename;
 - (id)initWithCode:(NSString *)code;
 
