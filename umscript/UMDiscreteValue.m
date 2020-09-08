@@ -427,8 +427,16 @@
     self = [super init];
     if(self)
     {
-        type = UMVALUE_STRING;
-        value = s;
+        if(s==NULL)
+        {
+            type = UMVALUE_NULL;
+            value = NULL;
+        }
+        else
+        {
+            type = UMVALUE_STRING;
+            value = s;
+        }
     }
     return self;
 }
@@ -438,8 +446,16 @@
     self = [super init];
     if(self)
     {
-        type = UMVALUE_POINTER;
-        value = s;
+        if(s==NULL)
+        {
+            type = UMVALUE_NULL;
+            value = NULL;
+        }
+        else
+        {
+            type = UMVALUE_POINTER;
+            value = s;
+        }
     }
     return self;
 }
@@ -463,8 +479,16 @@
     self = [super init];
     if(self)
     {
-        type    = UMVALUE_ARRAY;
-        value   = [array mutableCopy];
+        if(array==NULL)
+        {
+            type = UMVALUE_NULL;
+            value = NULL;
+        }
+        else
+        {
+            type    = UMVALUE_ARRAY;
+            value   = [array mutableCopy];
+        }
     }
     return self;
 }
@@ -474,8 +498,16 @@
     self = [super init];
     if(self)
     {
-        type    = UMVALUE_STRUCT;
-        value   = [dict mutableCopy];
+        if(dict==NULL)
+        {
+            type = UMVALUE_NULL;
+            value = NULL;
+        }
+        else
+        {
+            type    = UMVALUE_STRUCT;
+            value   = [dict mutableCopy];
+        }
     }
     return self;
 }
@@ -485,8 +517,16 @@
     self = [super init];
     if(self)
     {
-        type = UMVALUE_DATA;
-        value = d;
+        if(d==NULL)
+        {
+            type = UMVALUE_NULL;
+            value = NULL;
+        }
+        else
+        {
+            type = UMVALUE_DATA;
+            value = d;
+        }
     }
     return self;
 }
@@ -496,9 +536,17 @@
 	self = [super init];
 	if(self)
 	{
-		type = UMVALUE_ASN1_OBJECT;
-		value = asn1;
-	}
+        if(asn1==NULL)
+        {
+            type = UMVALUE_NULL;
+            value = NULL;
+        }
+        else
+        {
+            type = UMVALUE_ASN1_OBJECT;
+            value = asn1;
+        }
+    }
 	return self;
 }
 
