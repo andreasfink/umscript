@@ -96,9 +96,9 @@
     {
         key = [key substringFromIndex:1]; /* skip the $ */
     }
-
     _variables[key] = val;
 }
+
 
 - (UMDiscreteValue *)fieldForKey:(NSString *)key
 {
