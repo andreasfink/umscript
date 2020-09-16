@@ -7,14 +7,13 @@
 
 @protocol UMEnvironmentNamedListProviderProtocol<NSObject>
 
-- (NSArray<NSString *>*)namedlistsListNames;
 - (void)namedlistReplaceList:(NSString *)listName withContentsOfFile:(NSString *)filename;
 - (void)namedlistsFlushAll;
 - (void)namedlistsLoadFromDirectory:(NSString *)directory;
 - (void)namedlistAdd:(NSString *)listName value:(NSString *)value;
 - (void)namedlistRemove:(NSString *)listName value:(NSString *)value;
 - (BOOL)namedlistContains:(NSString *)listName value:(NSString *)value;
-- (NSArray *)namedlistList:(NSString *)listName;
-- (NSArray *)namedlistGetAllEntries:(NSString *)listName;
+- (NSArray *)namedlistGetAllEntriesOfList:(NSString *)listName; /* returns list of all entries in that list*/
+- (NSArray<NSString *>*)namedlistsListNames;
 
 @end
