@@ -150,8 +150,8 @@
         _functionDictionary  = [[UMSynchronizedSortedDictionary alloc]init];
         _variables           = [[UMSynchronizedSortedDictionary alloc]init];
         _fields              = [[UMSynchronizedSortedDictionary alloc]init];
-        _namedLists          = NULL;
         _stack               = [[UMStack alloc]init];
+        _namedListsProvider  = NULL;
     }
     return self;
 }
@@ -167,7 +167,6 @@
         _variables           = [[UMSynchronizedSortedDictionary alloc]init];
         _fields              = [[UMSynchronizedSortedDictionary alloc]init];
         _namedListsProvider  = template.namedListsProvider;
-        _namedLists          = template.namedLists;
     }
     return self;
 }
@@ -249,75 +248,105 @@
     [standardOutput addLogEntry:entry];
 }
 
-- (void)namedlistAdd:(NSString *)listName value:(NSString *)value
+- (void)namedlistReplaceList:(NSString *)listName withContentsOfFile:(NSString *)filename
 {
-    if((value) && (listName))
+    if(_namedListsProvider)
     {
-        @synchronized (self)
-        {
-            if(_namedListsProvider)
-            {
-                [_namedListsProvider namedlistAdd:listName value:value];
-            }
-            else
-            {
-                UMSynchronizedDictionary *list = _namedLists[listName];
-                if(list == NULL)
-                {
-                    list = [[UMSynchronizedDictionary alloc]init];
-                    _namedLists[listName] = list;
-                }
-                list[value] = value;
-            }
-        }
+        [_namedListsProvider namedlistReplaceList:listName withContentsOfFile:filename];
+    }
+    else
+    {
+        NSLog(@"UMEnvironment: _namedListsProvider is not set");
+    }
+}
+- (void)namedlistsFlushAll
+{
+    if(_namedListsProvider)
+    {
+        [_namedListsProvider namedlistsFlushAll];
+    }
+    else
+    {
+        NSLog(@"UMEnvironment: _namedListsProvider is not set");
     }
 }
 
+- (void)namedlistsLoadFromDirectory:(NSString *)directory
+{
+    if(_namedListsProvider)
+    {
+        [_namedListsProvider namedlistsLoadFromDirectory:directory];
+    }
+    else
+    {
+        NSLog(@"UMEnvironment: _namedListsProvider is not set");
+    }
+}
+
+- (void)namedlistAdd:(NSString *)listName value:(NSString *)value
+{
+    if(_namedListsProvider)
+    {
+        [_namedListsProvider namedlistAdd:listName value:value];
+    }
+    else
+    {
+        NSLog(@"UMEnvironment: _namedListsProvider is not set");
+    }
+
+}
 - (void)namedlistRemove:(NSString *)listName value:(NSString *)value
 {
-    if((value) && (listName))
+    if(_namedListsProvider)
     {
-        @synchronized (self)
-        {
-            if(_namedListsProvider)
-            {
-                [_namedListsProvider namedlistRemove:listName value:value];
-            }
-            else
-            {
-                UMSynchronizedDictionary *list = _namedLists[listName];
-                if(list == NULL)
-                {
-                    return;
-                }
-                [list removeObjectForKey:value];
-            }
-        }
+        [_namedListsProvider namedlistRemove:listName value:value];
+    }
+    else
+    {
+        NSLog(@"UMEnvironment: _namedListsProvider is not set");
     }
 }
 
 - (BOOL)namedlistContains:(NSString *)listName value:(NSString *)value
 {
-    if((value) && (listName))
+    if(_namedListsProvider)
     {
-        @synchronized (self)
-        {
-            if(_namedListsProvider)
-            {
-                return [_namedListsProvider namedlistContains:listName value:value];
-            }
-            else
-            {
-                UMSynchronizedDictionary *list = _namedLists[listName];
-                if((list) && (list[value]))
-                {
-                    return YES;
-                }
-            }
-        }
+        return [_namedListsProvider namedlistContains:listName value:value];
     }
-    return NO;
+    else
+    {
+        NSLog(@"UMEnvironment: _namedListsProvider is not set");
+        return NO;
+    }
 }
+
+- (NSArray *)namedlistGetAllEntriesOfList:(NSString *)listName
+{
+    if(_namedListsProvider)
+    {
+        return [_namedListsProvider namedlistGetAllEntriesOfList:listName];
+    }
+
+    else
+    {
+        NSLog(@"UMEnvironment: _namedListsProvider is not set");
+        return @[];
+    }
+}
+
+- (NSArray<NSString *>*)namedlistsListNames
+{
+    if(_namedListsProvider)
+    {
+        return [_namedListsProvider namedlistsListNames];
+    }
+    else
+   {
+       NSLog(@"UMEnvironment: _namedListsProvider is not set");
+       return @[];
+   }
+}
+
 
 - (void)pushFrame:(UMStackFrame *)frame
 {

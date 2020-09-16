@@ -15,13 +15,12 @@
 @class UMStack;
 @class UMStackFrame;
 
-@interface UMEnvironment : UMObject
+@interface UMEnvironment : UMObject<UMEnvironmentNamedListProviderProtocol>
 {
     UMSynchronizedSortedDictionary 	*_variables;
     UMSynchronizedSortedDictionary 	*_fields;
     UMSynchronizedSortedDictionary 	*_functionDictionary;
     id                              _namedListsProvider;
-    UMSynchronizedDictionary 		*_namedLists;
     UMDiscreteValue 				*returnValue;
     BOOL                            returnCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
     BOOL                            breakCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
@@ -50,7 +49,6 @@
 @property (readwrite,assign) BOOL traceTreeBuildupFlag;
 @property (readwrite,strong) id<UMEnvironmentNamedListProviderProtocol> namedListsProvider;
 @property (readwrite,strong) UMSynchronizedSortedDictionary *functionDictionary;
-@property (readwrite,strong) UMSynchronizedDictionary *namedLists;
 
 - (UMEnvironment *)initWithTemplate:(UMEnvironment *)template;
 - (UMEnvironment *)initWithVarFile:(NSString *)varfile;
@@ -71,11 +69,6 @@
 - (void) print:(NSString *)entry;
 - (void)pushFrame:(UMStackFrame *)frame;
 - (void)popFrame;
-
-- (void)namedlistAdd:(NSString *)listName value:(NSString *)value;
-- (void)namedlistRemove:(NSString *)listName value:(NSString *)value;
-- (BOOL)namedlistContains:(NSString *)listName value:(NSString *)value;
-
 
 - (void)defineLocalVariable:(NSString *)name;
 - (void)setLocalVariable:(NSString *)name value:(UMDiscreteValue *)val;
