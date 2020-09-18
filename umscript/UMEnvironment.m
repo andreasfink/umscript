@@ -347,6 +347,18 @@
    }
 }
 
+- (UMNamedList *)getNamedList:(NSString *)name
+{
+     if(_namedListsProvider)
+     {
+         return [_namedListsProvider getNamedList:name];
+     }
+     else
+    {
+        NSLog(@"UMEnvironment: _namedListsProvider is not set");
+        return NULL;
+    }
+}
 
 - (void)pushFrame:(UMStackFrame *)frame
 {

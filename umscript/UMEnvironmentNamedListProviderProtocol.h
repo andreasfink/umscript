@@ -15,5 +15,5 @@
 - (BOOL)namedlistContains:(NSString *)listName value:(NSString *)value;
 - (NSArray *)namedlistGetAllEntriesOfList:(NSString *)listName; /* returns list of all entries in that list*/
 - (NSArray<NSString *>*)namedlistsListNames;
-
+- (UMNamedList *)getNamedList:(NSString *)name;
 @end
