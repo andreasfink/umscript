@@ -1372,6 +1372,7 @@
 				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
 				INFOPLIST_FILE = "umscript/umscript-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.umscript;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1404,6 +1405,7 @@
 				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
 				INFOPLIST_FILE = "umscript/umscript-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.umscript;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
