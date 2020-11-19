@@ -23,7 +23,7 @@
 
 @interface UMTerm_Interrupt : UMObject
 {
-    UMQueue *callStackEntries;
+    UMQueueSingle *callStackEntries;
     UMScriptDocument *_currentScript;
     UMObject<UMScriptResume> *_delegate;
 }
