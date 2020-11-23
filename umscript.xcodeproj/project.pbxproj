@@ -1283,6 +1283,7 @@
 				OTHER_CFLAGS = "-DUMSCRIPT_CONFIG=Debug";
 				SDKROOT = macosx;
 				VALID_ARCHS = "$(inherited)";
+				WARNING_CFLAGS = "-Wimplicit-fallthrough=3";
 			};
 			name = Debug;
 		};
@@ -1347,6 +1348,7 @@
 				OTHER_CFLAGS = "-DUMSCRIPT_CONFIG=Release";
 				SDKROOT = macosx;
 				VALID_ARCHS = "$(inherited)";
+				WARNING_CFLAGS = "-Wimplicit-fallthrough=3";
 			};
 			name = Release;
 		};
