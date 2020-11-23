@@ -442,20 +442,34 @@
     {
         case UMTermType_discrete:
             dict[@"_discrete"] = _discrete.objectValue;
+            break;
         case UMTermType_field:
             dict[@"field"] = _fieldname;
+            break;
+
         case UMTermType_variable:
             dict[@"variable"] = _varname;
+            break;
+
         case UMTermType_functionCall:
             dict[@"function-call"] = _function.name;
+            break;
+
         case UMTermType_functionDefinition:
             dict[@"function-definition"] = _function.name;
+            break;
+
         case UMTermType_identifier:
             dict[@"identifier"] = _identifier;
+            break;
+
         case UMTermType_nullterm:
             dict[@"null"] = @"null";
+            break;
+
         case UMTermType_token:
             dict[@"token"] = @(_token);
+            break;
     }
     return dict;
 }

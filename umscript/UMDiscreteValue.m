@@ -128,6 +128,7 @@
             NSData *d = [asn1 berEncoded];
             UMASN1OctetString *o = [[UMASN1OctetString alloc]initWithValue:d];
             [_asn1_list addObject:o];
+            break;
         }
         default:
         {
