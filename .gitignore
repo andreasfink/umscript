@@ -9,10 +9,13 @@ language/_generated_umscript.l.h
 Makefile
 Makefile.linux
 Makefile.osx
+Makefile.freebsd
 config.h
 config.log
 config.status
 stamp-h1
+BUILDNR
+make_buildnr.sh
 
 
 
