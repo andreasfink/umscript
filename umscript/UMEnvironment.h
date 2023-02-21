@@ -20,7 +20,7 @@
     UMSynchronizedSortedDictionary 	*_variables;
     UMSynchronizedSortedDictionary 	*_fields;
     UMSynchronizedSortedDictionary 	*_functionDictionary;
-    id                              _namedListsProvider;
+    id<UMEnvironmentNamedListProviderProtocol>  _namedListsProvider;
     UMDiscreteValue 				*returnValue;
     BOOL                            returnCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
     BOOL                            breakCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
