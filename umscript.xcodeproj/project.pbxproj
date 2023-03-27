@@ -906,7 +906,7 @@
 		A6A3A9FA19297741007FFC7B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					A673BEB81F1360E70026A4CF = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -1283,7 +1283,7 @@
 				);
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DUMSCRIPT_CONFIG=Debug";
 				SDKROOT = macosx;
@@ -1353,7 +1353,7 @@
 				);
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DUMSCRIPT_CONFIG=Release";
 				SDKROOT = macosx;
@@ -1385,7 +1385,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
 				INFOPLIST_FILE = "umscript/umscript-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.16.3;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.umscript;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1421,7 +1421,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
 				INFOPLIST_FILE = "umscript/umscript-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.16.3;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.umscript;
 				PRODUCT_NAME = "$(TARGET_NAME)";
