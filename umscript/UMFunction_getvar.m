@@ -54,7 +54,7 @@
     NSString *variableName = [variableNameValue stringValue];
     
     return [env variableForKey:variableName ];
-
+#if 0
     {
         NSInteger start;
         if(interruptedAt)
@@ -91,6 +91,7 @@
         NSString *varName = [varNameValue stringValue];
         return [env variableForKey:varName ];
     }
+#endif
 }
 
 
