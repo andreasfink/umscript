@@ -16,6 +16,9 @@ config.status
 stamp-h1
 BUILDNR
 make_buildnr.sh
+buildnumber.c
+buildnumber.h
+
 
 
 
