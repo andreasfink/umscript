@@ -125,8 +125,8 @@ int main(int argc, const char * argv[])
         }
         if(g_debug)
         {
-            env.traceExecutionFlag = YES;
-            env.traceTreeBuildupFlag = YES;
+            env._traceExecutionFlag = YES;
+            env._traceTreeBuildupFlag = YES;
         }
         @try
         {

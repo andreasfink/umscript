@@ -78,7 +78,7 @@
             [interrupt recordEntry:e];
             @throw(interrupt);
         }
-        env.breakCalled=NO;
+        env._breakCalled=NO;
     }
     
     
@@ -101,7 +101,7 @@
                 @throw(interrupt);
             }
         }
-        if((env.breakCalled==YES) || (condition.boolValue==NO))
+        if((env._breakCalled==YES) || (condition.boolValue==NO))
         {
             break;
         }
@@ -143,7 +143,7 @@
         }
     }
 
-    env.breakCalled=NO;
+    env._breakCalled=NO;
     return condition;
 }
 

@@ -36,7 +36,7 @@
 {
     
     UMTerm *label = params[0];
-    env.jumpTo = label.labelValue;
+    env._jumpTo = label.labelValue;
     return NULL;
 }
 

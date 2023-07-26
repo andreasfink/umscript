@@ -47,7 +47,7 @@
         start = 0;
     }
 //    UMDiscreteValue *previousReturnValue = env.returnValue;
-    env.returnValue = nil;
+    env._returnValue = nil;
 
     NSMutableDictionary *labelsDict = [[NSMutableDictionary alloc]init];
     NSUInteger i=0;
@@ -61,9 +61,9 @@
         }
     }
 
-    if(env.jumpTo != NULL) /* a block of a switch statement where we are being jumped into */
+    if(env._jumpTo != NULL) /* a block of a switch statement where we are being jumped into */
     {
-        NSNumber *goTo = [labelsDict objectForKey:env.jumpTo];
+        NSNumber *goTo = [labelsDict objectForKey:env._jumpTo];
         if(goTo != NULL)
         {
             i =  [goTo integerValue];
@@ -94,9 +94,9 @@
         }
         UMTerm *term  = [params objectAtIndex:i];
 
-        env.jumpTo = NULL;
-        env.returnCalled = NO;
-        env.breakCalled = NO;
+        env._jumpTo = NULL;
+        env._returnCalled = NO;
+        env._breakCalled = NO;
 
         UMDiscreteValue *r;
         @try
@@ -111,18 +111,18 @@
             [interrupt recordEntry:e];
             @throw(interrupt);
         }
-        if(env.returnCalled)
+        if(env._returnCalled)
         {
-            env.returnValue = r;
+            env._returnValue = r;
             break;
         }
-        if(env.breakCalled)
+        if(env._breakCalled)
         {
             break;
         }
-        if(env.jumpTo)
+        if(env._jumpTo)
         {
-            NSNumber *goTo = [labelsDict objectForKey:[env.jumpTo description]];
+            NSNumber *goTo = [labelsDict objectForKey:[env._jumpTo description]];
             if(goTo != NULL)
             {
                 i =  [goTo integerValue];
@@ -140,7 +140,7 @@
                 @throw([NSException exceptionWithName:@"umscript unknown lablel"
                                                reason:NULL
                                              userInfo:@{
-                                                        @"sysmsg" : [NSString stringWithFormat:@"Unknown label %@",env.jumpTo.description],
+                                                        @"sysmsg" : [NSString stringWithFormat:@"Unknown label %@",env._jumpTo.description],
                                                         @"func": @(__func__),
                                                         @"err": @(1)
                                                         }]);
@@ -150,12 +150,12 @@
         }
         i++;
     } while (i<n);
-    return  env.returnValue;
+    return  env._returnValue;
 }
 
 - (NSString *)codeWithEnvironmentStart:(UMEnvironment *)env
 {
-    NSString *s=[NSString stringWithFormat:@"%@{\r%@    ",[env identPrefix],[env identPrefix]];
+    NSString *s=[NSString stringWithFormat:@"%@{\r%@    ",[env _identPrefix],[env _identPrefix]];
     [env identAdd];
     return s;
 }
@@ -163,13 +163,13 @@
 - (NSString *)codeWithEnvironmentFirstParam:(UMTerm *)param env:(UMEnvironment *)env
 {
     NSString *pstring = [param codeWithEnvironment:env];
-    return [NSString stringWithFormat:@"%@;\r%@",pstring,[env identPrefix]];
+    return [NSString stringWithFormat:@"%@;\r%@",pstring,[env _identPrefix]];
 }
 
 - (NSString *)codeWithEnvironmentNextParam:(UMTerm *)param env:(UMEnvironment *)env
 {
     NSString *pstring = [param codeWithEnvironment:env];
-    return [NSString stringWithFormat:@"%@;\r%@",pstring,[env identPrefix]];
+    return [NSString stringWithFormat:@"%@;\r%@",pstring,[env _identPrefix]];
 }
 
 - (NSString *)codeWithEnvironmentLastParam:(UMTerm *)param env:(UMEnvironment *)env
@@ -181,7 +181,7 @@
 - (NSString *)codeWithEnvironmentStop:(UMEnvironment *)env
 {
     [env identRemove];
-    return [NSString stringWithFormat:@"%@}\r",[env identPrefix]];
+    return [NSString stringWithFormat:@"%@}\r",[env _identPrefix]];
 }
 
 @end

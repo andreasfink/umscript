@@ -110,7 +110,7 @@
 - (NSString *)codeWithEnvironmentNextParam:(UMTerm *)param env:(UMEnvironment *)env
 {
     NSString *pstring = [param codeWithEnvironment:env];
-    return [NSString stringWithFormat:@"%@;\r%@",pstring,[env identPrefix]];
+    return [NSString stringWithFormat:@"%@;\r%@",pstring,[env _identPrefix]];
 }
 
 - (NSString *)codeWithEnvironmentStop:(UMEnvironment *)env

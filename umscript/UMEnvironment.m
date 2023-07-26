@@ -14,37 +14,24 @@
 
 @implementation UMEnvironment
 
-@synthesize identValue;
-@synthesize identPrefix;
-@synthesize returnValue;
-@synthesize environmentLog;
-@synthesize standardOutput;
-@synthesize trace;
-
-@synthesize jumpTo;
-@synthesize returnCalled;
-@synthesize breakCalled;
-@synthesize traceExecutionFlag;
-@synthesize traceTreeBuildupFlag;
-
 - (void)identAdd
 {
-    identValue++;
-    identPrefix = [identPrefix stringByAppendingString:@"    "];
+    _identValue++;
+    _identPrefix = [_identPrefix stringByAppendingString:@"    "];
 }
 
 - (void)identRemove
 {
-    identValue--;
-    int n = (int)[identPrefix length];
+    _identValue--;
+    int n = (int)[_identPrefix length];
     n = n - 4;
     if(n<=0)
     {
-        identPrefix = @"";
+        _identPrefix = @"";
     }
     else
     {
-        identPrefix = [identPrefix substringToIndex:n];
+        _identPrefix = [_identPrefix substringToIndex:n];
     }
 }
 
@@ -144,9 +131,8 @@
     if(self)
     {
         
-        environmentLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
-        
-        identPrefix          = @"";
+        _environmentLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
+        _identPrefix          = @"";
         _functionDictionary  = [[UMSynchronizedSortedDictionary alloc]init];
         _variables           = [[UMSynchronizedSortedDictionary alloc]init];
         _fields              = [[UMSynchronizedSortedDictionary alloc]init];
@@ -161,8 +147,8 @@
     self = [super init];
     if(self)
     {
-        environmentLog       = [[UMHistoryLog alloc]initWithMaxLines:10240];
-        identPrefix          = @"";
+        _environmentLog       = [[UMHistoryLog alloc]initWithMaxLines:10240];
+        _identPrefix          = @"";
         _functionDictionary  = [template.functionDictionary copy];
         _variables           = [[UMSynchronizedSortedDictionary alloc]init];
         _fields              = [[UMSynchronizedSortedDictionary alloc]init];
@@ -177,9 +163,9 @@
     if(self)
     {
 
-        environmentLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
+        _environmentLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
 
-        identPrefix          = @"";
+        _identPrefix          = @"";
         _functionDictionary  = [[UMSynchronizedSortedDictionary alloc]init];
         _variables           = [[UMSynchronizedSortedDictionary alloc]init];
         _fields              = [[UMSynchronizedSortedDictionary alloc]init];
@@ -235,17 +221,17 @@
 
 - (void) log:(NSString *)entry
 {
-    [environmentLog addLogEntry:entry];
+    [_environmentLog addLogEntry:entry];
 }
 
 - (void) trace:(NSString *)entry
 {
-    [trace addLogEntry:entry];
+    [_trace addLogEntry:entry];
 }
 
 - (void) print:(NSString *)entry
 {
-    [standardOutput addLogEntry:entry];
+    [_standardOutput addLogEntry:entry];
 }
 
 - (void)namedlistReplaceList:(NSString *)listName withContentsOfFile:(NSString *)filename

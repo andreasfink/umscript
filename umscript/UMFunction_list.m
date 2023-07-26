@@ -46,7 +46,7 @@
         start = 0;
     }
 
-    env.returnValue = nil;
+    env._returnValue = nil;
     
     NSMutableDictionary *labelsDict = [[NSMutableDictionary alloc]init];
     NSUInteger i=0;
@@ -60,9 +60,9 @@
         }
     }
     
-    if(env.jumpTo != NULL) /* a block of a switch statement where we are being jumped into */
+    if(env._jumpTo != NULL) /* a block of a switch statement where we are being jumped into */
     {
-        NSNumber *goTo = [labelsDict objectForKey:env.jumpTo];
+        NSNumber *goTo = [labelsDict objectForKey:env._jumpTo];
         if(goTo != NULL)
         {
             i =  [goTo integerValue];
@@ -93,9 +93,9 @@
         }
         UMTerm *term  = [xparams objectAtIndex:i];
         
-        env.jumpTo = NULL;
-        env.returnCalled = NO;
-        env.breakCalled = NO;
+        env._jumpTo = NULL;
+        env._returnCalled = NO;
+        env._breakCalled = NO;
         
         UMDiscreteValue *r;
         @try
@@ -111,18 +111,18 @@
             @throw(interrupt);
         }
         
-        if(env.returnCalled)
+        if(env._returnCalled)
         {
-            env.returnValue = r;
+            env._returnValue = r;
             break;
         }
-        if(env.breakCalled)
+        if(env._breakCalled)
         {
             break;
         }
-        if(env.jumpTo)
+        if(env._jumpTo)
         {
-            NSNumber *goTo = [labelsDict objectForKey:[env.jumpTo description]];
+            NSNumber *goTo = [labelsDict objectForKey:[env._jumpTo description]];
             if(goTo != NULL)
             {
                 i =  [goTo integerValue];
@@ -140,7 +140,7 @@
                 @throw([NSException exceptionWithName:@"UMSCRIPT Unknown lablel"
                                                reason:NULL
                                              userInfo:@{
-                                                        @"sysmsg" : [NSString stringWithFormat:@"Unknown label %@",env.jumpTo.description],
+                                                        @"sysmsg" : [NSString stringWithFormat:@"Unknown label %@",env._jumpTo.description],
                                                         @"func": @(__func__),
                                                         @"err": @(1)
                                                         }]);
@@ -150,7 +150,7 @@
         }
         i++;
     } while (i<n);
-    return  env.returnValue;
+    return  env._returnValue;
 }
 
 @end

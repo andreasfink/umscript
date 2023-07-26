@@ -36,7 +36,7 @@
                             environment:(UMEnvironment *)env
                            continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
-    env.breakCalled = YES;
+    env._breakCalled = YES;
     return [UMDiscreteValue discreteNull];
 }
 
