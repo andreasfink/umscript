@@ -66,8 +66,8 @@
         [interrupt recordEntry:e];
         @throw(interrupt);
     }
-    env._returnValue =  returnValue;
-    env._returnCalled = YES;
+    env.returnValue =  returnValue;
+    env.returnCalled = YES;
     return returnValue;
 }
 @end

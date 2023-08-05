@@ -70,7 +70,7 @@
         }
     }
 
-    env._jumpTo = switchValue.stringValue;
+    env.jumpTo = switchValue.stringValue;
     @try
     {
         [switchBlock evaluateWithEnvironment:env continueFrom:interruptedAt];
@@ -84,7 +84,7 @@
         [interrupt recordEntry:e];
         @throw(interrupt);
     }
-    env._breakCalled = NO;
+    env.breakCalled = NO;
     return [UMDiscreteValue discreteNull];
 }
 

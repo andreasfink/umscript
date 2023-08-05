@@ -56,7 +56,7 @@
     UMDiscreteValue *condition;
     UMDiscreteValue *doValue;
     
-    env._breakCalled=NO;
+    env.breakCalled=NO;
     do
     {
         if(start==0)
@@ -73,7 +73,7 @@
                 [interrupt recordEntry:e];
                 @throw(interrupt);
             }
-            if(env._breakCalled==YES)
+            if(env.breakCalled==YES)
             {
                 break;
             }

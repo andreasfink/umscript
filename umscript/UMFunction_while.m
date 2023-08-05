@@ -55,7 +55,7 @@
         return [UMDiscreteValue discreteNull];
     }
     
-    env._breakCalled=NO;
+    env.breakCalled=NO;
     if(start==0)
     {
         @try
@@ -88,7 +88,7 @@
             @throw(interrupt);
         }
 
-        if(env._breakCalled==YES)
+        if(env.breakCalled==YES)
         {
             break;
         }
@@ -106,7 +106,7 @@
             @throw(interrupt);
         }
     }
-    env._breakCalled=NO;
+    env.breakCalled=NO;
     return condition;
 }
 

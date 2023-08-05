@@ -541,7 +541,7 @@
             break;
         }
     }
-    if(xenv._trace)
+    if(xenv.trace)
     {
         [xenv trace:[NSString stringWithFormat:@"evaluating: %@ returns %@",self.description,returnvalue.description]];
     }
