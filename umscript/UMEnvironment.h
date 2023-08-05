@@ -37,7 +37,7 @@
 }
 
 @property (readwrite,strong) UMDiscreteValue *returnValue;
-@property (readwrite,assign) int _identValue;
+@property (readwrite,assign) int identValue;
 @property (readwrite,strong) NSString *identPrefix;
 @property (readwrite,strong) UMHistoryLog *environmentLog;
 @property (readwrite,strong) UMHistoryLog *standardOutput;
