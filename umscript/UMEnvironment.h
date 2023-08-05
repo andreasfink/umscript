@@ -36,17 +36,17 @@
     UMStack *_stack;
 }
 
-@property (readwrite,strong) UMDiscreteValue *_returnValue;
+@property (readwrite,strong) UMDiscreteValue *returnValue;
 @property (readwrite,assign) int _identValue;
-@property (readwrite,strong) NSString *_identPrefix;
-@property (readwrite,strong) UMHistoryLog *_environmentLog;
-@property (readwrite,strong) UMHistoryLog *_standardOutput;
-@property (readwrite,strong) UMHistoryLog *_trace;
-@property (readwrite,strong) NSString *_jumpTo;
-@property (readwrite,assign) BOOL _returnCalled;
-@property (readwrite,assign) BOOL _breakCalled;
-@property (readwrite,assign) BOOL _traceExecutionFlag;
-@property (readwrite,assign) BOOL _traceTreeBuildupFlag;
+@property (readwrite,strong) NSString *identPrefix;
+@property (readwrite,strong) UMHistoryLog *environmentLog;
+@property (readwrite,strong) UMHistoryLog *standardOutput;
+@property (readwrite,strong) UMHistoryLog *trace;
+@property (readwrite,strong) NSString *jumpTo;
+@property (readwrite,assign) BOOL returnCalled;
+@property (readwrite,assign) BOOL breakCalled;
+@property (readwrite,assign) BOOL traceExecutionFlag;
+@property (readwrite,assign) BOOL traceTreeBuildupFlag;
 @property (readwrite,strong) id<UMEnvironmentNamedListProviderProtocol> namedListsProvider;
 @property (readwrite,strong) UMSynchronizedSortedDictionary *functionDictionary;
 
