@@ -14,6 +14,24 @@
 
 @implementation UMEnvironment
 
+- (UMEnvironment *)init
+{
+    self = [super init];
+    if(self)
+    {
+        
+        _environmentLog      = [[UMHistoryLog alloc]initWithMaxLines:10240];
+        _identPrefix         = @"";
+        _functionDictionary  = [[UMSynchronizedSortedDictionary alloc]init];
+        _variables           = [[UMSynchronizedSortedDictionary alloc]init];
+        _fields              = [[UMSynchronizedSortedDictionary alloc]init];
+        _stack               = [[UMStack alloc]init];
+        _namedListsProvider  = NULL;
+    }
+    return self;
+}
+
+
 - (void)identAdd
 {
     _identValue++;
@@ -125,29 +143,13 @@
     _functionDictionary[f.name] = f;
 }
 
-- (UMEnvironment *)init
-{
-    self = [super init];
-    if(self)
-    {
-        
-        _environmentLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
-        _identPrefix          = @"";
-        _functionDictionary  = [[UMSynchronizedSortedDictionary alloc]init];
-        _variables           = [[UMSynchronizedSortedDictionary alloc]init];
-        _fields              = [[UMSynchronizedSortedDictionary alloc]init];
-        _stack               = [[UMStack alloc]init];
-        _namedListsProvider  = NULL;
-    }
-    return self;
-}
 
 - (UMEnvironment *)initWithTemplate:(UMEnvironment *)template
 {
     self = [super init];
     if(self)
     {
-        _environmentLog       = [[UMHistoryLog alloc]initWithMaxLines:10240];
+        _environmentLog       = [[UMHistoryLog alloc]initWithMaxLines:1000];
         _identPrefix          = @"";
         _functionDictionary  = [template.functionDictionary copy];
         _variables           = [[UMSynchronizedSortedDictionary alloc]init];
@@ -163,7 +165,7 @@
     if(self)
     {
 
-        _environmentLog = [[UMHistoryLog alloc]initWithMaxLines:10240];
+        _environmentLog = [[UMHistoryLog alloc]initWithMaxLines:1000];
 
         _identPrefix          = @"";
         _functionDictionary  = [[UMSynchronizedSortedDictionary alloc]init];
