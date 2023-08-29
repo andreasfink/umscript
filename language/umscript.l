@@ -214,19 +214,22 @@ extern int yydebug;
 
 int yycompile(UMScriptCompilerEnvironment *cenv, int fdes_input, int fdes_output)
 {
-    yyscan_t yyscanner;
-    yylex_init(&yyscanner);
-    FILE *infile = fdopen(fdes_input, "r");
-    FILE *outfile = fdopen(fdes_output,"w");
-    yyset_in(infile,yyscanner);
-    yyset_out(outfile,yyscanner);
-    void * cenv2 = (void *)XCFBridgingRetain(cenv);
-    yyset_extra(cenv2,yyscanner);
-//    yydebug = 1;
-    yyparse(yyscanner,cenv);
-    XCFBridgingRelease(cenv2);
-    yylex_destroy(yyscanner);
-    return 0;
+    @autoreleasepool
+    {
+        yyscan_t yyscanner;
+        yylex_init(&yyscanner);
+        FILE *infile = fdopen(fdes_input, "r");
+        FILE *outfile = fdopen(fdes_output,"w");
+        yyset_in(infile,yyscanner);
+        yyset_out(outfile,yyscanner);
+        void * cenv2 = (void *)XCFBridgingRetain(cenv);
+        yyset_extra(cenv2,yyscanner);
+        //    yydebug = 1;
+        yyparse(yyscanner,cenv);
+        XCFBridgingRelease(cenv2);
+        yylex_destroy(yyscanner);
+        return 0;
+    }
 }
 
 int column = 0;

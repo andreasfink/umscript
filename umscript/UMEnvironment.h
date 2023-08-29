@@ -21,17 +21,17 @@
     UMSynchronizedSortedDictionary 	*_fields;
     UMSynchronizedSortedDictionary 	*_functionDictionary;
     id<UMEnvironmentNamedListProviderProtocol>  _namedListsProvider;
-    UMDiscreteValue 				*returnValue;
-    BOOL                            returnCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
-    BOOL                            breakCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
-    NSString                        *jumpTo; /* if this is set, a block should jump to that label like in a goto or continue statement */
-    int                             identValue;
-    NSString                        *identPrefix;
-    BOOL                            traceExecutionFlag;
-    BOOL                            traceTreeBuildupFlag;
-    UMHistoryLog                    *environmentLog;
-    UMHistoryLog                    *standardOutput;
-    UMHistoryLog                    *trace;
+    UMDiscreteValue 				*_returnValue;
+    BOOL                            _returnCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
+    BOOL                            _breakCalled; /* if this is set to TRUE, a block executor should jump out (like in a return statement) */
+    NSString                        *_jumpTo; /* if this is set, a block should jump to that label like in a goto or continue statement */
+    int                             _identValue;
+    NSString                        *_identPrefix;
+    BOOL                            _traceExecutionFlag;
+    BOOL                            _traceTreeBuildupFlag;
+    UMHistoryLog                    *_environmentLog;
+    UMHistoryLog                    *_standardOutput;
+    UMHistoryLog                    *_trace;
 
     UMStack *_stack;
 }

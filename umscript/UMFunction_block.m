@@ -155,7 +155,7 @@
 
 - (NSString *)codeWithEnvironmentStart:(UMEnvironment *)env
 {
-    NSString *s=[NSString stringWithFormat:@"%@{\r%@    ",[env identPrefix],[env identPrefix]];
+    NSString *s=[NSString stringWithFormat:@"%@{\r%@    ",env.identPrefix,env.identPrefix];
     [env identAdd];
     return s;
 }
@@ -163,13 +163,13 @@
 - (NSString *)codeWithEnvironmentFirstParam:(UMTerm *)param env:(UMEnvironment *)env
 {
     NSString *pstring = [param codeWithEnvironment:env];
-    return [NSString stringWithFormat:@"%@;\r%@",pstring,[env identPrefix]];
+    return [NSString stringWithFormat:@"%@;\r%@",pstring,env.identPrefix];
 }
 
 - (NSString *)codeWithEnvironmentNextParam:(UMTerm *)param env:(UMEnvironment *)env
 {
     NSString *pstring = [param codeWithEnvironment:env];
-    return [NSString stringWithFormat:@"%@;\r%@",pstring,[env identPrefix]];
+    return [NSString stringWithFormat:@"%@;\r%@",pstring,env.identPrefix];
 }
 
 - (NSString *)codeWithEnvironmentLastParam:(UMTerm *)param env:(UMEnvironment *)env
@@ -181,7 +181,7 @@
 - (NSString *)codeWithEnvironmentStop:(UMEnvironment *)env
 {
     [env identRemove];
-    return [NSString stringWithFormat:@"%@}\r",[env identPrefix]];
+    return [NSString stringWithFormat:@"%@}\r",env.identPrefix];
 }
 
 @end
