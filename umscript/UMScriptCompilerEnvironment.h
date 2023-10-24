@@ -6,7 +6,7 @@
 //  Copyright (c) 2016 Andreas Fink
 //
 
-#import "UMEnvironment.h"
+#import <umscript/UMEnvironment.h>
 
 #if defined(LINUX) || defined(FREEBSD)
 #ifndef LINUX_GLUE
