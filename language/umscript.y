@@ -22,10 +22,10 @@
 #define YYDEBUG     1
 #define	AUTORELEASEPOOL	@autoreleasepool
 
-#import <umscript/flex_definitions.h>
-#import <umscript/bison_definitions.h>
+#import "flex_definitions.h"
+#import "bison_definitions.h"
 
-#import <umscript/umscript.yl.h>
+#import "umscript.yl.h"
 
 extern int yylex(YYSTYPE * yylval_param, YYLTYPE * yylloc_param , yyscan_t yyscanner);
 extern int yydebug;
