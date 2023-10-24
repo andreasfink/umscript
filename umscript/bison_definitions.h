@@ -7,10 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UMTerm.h"
-#import "UMScriptCompilerEnvironment.h"
-#import "UMFunctionMacros.h"
-#import "glueterm.h"
-//#import "bisonbridge.h"
+#import <umscript/UMTerm.h>
+#import <umscript/UMScriptCompilerEnvironment.h>
+#import <umscript/UMFunctionMacros.h>
+#import <umscript/glueterm.h>
 
 

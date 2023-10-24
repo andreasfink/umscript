@@ -7,7 +7,7 @@
 //
 
 #import <ulib/ulib.h>
-#import "UMFunction.h"
+#import <umscript/UMFunction.h>
 #import "UMEnvironment.h"
 #import "UMTerm.h"
 #import "NSNumber+UMScript.h"

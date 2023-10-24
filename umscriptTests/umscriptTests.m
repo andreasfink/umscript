@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "UMFunction.h"
+#import <umscript/UMFunction.h>
 #import "UMTerm.h"
 #import "UMEnvironment.h"
 #import "UMScriptDocument.h"

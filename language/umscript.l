@@ -10,12 +10,12 @@
 
 %top{
 
-#import "glueterm.h"
+#import <umscript/glueterm.h>
 #define YYSTYPE_IS_DECLARED 1
 #define YYSTYPE glueterm
 
-#import "flex_definitions.h"
-#import "umscript.yl.h"
+#import <umscript/flex_definitions.h>
+#import <umscript/umscript.yl.h>
 
 typedef UMScriptCompilerEnvironment *YY_EXTRA_TYPE;
 
@@ -36,8 +36,7 @@ IS            (u|U|l|L)*
 
 %{
 
-//#import "umscript.yl.h"
-#import "_generated_umscript.y.h"
+#import <umscript/_generated_umscript.y.h>
 
 
 static void yyunput (int c, register char * yy_bp , yyscan_t yyscanner);

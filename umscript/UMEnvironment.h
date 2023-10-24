@@ -8,7 +8,7 @@
 
 #import <ulib/ulib.h>
 #import <ulibasn1/ulibasn1.h>
-#import "UMEnvironmentNamedListProviderProtocol.h"
+#import <umscript/UMEnvironmentNamedListProviderProtocol.h>
 
 @class UMDiscreteValue;
 @class UMFunction;

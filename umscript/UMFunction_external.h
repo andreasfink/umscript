@@ -7,7 +7,7 @@
 //
 
 #import <umscript/umscript.h>
-#import "UMFunction_CGlue.h"
+#import <umscript/UMFunction_CGlue.h>
 
 typedef int             (* umfunction_init_func)(void **globals);
 typedef int             (* umfunction_exit_func)(void *globals);

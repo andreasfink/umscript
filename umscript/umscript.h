@@ -8,17 +8,17 @@
 
 #import <ulib/ulib.h>
 
-#import "UMDiscreteValue.h"
-#import "UMEnvironment.h"
-#import "UMFunction.h"
-#import "UMFunctionMacros.h"
+#import <umscript/UMDiscreteValue.h>
+#import <umscript/UMEnvironment.h>
+#import <umscript/UMFunction.h>
+#import <umscript/UMFunctionMacros.h>
 
-#import "UMTerm.h"
-#import "UMScriptDocument.h"
-#import "UMScriptCompilerEnvironment.h"
-#import "NSNumber+UMScript.h"
+#import <umscript/UMTerm.h>
+#import <umscript/UMScriptDocument.h>
+#import <umscript/UMScriptCompilerEnvironment.h>
+#import <umscript/NSNumber+UMScript.h>
 
-#import "UMTerm_CallStackEntry.h"
-#import "UMTerm_Interrupt.h"
-#import "UMScriptResume.h"
-#import "UMEnvironmentNamedListProviderProtocol.h"
+#import <umscript/UMTerm_CallStackEntry.h>
+#import <umscript/UMTerm_Interrupt.h>
+#import <umscript/UMScriptResume.h>
+#import <umscript/UMEnvironmentNamedListProviderProtocol.h>

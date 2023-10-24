@@ -10,7 +10,7 @@
 #import "UMTerm.h"
 #import "UMEnvironment.h"
 #import "UMScriptCompilerEnvironment.h"
-#import "UMFunction.h"
+#import <umscript/UMFunction.h>
 #include <stdio.h>
 #include <unistd.h>
 #import "UMTerm_Interrupt.h"

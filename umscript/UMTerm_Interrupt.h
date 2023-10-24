@@ -7,7 +7,7 @@
 //
 
 #import <ulib/ulib.h>
-#import "UMScriptResume.h"
+#import <umscript/UMScriptResume.h>
 /*
     UMTerm_Interrupt is a object to store the exact location of
     a function chain so it can be paused and continued at this 

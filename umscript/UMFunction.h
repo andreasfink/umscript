@@ -8,10 +8,10 @@
 
 #import <ulib/ulib.h>
 #import <ulibasn1/ulibasn1.h>
-#import "UMEnvironment.h"
-#import "UMTerm.h"
-#import "UMDiscreteValue.h"
-#import "UMEnvironment.h"
+#import <umscript/UMEnvironment.h>
+#import <umscript/UMTerm.h>
+#import <umscript/UMDiscreteValue.h>
+#import <umscript/UMEnvironment.h>
 
 @interface UMFunction : UMObject
 {

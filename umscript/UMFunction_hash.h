@@ -6,7 +6,7 @@
 //
 //
 
-#import "UMFunction.h"
+#import <umscript/UMFunction.h>
 
 @interface UMFunction_hash : UMFunction
 

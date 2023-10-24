@@ -5,7 +5,7 @@
 //  Created by Andreas Fink on 10.10.18.
 //
 
-#import "UMFunction.h"
+#import <umscript/UMFunction.h>
 
 
 @interface UMFunction_has_prefix : UMFunction

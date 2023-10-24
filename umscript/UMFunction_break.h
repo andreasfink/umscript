@@ -6,7 +6,7 @@
 //  Copyright (c) 2016 Andreas Fink
 //
 
-#import "UMFunction.h"
+#import <umscript/UMFunction.h>
 
 @interface UMFunction_break : UMFunction
 

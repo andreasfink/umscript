@@ -6,7 +6,7 @@
 //
 
 #import <ulib/ulib.h>
-#import "UMDiscreteValue.h"
+#import <umscript/UMDiscreteValue.h>
 
 @interface NSString(UMScript)
 

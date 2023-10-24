@@ -6,9 +6,9 @@
 //  Copyright (c) 2016 Andreas Fink
 //
 
-#import "UMTerm.h"
-#import "UMScriptCompilerEnvironment.h"
-#import "UMFunctionMacros.h"
+#import <umscript/UMTerm.h>
+#import <umscript/UMScriptCompilerEnvironment.h>
+#import <umscript/UMFunctionMacros.h>
 
 
 #define YY_TYPEDEF_YY_SCANNER_T
