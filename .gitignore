@@ -18,7 +18,10 @@ BUILDNR
 make_buildnr.sh
 buildnumber.c
 buildnumber.h
-
+umscript.pc
+umscript/umscript_config.h
+version.h
+*.m.d
 
 
 
