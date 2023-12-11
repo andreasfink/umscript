@@ -1,0 +1,17 @@
+lib/xconcat-filename.o: lib/xconcat-filename.c lib/config.h \
+  lib/concat-filename.h lib/xalloc.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include/stddef.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include/__stddef_max_align_t.h \
+  lib/xalloc-oversized.h
+
+lib/config.h:
+
+lib/concat-filename.h:
+
+lib/xalloc.h:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include/stddef.h:
+
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include/__stddef_max_align_t.h:
+
+lib/xalloc-oversized.h:
