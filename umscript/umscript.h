@@ -22,3 +22,4 @@
 #import <umscript/UMTerm_Interrupt.h>
 #import <umscript/UMScriptResume.h>
 #import <umscript/UMEnvironmentNamedListProviderProtocol.h>
+#import <umscript/NSNumber+UMScript.h>
