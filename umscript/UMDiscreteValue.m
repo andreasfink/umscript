@@ -902,6 +902,31 @@
     }
 }
 
+- (NSArray *)stringArrayValue
+{
+    switch(type)
+    {
+        case UMVALUE_ARRAY:
+        {
+            NSMutableArray *a = [[NSMutableArray alloc]init];
+            for (id i in (NSArray *)value)
+            {
+                [a addObject: [i stringValue]];
+            }
+            return a;
+        }
+        case UMVALUE_BOOL:
+        case UMVALUE_INT:
+        case UMVALUE_LONGLONG:
+        case UMVALUE_DOUBLE:
+        case UMVALUE_STRING:
+        case UMVALUE_DATA:
+            return @[[self stringValue]];
+        default:
+            return @[];
+    }
+}
+
 - (NSData *)dataValue
 {
     switch(type)

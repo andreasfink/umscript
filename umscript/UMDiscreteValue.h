@@ -51,7 +51,7 @@ typedef enum UMDiscreteValueType
 - (UMDiscreteValue *) notValue;
 - (NSString *)labelValue;
 - (UMASN1Object *)asn1Value;
-
+- (NSArray<NSString *>*)stringArrayValue;
 - (UMDiscreteValue *)initWithBool:(BOOL)b;
 - (UMDiscreteValue *)initWithInt:(int)i;
 - (UMDiscreteValue *)initWithInteger:(NSInteger)i;
