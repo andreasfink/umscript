@@ -7,7 +7,7 @@ includedir=${prefix}/include
 
 Name: umscript
 Cflags: -I${includedir}
-Libs: -L${libdir} -l:libumscript.dylib.2.0
+Libs: -L${libdir} -l:libumscript..2.0
 
 Description: universal scriptlibrary
 Version: 2.0.0
