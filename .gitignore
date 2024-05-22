@@ -21,8 +21,13 @@ buildnumber.h
 umscript.pc
 umscript/umscript_config.h
 version.h
-*.m.d
-
+*.d
+*.o
+autom4te.cache/
+configure
+install
+libumscript.a
+libumscript.so
 
 
 #########################
