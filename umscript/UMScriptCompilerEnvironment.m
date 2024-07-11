@@ -124,7 +124,7 @@
              stdOut:(NSString **)sout
              stdErr:(NSString **)serr
 {
-    [_compileLock lock];
+    UMMUTEX_LOCK(_compileLock);
     @try
     {
         [self zapOutput];
@@ -204,7 +204,7 @@
     }
     @finally
     {
-        [_compileLock unlock];
+        UMMUTEX_UNLOCK(_compileLock);
     }
 }
 
