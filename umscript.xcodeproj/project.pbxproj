@@ -49,9 +49,9 @@
 		A63DD83E192C84F60090FC94 /* UMFunction_data.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD83C192C84F60090FC94 /* UMFunction_data.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A63DD83F192C84F60090FC94 /* UMFunction_data.m in Sources */ = {isa = PBXBuildFile; fileRef = A63DD83D192C84F60090FC94 /* UMFunction_data.m */; };
 		A652D36724FAA91F009D5E6A /* umscript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA0319297741007FFC7B /* umscript.framework */; };
-		A655CB6C1F0A46B0007C0B5C /* UMFunction_external.h in Headers */ = {isa = PBXBuildFile; fileRef = A655CB6A1F0A46B0007C0B5C /* UMFunction_external.h */; };
+		A655CB6C1F0A46B0007C0B5C /* UMFunction_external.h in Headers */ = {isa = PBXBuildFile; fileRef = A655CB6A1F0A46B0007C0B5C /* UMFunction_external.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A655CB6D1F0A46B0007C0B5C /* UMFunction_external.m in Sources */ = {isa = PBXBuildFile; fileRef = A655CB6B1F0A46B0007C0B5C /* UMFunction_external.m */; };
-		A655CB701F0A49E7007C0B5C /* UMFunction_CGlue.h in Headers */ = {isa = PBXBuildFile; fileRef = A655CB6E1F0A49E7007C0B5C /* UMFunction_CGlue.h */; };
+		A655CB701F0A49E7007C0B5C /* UMFunction_CGlue.h in Headers */ = {isa = PBXBuildFile; fileRef = A655CB6E1F0A49E7007C0B5C /* UMFunction_CGlue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A657939C1F67E55700F417E8 /* UMFunction_namedlist_add.h in Headers */ = {isa = PBXBuildFile; fileRef = A657939A1F67E55700F417E8 /* UMFunction_namedlist_add.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A657939D1F67E55700F417E8 /* UMFunction_namedlist_add.m in Sources */ = {isa = PBXBuildFile; fileRef = A657939B1F67E55700F417E8 /* UMFunction_namedlist_add.m */; };
 		A65793A01F67E56700F417E8 /* UMFunction_namedlist_remove.h in Headers */ = {isa = PBXBuildFile; fileRef = A657939E1F67E56700F417E8 /* UMFunction_namedlist_remove.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -193,7 +193,7 @@
 		A6E69D941F00F1C5007C203A /* NSString+UMScript.h in Headers */ = {isa = PBXBuildFile; fileRef = A6E69D921F00F1C4007C203A /* NSString+UMScript.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6E69D951F00F1C5007C203A /* NSString+UMScript.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E69D931F00F1C4007C203A /* NSString+UMScript.m */; };
 		A6E69D961F00F2E8007C203A /* NSString+UMScript.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E69D931F00F1C4007C203A /* NSString+UMScript.m */; };
-		A6ECC2F7192CE7350090FC94 /* _generated_umscript.y.h in Headers */ = {isa = PBXBuildFile; fileRef = A6ECC2F6192CE7350090FC94 /* _generated_umscript.y.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6ECC2F7192CE7350090FC94 /* _generated_umscript.y.h in Headers */ = {isa = PBXBuildFile; fileRef = A6ECC2F6192CE7350090FC94 /* _generated_umscript.y.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		A6EEDB691929DD1F0090FC94 /* umscript.yl.h in Headers */ = {isa = PBXBuildFile; fileRef = A6EEDB681929DD1F0090FC94 /* umscript.yl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6EEDB6C1929DE800090FC94 /* _generated_umscript.l.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EEDB6A1929DE800090FC94 /* _generated_umscript.l.m */; };
 		A6EEDB6D1929DE800090FC94 /* _generated_umscript.y.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EEDB6B1929DE800090FC94 /* _generated_umscript.y.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
@@ -775,7 +775,6 @@
 				A669B2761F2B12EA002C9259 /* UMFunction_hash.h in Headers */,
 				A6835C0419297AE30090FC94 /* UMFunction_if.h in Headers */,
 				A612C2041EEEB7100096C70F /* UMFunction_starIdentifier.h in Headers */,
-				A655CB701F0A49E7007C0B5C /* UMFunction_CGlue.h in Headers */,
 				A65793A41F67E57500F417E8 /* UMFunction_namedlist_contains.h in Headers */,
 				A6835C0219297AE30090FC94 /* UMFunction_greaterthan.h in Headers */,
 				A6B962E7216DE8F4004D7FE4 /* UMFunction_has_suffix.h in Headers */,
@@ -822,7 +821,6 @@
 				A6F8AE031F2A191C00B9512E /* UMFunction_datetime.h in Headers */,
 				A6FCEFE62462A92F002D5FE4 /* UMEnvironmentNamedListProviderProtocol.h in Headers */,
 				A65D34C9192BAE130090FC94 /* UMFunction_assign.h in Headers */,
-				A655CB6C1F0A46B0007C0B5C /* UMFunction_external.h in Headers */,
 				A6835CA019298C110090FC94 /* UMScriptCompilerEnvironment.h in Headers */,
 				A65D34C4192BAAA40090FC94 /* UMFunction_lessorequal.h in Headers */,
 				A6916CEE192BDFAC00F6BFF4 /* UMFunction_greaterorequal.h in Headers */,
@@ -835,7 +833,9 @@
 				A6835C1419297AE30090FC94 /* UMFunction_dot.h in Headers */,
 				A62B98F51946B255005B48BC /* UMFunction_list.h in Headers */,
 				A62B98F11946A8A6005B48BC /* UMFunction_substr.h in Headers */,
+				A655CB6C1F0A46B0007C0B5C /* UMFunction_external.h in Headers */,
 				A6B5CE79192FF0C300F02FCA /* UMFunction_goto.h in Headers */,
+				A655CB701F0A49E7007C0B5C /* UMFunction_CGlue.h in Headers */,
 				A6835C0819297AE30090FC94 /* UMFunction_and.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -865,8 +865,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A6A3AA2B19297741007FFC7B /* Build configuration list for PBXNativeTarget "umscript" */;
 			buildPhases = (
-				A6EEDB6E1929DEF70090FC94 /* Run Script (lex) */,
-				A6EEDB6F1929DFB00090FC94 /* Run Script (bison) */,
 				A6A3A9FE19297741007FFC7B /* Sources */,
 				A6A3A9FF19297741007FFC7B /* Frameworks */,
 				A6A3AA0019297741007FFC7B /* Headers */,
@@ -978,40 +976,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ -f version.h ]\nthen\nif [ VERSION -nt version.h ]\nthen\n./configure\nfi\nelse\n./configure\nfi\n";
-		};
-		A6EEDB6E1929DEF70090FC94 /* Run Script (lex) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/language/umscript.l",
-			);
-			name = "Run Script (lex)";
-			outputPaths = (
-				"$(SRCROOT)/language/generated_umscript.l.m",
-				"$(SRCROOT)/language/generated_asn1_lexer.m",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "/usr/local/bin/flex --outfile language/_generated_umscript.l.m language/umscript.l\n";
-		};
-		A6EEDB6F1929DFB00090FC94 /* Run Script (bison) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/language/umscript.y",
-			);
-			name = "Run Script (bison)";
-			outputPaths = (
-				"$(SRCROOT)/language/_generated_umscript.y.m",
-				"$(SRCROOT)/language/_generated_umscript.y.h",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/bison  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none\n\n\n#/usr/local/bin/yacc -o language/_generated_umscript.y.m -P language/umscript.y\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
