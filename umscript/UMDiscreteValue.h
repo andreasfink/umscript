@@ -14,25 +14,25 @@
 
 typedef enum UMDiscreteValueType
 {
-    UMVALUE_NULL = 0,
-    UMVALUE_BOOL = 1,
-    UMVALUE_INT = 2,
-    UMVALUE_LONGLONG = 3,
-    UMVALUE_DOUBLE = 4,
-    UMVALUE_STRING = 5,
-    UMVALUE_DATA = 6,
-    UMVALUE_ARRAY = 7,
-    UMVALUE_STRUCT = 8, /* also known as DICT */
-    UMVALUE_POINTER = 9,
+    UMVALUE_NULL        = 0,
+    UMVALUE_BOOL        = 1,
+    UMVALUE_INT         = 2,
+    UMVALUE_LONGLONG    = 3,
+    UMVALUE_DOUBLE      = 4,
+    UMVALUE_STRING      = 5,
+    UMVALUE_DATA        = 6,
+    UMVALUE_ARRAY       = 7,
+    UMVALUE_STRUCT      = 8, /* also known as DICT */
+    UMVALUE_POINTER     = 9,
     UMVALUE_ASN1_OBJECT = 10,
     UMVALUE_CUSTOM_TYPE = -1,
 } UMDiscreteValueType;
 
 @interface UMDiscreteValue : UMASN1Choice
 {
-    UMDiscreteValueType type;
-    NSString *_customTypeName;
-    id value;
+    UMDiscreteValueType _type;
+    NSString            *_customTypeName;
+    id                  _value;
 }
 
 @property (readonly)    UMDiscreteValueType type;

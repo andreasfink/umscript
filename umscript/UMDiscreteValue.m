@@ -12,9 +12,6 @@
 
 @implementation UMDiscreteValue
 
-@synthesize type;
-@synthesize value;
-
 - (void) processBeforeEncode
 {
     [super processBeforeEncode];
@@ -22,7 +19,7 @@
     _asn1_tag.tagClass = UMASN1Class_ContextSpecific;
     _asn1_tag.isConstructed=NO;
 
-    switch(type)
+    switch(_type)
     {
         case UMVALUE_NULL:
         {
@@ -37,7 +34,7 @@
             _asn1_tag.tagNumber = UMVALUE_BOOL;
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
-            UMASN1Boolean *b = [[UMASN1Boolean alloc]initWithValue:[value boolValue]];
+            UMASN1Boolean *b = [[UMASN1Boolean alloc]initWithValue:[_value boolValue]];
             [_asn1_list addObject:b];
             break;
         }
@@ -46,7 +43,7 @@
             _asn1_tag.tagNumber = UMVALUE_INT;
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
-            UMASN1Integer *i = [[UMASN1Integer alloc]initWithValue:[value integerValue]];
+            UMASN1Integer *i = [[UMASN1Integer alloc]initWithValue:[_value integerValue]];
             [_asn1_list addObject:i];
             break;
         }
@@ -55,7 +52,7 @@
             _asn1_tag.tagNumber = UMVALUE_LONGLONG;
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
-            UMASN1Integer *i = [[UMASN1Integer alloc]initWithValue:[value longLongValue]];
+            UMASN1Integer *i = [[UMASN1Integer alloc]initWithValue:[_value longLongValue]];
             [_asn1_list addObject:i];
             break;
         }
@@ -64,7 +61,7 @@
             _asn1_tag.tagNumber = UMVALUE_DOUBLE;
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
-            UMASN1UTF8String *i = [[UMASN1UTF8String alloc]initWithValue:[value stringValue]];
+            UMASN1UTF8String *i = [[UMASN1UTF8String alloc]initWithValue:[_value stringValue]];
             [_asn1_list addObject:i];
             break;
         }
@@ -73,7 +70,7 @@
             _asn1_tag.tagNumber = UMVALUE_STRING;
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
-            UMASN1UTF8String *s = [[UMASN1UTF8String alloc]initWithValue:[value stringValue]];
+            UMASN1UTF8String *s = [[UMASN1UTF8String alloc]initWithValue:[_value stringValue]];
             [_asn1_list addObject:s];
             break;
         }
@@ -82,7 +79,7 @@
             _asn1_tag.tagNumber = UMVALUE_ARRAY;
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
-            NSArray *a = (NSArray *)value;
+            NSArray *a = (NSArray *)_value;
             NSInteger n = [a count];
             for(NSInteger i=0;i<n;i++)
             {
@@ -96,7 +93,7 @@
             _asn1_tag.tagNumber = UMVALUE_STRUCT;
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
-            NSDictionary *dict = (NSDictionary *)value;
+            NSDictionary *dict = (NSDictionary *)_value;
             NSArray *allKeys = [dict allKeys];
             NSInteger n = [allKeys count];
             for(NSInteger i=0;i<n;i++)
@@ -115,7 +112,7 @@
             _asn1_tag.tagNumber = UMVALUE_DATA;
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
-            UMASN1OctetString *d = [[UMASN1OctetString alloc]initWithValue:(NSData *)value];
+            UMASN1OctetString *d = [[UMASN1OctetString alloc]initWithValue:(NSData *)_value];
             [_asn1_list addObject:d];
             break;
         }
@@ -124,7 +121,7 @@
             _asn1_tag.tagNumber = UMVALUE_ASN1_OBJECT;
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
-            UMASN1Object *asn1 = (UMASN1Object *)value;
+            UMASN1Object *asn1 = (UMASN1Object *)_value;
             NSData *d = [asn1 berEncoded];
             UMASN1OctetString *o = [[UMASN1OctetString alloc]initWithValue:d];
             [_asn1_list addObject:o];
@@ -132,7 +129,7 @@
         }
         default:
         {
-            if(type==UMVALUE_ASN1_OBJECT)
+            if(_type==UMVALUE_ASN1_OBJECT)
             {
                 _asn1_tag.tagNumber = UMVALUE_ASN1_OBJECT; /* An ANS1 object is simply transported as BER encoded */
             }
@@ -142,7 +139,7 @@
             }
             _asn1_tag.isConstructed=YES;
             _asn1_list = [[NSMutableArray alloc]init];
-            UMASN1OctetString *d = [[UMASN1OctetString alloc]initWithValue:(NSData *)value];
+            UMASN1OctetString *d = [[UMASN1OctetString alloc]initWithValue:(NSData *)_value];
             [_asn1_list addObject:d];
             break;
         }
@@ -163,63 +160,63 @@
             {
                 case UMVALUE_NULL:
                 {
-                    type = UMVALUE_NULL;
-                    value = NULL;
+                    _type = UMVALUE_NULL;
+                    _value = NULL;
                     return self;
                 }
                 case UMVALUE_BOOL:
                 {
-                    type = UMVALUE_BOOL;
+                    _type = UMVALUE_BOOL;
                     UMASN1Boolean *b = [[UMASN1Boolean alloc]initWithASN1Object:o context:context];
                     if(b.isTrue)
                     {
-                        value = @(YES);
+                        _value = @(YES);
                     }
                     else
                     {
-                        value = @(NO);
+                        _value = @(NO);
                     }
                     return self;
                 }
                 case UMVALUE_INT:
                 {
-                    type = UMVALUE_INT;
+                    _type = UMVALUE_INT;
                     UMASN1Integer *i = [[UMASN1Integer alloc]initWithASN1Object:o context:context];
-                    value = @( (int)i.value);
+                    _value = @( (int)i.value);
                     return self;
                 }
                 case UMVALUE_LONGLONG:
                 {
-                    type = UMVALUE_LONGLONG;
+                    _type = UMVALUE_LONGLONG;
                     UMASN1Integer *i = [[UMASN1Integer alloc]initWithASN1Object:o context:context];
-                    value = @( (long long)i.value);
+                    _value = @( (long long)i.value);
                     return self;
                 }
                 case UMVALUE_DOUBLE:
                 {
-                    type = UMVALUE_DOUBLE;
+                    _type = UMVALUE_DOUBLE;
                     UMASN1UTF8String *utf8 = [[UMASN1UTF8String alloc]initWithASN1Object:o context:context];
                     NSString *s = utf8.stringValue;
-                    value = @(s.doubleValue);
+                    _value = @(s.doubleValue);
                     return self;
                 }
                 case UMVALUE_STRING:
                 {
-                    type = UMVALUE_STRING;
+                    _type = UMVALUE_STRING;
                     UMASN1UTF8String *utf8 = [[UMASN1UTF8String alloc]initWithASN1Object:o context:context];
-                    value = utf8.stringValue;
+                    _value = utf8.stringValue;
                     return self;
                 }
                 case UMVALUE_DATA:
                 {
-                    type = UMVALUE_DATA;
+                    _type = UMVALUE_DATA;
                     UMASN1OctetString *os = [[UMASN1OctetString alloc]initWithASN1Object:o context:context];
-                    value = os.value;
+                    _value = os.value;
                     return self;
                 }
                 case UMVALUE_ARRAY:
                 {
-                    type = UMVALUE_ARRAY;
+                    _type = UMVALUE_ARRAY;
                     UMASN1Sequence *os = [[UMASN1Sequence alloc]initWithASN1Object:o context:context];
                     NSArray *arr = os.values;
                     NSMutableArray *marr = [[NSMutableArray alloc]init];
@@ -233,12 +230,12 @@
                             [marr addObject:ds];
                         }
                     }
-                    value = marr;
+                    _value = marr;
                     return self;
                 }
                 case UMVALUE_STRUCT:
                 {
-                    type = UMVALUE_STRUCT;
+                    _type = UMVALUE_STRUCT;
                     UMASN1Sequence *os = [[UMASN1Sequence alloc]initWithASN1Object:o context:context];
                     NSArray *arr = os.values;
                     NSMutableDictionary *mdict = [[NSMutableDictionary alloc]init];
@@ -259,22 +256,22 @@
                             mdict[key] = xvalue;
                         }
                     }
-                    value = mdict;
+                    _value = mdict;
                     return self;
                 }
                 case UMVALUE_ASN1_OBJECT:
                 {
-                    type = UMVALUE_ASN1_OBJECT;
+                    _type = UMVALUE_ASN1_OBJECT;
                     UMASN1OctetString *os = [[UMASN1OctetString alloc]initWithASN1Object:o context:context];
                     NSData *d = os.value;
                     UMASN1Object *asn1 = [[UMASN1Object alloc]initWithBerData:d];
-                    value = asn1;
+                    _value = asn1;
                     return self;
                 }
             }
         }
     }
-    @throw([NSException exceptionWithName:@"INVALID_ASN1" reason:@"while decoding UMDiscreteValue, the type could not be decoded" userInfo:NULL]);
+    @throw([NSException exceptionWithName:@"INVALID_ASN1" reason:@"while decoding UMDiscreteValue, the _type could not be decoded" userInfo:NULL]);
 }
 
 - (NSString *) objectName
@@ -287,40 +284,40 @@
 {
     UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
 
-    switch(type)
+    switch(_type)
     {
         case UMVALUE_NULL:
             dict[@"null"] = [NSNull null];
             break;
         case UMVALUE_BOOL:
-            dict[@"bool"] = @([value boolValue]);
+            dict[@"bool"] = @([_value boolValue]);
             break;
         case UMVALUE_INT:
-            dict[@"int"] = @([value intValue]);
+            dict[@"int"] = @([_value intValue]);
             break;
         case UMVALUE_LONGLONG:
-            dict[@"longlong"] = @([value longLongValue]);
+            dict[@"longlong"] = @([_value longLongValue]);
             break;
         case UMVALUE_DOUBLE:
-            dict[@"double"] = @([value doubleValue]);
+            dict[@"double"] = @([_value doubleValue]);
             break;
         case UMVALUE_STRING:
-            dict[@"string"] = [value stringValue];
+            dict[@"string"] = [_value stringValue];
             break;
         case UMVALUE_ARRAY:
-            dict[@"array"] = [(NSArray *)value copy];
+            dict[@"array"] = [(NSArray *)_value copy];
             break;
         case UMVALUE_STRUCT:
-            dict[@"struct"] = [(NSDictionary *)value copy];
+            dict[@"struct"] = [(NSDictionary *)_value copy];
             break;
         case UMVALUE_DATA:
-            dict[@"data"] = [value dataValue];
+            dict[@"data"] = [_value dataValue];
             break;
         case UMVALUE_POINTER:
-            dict[@"pointer"] = [value stringValue];
+            dict[@"pointer"] = [_value stringValue];
             break;
         case UMVALUE_ASN1_OBJECT:
-            dict[@"asn1"] = [value objectValue];
+            dict[@"asn1"] = [_value objectValue];
             break;
 
         case UMVALUE_CUSTOM_TYPE:
@@ -333,26 +330,26 @@
 
 - (UMDiscreteValueType)outputType:(UMDiscreteValueType)btype
 {
-    if(type == btype)
+    if(_type == btype)
     {
-       return type;
+       return _type;
     }
-    if  (   ( (type == UMVALUE_INT)       && (btype==UMVALUE_LONGLONG) )
-         || ( (type == UMVALUE_LONGLONG)  && (btype==UMVALUE_INT)      ) )
+    if  (   ( (_type == UMVALUE_INT)       && (btype==UMVALUE_LONGLONG) )
+         || ( (_type == UMVALUE_LONGLONG)  && (btype==UMVALUE_INT)      ) )
     {
        return UMVALUE_LONGLONG;
     }
-    if  (   ( (type == UMVALUE_INT)        && (btype==UMVALUE_DOUBLE) )
-         || ( (type == UMVALUE_DOUBLE)     && (btype==UMVALUE_INT)      ) )
+    if  (   ( (_type == UMVALUE_INT)        && (btype==UMVALUE_DOUBLE) )
+         || ( (_type == UMVALUE_DOUBLE)     && (btype==UMVALUE_INT)      ) )
     {
         return UMVALUE_DOUBLE;
     }
-    if  (   ( (type == UMVALUE_LONGLONG)    && (btype==UMVALUE_DOUBLE) )
-         || ( (type == UMVALUE_DOUBLE)      && (btype==UMVALUE_LONGLONG)      ) )
+    if  (   ( (_type == UMVALUE_LONGLONG)    && (btype==UMVALUE_DOUBLE) )
+         || ( (_type == UMVALUE_DOUBLE)      && (btype==UMVALUE_LONGLONG)      ) )
     {
         return UMVALUE_DOUBLE;
     }
-    return type;
+    return _type;
 }
 
 - (UMDiscreteValue *)init
@@ -360,7 +357,7 @@
     self = [super init];
     if(self)
     {
-        type = UMVALUE_NULL;
+        _type = UMVALUE_NULL;
     }
     return self;
 }
@@ -370,8 +367,8 @@
     self = [super init];
     if(self)
     {
-        type = UMVALUE_BOOL;
-        value = @(b);
+        _type = UMVALUE_BOOL;
+        _value = @(b);
     }
     return self;
 }
@@ -381,8 +378,8 @@
     self = [super init];
     if(self)
     {
-        type = UMVALUE_INT;
-        value = @(i);
+        _type = UMVALUE_INT;
+        _value = @(i);
     }
     return self;
 
@@ -393,8 +390,8 @@
     self = [super init];
     if(self)
     {
-        type = UMVALUE_INT;
-        value = @(i);
+        _type = UMVALUE_INT;
+        _value = @(i);
     }
     return self;
 
@@ -405,8 +402,8 @@
     self = [super init];
     if(self)
     {
-        type = UMVALUE_LONGLONG;
-        value = @(ll);
+        _type = UMVALUE_LONGLONG;
+        _value = @(ll);
     }
     return self;
  
@@ -416,8 +413,8 @@
     self = [super init];
     if(self)
     {
-        type = UMVALUE_DOUBLE;
-        value = @(d);
+        _type = UMVALUE_DOUBLE;
+        _value = @(d);
     }
     return self;
 
@@ -430,13 +427,13 @@
     {
         if(s==NULL)
         {
-            type = UMVALUE_NULL;
-            value = NULL;
+            _type = UMVALUE_NULL;
+            _value = NULL;
         }
         else
         {
-            type = UMVALUE_STRING;
-            value = s;
+            _type = UMVALUE_STRING;
+            _value = s;
         }
     }
     return self;
@@ -449,13 +446,13 @@
     {
         if(s==NULL)
         {
-            type = UMVALUE_NULL;
-            value = NULL;
+            _type = UMVALUE_NULL;
+            _value = NULL;
         }
         else
         {
-            type = UMVALUE_POINTER;
-            value = s;
+            _type = UMVALUE_POINTER;
+            _value = s;
         }
     }
     return self;
@@ -466,10 +463,10 @@
     self = [super init];
     if(self)
     {
-        type = UMVALUE_INT;
+        _type = UMVALUE_INT;
         int i = atoi(numberString.UTF8String);
         /* FIXME: we must return other types if the string indicates its a long long or a double */
-        value = @(i);
+        _value = @(i);
     }
     return self;
 }
@@ -482,13 +479,13 @@
     {
         if(array==NULL)
         {
-            type = UMVALUE_NULL;
-            value = NULL;
+            _type = UMVALUE_NULL;
+            _value = NULL;
         }
         else
         {
-            type    = UMVALUE_ARRAY;
-            value   = [array mutableCopy];
+            _type    = UMVALUE_ARRAY;
+            _value   = [array mutableCopy];
         }
     }
     return self;
@@ -501,13 +498,13 @@
     {
         if(dict==NULL)
         {
-            type = UMVALUE_NULL;
-            value = NULL;
+            _type = UMVALUE_NULL;
+            _value = NULL;
         }
         else
         {
-            type    = UMVALUE_STRUCT;
-            value   = [dict mutableCopy];
+            _type    = UMVALUE_STRUCT;
+            _value   = [dict mutableCopy];
         }
     }
     return self;
@@ -520,13 +517,13 @@
     {
         if(d==NULL)
         {
-            type = UMVALUE_NULL;
-            value = NULL;
+            _type = UMVALUE_NULL;
+            _value = NULL;
         }
         else
         {
-            type = UMVALUE_DATA;
-            value = d;
+            _type = UMVALUE_DATA;
+            _value = d;
         }
     }
     return self;
@@ -539,13 +536,13 @@
 	{
         if(asn1==NULL)
         {
-            type = UMVALUE_NULL;
-            value = NULL;
+            _type = UMVALUE_NULL;
+            _value = NULL;
         }
         else
         {
-            type = UMVALUE_ASN1_OBJECT;
-            value = asn1;
+            _type = UMVALUE_ASN1_OBJECT;
+            _value = asn1;
         }
     }
 	return self;
@@ -781,7 +778,7 @@
 
 - (BOOL)isNull
 {
-    if(type==UMVALUE_NULL)
+    if(_type==UMVALUE_NULL)
 	{
         return YES;
 	}
@@ -790,7 +787,7 @@
 
 - (int)intValue
 {
-    switch(type)
+    switch(_type)
     {
         case UMVALUE_NULL:
             return 0;
@@ -798,23 +795,23 @@
         case UMVALUE_INT:
         case UMVALUE_LONGLONG:
         case UMVALUE_DOUBLE:
-            return [((NSNumber *)value) intValue];
+            return [((NSNumber *)_value) intValue];
         case UMVALUE_POINTER:
         case UMVALUE_STRING:
         {
             int i;
-            sscanf([((NSString *)value)  UTF8String],"%d",&i);
+            sscanf([((NSString *)_value)  UTF8String],"%d",&i);
             return i;
         }
         case UMVALUE_DATA:
         {
-            NSData *d = (NSData *)value;
+            NSData *d = (NSData *)_value;
             unsigned char *c = (unsigned char *)[d bytes];
             return (int)c[0];
         }
 		case UMVALUE_ASN1_OBJECT:
 		{
-			UMASN1Object *asn1 = (UMASN1Object *)value;
+			UMASN1Object *asn1 = (UMASN1Object *)_value;
 			if([asn1 isKindOfClass:[UMASN1Integer class]])
 			{
 				return (int) [((UMASN1Integer *)asn1) value];
@@ -847,7 +844,7 @@
 
 - (NSString *)stringValue
 {
-    switch(type)
+    switch(_type)
     {
         case UMVALUE_NULL:
             return @"(null)";
@@ -863,15 +860,15 @@
         case UMVALUE_INT:
         case UMVALUE_LONGLONG:
         case UMVALUE_DOUBLE:
-            return [((NSNumber *)value) stringValue];
+            return [((NSNumber *)_value) stringValue];
         case UMVALUE_STRING:
         case UMVALUE_POINTER:
-            return value;
+            return _value;
         case UMVALUE_DATA:
-            return [[NSString alloc] initWithData:(NSData *)value encoding:NSUTF8StringEncoding];
+            return [[NSString alloc] initWithData:(NSData *)_value encoding:NSUTF8StringEncoding];
 		case UMVALUE_ASN1_OBJECT:
 		{
-			UMASN1Object *asn1 = (UMASN1Object *)value;
+			UMASN1Object *asn1 = (UMASN1Object *)_value;
 			if([asn1 isKindOfClass:[UMASN1Integer class]])
 			{
 				return [NSString stringWithFormat:@"%lld",(long long) [((UMASN1Integer *)asn1) value]];
@@ -904,12 +901,12 @@
 
 - (NSArray *)stringArrayValue
 {
-    switch(type)
+    switch(_type)
     {
         case UMVALUE_ARRAY:
         {
             NSMutableArray *a = [[NSMutableArray alloc]init];
-            for (id i in (NSArray *)value)
+            for (id i in (NSArray *)_value)
             {
                 [a addObject: [i stringValue]];
             }
@@ -929,7 +926,7 @@
 
 - (NSData *)dataValue
 {
-    switch(type)
+    switch(_type)
     {
         case UMVALUE_NULL:
             return [NSData data];
@@ -938,21 +935,21 @@
         case UMVALUE_LONGLONG:
         case UMVALUE_DOUBLE:
         {
-            NSNumber *n = value;
+            NSNumber *n = _value;
             unsigned char c = [n unsignedCharValue];
             return [NSData dataWithBytes:&c length:1];
         }
         case UMVALUE_POINTER:
         case UMVALUE_STRING:
         {
-            NSString *s = value;
+            NSString *s = _value;
             return [s dataUsingEncoding:NSUTF8StringEncoding];
         }
         case UMVALUE_DATA:
-            return value;
+            return _value;
 		case UMVALUE_ASN1_OBJECT:
 		{
-			UMASN1Object *asn1 = (UMASN1Object *)value;
+			UMASN1Object *asn1 = (UMASN1Object *)_value;
 			return [asn1 berEncoded];
 		}
         default:
@@ -963,7 +960,7 @@
 
 - (BOOL) boolValue
 {
-    switch(type)
+    switch(_type)
     {
         case UMVALUE_NULL:
             return NO;
@@ -971,30 +968,30 @@
         case UMVALUE_INT:
         case UMVALUE_LONGLONG:
         case UMVALUE_DOUBLE:
-            return [((NSNumber *)value) boolValue];
+            return [((NSNumber *)_value) boolValue];
         case UMVALUE_STRING:
         {
-            if (([value isEqualToString:@"YES"]) ||  ([value isEqualToString:@"true"]))
+            if (([_value isEqualToString:@"YES"]) ||  ([_value isEqualToString:@"true"]))
             {
                 return YES;
             }
-            if (([value isEqualToString:@"NO"]) ||  ([value isEqualToString:@"false"]))
+            if (([_value isEqualToString:@"NO"]) ||  ([_value isEqualToString:@"false"]))
             {
                 return NO;
             }
             int i;
-            sscanf([((NSString *)value)  UTF8String],"%d",&i);
+            sscanf([((NSString *)_value)  UTF8String],"%d",&i);
             return i ? YES : NO;
         }
         case UMVALUE_DATA:
         {
-            NSData *d = (NSData *)value;
+            NSData *d = (NSData *)_value;
             unsigned char *c = (unsigned char *)[d bytes];
             return c[0] ? YES : NO;
         }
         case UMVALUE_POINTER:
         {
-            NSString *s = value;
+            NSString *s = _value;
             if (s.length > 0)
             {
                 return YES;
@@ -1003,7 +1000,7 @@
         }
 		case UMVALUE_ASN1_OBJECT:
 		{
-			UMASN1Object *asn1 = (UMASN1Object *)value;
+			UMASN1Object *asn1 = (UMASN1Object *)_value;
 			if([asn1 isKindOfClass:[UMASN1Integer class]])
 			{
 				int64_t i = [((UMASN1Integer *)asn1) value];
@@ -1075,7 +1072,7 @@
 
 - (double) doubleValue
 {
-    switch(type)
+    switch(_type)
     {
         case UMVALUE_NULL:
             return 0.0;
@@ -1083,23 +1080,23 @@
         case UMVALUE_INT:
         case UMVALUE_LONGLONG:
         case UMVALUE_DOUBLE:
-            return [((NSNumber *)value) doubleValue];
+            return [((NSNumber *)_value) doubleValue];
         case UMVALUE_STRING:
         case UMVALUE_POINTER:
         {
             double d;
-            sscanf([((NSString *)value)  UTF8String],"%lf",&d);
+            sscanf([((NSString *)_value)  UTF8String],"%lf",&d);
             return d;
         }
         case UMVALUE_DATA:
         {
-            NSData *d = (NSData *)value;
+            NSData *d = (NSData *)_value;
             unsigned char *c = (unsigned char *)[d bytes];
             return (double)c[0];
         }
 		case UMVALUE_ASN1_OBJECT:
 		{
-			UMASN1Object *asn1 = (UMASN1Object *)value;
+			UMASN1Object *asn1 = (UMASN1Object *)_value;
 			if([asn1 isKindOfClass:[UMASN1Integer class]])
 			{
 				return (double) [((UMASN1Integer *)asn1) value];
@@ -1131,7 +1128,7 @@
 
 - (long long)longLongValue
 {
-    switch(type)
+    switch(_type)
     {
         case UMVALUE_NULL:
             return 0LL;
@@ -1139,22 +1136,22 @@
         case UMVALUE_INT:
         case UMVALUE_LONGLONG:
         case UMVALUE_DOUBLE:
-            return [((NSNumber *)value) longLongValue];
+            return [((NSNumber *)_value) longLongValue];
         case UMVALUE_STRING:
         {
             long long i;
-            sscanf([((NSString *)value)  UTF8String],"%lld",&i);
+            sscanf([((NSString *)_value)  UTF8String],"%lld",&i);
             return i;
         }
         case UMVALUE_DATA:
         {
-            NSData *d = (NSData *)value;
+            NSData *d = (NSData *)_value;
             unsigned char *c = (unsigned char *)[d bytes];
             return (long long)c[0];
         }
 		case UMVALUE_ASN1_OBJECT:
 		{
-			NSData *d = (NSData *)value;
+			NSData *d = (NSData *)_value;
 			unsigned char *c = (unsigned char *)[d bytes];
 			return (long long)c[0];
 		}
@@ -1166,12 +1163,12 @@
 
 - (UMASN1Object *)asn1Value
 {
-	switch(type)
+	switch(_type)
 	{
 		case UMVALUE_NULL:
 			return [[UMASN1Null alloc]init];
 		case UMVALUE_BOOL:
-			if( [((NSNumber *)value) boolValue])
+			if( [((NSNumber *)_value) boolValue])
 			{
 				return [[UMASN1Boolean alloc]initAsYes];
 			}
@@ -1183,29 +1180,29 @@
 		case UMVALUE_INT:
 		case UMVALUE_LONGLONG:
 		{
-			int64_t i = [(NSNumber *)value longLongValue];
+			int64_t i = [(NSNumber *)_value longLongValue];
 			return [[UMASN1Integer alloc]initWithValue:i];
 			break;
 		}
 		case UMVALUE_DOUBLE:
 		{
-			double d = [(NSNumber *)value doubleValue];
+			double d = [(NSNumber *)_value doubleValue];
 			return [[UMASN1Real alloc]initWithValue:d];
 		}
 			break;
 		case UMVALUE_STRING:
 		{
-			NSString *str = (NSString *)value;
+			NSString *str = (NSString *)_value;
 			return [[UMASN1UTF8String alloc]initWithValue:str];
 		}
 		case UMVALUE_DATA:
 		{
-			NSData *d = (NSData *)value;
+			NSData *d = (NSData *)_value;
 			return [[UMASN1OctetString alloc]initWithValue:d];
 		}
 		case UMVALUE_ASN1_OBJECT:
 		{
-			return (UMASN1Object *)value;
+			return (UMASN1Object *)_value;
 		}
 		default:
 			return 0LL;
@@ -1220,7 +1217,7 @@
 
 -(BOOL) isNumberType
 {
-    if((type==UMVALUE_BOOL) || (type==UMVALUE_INT) || (type==UMVALUE_LONGLONG) || (type==UMVALUE_DOUBLE))
+    if((_type==UMVALUE_BOOL) || (_type==UMVALUE_INT) || (_type==UMVALUE_LONGLONG) || (_type==UMVALUE_DOUBLE))
     {
         return YES;
     }
@@ -1231,21 +1228,21 @@
 - (UMDiscreteValue *)discreteIsCaseInsensitiveEqualTo:(UMDiscreteValue *)bval
 {
     BOOL r;
-    if((type==UMVALUE_NULL) || (bval.type==UMVALUE_NULL))
+    if((_type==UMVALUE_NULL) || (bval.type==UMVALUE_NULL))
     {
-        r = (type == bval.type);
+        r = (_type == bval.type);
     }
     else if((self.isNumberType) && (bval.isNumberType))
     {
-        r = [value isEqualToValue:bval.value];
+        r = [_value isEqualToValue:bval.value];
     }
-    else if((type==UMVALUE_STRING) && (bval.type==UMVALUE_STRING))
+    else if((_type==UMVALUE_STRING) && (bval.type==UMVALUE_STRING))
     {
-        r = [[value lowercaseString] isEqualToString:[bval.value lowercaseString]];
+        r = [[_value lowercaseString] isEqualToString:[bval.value lowercaseString]];
     }
-    else if((type==UMVALUE_DATA) || (bval.type==UMVALUE_DATA))
+    else if((_type==UMVALUE_DATA) || (bval.type==UMVALUE_DATA))
     {
-        r = [value isEqualToData:bval.value];
+        r = [_value isEqualToData:bval.value];
     }
     else
     {
@@ -1260,21 +1257,21 @@
 - (UMDiscreteValue *)discreteIsEqualTo:(UMDiscreteValue *)bval
 {
     BOOL r;
-    if((type==UMVALUE_NULL) || (bval.type==UMVALUE_NULL))
+    if((_type==UMVALUE_NULL) || (bval.type==UMVALUE_NULL))
     {
-        r = (type == bval.type);
+        r = (_type == bval.type);
     }
     else if((self.isNumberType) && (bval.isNumberType))
     {
-        r = [value isEqualToValue:bval.value];
+        r = [_value isEqualToValue:bval.value];
     }
-    else if((type==UMVALUE_STRING) || (bval.type==UMVALUE_STRING))
+    else if((_type==UMVALUE_STRING) || (bval.type==UMVALUE_STRING))
     {
-        r = [value isEqualToString:bval.value];
+        r = [_value isEqualToString:bval.value];
     }
-    else if((type==UMVALUE_DATA) || (bval.type==UMVALUE_DATA))
+    else if((_type==UMVALUE_DATA) || (bval.type==UMVALUE_DATA))
     {
-        r = [value isEqualToData:bval.value];
+        r = [_value isEqualToData:bval.value];
     }
     else
     {
@@ -1294,15 +1291,15 @@
 
 - (UMDiscreteValue *)discreteIsGreaterThan:(UMDiscreteValue *)bval
 {
-    if((type==UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
+    if((_type==UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
     {
         return [UMDiscreteValue discreteBool:NO];
     }
-    if((type==UMVALUE_NULL) && (bval.type!=UMVALUE_NULL))
+    if((_type==UMVALUE_NULL) && (bval.type!=UMVALUE_NULL))
     {
         return [UMDiscreteValue discreteBool:NO];
     }
-    if((type!=UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
+    if((_type!=UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
     {
         return [UMDiscreteValue discreteBool:YES];
     }
@@ -1312,13 +1309,13 @@
         NSNumber *b = bval.value;
         return [UMDiscreteValue discreteBool:[a isGreaterThan:b]];
     }
-    else if((type==UMVALUE_STRING) || (bval.type==UMVALUE_STRING))
+    else if((_type==UMVALUE_STRING) || (bval.type==UMVALUE_STRING))
     {
         NSString *a = self.value;
         NSString *b = bval.value;
         return [UMDiscreteValue discreteBool:[a isGreaterThan:b]];
     }
-    else if((type==UMVALUE_DATA) || (bval.type==UMVALUE_DATA))
+    else if((_type==UMVALUE_DATA) || (bval.type==UMVALUE_DATA))
     {
         NSData *a = self.value;
         NSData *b = bval.value;
@@ -1334,15 +1331,15 @@
 
 - (UMDiscreteValue *)discreteIsGreaterThanOrEqualTo:(UMDiscreteValue *)bval
 {
-    if((type==UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
+    if((_type==UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
     {
         return [UMDiscreteValue discreteBool:YES];
     }
-    if((type==UMVALUE_NULL) && (bval.type!=UMVALUE_NULL))
+    if((_type==UMVALUE_NULL) && (bval.type!=UMVALUE_NULL))
     {
         return [UMDiscreteValue discreteBool:NO];
     }
-    if((type!=UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
+    if((_type!=UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
     {
         return [UMDiscreteValue discreteBool:YES];
     }
@@ -1352,13 +1349,13 @@
         NSNumber *b = bval.value;
         return [UMDiscreteValue discreteBool:[a isGreaterThanOrEqualTo:b]];
     }
-    else if((type==UMVALUE_STRING) || (bval.type==UMVALUE_STRING))
+    else if((_type==UMVALUE_STRING) || (bval.type==UMVALUE_STRING))
     {
         NSString *a = self.value;
         NSString *b = bval.value;
         return [UMDiscreteValue discreteBool:[a isGreaterThanOrEqualTo:b]];
     }
-    else if((type==UMVALUE_DATA) || (bval.type==UMVALUE_DATA))
+    else if((_type==UMVALUE_DATA) || (bval.type==UMVALUE_DATA))
     {
         NSData *a = self.value;
         NSData *b = bval.value;
@@ -1374,15 +1371,15 @@
 
 - (UMDiscreteValue *)discreteIsLessThan:(UMDiscreteValue *)bval
 {
-    if((type==UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
+    if((_type==UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
     {
         return [UMDiscreteValue discreteBool:NO];
     }
-    if((type==UMVALUE_NULL) && (bval.type!=UMVALUE_NULL))
+    if((_type==UMVALUE_NULL) && (bval.type!=UMVALUE_NULL))
     {
         return [UMDiscreteValue discreteBool:YES];
     }
-    if((type!=UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
+    if((_type!=UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
     {
         return [UMDiscreteValue discreteBool:NO];
     }
@@ -1392,13 +1389,13 @@
         NSNumber *b = bval.value;
         return [UMDiscreteValue discreteBool:[a isLessThan:b]];
     }
-    else if((type==UMVALUE_STRING) || (bval.type==UMVALUE_STRING))
+    else if((_type==UMVALUE_STRING) || (bval.type==UMVALUE_STRING))
     {
         NSString *a = self.value;
         NSString *b = bval.value;
         return [UMDiscreteValue discreteBool:[a isLessThan:b]];
     }
-    else if((type==UMVALUE_DATA) || (bval.type==UMVALUE_DATA))
+    else if((_type==UMVALUE_DATA) || (bval.type==UMVALUE_DATA))
     {
         NSData *a = self.value;
         NSData *b = bval.value;
@@ -1414,15 +1411,15 @@
 
 - (UMDiscreteValue *)discreteIsLessThanOrEqualTo:(UMDiscreteValue *)bval
 {
-    if((type==UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
+    if((_type==UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
     {
         return [UMDiscreteValue discreteBool:YES];
     }
-    if((type==UMVALUE_NULL) && (bval.type!=UMVALUE_NULL))
+    if((_type==UMVALUE_NULL) && (bval.type!=UMVALUE_NULL))
     {
         return [UMDiscreteValue discreteBool:YES];
     }
-    if((type!=UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
+    if((_type!=UMVALUE_NULL) && (bval.type==UMVALUE_NULL))
     {
         return [UMDiscreteValue discreteBool:NO];
     }
@@ -1432,13 +1429,13 @@
         NSNumber *b = bval.value;
         return [UMDiscreteValue discreteBool:[a isLessThanOrEqualTo:b]];
     }
-    else if((type==UMVALUE_STRING) || (bval.type==UMVALUE_STRING))
+    else if((_type==UMVALUE_STRING) || (bval.type==UMVALUE_STRING))
     {
         NSString *a = self.value;
         NSString *b = bval.value;
         return [UMDiscreteValue discreteBool:[a isLessThanOrEqualTo:b]];
     }
-    else if((type==UMVALUE_DATA) || (bval.type==UMVALUE_DATA))
+    else if((_type==UMVALUE_DATA) || (bval.type==UMVALUE_DATA))
     {
         NSData *a = self.value;
         NSData *b = bval.value;
@@ -1454,7 +1451,7 @@
 
 - (NSString *)description
 {
-    switch(type)
+    switch(_type)
     {
         case UMVALUE_NULL:
             return @"(null)";
@@ -1477,7 +1474,7 @@
 
 - (id)descriptionDictVal
 {
-    switch(type)
+    switch(_type)
     {
         case UMVALUE_NULL:
             return [NSNull null];
@@ -1485,11 +1482,11 @@
         case UMVALUE_INT:
         case UMVALUE_LONGLONG:
         case UMVALUE_DOUBLE:
-            return (NSNumber *)value;
+            return (NSNumber *)_value;
         case UMVALUE_STRING:
-            return (NSString *)value;
+            return (NSString *)_value;
         case UMVALUE_DATA:
-            return (NSData *)value;
+            return (NSData *)_value;
         default:
             return [NSNull null];
     }
@@ -1512,35 +1509,35 @@
        return [UMDiscreteValue discreteBool:c];
     }
     
-    else if(type==UMVALUE_INT)
+    else if(_type==UMVALUE_INT)
     {
         NSNumber *a = self.value;
         NSNumber *b = bval.value;
         int c = a.intValue + b.intValue;
        return [UMDiscreteValue discreteInt:c];
     }
-    else if(type==UMVALUE_LONGLONG)
+    else if(_type==UMVALUE_LONGLONG)
     {
         NSNumber *a = self.value;
         NSNumber *b = bval.value;
         long long c = a.longLongValue + b.longLongValue;
         return [UMDiscreteValue discreteLongLong:c];
     }
-    else if(type==UMVALUE_DOUBLE)
+    else if(_type==UMVALUE_DOUBLE)
     {
          NSNumber *a = self.value;
          NSNumber *b = bval.value;
          double c = a.doubleValue + b.doubleValue;
          return [UMDiscreteValue discreteDouble:c];
     }
-    else if(type==UMVALUE_STRING)
+    else if(_type==UMVALUE_STRING)
     {
         NSString *a = self.value;
         NSString *b = bval.value;
         NSString *c = [a stringByAppendingString:b];
         return [UMDiscreteValue discreteString:c];
     }
-    else if(type==UMVALUE_DATA)
+    else if(_type==UMVALUE_DATA)
     {
         NSData *a = self.value;
         NSData *b = bval.value;
@@ -1568,21 +1565,21 @@
         return [UMDiscreteValue discreteBool:c];
     }
 
-    else if(type==UMVALUE_INT)
+    else if(_type==UMVALUE_INT)
     {
         NSNumber *a = self.value;
         NSNumber *b = bval.value;
         int c = a.intValue - b.intValue;
         return [UMDiscreteValue discreteInt:c];
     }
-    else if(type==UMVALUE_LONGLONG)
+    else if(_type==UMVALUE_LONGLONG)
     {
         NSNumber *a = self.value;
         NSNumber *b = bval.value;
         long long c = a.longLongValue - b.longLongValue;
         return [UMDiscreteValue discreteLongLong:c];
     }
-    else if(type==UMVALUE_DOUBLE)
+    else if(_type==UMVALUE_DOUBLE)
     {
         NSNumber *a = self.value;
         NSNumber *b = bval.value;
@@ -1601,17 +1598,17 @@
     {
         NSNumber *a = self.value;
         NSNumber *b = bval.value;
-        if(type==UMVALUE_BOOL)
+        if(_type==UMVALUE_BOOL)
         {
             BOOL c = a.boolValue * b.boolValue;
             return [UMDiscreteValue discreteBool:c];
         }
-        if(type==UMVALUE_INT)
+        if(_type==UMVALUE_INT)
         {
             int c = a.intValue * b.intValue;
             return [UMDiscreteValue discreteInt:c];
         }
-        if(type==UMVALUE_LONGLONG)
+        if(_type==UMVALUE_LONGLONG)
         {
             long long c = a.longLongValue * b.longLongValue;
             return [UMDiscreteValue discreteLongLong:c];
@@ -1622,7 +1619,7 @@
             return [UMDiscreteValue discreteDouble:c];
         }
     }
-    else if ((type==UMVALUE_STRING) && (bval.isNumberType))
+    else if ((_type==UMVALUE_STRING) && (bval.isNumberType))
     {
         /* string multiplied by integer */
         int count = bval.intValue;
@@ -1644,7 +1641,7 @@
         NSNumber *a = self.value;
         NSNumber *b = bval.value;
 
-        if(type==UMVALUE_BOOL)
+        if(_type==UMVALUE_BOOL)
         {
             if(b.boolValue == NO)
             {
@@ -1655,12 +1652,12 @@
                 return [UMDiscreteValue discreteBool:a.boolValue];
             }
         }
-        if(type==UMVALUE_INT)
+        if(_type==UMVALUE_INT)
         {
             int c = a.intValue / b.intValue;
             return [UMDiscreteValue discreteInt:c];
         }
-        if(type==UMVALUE_LONGLONG)
+        if(_type==UMVALUE_LONGLONG)
         {
             long long c = a.longLongValue / b.longLongValue;
             return [UMDiscreteValue discreteLongLong:c];
@@ -1706,28 +1703,28 @@
 
 - (UMDiscreteValue *)percentValue:(UMDiscreteValue *)bval
 {
-    if(type==UMVALUE_BOOL)
+    if(_type==UMVALUE_BOOL)
     {
         NSNumber *a = self.value;
         NSNumber *b = [bval convertToBool].value;
         BOOL c = a.boolValue % b.boolValue;
         return [UMDiscreteValue discreteBool:c];
     }
-    else if(type==UMVALUE_INT)
+    else if(_type==UMVALUE_INT)
     {
         NSNumber *a = self.value;
         NSNumber *b = [bval convertToInt].value;
         int c = a.intValue % b.intValue;
         return [UMDiscreteValue discreteInt:c];
     }
-    else if(type==UMVALUE_LONGLONG)
+    else if(_type==UMVALUE_LONGLONG)
     {
         NSNumber *a = self.value;
         NSNumber *b = [bval convertToLongLong].value;
         long long  c = a.longLongValue % b.longLongValue;
         return [UMDiscreteValue discreteLongLong:c];
     }
-    else if(type==UMVALUE_DOUBLE)
+    else if(_type==UMVALUE_DOUBLE)
     {
         NSNumber *a = [self convertToLongLong].value;
         NSNumber *b = [bval convertToLongLong].value;
@@ -1743,7 +1740,7 @@
 
 - (UMDiscreteValue *)convertToBool
 {
-    if(type ==UMVALUE_BOOL)
+    if(_type ==UMVALUE_BOOL)
     {
         return self;
     }
@@ -1752,7 +1749,7 @@
 
 - (UMDiscreteValue *)convertToInt
 {
-    if(type ==UMVALUE_INT)
+    if(_type ==UMVALUE_INT)
     {
         return self;
     }
@@ -1761,7 +1758,7 @@
 
 - (UMDiscreteValue *)convertToLongLong
 {
-    if(type == UMVALUE_LONGLONG)
+    if(_type == UMVALUE_LONGLONG)
     {
         return self;
     }
@@ -1770,7 +1767,7 @@
 
 - (UMDiscreteValue *)convertToDouble
 {
-    if(type == UMVALUE_DOUBLE)
+    if(_type == UMVALUE_DOUBLE)
     {
         return self;
     }
@@ -1779,7 +1776,7 @@
 
 - (UMDiscreteValue *)convertToString
 {
-    if(type == UMVALUE_STRING)
+    if(_type == UMVALUE_STRING)
     {
         return self;
     }
@@ -1788,7 +1785,7 @@
 
 - (UMDiscreteValue *)convertToData
 {
-    if(type == UMVALUE_DATA)
+    if(_type == UMVALUE_DATA)
     {
         return self;
     }
@@ -1836,7 +1833,7 @@
 
 - (UMDiscreteValue *)bitAnd:(UMDiscreteValue *)bval
 {
-    if(type == UMVALUE_LONGLONG)
+    if(_type == UMVALUE_LONGLONG)
     {
         NSNumber *anum = self.value;
         NSNumber *bnum = [bval convertToLongLong].value;
@@ -1857,7 +1854,7 @@
 }
 - (UMDiscreteValue *)bitOr:(UMDiscreteValue *)bval
 {
-    if(type == UMVALUE_LONGLONG)
+    if(_type == UMVALUE_LONGLONG)
     {
         NSNumber *anum = self.value;
         NSNumber *bnum = [bval convertToLongLong].value;
@@ -1879,7 +1876,7 @@
 
 - (UMDiscreteValue *)bitXor:(UMDiscreteValue *)bval
 {
-    if(type == UMVALUE_LONGLONG)
+    if(_type == UMVALUE_LONGLONG)
     {
         NSNumber *anum = self.value;
         NSNumber *bnum = [bval convertToLongLong].value;
@@ -1901,7 +1898,7 @@
 
 - (UMDiscreteValue *)bitNot
 {
-    if(type == UMVALUE_LONGLONG)
+    if(_type == UMVALUE_LONGLONG)
     {
         NSNumber *anum = self.value;
         long long a = [anum longLongValue];
@@ -1919,7 +1916,7 @@
 
 - (UMDiscreteValue *)bitShiftLeft:(UMDiscreteValue *)bval
 {
-    if(type == UMVALUE_LONGLONG)
+    if(_type == UMVALUE_LONGLONG)
     {
         NSNumber *anum = self.value;
         NSNumber *bnum = [bval convertToLongLong].value;
@@ -1942,7 +1939,7 @@
 
 - (UMDiscreteValue *)bitShiftRight:(UMDiscreteValue *)bval
 {
-    if(type == UMVALUE_LONGLONG)
+    if(_type == UMVALUE_LONGLONG)
     {
         NSNumber *anum = self.value;
         NSNumber *bnum = [bval convertToLongLong].value;
@@ -1965,24 +1962,24 @@
 - (UMDiscreteValue *)arrayAccess:(UMDiscreteValue *)bval
 {
     NSNumber *bnum = [bval convertToInt].value;
-    NSMutableArray *arr = (NSMutableArray *)value;
+    NSMutableArray *arr = (NSMutableArray *)_value;
     return  arr[bnum.intValue];
 }
                            
 - (UMDiscreteValue *)structAccess:(UMDiscreteValue *)bval
 {
     NSString *key = [bval convertToString].value;
-    NSMutableDictionary *dict = (NSMutableDictionary *)value;
+    NSMutableDictionary *dict = (NSMutableDictionary *)_value;
     return  dict[key];
 }
 
 - (NSString *)codeWithEnvironment:(UMEnvironment *)env
 {
-    if(type==UMVALUE_NULL)
+    if(_type==UMVALUE_NULL)
     {
         return @"NULL";
     }
-    else if (type==UMVALUE_BOOL)
+    else if (_type==UMVALUE_BOOL)
     {
         if([self boolValue])
         {
@@ -1993,19 +1990,19 @@
             return @"NO";
         }
     }
-    else if ((type==UMVALUE_INT) || (type==UMVALUE_LONGLONG) || (type==UMVALUE_DOUBLE))
+    else if ((_type==UMVALUE_INT) || (_type==UMVALUE_LONGLONG) || (_type==UMVALUE_DOUBLE))
     {
         return [self stringValue];
     }
-    else if(type == UMVALUE_STRING)
+    else if(_type == UMVALUE_STRING)
     {
         return [NSString stringWithFormat:@"\"%@\"",[self stringValue]];
     }
-    else if(type == UMVALUE_DATA)
+    else if(_type == UMVALUE_DATA)
     {
         NSMutableString *s = [[NSMutableString alloc]init];
         [s appendString:@"["];
-        NSData *d = value;
+        NSData *d = _value;
         const unsigned char *bytes = [d bytes];
         size_t len = [d length];
         size_t i;
@@ -2024,7 +2021,7 @@
         [s appendString:@"]"];
         return s;
     }
-    return @"/* unknown discreete type */";
+    return @"/* unknown discreete _type */";
 }
 
 - (UMDiscreteValue *)increase
@@ -2032,17 +2029,17 @@
     if(self.isNumberType)
     {
         NSNumber *a = self.value;
-        if(type==UMVALUE_BOOL)
+        if(_type==UMVALUE_BOOL)
         {
             BOOL c =  YES;
             return [UMDiscreteValue discreteBool:c];
         }
-        if(type==UMVALUE_INT)
+        if(_type==UMVALUE_INT)
         {
             int c = a.intValue + 1;
             return [UMDiscreteValue discreteInt:c];
         }
-        if(type==UMVALUE_LONGLONG)
+        if(_type==UMVALUE_LONGLONG)
         {
             long long c = a.longLongValue + 1;
             return [UMDiscreteValue discreteLongLong:c];
@@ -2066,17 +2063,17 @@
     if(self.isNumberType)
     {
         NSNumber *a = self.value;
-        if(type==UMVALUE_BOOL)
+        if(_type==UMVALUE_BOOL)
         {
             BOOL c = NO;
             return [UMDiscreteValue discreteBool:c];
         }
-        if(type==UMVALUE_INT)
+        if(_type==UMVALUE_INT)
         {
             int c = a.intValue - 1;
             return [UMDiscreteValue discreteInt:c];
         }
-        if(type==UMVALUE_LONGLONG)
+        if(_type==UMVALUE_LONGLONG)
         {
             long long c = a.longLongValue - 1;
             return [UMDiscreteValue discreteLongLong:c];
