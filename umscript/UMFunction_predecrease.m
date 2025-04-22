@@ -50,13 +50,13 @@
         newValue = [currentValue decrease];
         [env setVariable:newValue forKey:currentTerm.varname];
     }
-    else if(currentValue.type == UMTermType_field)
+    else if(currentTerm.type == UMTermType_field)
     {
         currentValue = [env fieldForKey:currentTerm.fieldname];
         newValue = [currentValue decrease];
         [env setField:newValue forKey:currentTerm.fieldname];
     }
-    else if(currentValue.type == UMTermType_discrete)
+    else if(currentTerm.type == UMTermType_discrete)
     {
         currentValue = currentTerm.discrete;
         newValue = [currentValue decrease];

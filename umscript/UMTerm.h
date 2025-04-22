@@ -15,6 +15,8 @@
 @class UMDiscreteValue;
 @class UMTerm_Interrupt;
 
+
+
 typedef enum UMTermType
 {
     UMTermType_discrete,
