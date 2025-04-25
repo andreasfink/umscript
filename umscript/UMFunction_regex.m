@@ -87,8 +87,8 @@
         [interrupt recordEntry:e];
         @throw(interrupt);
     }
-    NSString *regex = [value0 stringValue];
-    NSString *mystring = [value1 stringValue];
+    NSString *regex     = [value0 stringValue];
+    NSString *mystring  = [value1 stringValue];
     
     
     NSPredicate *regextest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
