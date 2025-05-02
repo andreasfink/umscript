@@ -457,4 +457,10 @@
 
     XCTAssertTrue([str isEqualToString:@"abc"],@"\"abc\" comes back as %@",str);
 }
+
+- (void)testRegex
+{
+    NSString *code = @"int main() { return \"abc\"; }";
+
+}
 @end
