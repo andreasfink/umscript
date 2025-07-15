@@ -335,7 +335,7 @@
    }
 }
 
-- (UMNamedList *)getNamedList:(NSString *)name
+- (id)getNamedList:(NSString *)name
 {
      if(_namedListsProvider)
      {
