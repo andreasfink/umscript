@@ -6,9 +6,8 @@
 //
 
 
+
 @protocol UMEnvironmentNamedListProviderProtocol<NSObject>
-
-
 - (void)namedlistReplaceList:(NSString *)listName withContentsOfFile:(NSString *)filename;
 - (void)namedlistsFlushAll;
 - (void)namedlistsLoadFromDirectory:(NSString *)directory;
