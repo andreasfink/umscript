@@ -6,7 +6,7 @@
 //  Copyright (c) 2016 Andreas Fink
 //
 
-#import <Foundation/Foundation.h>
+#import <ulib/ulib.h>
 #import <umscript/UMTerm.h>
 #import <umscript/UMScriptCompilerEnvironment.h>
 #import <umscript/UMFunctionMacros.h>

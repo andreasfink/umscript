@@ -6,7 +6,7 @@
 //  Copyright (c) 2016 Andreas Fink
 //
 
-#import <Foundation/Foundation.h>
+#import <ulib/ulib.h>
 
 #if defined(LINUX) || defined(FREEBSD)
 #ifndef LINUX_GLUE
