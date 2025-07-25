@@ -6,7 +6,7 @@
 //  Copyright (c) 2016 Andreas Fink
 //
 
-#import <Foundation/Foundation.h>
+#import <ulib/framework.h>
 
 @interface NSNumber(UMScript)
 
