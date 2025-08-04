@@ -5,5 +5,9 @@
 //
 
 #ifdef __OBJC__
+<<<<<<< HEAD
     #import <ulib/framework.h>
+=======
+#import <ulib/ulib.h>
+>>>>>>> release-2.1
 #endif
