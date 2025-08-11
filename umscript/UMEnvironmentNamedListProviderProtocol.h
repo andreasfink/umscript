@@ -5,13 +5,8 @@
 //  Created by Andreas Fink on 04.05.20.
 //
 
-<<<<<<< HEAD
 @class UMNamedList;
 
-=======
-
-
->>>>>>> release-2.1
 @protocol UMEnvironmentNamedListProviderProtocol<NSObject>
 - (void)namedlistReplaceList:(NSString *)listName withContentsOfFile:(NSString *)filename;
 - (void)namedlistsFlushAll;
