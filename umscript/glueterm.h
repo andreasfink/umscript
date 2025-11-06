@@ -6,11 +6,7 @@
 //  Copyright (c) 2016 Andreas Fink
 //
 
-<<<<<<< HEAD
 #import <ulib/ulib.h>
-=======
-#import <ulib/framework.h>
->>>>>>> dc1720b (wip)
 
 #if defined(LINUX) || defined(FREEBSD)
 #ifndef LINUX_GLUE
