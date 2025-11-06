@@ -6,7 +6,11 @@
 //  Copyright (c) 2016 Andreas Fink
 //
 
+<<<<<<< HEAD
 #import <ulib/ulib.h>
+=======
+#import <ulib/framework.h>
+>>>>>>> dc1720b (wip)
 
 @interface NSNumber(UMScript)
 

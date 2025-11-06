@@ -5,5 +5,9 @@
 //
 
 #ifdef __OBJC__
+<<<<<<< HEAD
 #import <ulib/ulib.h>
+=======
+    #import <ulib/framework.h>
+>>>>>>> dc1720b (wip)
 #endif
