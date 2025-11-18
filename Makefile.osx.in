@@ -9,7 +9,8 @@
 PROJECT_NAME=@PROJECT_NAME@
 VERSION=`cat VERSION`
 PROJECT_ID=me.fink.@PROJECT_NAME@
-
+FLEX=flex
+BISON=bison
 
 
 CC=@CC@
@@ -19,6 +20,18 @@ all:
 	xcodebuild ${XCODESIGN}
 	
 unlock:
+
+language/flex_definitions.h: language/_generated_umscript.y.h
+
+language/_generated_umscript.l.m:	language/umscript.l language/_generated_umscript.y.h
+	$(FLEX) --outfile language/_generated_umscript.l.m language/umscript.l
+
+language/_generated_umscript.y.m:	language/umscript.y
+	$(BISON)  --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
+
+language/_generated_umscript.y.h:	language/umscript.y
+	$(BISON) --defines=language/_generated_umscript.y.h --output-file language/_generated_umscript.y.m language/umscript.y --warnings=none
+
 	security unlock-keychain ~/Library/Keychains/login.keychain
 
 clean:
