@@ -28,6 +28,7 @@ configure
 install
 libumscript.a
 libumscript.so
+umscript.xcodeproj/xcshareddata/
 
 
 #########################
