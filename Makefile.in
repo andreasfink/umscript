@@ -55,8 +55,9 @@ ${LIB}: ${OFILES}  language/_generated_umscript.y.h
 	${CC} -shared -o ${LIB} ${LDFLAGS}  ${OFILES} ${LIBS} ${STATIC_LIBS}
 
 ${SLIB}: ${OFILES}
-	ar rcs ${SLIB} ${OFILES}
-	ranlib ${SLIB}
+	@LIBTOOL@ ${SLIB} ${OFILES}
+	@RANLIB@ ${SLIB}
+
 
 install: install_dev install_bin
 
