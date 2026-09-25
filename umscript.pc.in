@@ -7,7 +7,7 @@ includedir=${prefix}/include
 
 Name: umscript
 Cflags: -I${includedir}
-Libs: -L${libdir} -l:libumscript.@SHARED_LIBRARY_EXTENSION@.@MAJORVER@.@MINORVER@
+Libs: -L${libdir} -lumscript
 
 Description: universal scriptlibrary
 Version: @VERSION@
