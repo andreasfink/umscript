@@ -48,6 +48,9 @@
 		A63DD83B192C84EB0090FC94 /* UMFunction_double.m in Sources */ = {isa = PBXBuildFile; fileRef = A63DD839192C84EB0090FC94 /* UMFunction_double.m */; };
 		A63DD83E192C84F60090FC94 /* UMFunction_data.h in Headers */ = {isa = PBXBuildFile; fileRef = A63DD83C192C84F60090FC94 /* UMFunction_data.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A63DD83F192C84F60090FC94 /* UMFunction_data.m in Sources */ = {isa = PBXBuildFile; fileRef = A63DD83D192C84F60090FC94 /* UMFunction_data.m */; };
+		A643EE323066580B00F9798D /* libulib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A643EE313066580B00F9798D /* libulib.a */; };
+		A643EE333066580B00F9798D /* libulib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A643EE313066580B00F9798D /* libulib.a */; };
+		A643EE343066580B00F9798D /* libulib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A643EE313066580B00F9798D /* libulib.a */; };
 		A652D36724FAA91F009D5E6A /* umscript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A3AA0319297741007FFC7B /* umscript.framework */; };
 		A655CB6C1F0A46B0007C0B5C /* UMFunction_external.h in Headers */ = {isa = PBXBuildFile; fileRef = A655CB6A1F0A46B0007C0B5C /* UMFunction_external.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A655CB6D1F0A46B0007C0B5C /* UMFunction_external.m in Sources */ = {isa = PBXBuildFile; fileRef = A655CB6B1F0A46B0007C0B5C /* UMFunction_external.m */; };
@@ -72,12 +75,6 @@
 		A669B2761F2B12EA002C9259 /* UMFunction_hash.h in Headers */ = {isa = PBXBuildFile; fileRef = A669B2741F2B12EA002C9259 /* UMFunction_hash.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A669B2771F2B12EA002C9259 /* UMFunction_hash.m in Sources */ = {isa = PBXBuildFile; fileRef = A669B2751F2B12EA002C9259 /* UMFunction_hash.m */; };
 		A673BEBC1F1360E70026A4CF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A673BEBB1F1360E70026A4CF /* main.m */; };
-		A6798A0922BB705D0019806C /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6798A0822BB705D0019806C /* ulib.framework */; };
-		A6798A0A22BB705D0019806C /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6798A0822BB705D0019806C /* ulib.framework */; };
-		A6798A0B22BB705D0019806C /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6798A0822BB705D0019806C /* ulib.framework */; };
-		A6798A0D22BB70690019806C /* ulibasn1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6798A0C22BB70690019806C /* ulibasn1.framework */; };
-		A6798A0E22BB70690019806C /* ulibasn1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6798A0C22BB70690019806C /* ulibasn1.framework */; };
-		A6798A0F22BB70690019806C /* ulibasn1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6798A0C22BB70690019806C /* ulibasn1.framework */; };
 		A6835BE519297AE30090FC94 /* NSNumber+UMScript.h in Headers */ = {isa = PBXBuildFile; fileRef = A6835B9519297AE30090FC94 /* NSNumber+UMScript.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6835BE619297AE30090FC94 /* NSNumber+UMScript.m in Sources */ = {isa = PBXBuildFile; fileRef = A6835B9619297AE30090FC94 /* NSNumber+UMScript.m */; };
 		A6835BE719297AE30090FC94 /* UMDiscreteValue.h in Headers */ = {isa = PBXBuildFile; fileRef = A6835B9719297AE30090FC94 /* UMDiscreteValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -275,6 +272,7 @@
 		A63DD839192C84EB0090FC94 /* UMFunction_double.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_double.m; sourceTree = "<group>"; };
 		A63DD83C192C84F60090FC94 /* UMFunction_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_data.h; sourceTree = "<group>"; };
 		A63DD83D192C84F60090FC94 /* UMFunction_data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_data.m; sourceTree = "<group>"; };
+		A643EE313066580B00F9798D /* libulib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libulib.a; path = /usr/local/lib/libulib.a; sourceTree = "<absolute>"; };
 		A655CB6A1F0A46B0007C0B5C /* UMFunction_external.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_external.h; sourceTree = "<group>"; };
 		A655CB6B1F0A46B0007C0B5C /* UMFunction_external.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_external.m; sourceTree = "<group>"; };
 		A655CB6E1F0A49E7007C0B5C /* UMFunction_CGlue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_CGlue.h; sourceTree = "<group>"; };
@@ -294,11 +292,8 @@
 		A664D5901F6A65EF00BD455E /* UMFunction_regex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_regex.m; sourceTree = "<group>"; };
 		A669B2741F2B12EA002C9259 /* UMFunction_hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_hash.h; sourceTree = "<group>"; };
 		A669B2751F2B12EA002C9259 /* UMFunction_hash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_hash.m; sourceTree = "<group>"; };
-		A66A4244217479AC0083526C /* Makefile.linux.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.linux.in; sourceTree = "<group>"; };
 		A673BEB91F1360E70026A4CF /* uexe */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = uexe; sourceTree = BUILT_PRODUCTS_DIR; };
 		A673BEBB1F1360E70026A4CF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A6798A0822BB705D0019806C /* ulib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ulib.framework; path = "../../../../../Library/Application Support/FinkTelecomServices/frameworks/ulib.framework"; sourceTree = "<group>"; };
-		A6798A0C22BB70690019806C /* ulibasn1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ulibasn1.framework; path = "../../../../../Library/Application Support/FinkTelecomServices/frameworks/ulibasn1.framework"; sourceTree = "<group>"; };
 		A6835B9519297AE30090FC94 /* NSNumber+UMScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+UMScript.h"; sourceTree = "<group>"; };
 		A6835B9619297AE30090FC94 /* NSNumber+UMScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+UMScript.m"; sourceTree = "<group>"; };
 		A6835B9719297AE30090FC94 /* UMDiscreteValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMDiscreteValue.h; sourceTree = "<group>"; };
@@ -427,8 +422,6 @@
 		A6EEDB751929EB6D0090FC94 /* umscript.l */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.lex; name = umscript.l; path = language/umscript.l; sourceTree = "<group>"; };
 		A6EEDB761929EB6D0090FC94 /* umscript.y */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.yacc; name = umscript.y; path = language/umscript.y; sourceTree = "<group>"; };
 		A6EEDB781929F9810090FC94 /* test1.ums */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test1.ums; sourceTree = "<group>"; };
-		A6F693F11B4E83770090FC94 /* configure.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = configure.in; sourceTree = "<group>"; };
-		A6F694251B4E85B80090FC94 /* Makefile.osx.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.osx.in; sourceTree = "<group>"; };
 		A6F694261B4E85B80090FC94 /* umscript.pc */ = {isa = PBXFileReference; lastKnownFileType = text; path = umscript.pc; sourceTree = "<group>"; };
 		A6F8AE011F2A191C00B9512E /* UMFunction_datetime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFunction_datetime.h; sourceTree = "<group>"; };
 		A6F8AE021F2A191C00B9512E /* UMFunction_datetime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMFunction_datetime.m; sourceTree = "<group>"; };
@@ -441,8 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A652D36724FAA91F009D5E6A /* umscript.framework in Frameworks */,
-				A6798A0B22BB705D0019806C /* ulib.framework in Frameworks */,
-				A6798A0F22BB70690019806C /* ulibasn1.framework in Frameworks */,
+				A643EE323066580B00F9798D /* libulib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,8 +442,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6798A0D22BB70690019806C /* ulibasn1.framework in Frameworks */,
-				A6798A0922BB705D0019806C /* ulib.framework in Frameworks */,
+				A643EE333066580B00F9798D /* libulib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,14 +451,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6A3AA2019297741007FFC7B /* umscript.framework in Frameworks */,
-				A6798A0A22BB705D0019806C /* ulib.framework in Frameworks */,
-				A6798A0E22BB70690019806C /* ulibasn1.framework in Frameworks */,
+				A643EE343066580B00F9798D /* libulib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A643EE2C306657D900F9798D /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				A643EE313066580B00F9798D /* libulib.a */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
 		A673BEBA1F1360E70026A4CF /* uexe */ = {
 			isa = PBXGroup;
 			children = (
@@ -497,16 +495,13 @@
 		A6A3A9F919297741007FFC7B = {
 			isa = PBXGroup;
 			children = (
+				A643EE2C306657D900F9798D /* Libraries */,
 				A6019BB31AC1FA8600854472 /* VERSION */,
-				A6F693F11B4E83770090FC94 /* configure.in */,
-				A66A4244217479AC0083526C /* Makefile.linux.in */,
-				A6F694251B4E85B80090FC94 /* Makefile.osx.in */,
 				A6F694261B4E85B80090FC94 /* umscript.pc */,
 				A6835C951929890B0090FC94 /* language */,
 				A6A3AA0C19297741007FFC7B /* umscript */,
 				A6A3AA2119297741007FFC7B /* umscriptTests */,
 				A673BEBA1F1360E70026A4CF /* uexe */,
-				A6A3AA0519297741007FFC7B /* Frameworks */,
 				A6A3AA0419297741007FFC7B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -519,15 +514,6 @@
 				A673BEB91F1360E70026A4CF /* uexe */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		A6A3AA0519297741007FFC7B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A6798A0C22BB70690019806C /* ulibasn1.framework */,
-				A6798A0822BB705D0019806C /* ulib.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		A6A3AA0C19297741007FFC7B /* umscript */ = {
@@ -1150,6 +1136,10 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/bin";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libraries",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.uexe";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1177,6 +1167,10 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/bin";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libraries",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.uexe";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1229,7 +1223,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"/Library/Application Support/FinkTelecomServices/frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1246,11 +1240,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/usr/local/include,
-				);
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				INSTALL_PATH = FinkTelecomServices/frameworks;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
@@ -1258,6 +1248,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DUMSCRIPT_CONFIG=Debug";
 				SDKROOT = macosx;
+				SYSTEM_HEADER_SEARCH_PATHS = /usr/local/include;
+				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 				VALID_ARCHS = "$(inherited)";
 				WARNING_CFLAGS = "-Wimplicit-fallthrough";
 			};
@@ -1309,7 +1301,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"/Library/Application Support/FinkTelecomServices/frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1319,11 +1311,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/usr/local/include,
-				);
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				INSTALL_PATH = FinkTelecomServices/frameworks;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
@@ -1331,6 +1319,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DUMSCRIPT_CONFIG=Release";
 				SDKROOT = macosx;
+				SYSTEM_HEADER_SEARCH_PATHS = /usr/local/include;
+				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 				VALID_ARCHS = "$(inherited)";
 				WARNING_CFLAGS = "-Wimplicit-fallthrough";
 			};
@@ -1342,31 +1332,22 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
-				DEFINES_MODULE = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = 38L827M334;
-				DSTROOT = "/Library/Application Support/";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
-					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
-					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
-				);
+				DSTROOT = /;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
 				INFOPLIST_FILE = "umscript/umscript-Info.plist";
-				INSTALL_PATH = /FinkTelecomServices/frameworks;
+				INSTALL_PATH = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.umscript";
+				PRODUCT_BUNDLE_IDENTIFIER = com.signalmover.umscript;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTS_MACCATALYST = NO;
-				WRAPPER_EXTENSION = framework;
 				YACC_GENERATE_DEBUGGING_DIRECTIVES = YES;
 			};
 			name = Debug;
@@ -1377,32 +1358,23 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
-				DEFINES_MODULE = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = 38L827M334;
-				DSTROOT = "/Library/Application Support/";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
-					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
-					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
-				);
+				DSTROOT = /;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
 				INFOPLIST_FILE = "umscript/umscript-Info.plist";
-				INSTALL_PATH = /FinkTelecomServices/frameworks;
+				INSTALL_PATH = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.umscript";
+				PRODUCT_BUNDLE_IDENTIFIER = com.signalmover.umscript;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTS_MACCATALYST = NO;
-				WRAPPER_EXTENSION = framework;
 				YACC_GENERATE_DEBUGGING_DIRECTIVES = YES;
 			};
 			name = Release;
@@ -1429,6 +1401,10 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "umscriptTests/umscriptTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libraries",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.--PRODUCT-NAME-rfc1034identifier-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1452,6 +1428,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "umscript/umscript-Prefix.pch";
 				INFOPLIST_FILE = "umscriptTests/umscriptTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libraries",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.--PRODUCT-NAME-rfc1034identifier-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;

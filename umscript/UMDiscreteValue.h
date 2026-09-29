@@ -7,7 +7,6 @@
 //
 
 #import <ulib/ulib.h>
-#import <ulibasn1/ulibasn1.h>
 
 @class UMEnvironment;
 @class UMTerm_Interrupt;
