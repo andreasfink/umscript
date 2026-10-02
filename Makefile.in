@@ -32,7 +32,7 @@ all: ${LIB} build/uexe
 
 build/uexe:	build/uexe.o ${SLIB}
 	mkdir -p build
-	${CC}  ${LDFLAGS} ${SLIB} -o build/uexe build/uexe.o
+	${CC} -o build/uexe build/uexe.o  ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS} 
 
 build/uexe.o:	uexe/main.m
 	mkdir -p build
