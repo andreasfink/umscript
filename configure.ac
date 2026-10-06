@@ -83,6 +83,9 @@ dnl Checks system type.
 AC_CONFIG_SECTION([Running system checks])
 AC_CANONICAL_HOST
 
+FLEX=flex
+BISON=bison
+
 case "$host" in
   *apple-darwin*) 
   	#  set(CMAKE_CXX_FLAGS "--sysroot ${CMAKE_OSX_SYSROOT} ${CMAKE_CXX_FLAGS}")

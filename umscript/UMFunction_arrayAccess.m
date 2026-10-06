@@ -35,17 +35,10 @@
 
 - (UMDiscreteValue *)evaluateWithParams:(NSArray *)params environment:(id)env continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
-    NSInteger start;
     if(interruptedAt)
     {
         UMTerm_CallStackEntry *entry = [interruptedAt pullEntry];
-        start = entry.position;
     }
-    else
-    {
-        start = 0;
-    }
-
     if(params.count < 2)
     {
         return [UMDiscreteValue discreteNull];

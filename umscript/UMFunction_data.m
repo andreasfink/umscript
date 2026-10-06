@@ -36,15 +36,9 @@
                             environment:(UMEnvironment *)env
                            continueFrom:(UMTerm_Interrupt *)interruptedAt
 {
-    NSInteger start;
     if(interruptedAt)
     {
         UMTerm_CallStackEntry *entry = [interruptedAt pullEntry];
-        start = entry.position;
-    }
-    else
-    {
-        start = 0;
     }
     
     UMDiscreteValue *d;

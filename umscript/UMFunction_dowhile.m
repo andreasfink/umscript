@@ -54,7 +54,7 @@
     UMTerm *conditionTerm = params[1];
 
     UMDiscreteValue *condition;
-    UMDiscreteValue *doValue;
+    //UMDiscreteValue *doValue;
     
     env.breakCalled=NO;
     do
@@ -63,7 +63,7 @@
         {
             @try
             {
-                doValue = [thenDoTerm evaluateWithEnvironment:env  continueFrom:interruptedAt];
+                /* doValue = */ [thenDoTerm evaluateWithEnvironment:env  continueFrom:interruptedAt];
             }
             @catch(UMTerm_Interrupt *interrupt)
             {
